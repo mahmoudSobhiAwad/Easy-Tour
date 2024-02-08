@@ -1,0 +1,3 @@
+enum PrefOrLang{
+  list,grid
+}

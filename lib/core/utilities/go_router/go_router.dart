@@ -1,0 +1,72 @@
+import 'package:go_router/go_router.dart';
+import 'package:prepare_project/core/utilities/function/set_app_state.dart';
+import 'package:prepare_project/features/forget_pass/presentation/view/forget_password_view.dart';
+import 'package:prepare_project/features/login/presentation/view/login_view.dart';
+import 'package:prepare_project/features/sign_up/presentation/views/sign_up_view.dart';
+import 'package:prepare_project/features/tour_guide/basic/presentation/view/home_basic_view.dart';
+import 'package:prepare_project/features/tour_guide/settings/presentation/view/tour_guide_settings_view.dart';
+import 'package:prepare_project/features/tourist/chat_bot/presentation/views/chat_bot_view.dart';
+import 'package:prepare_project/features/tourist/chat_bot/presentation/views/widgets/intro_chat_bot.dart';
+import 'package:prepare_project/features/tourist/entertainment_places/presentation/views/entertainment_places_view.dart';
+import 'package:prepare_project/features/tourist/historical_places/presentation/view/historical_places_view.dart';
+import 'package:prepare_project/features/tourist/image_classification/presentation/views/image_classificarion_view.dart';
+import 'package:prepare_project/features/tourist/settings/presentaion/views/settings_view.dart';
+import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/home_view.dart';
+import '../../../features/splash/presentation/views/splash_view.dart';
+import '../../../features/tourist/profile/presentation/views/profile_view.dart';
+
+ class RouterApp{
+  static const kLoginView='/loginView';
+  static const kSignUpView='/SignUpView';
+  static const kSignUpPages='/SignUpPages';
+  static const kHomeView='/HomeView';
+  static const kUserInfo='/UserInfo';
+  static const kResetPasswordView='/ResetPasswordView';
+  static const kTouristSettings='/TouristSettings';
+  static const kTourGuideSettings='/TourGuideSettings';
+  static const kChatBotView='/ChatBotView';
+  static const kTourGuideHome='/TourGuideHomeView';
+  static const kImageClassification='/ImageClassification';
+  static const kHistoricalPlace='/HistoricalPlaces';
+  static const kEntertainmentPlaces='/EntertainmentPlaces';
+  static final router=GoRouter(routes:[
+   GoRoute(path: '/',builder: (context,state){
+   // return const OnBoardingView();
+    if(SetAppState.prefs?.getInt('currIndex')==2&&SetAppState.prefs!.getString('token')=='')
+    {
+     return const LoginScreen();
+    }
+    else if(SetAppState.prefs!.getString('token')!=''&&SetAppState.prefs!.getString('role')=='tourGuide')
+    {
+     return const BasicHome();
+    }
+    else if(SetAppState.prefs!.getString('token')!=''&&SetAppState.prefs!.getString('role')=='tourist')
+    {
+     return const HomeTouristView();
+    }
+    else
+    {
+     return const OnBoardingView();
+    }
+   }),
+   GoRoute(path: kLoginView,builder: (context,state)=>const LoginScreen(),),
+   GoRoute(path: kSignUpView,builder: (context,state)=>const SignUpView()),
+   GoRoute(path: kHomeView,builder: (context,state)=>const HomeTouristView()),
+   GoRoute(path: kUserInfo,builder: (context,state)=>const ProfileView()),
+   GoRoute(path: kResetPasswordView,builder: (context,state)=>const ForgetPasswordView(),),
+   GoRoute(path: kTouristSettings,builder: (context,state)=>const SettingsView(),),
+   GoRoute(path: kTourGuideSettings,builder: (context,state)=>const TourGuideSettingView(),),
+   GoRoute(path: kChatBotView,builder: (context,state){
+    if(SetAppState.prefs!.getBool('start')==true){
+     return const ChatBotView();
+    }
+    else{
+    return const ChatBotIntro();
+    }
+   }),
+   GoRoute(path: kTourGuideHome,builder: (context,state)=>const BasicHome(),),
+   GoRoute(path: kImageClassification,builder: (context,state)=>const ImageClassificationView(),),
+   GoRoute(path: kHistoricalPlace,builder: (context,state)=>const HistoricalPLacesView(),),
+   GoRoute(path: kEntertainmentPlaces,builder: (context,state)=>const EntertainmentPlacesView(),),
+  ]);
+}

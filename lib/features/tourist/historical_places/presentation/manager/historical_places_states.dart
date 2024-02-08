@@ -1,0 +1,4 @@
+abstract class HistoricalPlacesState {}
+class InitialHistoricalPlacesState extends HistoricalPlacesState{}
+class ChangeFavIconsHistoricalPlacesState extends HistoricalPlacesState{}
+class ChangePaginationIndexState extends HistoricalPlacesState{}

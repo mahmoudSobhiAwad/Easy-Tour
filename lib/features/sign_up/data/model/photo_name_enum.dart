@@ -1,0 +1,1 @@
+enum SignUpPhotoName{ministryId,nId,profile}
