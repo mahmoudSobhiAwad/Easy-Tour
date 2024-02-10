@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/manager/edit_create_tour/edit_create_tour_cubit.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/edit_delete_trip_menu_options.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/model_bottom_create_edit.dart';
+
 class DayDetailsItem extends StatelessWidget {
   const DayDetailsItem({
     super.key,
@@ -34,16 +34,16 @@ class DayDetailsItem extends StatelessWidget {
             Container(
               width:width*0.12,
               decoration: BoxDecoration(
-                color: secondaryColor,
+                color: const Color(0xff66757F),
                 borderRadius:commonBorderRadius(),
               ),
-              child: Center(child: Text(tripDays[index].dayName??"",style: CustomTextStyle.commonProfileDark,)),
+              child: Center(child: Text(tripDays[index].dayName??"",style: CustomTextStyle.commonProfileDark.copyWith(color: Colors.white),)),
             ),
             Container(
               padding:const EdgeInsets.all(5),
               width:width*0.58,
               decoration: BoxDecoration(
-                color: secondaryColor,
+                color: const Color(0xff66757F),
                 borderRadius:commonBorderRadius(),
               ),
               child: Column(
@@ -55,7 +55,7 @@ class DayDetailsItem extends StatelessWidget {
                         children: List.generate(
                             tripDays[index].dayPlaces?.length??0,
                                 (listIndex){
-                          return Text('${ tripDays[index].dayPlaces?[listIndex].placeName},');}
+                          return Text('${ tripDays[index].dayPlaces?[listIndex].placeName},',style: CustomTextStyle.commonProfileDark.copyWith(color: Colors.white),);}
                         )),
                   ),
                   SizedBox(
@@ -66,7 +66,7 @@ class DayDetailsItem extends StatelessWidget {
                         {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 3.0),
-                            child: Text('\t''- ${tripDays[index].dayPlaces?[listIndex].activity}',style: CustomTextStyle.commonFontThin),
+                            child: Text('\t''- ${tripDays[index].dayPlaces?[listIndex].activity}',style: CustomTextStyle.commonFontThin.copyWith(color: Colors.white)),
                      );
                  }
                  ),
@@ -80,6 +80,9 @@ class DayDetailsItem extends StatelessWidget {
                   isScrollControlled: true,
                   context: context, builder: (context){
                     return AddOrEditTripModelBottom(
+                      onClose:(){
+                        Navigator.pop(context);
+                      } ,
                       placesOfDay: cubit.tripDay[index].dayPlaces??[],
                       height: height,
                       width: width,
@@ -87,7 +90,9 @@ class DayDetailsItem extends StatelessWidget {
                       dayNum: index+1,
                       enable: false,
                       addAnotherPlaceInDay:(){ cubit.addNewPlaceInExistedDay(index);},
-                      onTap: (){Navigator.pop(context);},
+                      onTap: (){Navigator.pop(context);}, clearDay: (int index) {
+                        cubit.clearPlaceInOneDay(index);
+                    },
                     );
                   });
                   },

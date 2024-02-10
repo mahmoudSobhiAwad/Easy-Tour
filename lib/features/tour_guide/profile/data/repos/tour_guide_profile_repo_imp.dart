@@ -64,5 +64,22 @@ class TourGuideProfileRepoImp implements TourGuideProfileRepo{
       }
     }
   }
+  @override
+  Future<Either<Failure, TourGuidePersonalInfoModel>> updateCvFile({required FormData infoModel}) async{
+    try
+    {
+      var data=await apiServices.patchWithPhoto(endPoint: '${homeEndPoint}profile/updateProfile', data:infoModel);
+      TourGuidePersonalInfoModel model= TourGuidePersonalInfoModel.fromJson(data['updated_user']);
+      return right(model);
+    }
+    catch(e){
+      if(e is DioException){
+        return left(ServerFailure.fromDioError(e));
+      }
+      else{
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
 
 }

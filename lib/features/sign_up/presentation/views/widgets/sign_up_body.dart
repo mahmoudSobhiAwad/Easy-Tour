@@ -11,38 +11,29 @@ class SignUpBody extends StatelessWidget {
   Widget build(BuildContext context) {
       final double height=BasicDimension.screenHeight(context);
       final double width=BasicDimension.screenWidth(context);
-    return SingleChildScrollView(
-      reverse: true,
+    return Padding(
       padding: EdgeInsets.only(bottom:MediaQuery.of(context).viewInsets.bottom,top:height*0.06),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomSignInUpBar(
-            changeRole: (index){
-              cubit.changeToggleIndex(index);
-            },
-            width: width,
-            height: height,
-            toggleRoleIndex: cubit.toggleRoleIndex,
-            progressIndex: cubit.progressIndex,
-            backwardProgressIndex: cubit.backwardProgressIndex,
-          ),
-          SizedBox(height:height*0.03,),
-          SizedBox(
-            height: height*0.86,
-            child: cubit.toggleRoleIndex==0?SignUpAsTourism(cubit: cubit,height: height,width: width,):SignUpAsTourGuide(cubit: cubit,height: height*0.84,),
-          ),
-          // CustomPageViewLoginSignUp(
-          //     onPageChanged: (index){
-          //       cubit.changeToggleIndex(index);
-          //       },
-          //     height: height*0.86,
-          //     children: [
-          //
-          //     ]
-          // ),
-         // SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomSignInUpBar(
+              changeRole: (index){
+                cubit.changeToggleIndex(index);
+              },
+              width: width,
+              height: height,
+              toggleRoleIndex: cubit.toggleRoleIndex,
+              progressIndex: cubit.progressIndex,
+              backwardProgressIndex: cubit.backwardProgressIndex,
+            ),
+            SizedBox(height:height*0.03,),
+            SizedBox(
+              height: height*0.86,
+              child: cubit.toggleRoleIndex==0?SignUpAsTourism(cubit: cubit,height: height,width: width,):SignUpAsTourGuide(cubit: cubit,height: height*0.84,),
+            ),
+          ],
+        ),
       ),
     );
   }

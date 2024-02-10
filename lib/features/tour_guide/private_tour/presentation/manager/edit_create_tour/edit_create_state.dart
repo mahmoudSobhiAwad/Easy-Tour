@@ -10,6 +10,7 @@ class EditBGTourSuccessState extends CreateEditPrivateTourState {}
 class AddAnotherPlaceInOneDay extends CreateEditPrivateTourState {}
 class LoadingCreateTrip extends CreateEditPrivateTourState {}
 class SuccessCreateTrip extends CreateEditPrivateTourState {}
+class ChangeShowAddDayState extends CreateEditPrivateTourState {}
 class FailureCreateTrip extends CreateEditPrivateTourState {
   final String? errMessage;
   FailureCreateTrip({this.errMessage});

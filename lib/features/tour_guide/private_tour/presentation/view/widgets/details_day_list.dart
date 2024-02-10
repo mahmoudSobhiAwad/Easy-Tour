@@ -5,7 +5,6 @@ import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart
 import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/manager/edit_create_tour/edit_create_tour_cubit.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/day_details_item.dart';
-import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/model_bottom_create_edit.dart';
 
 class DetailsDayList extends StatelessWidget {
   const DetailsDayList({
@@ -43,27 +42,12 @@ class DetailsDayList extends StatelessWidget {
                 }),
           ),
           Container(
-            width: width*0.5,
-            decoration: BoxDecoration(borderRadius:commonBorderRadius(),border: Border.all(color:secondaryColor)),
+            width: width*0.4,
+            decoration: BoxDecoration(borderRadius:BorderRadius.circular(10),border: Border.all(color:secondaryColor)),
             child:  TextButton(
                 onPressed:(){
-                  showModalBottomSheet(
-                  isScrollControlled: true,
-                  context: context, builder: (context){
-                return AddOrEditTripModelBottom(
-                  height: height,
-                  dayNum: tripDays.length+1,
-                  width: width,
-                  placesOfDay:cubit.places,
-                  onTap: (){
-                  cubit.addTripDay(cubit.tripDay.length);
-                  Navigator.pop(context);
-                }, addAnotherPlaceInDay: () {
-                    cubit.addNewPlaceInNewDay();
-                },
-                );
-              });
-            },
+                  cubit.changeShowAddDays();
+                   },
                 child: const Text("Add a Trip",
                   style: CustomTextStyle.commonProfileDark,)),
           ),
@@ -76,7 +60,22 @@ class DetailsDayList extends StatelessWidget {
 
 
 
-
+//     showModalBottomSheet(
+//     isScrollControlled: true,
+//     context: context, builder: (context){
+//   return AddOrEditTripModelBottom(
+//     height: height,
+//     dayNum: tripDays.length+1,
+//     width: width,
+//     placesOfDay:cubit.places,
+//     onTap: (){
+//     cubit.addTripDay(cubit.tripDay.length);
+//     Navigator.pop(context);
+//   }, addAnotherPlaceInDay: () {
+//       cubit.addNewPlaceInNewDay();
+//   },
+//   );
+// });
 
 
 

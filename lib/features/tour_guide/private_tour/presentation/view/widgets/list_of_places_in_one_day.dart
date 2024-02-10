@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
-import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
 
 class PlacesListOfOneDay extends StatelessWidget {
@@ -11,12 +10,14 @@ class PlacesListOfOneDay extends StatelessWidget {
     required this.width,
     required this.enable,
     required this.placesOfDay,
+    required this.clearDay
 
   });
   final double height;
   final double width;
   final bool? enable;
   final List<Place>placesOfDay;
+  final void Function(int index) clearDay;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -55,24 +56,21 @@ class PlacesListOfOneDay extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text('type'),
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(borderRadius: commonBorderRadius(),border:Border.all(color: secondaryColor,width: 2)),
-                              child: const Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Historical'),
-                                  IconButton(padding: EdgeInsets.zero,onPressed: null, icon: Icon(Icons.arrow_drop_up_outlined)),
-                                ],
-                              ),
+                            CustomTextFormField(
+                              floatingLabelBehavior: FloatingLabelBehavior.never,
+                              labelFontSize: 10,
+                              label: 'Historical,Islamic and other',
+                              initialValue: placesOfDay[index].placeType,
+                              border: 20,
+                              onChanged: (String value){
+                                placesOfDay[index].placeType=value;
+                              },
                             ),
                           ],
                         ),
                       ),
                       GestureDetector(
-                        onTap: (){
-                          placesOfDay.removeAt(index);
-                        },
+                        onTap:(){clearDay(index);},
                           child: const Icon(Icons.delete_rounded,color: closeColor,))
                     ],
                   ),

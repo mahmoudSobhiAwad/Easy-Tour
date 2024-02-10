@@ -17,6 +17,8 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
   File?bgFile;
   ///new
   bool isLoading=false;
+  bool showAddDay=false;
+  bool editDay=false;
   String?tripId;
   PrivateTourRepo privateTourRepo;
   Trip? trip;
@@ -33,8 +35,11 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
       bgPath=trip?.bgImagePath??'';
     }
   }
-  void deleteImage()
-  {
+  void clearPlaceInOneDay(int index){
+    places.removeAt(index);
+    emit(AddAnotherPlaceInOneDay());
+  }
+  void deleteImage() {
     if(bgPath!=''&&bgFile?.path==null){
       bgPath='';
     }
@@ -90,7 +95,7 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
 
   void addTripDay(int index)
   {
-    tripDay.add(TripDay(dayName:'Day${tripDay.length+1}' ,dayPlaces:places ));
+    tripDay.add(TripDay(dayName:'Day${tripDay.length+1}' ,dayPlaces:places));
     emit(AddDetailsDaySuccessState());
     places=[Place(placeName: '',placeType: '',activity: '')];
 
@@ -107,7 +112,7 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
       brief:briefTextController.text,
       bgImagePath: bgFile?.path,
       minimumNumber:num.parse(minimumPersonTextController.text),
-      ticketPerPerson: num.parse(pricePerPersonTextController.text),
+      ticketPerPerson: double.parse(pricePerPersonTextController.text),
       tripDetails: tripDay,
     );
     isLoading=true;
@@ -115,12 +120,15 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
     var result=await privateTourRepo.createPrivateTrip(tripModel: await trip!.toFormData());
     result.fold(
             (failure){
-      isLoading=false;
-      emit(FailureCreateTrip(errMessage: failure.errMessage));
+              if(failure.statusCode==401){
+                createNewTrip();
+              }
+              isLoading=false;
+              emit(FailureCreateTrip(errMessage: failure.errMessage));
     },
             (trip) {
-      isLoading=false;
-      emit(SuccessCreateTrip());
+              isLoading=false;
+              emit(SuccessCreateTrip());
     });
   }
 
@@ -135,19 +143,34 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
       ticketPerPerson: num.parse(pricePerPersonTextController.text),
       tripDetails: tripDay,
     );
-    print(trip?.tripDetails?[0].dayName);
     emit(LoadingEditTrip());
     var result=await privateTourRepo.editPrivateTrip(tripModel: await trip!.updateTrip());
     result.fold(
             (failure){
+              if(failure.statusCode==401){
+                editCurrentTrip();
+              }
     isLoading=false;
     emit(FailureEditTrip(errMessage: failure.errMessage));
     },
             (trip) {
+
     isLoading=false;
     emit(SuccessEditTrip());
     });
 
+  }
+  void changeShowAddDays(){
+    showAddDay=!showAddDay;
+    emit(ChangeShowAddDayState());
+  }
+  bool checkIsThereChanges(){
+    if(trip?.brief==briefTextController.text&&trip?.title==titleTextController.text
+        &&bgFile==null
+    ) {
+      return false;
+    }
+    return true;
   }
 
 }

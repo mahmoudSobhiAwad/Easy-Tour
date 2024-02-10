@@ -53,22 +53,17 @@ class LoginCubit extends Cubit<LoginState>{
       emit(FailureLoginState(errorLogin: failure.errMessage));
     }, (tourismInfo)async
      {
-       await SetAppState.setToken(token:tourismInfo.token);
-       await SetAppState.setRole(role:'tourist');
-       await SetAppState.setName(name:tourismInfo.name);
-       showLoading=false;
-       emit(SuccessLoginState());
-      // if(tourismInfo.confirm==true){
-      //   await SetAppState.setToken(token:tourismInfo.token);
-      //   await SetAppState.setRole(role:'tourist');
-      //   await SetAppState.setName(name:tourismInfo.name);
-      //   showLoading=false;
-      //   emit(SuccessLoginState());
-      // }
-      // else{
-      //   showLoading=false;
-      //   emit(FailureLoginState(errorLogin: 'Please Confirm Your Account First'));
-      // }
+       if(tourismInfo.confirm==true){
+        await SetAppState.setToken(token:tourismInfo.token);
+        await SetAppState.setRole(role:'tourist');
+        await SetAppState.setName(name:tourismInfo.name);
+        showLoading=false;
+        emit(SuccessLoginState());
+      }
+      else{
+        showLoading=false;
+        emit(FailureLoginState(errorLogin: 'Please Confirm Your Account First'));
+      }
     });
     }
   }

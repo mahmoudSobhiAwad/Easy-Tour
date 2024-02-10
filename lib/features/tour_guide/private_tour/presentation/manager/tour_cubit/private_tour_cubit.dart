@@ -15,11 +15,17 @@ class PrivateTourCubit extends Cubit<PrivateTourStates>{
    var result=await privateTourRepo.getPrivateTrip();
    result.fold(
            (failure) {
+             if(failure.statusCode==401){
+               getAllMyTrip();
+             }
+             else{
              isLoading=false;
              emit(FailureGetALLPrivateTourState(errMessage: failure.errMessage));
+             }
            },
            (trips){
              isLoading=false;
+             tripsList.clear();
              for (var element in trips) {
                tripsList.add(element);
              }
@@ -32,8 +38,13 @@ class PrivateTourCubit extends Cubit<PrivateTourStates>{
     var result=await privateTourRepo.deletePrivateTrip(data: {'trip_id':tripId});
     result.fold(
             (failure){
+              if(failure.statusCode==401){
+                deleteSpecificTrip(index);
+              }
+              else{
               removeLoading=false;
               emit(FailureDeletePrivateTourState(errMessage: failure.errMessage));
+              }
             },
             (successDelete) async{
               removeLoading=false;

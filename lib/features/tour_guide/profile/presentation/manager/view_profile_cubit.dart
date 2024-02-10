@@ -15,6 +15,7 @@ class TourGuideProfileViewCubit extends Cubit<TourGuideProfileViewState>{
   String firstName='';
   String lastName='';
   String date='';
+  String cvUrl='';
   List languages=[];
   List<String>licenceNames=[];
   bool showLoading=false;
@@ -47,6 +48,7 @@ class TourGuideProfileViewCubit extends Cubit<TourGuideProfileViewState>{
     pre();
     date=profileTourGuideData.date??'';
     profileUrl=profileTourGuideData.profileUrl;
+    cvUrl=profileTourGuideData.cvUrl??'';
     licenceNames.addAll([profileTourGuideData.synId??'',profileTourGuideData.minId??'']);
   }
   void pre(){
@@ -65,8 +67,6 @@ class TourGuideProfileViewCubit extends Cubit<TourGuideProfileViewState>{
   void completePersonalInfo() {
     tourGuidePersonalInfoModel=TourGuidePersonalInfoModel(
         date: date,
-        minId: licenceNames[1],
-        synId: licenceNames[0],
         contactInfo: socialLinks,describeText: describeText,
         firstName: firstName, lastName: lastName,
         address: address, profileUrl: profileUrl,

@@ -2,7 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 const Color basicColor=Color(0xff1B2445);
-const Color secondaryColor=Color(0xffa6a6a6);
+const Color secondaryColor=Color(0xffDCDCDC);
 const Color formFillColor=Color(0xffF5F6FF);
 const Color thirdColor=Color(0xffEEEEEE);
 const Color entertainmentColor=Color(0xff66757F);

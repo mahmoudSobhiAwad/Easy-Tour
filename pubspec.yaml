@@ -61,6 +61,8 @@ dependencies:
   camera: ^0.10.5+9
   google_maps_flutter: ^2.5.3
   file_picker: ^6.1.1
+  flutter_downloader: ^1.11.6
+  path_provider: ^2.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

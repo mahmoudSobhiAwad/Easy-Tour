@@ -16,6 +16,8 @@ class AddOrEditTripModelBottom extends StatelessWidget {
     required this.onTap,
     required this.addAnotherPlaceInDay,
     required this.placesOfDay,
+    required this.onClose,
+    required this.clearDay
   });
 
   final double height;
@@ -24,7 +26,9 @@ class AddOrEditTripModelBottom extends StatelessWidget {
   final int dayNum;
   final bool? enable;
   final void Function() onTap;
+  final void Function() onClose;
   final void Function() addAnotherPlaceInDay;
+  final void Function(int indedx) clearDay;
   final List<Place>placesOfDay;
 
   @override
@@ -33,8 +37,9 @@ class AddOrEditTripModelBottom extends StatelessWidget {
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        height: height*0.5,
+        height: height*0.51,
         decoration: BoxDecoration(
+          border: Border.all(color: secondaryColor),
           color: thirdColor,
           borderRadius:commonBorderRadius(),
         ),
@@ -46,14 +51,12 @@ class AddOrEditTripModelBottom extends StatelessWidget {
               children: [
                 const SizedBox(),
                 Align(child: Text('Day$dayNum')),
-                IconButton(onPressed: (){
-                  Navigator.pop(context);
-                }, padding: EdgeInsets.zero,icon: const Icon(Icons.close,color: basicColor,)),
+                IconButton(onPressed: onClose, padding: EdgeInsets.zero,icon: const Icon(Icons.close,color: basicColor,)),
               ],
             ),
             Column(
               children: [
-                PlacesListOfOneDay(height: height, width: width,enable: enable,placesOfDay:placesOfDay,),
+                PlacesListOfOneDay(height: height, width: width,enable: enable,placesOfDay:placesOfDay,clearDay:clearDay,),
                 Align(
                   alignment: Alignment.center,
                   child: Container(
@@ -68,7 +71,10 @@ class AddOrEditTripModelBottom extends StatelessWidget {
               ],
             ),
             const SizedBox(height:20),
-            Align(alignment: Alignment.center,child: CustomLoginButton(label: labelButton,onTap: onTap,))
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5.0),
+              child: Align(alignment: Alignment.center,child: CustomLoginButton(label: labelButton,onTap: onTap,)),
+            ),
           ],
         ),
       ),

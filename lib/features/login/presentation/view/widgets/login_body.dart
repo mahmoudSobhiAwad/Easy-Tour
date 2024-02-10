@@ -21,42 +21,44 @@ class LoginBody extends StatelessWidget {
     return BlocConsumer<LoginCubit,LoginState>(
       builder: (context,state){
         var cubit=BlocProvider.of<LoginCubit>(context);
-        return SingleChildScrollView(
-          reverse: true,
-          scrollDirection: Axis.vertical,
+        return Padding(
           padding: EdgeInsets.only(bottom:MediaQuery.of(context).viewInsets.bottom,),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:[
-              Stack(
-                children: [
-                  TitleSignIn(height: height,width: width,),
-                  Positioned(
-                    top: height*0.13,
-                      left: width*0.15,
-                      child: RoleSignInPic(toggleRole: cubit.toggleRoleIndex,height: height,width: width,)),
-                ],
-              ),
-              SwapButtonRole(
-                changToggle: (index)
-                {
-                  cubit.changeToggleIndex(index);
-                },
-                height: height,
-                width: width,
-                toggleRoleIndex: cubit.toggleRoleIndex,
-              ),
-              const SizedBox(height: 25,),
-              Container(
-                padding: EdgeInsets.only(top: height*0.03,left: 20,right: 20),
-                height: height*0.58,
-                decoration: BoxDecoration(
-                color: thirdColor,
-                borderRadius: BorderRadius.circular(30),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+                Stack(
+                  children: [
+                    TitleSignIn(height: height,width: width,),
+                    Positioned(
+                      top: height*0.13,
+                        left: width*0.15,
+                        child: RoleSignInPic(toggleRole: cubit.toggleRoleIndex,height: height,width: width,)),
+                  ],
                 ),
-                child: LoginOfTourism(cubit: cubit,height: height,width: width,),
-              )
-            ],
+                SwapButtonRole(
+                  changToggle: (index)
+                  {
+                    cubit.changeToggleIndex(index);
+                  },
+                  height: height,
+                  width: width,
+                  toggleRoleIndex: cubit.toggleRoleIndex,
+                ),
+                const SizedBox(height: 25,),
+                Container(
+                  padding: EdgeInsets.only(top: height*0.03,left: 20,right: 20),
+                  height: height*0.58,
+                  decoration: BoxDecoration(
+                  color: thirdColor,
+                  borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: LoginOfTourism(cubit: cubit,height: height,width: width,),
+                )
+              ],
+            ),
           ),
         );
       },

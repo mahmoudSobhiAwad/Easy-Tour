@@ -7,4 +7,5 @@ abstract class TourGuideProfileRepo
   Future<Either<Failure,TourGuidePersonalInfoModel>>getTourGuideInfo();
   Future<Either<Failure,TourGuidePersonalInfoModel>>updatePersonalInfo({required FormData infoModel,});
   Future<Either<Failure,TourGuidePersonalInfoModel>>updateContactInfo({required FormData infoModel});
+  Future<Either<Failure,TourGuidePersonalInfoModel>>updateCvFile({required FormData infoModel});
 }

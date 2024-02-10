@@ -14,5 +14,5 @@ static const commonSignThinDark=TextStyle(fontSize: 16,color: basicColor,);
 static const commonFontThin=TextStyle(fontSize: 14,color: basicColor,);
 static const tripDetailsInTourGuide=TextStyle(fontSize: 12,color: basicColor,overflow: TextOverflow.ellipsis);
 static const commonProfileDark=TextStyle(fontSize: 14,color: basicColor,fontWeight: FontWeight.bold,);
-static const commonSignLight=TextStyle(fontSize: 16,color: secondaryColor);
+static const commonSignLight=TextStyle(fontSize: 16,color: entertainmentColor);
 }

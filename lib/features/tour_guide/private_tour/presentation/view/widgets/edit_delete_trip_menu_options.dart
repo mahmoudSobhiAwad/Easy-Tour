@@ -20,7 +20,7 @@ class EditOrAddTripOptionMenu extends StatelessWidget {
                 controller.open();
               }
             },
-            icon: const Icon(Icons.more_vert_rounded),
+            icon: const Icon(Icons.more_vert_rounded,color:Color(0xff66757F)),
             tooltip: 'Show menu',
           );
         },

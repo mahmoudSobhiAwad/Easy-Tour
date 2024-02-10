@@ -23,8 +23,8 @@ class Trip {
       bgImagePath:ProfileImageUrl.fromJson(json['image']).imageUrl??"",
       title: json['title']??'',
       brief: json['brief']??'',
-      ticketPerPerson: json['ticketPerPerson'] ??'',
-      minimumNumber: json['minimumNumber']??'',
+      ticketPerPerson: json['ticketPerPerson']??0,
+      minimumNumber: json['minimumNumber']??0,
       tripDetails: (json['tripDetails']as List).map((dayData) => TripDay.fromJson(dayData)).toList(),
     );
   }
@@ -101,7 +101,7 @@ class Place {
   }
   Map<String,dynamic>toJson()=>{
     'placeName':placeName,
-    // 'placeType':placeType,
+    'placeType':placeType,
     'activity':activity,
   };
 }

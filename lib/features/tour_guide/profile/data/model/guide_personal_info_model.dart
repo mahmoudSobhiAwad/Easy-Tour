@@ -7,13 +7,15 @@ class TourGuidePersonalInfoModel{
   String? describeText;
   String? date;
   String? phoneNumber;
-  String? profileUrl;
+  String?profileUrl;
   String?minId;
   String?profileFile;
+  String?cvUrl;
+  String?cvFile;
   String?synId;
   List<dynamic> ?lang;
   Map<String,dynamic>?contactInfo;
-  TourGuidePersonalInfoModel({ this.date,this.profileFile,this.describeText, this.firstName, this.lastName, this.address,this.profileUrl, this.lang,this.phoneNumber,this.minId,this.synId,this.contactInfo,});
+  TourGuidePersonalInfoModel({ this.date,this.profileFile,this.describeText,this.cvUrl,this.cvFile,this.firstName, this.lastName, this.address,this.profileUrl, this.lang,this.phoneNumber,this.minId,this.synId,this.contactInfo,});
   factory TourGuidePersonalInfoModel.fromJson(Map<String,dynamic>json)=>TourGuidePersonalInfoModel(
      firstName: json['firstName'],
      date: json['birthDate'],
@@ -23,6 +25,7 @@ class TourGuidePersonalInfoModel{
      profileUrl:ProfileImageUrl.fromJson(json['profilePicture']).imageUrl??"",
       minId: ProfileImageUrl.fromJson(json['ministyliscence']).imageUrl??"",
       synId: ProfileImageUrl.fromJson(json['syndicateLiscence']).imageUrl??"",
+      cvUrl: ProfileImageUrl.fromJson(json['CV']).imageUrl??"",
      lang: json['languages']??[],
      phoneNumber: json['phoneNumber'],
       contactInfo:json['contact_info']
@@ -39,12 +42,12 @@ class TourGuidePersonalInfoModel{
     });
     return formData;
   }
-  // Future<FormData>updateContactInfo(Map<String,String>contact)async{
-  //   FormData formData=FormData.fromMap({
-  //     'contactInfo':contact,
-  //   });
-  //   return formData;
-  // }
+  Future<FormData> updateCvFile() async{
+    FormData formData = FormData.fromMap({
+      'CV':cvFile!=null?[await MultipartFile.fromFile(cvFile!,filename: 'CV')]:[],
+    });
+    return formData;
+  }
 }
 class ProfileImageUrl{
   String?imageUrl;

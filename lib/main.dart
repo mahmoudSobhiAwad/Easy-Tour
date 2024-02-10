@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
@@ -12,6 +13,10 @@ Future<void> main()async {
   WidgetsFlutterBinding.ensureInitialized();
   setUp();
   cameras=await availableCameras();
+  await FlutterDownloader.initialize(
+      debug: true, // optional: set to false to disable printing logs to console (default: true)
+      ignoreSsl: true // option: set to false to disable working with http links (default: false)
+  );
   Bloc.observer=SimpleBlocObserver();
   await SetAppState.setShared();
   runApp(const MyApp());

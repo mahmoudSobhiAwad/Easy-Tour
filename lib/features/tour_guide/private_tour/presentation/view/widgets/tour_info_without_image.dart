@@ -23,7 +23,7 @@ class PrivateTourWithoutImage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: height*0.03,child: const Text('Egypt 11 days',style: CustomTextStyle.commonFontThin,)),
+          SizedBox(height: height*0.03,child: Text('Egypt ${model.tripDetails?.length} days',style: CustomTextStyle.commonFontThin,)),
           SizedBox(height: height*0.08,child: Text('${model.title}',maxLines: 2,style: CustomTextStyle.privateTourTitle,)),
           SizedBox(height: height*0.05,child: Text('${model.brief}',maxLines: 2,style: CustomTextStyle.commonFontThin,)),
           const SizedBox(height: 10,),
