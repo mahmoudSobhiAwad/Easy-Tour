@@ -50,7 +50,7 @@ class TourGuideProfileInfo extends StatelessWidget {
               children:[
                 const Text('Licence',style: CustomTextStyle.commonSignThinDark),
                 const Expanded(child:  SizedBox(height: 10,)),
-                ProfileSettingItem(text: cubit.getLicence(), onTap: (){
+                ProfileSettingItem(text: 'Ministry ID,Syndicate ID', onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>LicencesView(height: height,licences:cubit.licenceNames,width: width)));
                 },height: height*0.07,child: const Icon(Icons.arrow_forward_ios),),
               ],

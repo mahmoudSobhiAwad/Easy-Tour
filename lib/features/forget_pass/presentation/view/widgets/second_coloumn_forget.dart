@@ -11,11 +11,16 @@ class SecondColumnResetPass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         SizedBox(
-            height:height*0.15,
+            height:height*0.17,
             child:  OtpBox(otpKey: otpKey,otpController: otpController,)),
-        const SizedBox(height: 20,),
+        GestureDetector(
+          onTap: (){
+          otpController.clear();
+        },child: const Text('clear ',style: CustomTextStyle.commonSignThinDark,),),
+        const SizedBox(height: 10,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

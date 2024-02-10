@@ -17,7 +17,7 @@ class TourismSignInModel
     email:json?['email']??"",
     name:json?['userName']??"",
     token:json?['token']??"",
-    confirm:json?['confirmed']??"",
+    confirm:json?['confirmed']??true,
     profileUrl: ProfileImageUrl.fromJson(json?['profilePicture']).imageUrl,
   );
 

@@ -22,13 +22,23 @@ class TourGuideProfileView extends StatelessWidget {
       child: BlocConsumer<TourGuideProfileViewCubit,TourGuideProfileViewState>(
           builder: (context,state){
             var cubit=BlocProvider.of<TourGuideProfileViewCubit>(context);
-           return cubit.showLoading?const Center(child: CircularProgressIndicator(color: basicColor,),) :Column(
-              children: [
-                ProfilePicWithClipper(height: height, width: width,profileUrl: cubit.profileUrl,),
-                Text('${cubit.firstName} ${cubit.lastName}',style: CustomTextStyle.commonSignDark,),
-                TourGuideProfileInfo(height: height,cubit: cubit,width: width,),
-              ],
-            );
+           return cubit.showLoading?
+           const Center(child: CircularProgressIndicator(color: basicColor,),) :
+           RefreshIndicator(
+             backgroundColor: thirdColor,
+             key: cubit.refreshIndicatorKey,
+             color: basicColor,
+             onRefresh: ()async {
+               cubit.getData();
+             },
+             child: ListView(
+                children: [
+                  ProfilePicWithClipper(height: height, width: width,profileUrl: cubit.profileUrl,),
+                  Center(child: Text('${cubit.firstName} ${cubit.lastName}',style: CustomTextStyle.commonSignDark,)),
+                  TourGuideProfileInfo(height: height,cubit: cubit,width: width,),
+                ],
+              ),
+           );
           },
           listener: (context,state)
           {

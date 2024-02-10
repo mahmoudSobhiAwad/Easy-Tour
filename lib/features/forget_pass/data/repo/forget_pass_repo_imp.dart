@@ -28,7 +28,7 @@ class ForgetPassRepoImpl extends ForgetPassRepo{
   @override
   Future<Either<Failure, ResetPassModel>> resetTouristPassword(Map<String, dynamic> data) async{
     try{
-      var result= await apiServices.patchBehindToken(endPoint: '${authTourist}resetPassword', data: data);
+      var result= await apiServices.patchBehindToken(endPoint:'${authTourist}resetPassword', data: data);
       ResetPassModel model=ResetPassModel.successMessage(result);
       return right(model);
     }

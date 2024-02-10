@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/features/tour_guide/basic/presentation/manager/basic_home_state.dart';
 
 class BasicHomeCubit extends Cubit<BasicHomeState>{
@@ -16,7 +15,5 @@ class BasicHomeCubit extends Cubit<BasicHomeState>{
       currIndex=index;
     }
     emit(ChangeHomeNavBottomState());
-    String? name=SetAppState.prefs?.getString('name');
-    print(name);
   }
 }

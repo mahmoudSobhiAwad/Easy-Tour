@@ -42,8 +42,6 @@ class LoginCubit extends Cubit<LoginState>{
       showLoading=false;
     }
     else{
-      showLoading=false;
-      emit(SuccessLoginState());
     emit(LoadingLoginState());
     var result=await loginRepo.loginAsTourism(
       TourismSignInModel(
@@ -55,17 +53,22 @@ class LoginCubit extends Cubit<LoginState>{
       emit(FailureLoginState(errorLogin: failure.errMessage));
     }, (tourismInfo)async
      {
-      if(tourismInfo.confirm!){
-        await SetAppState.setToken(token:tourismInfo.token);
-        await SetAppState.setRole(role:'tourist');
-        await SetAppState.setName(name:tourismInfo.name);
-        showLoading=false;
-        emit(SuccessLoginState());
-      }
-      else{
-        showLoading=false;
-        emit(FailureLoginState(errorLogin: 'Please Confirm Your Account First'));
-      }
+       await SetAppState.setToken(token:tourismInfo.token);
+       await SetAppState.setRole(role:'tourist');
+       await SetAppState.setName(name:tourismInfo.name);
+       showLoading=false;
+       emit(SuccessLoginState());
+      // if(tourismInfo.confirm==true){
+      //   await SetAppState.setToken(token:tourismInfo.token);
+      //   await SetAppState.setRole(role:'tourist');
+      //   await SetAppState.setName(name:tourismInfo.name);
+      //   showLoading=false;
+      //   emit(SuccessLoginState());
+      // }
+      // else{
+      //   showLoading=false;
+      //   emit(FailureLoginState(errorLogin: 'Please Confirm Your Account First'));
+      // }
     });
     }
   }
@@ -88,7 +91,6 @@ class LoginCubit extends Cubit<LoginState>{
           await SetAppState.setToken(token:tourGuideInfo.token);
           await SetAppState.setRole(role:'tourGuide');
           await SetAppState.setName(name:'${tourGuideInfo.firstName}${tourGuideInfo.lastName}');
-          await SetAppState.setProfilePic(profileUrl:tourGuideInfo.profileUrl??'');
           showLoading=false;
           emit(SuccessTourGuideLoginState());
         }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/features/tour_guide/profile/data/model/guide_personal_info_model.dart';
 import 'package:prepare_project/features/tour_guide/profile/data/repos/tour_guide_profile_repo.dart';
@@ -15,11 +16,13 @@ class TourGuideProfileViewCubit extends Cubit<TourGuideProfileViewState>{
   String lastName='';
   String date='';
   List languages=[];
-  List<String>licenceNames=['Ministry Id','SyndicateId'];
+  List<String>licenceNames=[];
   bool showLoading=false;
   Map<String,dynamic>socialLinks={};
   TourGuidePersonalInfoModel? tourGuidePersonalInfoModel;
-  void getData()async{
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+
+  Future<void> getData()async{
     showLoading=true;
     emit(LoadingGetInfoTourGuideProfileView());
     var result=await tourGuideProfileRepo.getTourGuideInfo();

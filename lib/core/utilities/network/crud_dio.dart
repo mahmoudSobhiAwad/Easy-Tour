@@ -227,7 +227,9 @@ class ApiServices{
   /// patch With token behind used for forget reset password almost
   Future<Map<String,dynamic>>patchBehindToken({required String endPoint,required Map<String,dynamic> data})async {
     final String? tokenId=SetAppState.prefs?.getString('token');
-    var response=await dio.patch('$baseUrl$endPoint$tokenId',data: data,options: Options(headers: {'Authorization':'token $tokenId',}));
+    var response=await dio.patch('$baseUrl$endPoint$tokenId',data: data,options: Options(
+        //headers: {'Authorization':'token $tokenId',}
+        ));
     return response.data;
   }
 

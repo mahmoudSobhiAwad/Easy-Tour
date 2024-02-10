@@ -14,31 +14,35 @@ class OtpBox extends StatelessWidget {
           children: [
             ...List.generate(6, (index) =>SizedBox(
                 width: MediaQuery.of(context).size.width*0.12,
-          child:  CustomTextFormField(
-            onChanged: (value){
-              if(value.length==1){
-               otpController.text='${otpController.text}$value';
-               FocusScope.of(context).nextFocus();
-              }
-            },
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(1),
-              FilteringTextInputFormatter.digitsOnly,
-            ],
-            // controller: TextEditingController(),
-            label: '',
-            border: 10,
-            type: TextInputType.number,
-            align: TextAlign.center,
-            style: const TextStyle(fontSize: 25,),
-            validator: (value){if(value==null||value.isEmpty){return '';}
-            return null;
-            },
-          )
-        )
-        )
-      ]
-        ),
+                child:  CustomTextFormField(
+                  onChanged: (value){
+                    if(value.length==1){
+                      otpController.text='${otpController.text}$value';
+                      FocusScope.of(context).nextFocus();
+                    }
+                    else if(value.isEmpty){
+                      otpController.text = otpController.text.substring(0, otpController.text.length - 1);
+                      FocusScope.of(context).previousFocus();
+                    }
+                  },
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(1),
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
+                  // controller: TextEditingController(),
+                  label: '',
+                  border: 10,
+                  type: TextInputType.number,
+                  align: TextAlign.center,
+                  style: const TextStyle(fontSize: 25,),
+                  validator: (value){if(value==null||value.isEmpty){return '';}
+                  return null;
+                  },
+                )
+            )
+            )
+          ]
+      ),
     );
   }
 }
