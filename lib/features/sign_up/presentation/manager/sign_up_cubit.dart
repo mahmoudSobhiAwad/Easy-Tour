@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/constant_var/constant.dart';
 import 'package:prepare_project/core/utilities/function/crop_image.dart';
+import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/features/sign_up/data/model/photo_name_enum.dart';
 import 'package:prepare_project/features/sign_up/data/model/tour_guide_model.dart';
 import 'package:prepare_project/features/sign_up/data/model/toursim_sign_up_model.dart';
@@ -210,6 +211,7 @@ class SignUpCubit extends Cubit<SignUpStates>{
      }, (tourismInfo)
      async {
        showLoading=true;
+      await SetAppState.setName(name: '');
        emit(SuccessSignUpState());
      });
     }
@@ -245,6 +247,7 @@ class SignUpCubit extends Cubit<SignUpStates>{
       }, (tourGuideInfo)
       async {
         showLoading=false;
+        await SetAppState.setName(name: '');
         emit(SuccessTourGuideSignUpState());
       });
     }

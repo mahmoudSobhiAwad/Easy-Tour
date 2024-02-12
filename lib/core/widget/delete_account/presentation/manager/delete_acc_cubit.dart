@@ -9,9 +9,11 @@ class DeleteAccountCubit extends Cubit<DeleteAccountState>{
   final TextEditingController passwordController=TextEditingController();
   bool oldPassVis=true;
   bool checkOldPass=false;
+  bool isLoading=false;
   final GlobalKey<FormState> formKey=GlobalKey();
   final DeleteAccRepo deleteAccountRepo;
   Future<void> deleteAccount()async{
+    isLoading=true;
     emit(LoadingDeleteAccountState());
     if(formKey.currentState!.validate()) {
       checkOldPassword().then((value) async{
@@ -19,9 +21,10 @@ class DeleteAccountCubit extends Cubit<DeleteAccountState>{
           var response=await deleteAccountRepo.deleteAccount();
           response.fold(
                   (failure){
-                    print(failure.errMessage);
+                    isLoading=false;
                 emit(FailureDeleteAccountState(errMessage:failure.errMessage??""));
               }, (delete)async{
+            isLoading=false;
             emit(SuccessDeleteAccountState());
             await SetAppState.setToken(token: '');
           });
@@ -37,6 +40,7 @@ class DeleteAccountCubit extends Cubit<DeleteAccountState>{
     var response=await deleteAccountRepo.checkOldPassword(oldPass: passwordController.text);
     response.fold((failure)
     {
+      isLoading=false;
       emit(FailureCheckOldPasswordState(errMessage:failure.errMessage));
     }, (message)
     {

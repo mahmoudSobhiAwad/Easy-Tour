@@ -1,0 +1,1 @@
+List<String>placesForGeneratedTrip=['Alexandria', 'Aswan', 'Luxor', 'Giza', 'Cairo'];

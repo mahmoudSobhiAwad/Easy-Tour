@@ -27,6 +27,7 @@ class CustomDropDownMenu extends StatelessWidget {
         enabledBorder: const CustomTextFormField().buildOutlineInputBorder(borderColor: secondaryColor.withOpacity(0.7),borderRadius: 20) ,
       ),
       onSelected: onSelected,
+      menuStyle: const MenuStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
       initialSelection: initialValue,
       textStyle: TextStyle(color: basicColor,fontSize: fontSize),
       trailingIcon: const Icon(Icons.arrow_drop_down,),

@@ -19,7 +19,7 @@ class ProfileEdit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(right: 20,left: 20,bottom:MediaQuery.of(context).viewInsets.bottom+10),
+        padding: EdgeInsets.only(right: 20,left: 20,bottom:MediaQuery.of(context).viewInsets.bottom+10,top: 50),
         child: Stack(
           children: [
             Column(
@@ -31,10 +31,10 @@ class ProfileEdit extends StatelessWidget {
                       onPressed: (){
                         Navigator.pop(context);
                       },
-                      icon: const Icon(Icons.close,color: secondaryColor,)),
+                      icon: const Icon(Icons.close,color: entertainmentColor,)),
                 ),
                 UserProfilePicAndCover(widgetHeight: height, widgetWidth: width,cubit: cubit,),
-                Center(child: UserNameAndStatus(userName: cubit.name, status: cubit.model.status,)),//done
+                Center(child: UserNameAndStatus(userName: cubit.name, status: cubit.model?.status,)),//done
                 const SizedBox(height: 10,),
                 GenderAndCountry(height: height, width: width, cubit: cubit,),
                 LanguageAndPhone(cubit: cubit,height: height,width: width,),
@@ -57,6 +57,7 @@ class ProfileEdit extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: CustomLoginButton(
+                    isLoading: cubit.showGetLoading,
                     label: 'Update',
                     onTap: ()async{
                       await cubit.updateProfileDate();

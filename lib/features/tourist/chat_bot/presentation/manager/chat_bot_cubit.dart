@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/features/tourist/chat_bot/data/model/chat_bot_model.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/manager/chat_bot_states.dart';
 
@@ -13,6 +14,7 @@ class ChatBotCubit extends Cubit<ChatBotState>{
   String? requestMessage;
   bool enableSend=false;
   List<ChatBotModel>messages=[];
+  int chatBotCurrentPage=SetAppState.prefs?.getInt('pageIndex')??0;
   void getFromBot(String response){
     ChatBotModel model=ChatBotModel(message: '');
     response='$response<bot>';
@@ -23,6 +25,11 @@ class ChatBotCubit extends Cubit<ChatBotState>{
       emit(AddedToListMessagesChatBotState());
       sortMessages();
     });
+  }
+  void changePageIndex()async{
+    chatBotCurrentPage=1;
+    await SetAppState.prefs?.setInt('pageIndex', 1);
+    emit(ChangePageCurrentState());
   }
   Future<void> sendQuestion()async{
     if(messageController.text.isNotEmpty)

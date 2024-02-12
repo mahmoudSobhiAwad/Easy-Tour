@@ -38,12 +38,16 @@ class SignUpView extends StatelessWidget {
              );
             }
             else if(state is SuccessSignUpState) {
-              showDialog(context: context, builder: (context)=>const ContainerAlertWidget(types: AlertTypes.success,content: 'Created Account Success',));
-              context.go(RouterApp.kLoginView);
+              showDialog(context: context, builder: (context)=>const ContainerAlertWidget(types: AlertTypes.success,content: 'Created Account Success',)).then((value){
+                context.go(RouterApp.kLoginView);
+              });
+
             }
             else if(state is SuccessTourGuideSignUpState){
-              showDialog(context: context, builder: (context)=>const ContainerAlertWidget(types: AlertTypes.success,content: 'Created Account Success',));
-              context.go(RouterApp.kLoginView);
+              showDialog(context: context, builder: (context)=>const ContainerAlertWidget(types: AlertTypes.success,content: 'Created Account Success',)).then((value) {
+                context.go(RouterApp.kLoginView);
+              });
+
             }
             else if(state is FailureSignUpState)
             {

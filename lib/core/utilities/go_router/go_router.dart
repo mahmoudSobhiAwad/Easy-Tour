@@ -6,8 +6,8 @@ import 'package:prepare_project/features/sign_up/presentation/views/sign_up_view
 import 'package:prepare_project/features/tour_guide/basic/presentation/view/home_basic_view.dart';
 import 'package:prepare_project/features/tour_guide/settings/presentation/view/tour_guide_settings_view.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/chat_bot_view.dart';
-import 'package:prepare_project/features/tourist/chat_bot/presentation/views/widgets/intro_chat_bot.dart';
 import 'package:prepare_project/features/tourist/entertainment_places/presentation/views/entertainment_places_view.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/generate_trip_wit_ai.dart';
 import 'package:prepare_project/features/tourist/historical_places/presentation/view/historical_places_view.dart';
 import 'package:prepare_project/features/tourist/image_classification/presentation/views/image_classificarion_view.dart';
 import 'package:prepare_project/features/tourist/settings/presentaion/views/settings_view.dart';
@@ -25,6 +25,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
   static const kTouristSettings='/TouristSettings';
   static const kTourGuideSettings='/TourGuideSettings';
   static const kChatBotView='/ChatBotView';
+  static const kGenerateTripView='/GenerateTripView';
   static const kTourGuideHome='/TourGuideHomeView';
   static const kImageClassification='/ImageClassification';
   static const kHistoricalPlace='/HistoricalPlaces';
@@ -57,12 +58,10 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kTouristSettings,builder: (context,state)=>const SettingsView(),),
    GoRoute(path: kTourGuideSettings,builder: (context,state)=>const TourGuideSettingView(),),
    GoRoute(path: kChatBotView,builder: (context,state){
-    if(SetAppState.prefs!.getBool('start')==true){
      return const ChatBotView();
-    }
-    else{
-    return const ChatBotIntro();
-    }
+   }),
+   GoRoute(path: kGenerateTripView,builder: (context,state){
+     return const GenerateAiTrip();
    }),
    GoRoute(path: kTourGuideHome,builder: (context,state)=>const BasicHome(),),
    GoRoute(path: kImageClassification,builder: (context,state)=>const ImageClassificationView(),),

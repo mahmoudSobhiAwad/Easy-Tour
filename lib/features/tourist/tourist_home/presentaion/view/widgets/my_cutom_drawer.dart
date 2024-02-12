@@ -16,12 +16,14 @@ class MyDrawer extends StatelessWidget {
     this.role=Role.tourist,
     required this.touristDrawerList,
 
+
   });
 
   final double height;
   final double width;
   final Role role;
   final void Function()?onClose;
+
   final Future<void> Function() logOut;
   final String?name;
   final String?profileUrl;
@@ -40,7 +42,8 @@ class MyDrawer extends StatelessWidget {
               color:thirdColor,
               borderRadius: BorderRadius.only(topRight: Radius.circular(20),bottomRight: Radius.circular(20)),
             ),
-            child: CustomDrawerBody(onClose: onClose, height: height,logOut:logOut,name:name,profileUrl:profileUrl,role:role,drawerList: touristDrawerList,),
+            child: CustomDrawerBody(
+            onClose: onClose, height: height,logOut:logOut,name:name,profileUrl:profileUrl,role:role,drawerList: touristDrawerList,),
           ),
         ),
       ),

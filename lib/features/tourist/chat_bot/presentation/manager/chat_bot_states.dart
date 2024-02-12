@@ -9,3 +9,4 @@ class FailureSendRequestChatBotState extends ChatBotState {
 class AddedToListMessagesChatBotState extends ChatBotState {}
 class DeleteChatBotMessagesState extends ChatBotState {}
 class EnableSendRequestState extends ChatBotState {}
+class ChangePageCurrentState extends ChatBotState {}

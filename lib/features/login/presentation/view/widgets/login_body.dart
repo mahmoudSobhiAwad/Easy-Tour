@@ -77,7 +77,6 @@ class LoginBody extends StatelessWidget {
             content: 'Success Login',)).then((value){
               context.go(RouterApp.kHomeView);
           }
-
           );
         }
         else if(state is SuccessTourGuideLoginState){

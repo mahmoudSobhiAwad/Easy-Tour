@@ -21,7 +21,7 @@ class CoverPictureWidget extends StatelessWidget {
       height: widgetHeight,
       width: widgetWidth,
       decoration: BoxDecoration(
-        image:coverUrl!=null? DecorationImage(image: NetworkImage(coverUrl!),fit: BoxFit.fill):const DecorationImage(image: AssetImage('assets/login/default_cover.png',),fit: BoxFit.fill),
+        image:coverUrl!=''? DecorationImage(image: NetworkImage(coverUrl!),fit: BoxFit.fill):const DecorationImage(image: AssetImage('assets/login/default_cover.png',),fit: BoxFit.fill),
         color: secondaryColor,
         borderRadius: BorderRadius.circular(15),
       ),

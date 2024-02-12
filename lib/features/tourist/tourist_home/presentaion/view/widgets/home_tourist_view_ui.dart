@@ -40,7 +40,7 @@ class HomeTouristViewUi extends StatelessWidget {
         backgroundColor: thirdColor,
         foregroundColor: basicColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50),side:const BorderSide(width: 5,color: Colors.white,)),
-        child: const Icon(Icons.camera_alt_rounded),),
+        child: const Icon(Icons.near_me_rounded),),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar:cubit.isMenuActive?null:MyBottomNavBar(height: height, width: width, barIcons: bottomNavIcons, changeBottomNavIndex: (int index) {
         cubit.changeBottomNavIndex(index);

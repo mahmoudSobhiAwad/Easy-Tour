@@ -236,6 +236,7 @@ class ApiServices{
   /// delete request
   Future<Map<String,dynamic>>delete({required String endPoint,Map<String,dynamic>?data})async {
     final String? tokenId=SetAppState.prefs?.getString('token');
+
     var response=await dio.delete('$baseUrl$endPoint',data: data,options: Options(headers: {'Authorization':'token $tokenId',}));
     return response.data;
   }

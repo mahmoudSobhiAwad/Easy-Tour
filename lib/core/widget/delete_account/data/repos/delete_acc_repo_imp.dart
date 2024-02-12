@@ -28,7 +28,7 @@ class DeleteAccountRepoImpl implements DeleteAccRepo {
   @override
   Future<Either<Failure, String>> checkOldPassword({required String oldPass}) async{
     try{
-      var result=await apiServices.get(endPoint: 'confirmOldPassword',data:{'oldPassword':oldPass} );
+      var result=await apiServices.get(endPoint: '${homeEndPoint}settings/confirmOldPassword',data:{'oldPassword':oldPass} );
       String response= result['message'];
       return right(response);
     }

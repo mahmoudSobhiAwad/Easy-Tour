@@ -44,7 +44,7 @@ class AiPart extends StatelessWidget {
                       context.push(RouterApp.kImageClassification);
                       },
                           (){
-
+                            context.push(RouterApp.kGenerateTripView);
                       },
                     ][index],
                       child: CardElement(height: height,width: width,cardModel: aiTool[index],));

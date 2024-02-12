@@ -20,8 +20,11 @@ class SetAppState{
   static Future<void> setRole({required String? role})async{
     await prefs?.setString('role',role??"");
   }
-  static Future<void> chatBotStart({bool start=false})async{
-    await prefs?.setBool('start',start);
+  static Future<void> chatBotCurrentPage(int? index)async{
+    await prefs?.setInt('pageIndex',index??0);
+  }
+  static Future<void> generateTripCurrentPage(int? index)async{
+    await prefs?.setInt('tripIndex',index??0);
   }
 
 }

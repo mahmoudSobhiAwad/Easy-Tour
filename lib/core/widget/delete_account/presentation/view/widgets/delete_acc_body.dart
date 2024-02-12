@@ -27,7 +27,9 @@ class DeleteAccountBody extends StatelessWidget {
                 cubit.changeOldPassVis();
               },),
               SizedBox(height: height*0.15,),
-              CustomLoginButton(label: 'Delete',color: closeColor,onTap: ()async{
+              CustomLoginButton(label: 'Delete',color: closeColor,
+                isLoading: cubit.isLoading,
+                onTap: ()async{
                 await cubit.deleteAccount();
               },)
             ],

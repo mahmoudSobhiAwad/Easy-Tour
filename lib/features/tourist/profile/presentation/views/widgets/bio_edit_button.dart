@@ -22,7 +22,7 @@ class BioAndEditButton extends StatelessWidget {
             children: [
               Text('${cubit.name}',style:CustomTextStyle.commonProfileDark,),
               const SizedBox(height: 5,),
-              Text('${cubit.touristModel.flagName??""}  ${cubit.touristModel.nationality??""}'),
+              Text('${cubit.touristModel?.flagName??""}  ${cubit.touristModel?.nationality??""}'),
             ],
           ),
           InkWell(

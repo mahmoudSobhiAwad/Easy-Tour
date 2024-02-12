@@ -16,8 +16,8 @@ class TouristInfoModel {
   TouristInfoModel({this.profileUrl,this.flagName,this.coverUrl,this.coverFile,this.profileFile,this.preferences,this.confirmedEmail,this.phoneNumber,this.gender,this.languages,this.nationality,this.status});
   factory TouristInfoModel.fromJson(Map<String,dynamic>json)=> TouristInfoModel(
     languages: json['language'],
-    profileUrl:  ProfileImageUrl.fromJson(json['profilePicture']).imageUrl,
-    coverUrl: ProfileImageUrl.fromJson(json['coverPicture']).imageUrl,
+    profileUrl:  ProfileImageUrl.fromJson(json['profilePicture']).imageUrl??'',
+    coverUrl: ProfileImageUrl.fromJson(json['coverPicture']).imageUrl??'',
     gender: json['gender']??"male",
     status: json['status'],
     nationality: json['country']??'Egypt',

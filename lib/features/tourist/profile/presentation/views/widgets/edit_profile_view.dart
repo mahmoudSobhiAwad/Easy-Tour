@@ -13,14 +13,14 @@ import 'package:prepare_project/features/tourist/profile/presentation/views/widg
 
 class ProfileEditView extends StatelessWidget {
   const ProfileEditView({super.key,required this.model});
-  final TouristInfoModel model;
+  final TouristInfoModel? model;
   @override
   Widget build(BuildContext context) {
     double height=BasicDimension.screenHeight(context);
     double width=BasicDimension.screenWidth(context);
     return BlocProvider(
-      create:(context)=>EditProfileCubit(profileRepo: getIt.get<ProfileRepoImpl>(), model: model),
-      child:BlocConsumer(builder: (context,state){
+      create:(context)=>EditProfileCubit(profileRepo: getIt.get<ProfileRepoImpl>(), model: model)..prepareField(),
+      child:BlocConsumer<EditProfileCubit,EditProfileStates>(builder: (context,state){
         var cubit=BlocProvider.of<EditProfileCubit>(context);
         return ProfileEdit(height: height, width: width, cubit: cubit);
       }, listener: (context,state){

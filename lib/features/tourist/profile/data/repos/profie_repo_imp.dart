@@ -12,7 +12,7 @@ class ProfileRepoImpl implements ProfileRepo{
   @override
   Future<Either<Failure, TouristInfoModel>> getTourismInfo() async{
     try{
-      var data=await apiServices.get(endPoint: '${homeEndPoint}getProfile',);
+      var data=await apiServices.get(endPoint: '${homeEndPoint}profile/getProfile',);
       TouristInfoModel infoModel= TouristInfoModel.fromJson(data['user']);
       return right(infoModel);
     }
@@ -27,12 +27,12 @@ class ProfileRepoImpl implements ProfileRepo{
   }
 
   @override
-  Future<Either<Failure, TouristInfoModel>> updateTourismInfo({ required FormData infoModel})async {
+  Future<Either<Failure, String>> updateTourismInfo({ required FormData infoModel})async {
     try
     {
-      var data=await apiServices.postWithPhoto(endPoint: '${homeEndPoint}profileSetUp', data:infoModel);
-      TouristInfoModel model= TouristInfoModel.fromJson(data['user']);
-      return right(model);
+      var data=await apiServices.postWithPhoto(endPoint: '${homeEndPoint}profile/profileSetUp', data:infoModel);
+      String response= data['message'];
+      return right(response);
     }
     catch(e){
       if(e is DioException){

@@ -10,9 +10,12 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
   bool isMenuActive=false;
   final AnimationController? controller;
   final String?touristName= SetAppState.prefs?.getString('name');
-  final String?profileUrl= SetAppState.prefs?.getString('profileUrl');
+  String profileUrl= SetAppState.prefs?.getString('profileUrl')??'';
   final HomeTouristRepoImp homeTouristRepoImp;
   int currIndex=0;
+  Future<void>getProfilePicture()async{
+    profileUrl= SetAppState.prefs?.getString('profileUrl')??'';
+  }
   void changeMenuState(){
     isMenuActive=!isMenuActive;
     emit(ChangeHomeTouristMenuState());
@@ -42,8 +45,6 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
   }
   Future<void> logOut()async{
     emit(LoadingLogOutState());
-    await SetAppState.setToken(token:'');
-    emit(SuccessLogOutState());
     var result =await homeTouristRepoImp.logOut();
     result.fold(
         (failure){

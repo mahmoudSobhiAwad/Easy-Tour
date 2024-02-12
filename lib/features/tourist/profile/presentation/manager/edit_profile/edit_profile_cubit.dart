@@ -12,11 +12,11 @@ import 'package:prepare_project/features/tourist/profile/presentation/manager/ed
 class EditProfileCubit extends Cubit<EditProfileStates>{
   EditProfileCubit({required this.profileRepo,required this.model}):super(InitialEditProfileState());
   final ProfileRepo profileRepo;
-  final TouristInfoModel model;
+  final TouristInfoModel? model;
   String?country;
   String?flag;
-  String?coverUrl;
-  String?imageUrl;
+  String? coverUrl;
+  String? imageUrl;
   String?countryCode='20';
   String?gender;
   String?language;
@@ -29,13 +29,14 @@ class EditProfileCubit extends Cubit<EditProfileStates>{
   Set preferences={};
   final ImagePicker picker=ImagePicker();
   void prepareField(){
-    country=model.nationality;
-    flag=model.flagName;
-    imageUrl=model.profileUrl;
-    coverUrl=model.coverUrl;
-    gender=model.gender;
-    language=model.languages;
-    preferences=model.preferences?.toSet()??{};
+    country=model?.nationality;
+    flag=model?.flagName??'EG';
+    imageUrl=model?.profileUrl??"";
+    coverUrl=model?.coverUrl??"";
+    gender=model?.gender;
+    language=model?.languages;
+    preferences=model?.preferences?.toSet()??{};
+    phoneController.text=model?.phoneNumber??'';
   }
   Future<void>updateProfileDate()async {
     final FormData formData=await TouristInfoModel(
@@ -48,14 +49,14 @@ class EditProfileCubit extends Cubit<EditProfileStates>{
       phoneNumber: phoneController.text,
       flagName: flag,
     ).toFormData();
-
+    showGetLoading=true;
     emit(LoadingEditProfileState());
-    var result=await profileRepo.updateTourismInfo(infoModel: formData,
-    );
+    var result=await profileRepo.updateTourismInfo(infoModel: formData,);
     return result.fold((failure) {
-
+      showGetLoading=false;
       emit(FailureEditProfileState(errMessage:failure.errMessage));
     }, (tourismInfo) {
+      showGetLoading=false;
       emit(SuccessEditProfileState());
       profileFile=coverFile=null;
     });
