@@ -15,14 +15,14 @@ class ProfileCubit extends Cubit<ProfileStates>{
      emit(LoadingGetInfoTouristDataState());
       var result=await profileRepo.getTourismInfo();
       return  result.fold((failure) async {
-        print(failure.statusCode);
-        if(failure.statusCode==400)
+        if(failure.statusCode==401)
         {
-         await getProfileData();
+          emit(FailureGetInfoTouristDataState('that error due to refresh token'));
         }
-        else{
-      emit(FailureGetInfoTouristDataState(failure.errMessage));
-      showGetLoading=false;
+        else
+        {
+          emit(FailureGetInfoTouristDataState(failure.errMessage));
+          showGetLoading=false;
         }
    }, (infoModel) {
       changeDataAfterGet(infoModel);

@@ -16,35 +16,27 @@ class HistoricalPlacesCubit extends Cubit<HistoricalPlacesState>{
     currIndex=index;
     emit(ChangePaginationIndexState());
   }
-  void increaseIndex(){
-    if(currIndex<paginationList.length){
+  void scrollToNextItem({bool isPrevious = false,required double width}) {
+    if(currIndex<paginationList.length-1){
+      double offset = (currIndex+ 1) * width;
       currIndex++;
-      scrollToNextItem();
+      scrollController.animateTo(
+         offset,
+         duration: const Duration(milliseconds: 500),
+         curve: Curves.easeInOut,);
+      emit(ChangePaginationIndexState());
     }
-    else{
-
-    }
-    emit(ChangePaginationIndexState());
-
   }
-  void decreaseIndex(){
-    if(currIndex!=0){
+  void scrollToPrevItem({bool isPrevious = false,required double width}) {
+    if(currIndex>0){
+      double offset = (currIndex- 1) * width;
       currIndex--;
-      scrollToNextItem(isPrevious: true);
+      scrollController.animateTo(
+         offset,
+         duration: const Duration(milliseconds: 500),
+         curve: Curves.easeInOut,);
+      emit(ChangePaginationIndexState());
     }
-    else{
 
-    }
-    emit(ChangePaginationIndexState());
-  }
-  void scrollToNextItem({bool isPrevious = false}) {
-    double currentOffset = scrollController.offset;
-    double nextItemOffset=currentOffset;
-    if (isPrevious) {
-      nextItemOffset -= currentOffset*0.1;
-    } else {
-      nextItemOffset += currentOffset*0.2;
-    }
-    scrollController.animateTo(nextItemOffset, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
   }
 }

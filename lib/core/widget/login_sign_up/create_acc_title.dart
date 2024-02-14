@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TitleOfCreateAcc extends StatelessWidget {
-  const TitleOfCreateAcc({super.key,this.textAlign,required this.mainStyle,required this.secondaryStyle,this.align,required this.mainText,required this.secondaryText,});
+  const TitleOfCreateAcc({super.key,this.textAlign,this.maxLines,required this.mainStyle,required this.secondaryStyle,this.align,required this.mainText,required this.secondaryText,});
 final CrossAxisAlignment? align;
 final String mainText;
 final String secondaryText;
 final TextAlign? textAlign;
 final TextStyle mainStyle;
 final TextStyle secondaryStyle;
+final int?maxLines;
   @override
   Widget build(BuildContext context) {
     return   Padding(
@@ -17,7 +18,7 @@ final TextStyle secondaryStyle;
         children: [
           Text(mainText,style: mainStyle,textAlign: textAlign??TextAlign.center,),
           const SizedBox(height: 10,),
-          Text(secondaryText,style:secondaryStyle,textAlign: textAlign??TextAlign.center,),
+          Text(secondaryText,style:secondaryStyle,textAlign: textAlign??TextAlign.center,maxLines: maxLines,),
         ],
       ),
     );

@@ -14,7 +14,7 @@ class ImageClassificationView extends StatelessWidget {
   Widget build(BuildContext context) {
     double width=BasicDimension.screenWidth(context);
     double height=BasicDimension.screenHeight(context);
-    return  BlocProvider(create: (context)=>ImageClassificationCubit()..initCameraController(),
+    return  BlocProvider(create: (context)=>ImageClassificationCubit(),
       child: BlocConsumer<ImageClassificationCubit,ImageClassificationStates>(builder:(context,state){
         var cubit=BlocProvider.of<ImageClassificationCubit>(context);
         return ImageClassificationBody(height: height, width: width, cubit: cubit);

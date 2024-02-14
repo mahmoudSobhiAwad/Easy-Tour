@@ -49,7 +49,6 @@ class NearbySearchView extends StatelessWidget {
         );
       }),
     );
-
   }
 }
 

@@ -48,13 +48,13 @@ class PaginationInHistoricalPlaces extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(onPressed:decreaseIndex, icon:const  Icon(Icons.arrow_back_ios_new,color: secondaryColor,)),
+            IconButton(onPressed:decreaseIndex, icon: Icon(Icons.arrow_back_ios_new,color:pagIndex==0?secondaryColor:entertainmentColor,)),
             PaginationNumbers(
               controller: controller,
-              width: width,changePag:(int index){
+              width: width,changePag:(int index) {
               changeIndex(index);
             }, pagIndex: pagIndex, pagNumbers: pageNumbers,),
-            IconButton(onPressed: increaseIndex, icon:const Icon(Icons.arrow_forward_ios,color: secondaryColor,)),
+            IconButton(onPressed: increaseIndex, icon:Icon(Icons.arrow_forward_ios,color:pagIndex==pageNumbers.length-1?secondaryColor:entertainmentColor,)),
           ],
         ),
       ),

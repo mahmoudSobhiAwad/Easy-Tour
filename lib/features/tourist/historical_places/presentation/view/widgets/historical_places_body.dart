@@ -50,9 +50,9 @@ class HistoricalPlacesBody extends StatelessWidget {
           PaginationInHistoricalPlaces(
             controller: cubit.scrollController,
             width: width, height: height, decreaseIndex: () {
-            cubit.decreaseIndex();
+            cubit.scrollToPrevItem(width: width*0.1);
           }, pagIndex: cubit.currIndex, increaseIndex: () {
-            cubit.increaseIndex();
+            cubit.scrollToNextItem(width: width*0.1);
           }, changeIndex: (int index) {
             cubit.changeIndex(index);
           },
