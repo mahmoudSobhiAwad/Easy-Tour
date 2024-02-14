@@ -24,7 +24,9 @@ class PlacesWrapWidget extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(color: thirdColor,borderRadius: commonBorderRadius(),boxShadow: [buildBoxShadow()]),
       child: SingleChildScrollView(
-        child: Wrap(
+        child:places!.isEmpty?
+        const Text('Try To Add Places ',textAlign: TextAlign.center,) :
+        Wrap(
             alignment: WrapAlignment.center,
             spacing: 12,
             children:[

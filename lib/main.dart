@@ -14,7 +14,6 @@ Future<void> main()async {
   setUp();
   cameras=await availableCameras();
   await FlutterDownloader.initialize(
-      debug: true, // optional: set to false to disable printing logs to console (default: true)
       ignoreSsl: true // option: set to false to disable working with http links (default: false)
   );
   Bloc.observer=SimpleBlocObserver();
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
           iconTheme: const IconThemeData(color:basicColor),
             useMaterial3: true,
             primaryColor:basicColor,
-            fontFamily: 'inter',
+            fontFamily: 'ABeeZee',
         ),
         routerConfig: RouterApp.router,
       ),

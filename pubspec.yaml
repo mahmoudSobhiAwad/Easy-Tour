@@ -91,6 +91,9 @@ flutter:
       fonts:
         - asset: fonts/login_font/Inter-Regular.otf
           weight: 700
+    - family: ABeeZee
+      fonts:
+          - asset: fonts/login_font/ABeeZee-Regular.ttf
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/on_boarding_images/

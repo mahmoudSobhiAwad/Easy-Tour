@@ -73,5 +73,6 @@ enum Role{tourist,tourGuide}
 const String authTourist='auth/tourist/';
 const String authTourGuide='auth/tourGuide/';
 String homeEndPoint='home/${SetAppState.prefs?.get('role')}/';
-const baseUrl='http://54.224.73.95:8081/';
+const baseUrl='http://54.162.144.241:8081/';
+
 const chatBotUrl='http://184.73.59.25:8000/chatbot';

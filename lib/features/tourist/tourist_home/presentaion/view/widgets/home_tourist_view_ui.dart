@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/features/tourist/google_map/presentaion/view/google_map_view.dart';
+import 'package:prepare_project/features/tourist/nearby_places/presentation/views/search_nearby_view.dart';
 import 'package:prepare_project/features/tourist/profile/presentation/views/profile_view.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/tourist_feed_view.dart';
 import 'package:prepare_project/features/tourist/tourist_home/data/home_ui_data/icons.dart';
@@ -36,7 +37,9 @@ class HomeTouristViewUi extends StatelessWidget {
         const ProfileView(),
       ][cubit.currIndex],
       floatingActionButton:cubit.isMenuActive?null:FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>const NearbySearchView()));
+        },
         backgroundColor: thirdColor,
         foregroundColor: basicColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50),side:const BorderSide(width: 5,color: Colors.white,)),

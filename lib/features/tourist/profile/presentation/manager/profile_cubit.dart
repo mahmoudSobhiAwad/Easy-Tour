@@ -14,9 +14,16 @@ class ProfileCubit extends Cubit<ProfileStates>{
      showGetLoading=true;
      emit(LoadingGetInfoTouristDataState());
       var result=await profileRepo.getTourismInfo();
-      return  result.fold((failure) {
+      return  result.fold((failure) async {
+        print(failure.statusCode);
+        if(failure.statusCode==400)
+        {
+         await getProfileData();
+        }
+        else{
       emit(FailureGetInfoTouristDataState(failure.errMessage));
       showGetLoading=false;
+        }
    }, (infoModel) {
       changeDataAfterGet(infoModel);
       emit(SuccessGetInfoTouristDataState());

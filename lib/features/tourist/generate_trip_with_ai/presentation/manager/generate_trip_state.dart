@@ -5,3 +5,4 @@ class ChangeRangeDatePickerState extends GenerateAiTripState {}
 class AddPlaceToPickedPlacesList extends GenerateAiTripState {}
 class RemovePlaceFromPickedPlacesList extends GenerateAiTripState {}
 class ChangeToggleForSelectedTypeState extends GenerateAiTripState {}
+

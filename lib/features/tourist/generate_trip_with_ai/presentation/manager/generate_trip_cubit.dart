@@ -69,8 +69,8 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
       pickedTypes?.add(typeOfTourismList[index].typeName);
     }
     emit(ChangeToggleForSelectedTypeState());
-
   }
+
 
 
 }
