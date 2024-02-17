@@ -11,7 +11,7 @@ class DeleteAccountRepoImpl implements DeleteAccRepo {
   @override
   Future<Either<Failure, String>> deleteAccount() async{
     try{
-      var result= await apiServices.delete(endPoint: '${homeEndPoint}settings/deleteUser',);
+      var result= await apiServices.delete(endPoint: '${homeEndMutualPoint}settings/deleteUser',);
       String response=result['message'];
       return right(response);
     }
@@ -28,7 +28,7 @@ class DeleteAccountRepoImpl implements DeleteAccRepo {
   @override
   Future<Either<Failure, String>> checkOldPassword({required String oldPass}) async{
     try{
-      var result=await apiServices.get(endPoint: '${homeEndPoint}settings/confirmOldPassword',data:{'oldPassword':oldPass} );
+      var result=await apiServices.get(endPoint: '${homeEndMutualPoint}settings/confirmOldPassword',data:{'oldPassword':oldPass} );
       String response= result['message'];
       return right(response);
     }

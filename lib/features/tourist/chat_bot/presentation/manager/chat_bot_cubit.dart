@@ -3,16 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/features/tourist/chat_bot/data/model/chat_bot_model.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/manager/chat_bot_states.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 import '../../data/repo/chat_bot_repo.dart';
 
 class ChatBotCubit extends Cubit<ChatBotState>{
-  ChatBotCubit({required this.chatBotRepo}):super(InitialChatBotState());
+  ChatBotCubit({required this.chatBotRepo,this.initialMessage}):super(InitialChatBotState());
   final ChatBotRepo chatBotRepo;
+  final String?initialMessage;
   final TextEditingController messageController=TextEditingController();
   final ScrollController scrollController=ScrollController();
   String? requestMessage;
   bool enableSend=false;
+  SpeechToText speechToText = SpeechToText();
+  bool enableSpeech=false;
+  bool enableMic=false;
   List<ChatBotModel>messages=[];
   int chatBotCurrentPage=SetAppState.prefs?.getInt('pageIndex')??0;
   void getFromBot(String response){
@@ -30,6 +36,13 @@ class ChatBotCubit extends Cubit<ChatBotState>{
     chatBotCurrentPage=1;
     await SetAppState.prefs?.setInt('pageIndex', 1);
     emit(ChangePageCurrentState());
+  }
+  void initChatBot(){
+    if(initialMessage!=null){
+      enableSend=true;
+      messageController.text=initialMessage??'';
+      emit(InitialChatBotMessagesState());
+    }
   }
   Future<void> sendQuestion()async{
     if(messageController.text.isNotEmpty)
@@ -76,4 +89,35 @@ class ChatBotCubit extends Cubit<ChatBotState>{
     }
     emit(EnableSendRequestState());
    }
+  void initSpeech() async {
+    enableSpeech = await speechToText.initialize();
+    if(enableSpeech){
+      emit(InitializeSpeechToTextRecognition());
+    }
+    else{
+      emit(FailureSendRequestChatBotState(errMessage: 'Cant Initialise Text To Speech'));
+    }
+
+  }
+  void startListening() async {
+    enableMic=true;
+    if(!enableSpeech){
+      emit(FailureSendRequestChatBotState(errMessage: 'You don\'t Allow The Mic Permissions'));
+    }
+    else{
+      await speechToText.listen(onResult: onSpeechResult);
+      emit(StartListeningToVoiceState());
+    }
+  }
+
+  void stopListening() async {
+    enableMic=false;
+    await speechToText.stop();
+    emit(StopListeningToVoiceState());
+  }
+  void onSpeechResult(SpeechRecognitionResult result) {
+    messageController.text=result.recognizedWords;
+    checkExistOfText();
+    emit(ChangeVoiceToTextState());
+  }
 }

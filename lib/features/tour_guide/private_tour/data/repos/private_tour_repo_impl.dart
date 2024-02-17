@@ -12,7 +12,7 @@ class PrivateTourRepoImp implements PrivateTourRepo{
   @override
   Future<Either<Failure, String>> createPrivateTrip({required FormData tripModel}) async{
     try{
-      var data=await apiServices.postWithPhoto(endPoint: '${homeEndPoint}myTrips/createTrip', data: tripModel);
+      var data=await apiServices.postWithPhoto(endPoint: '${homeEndPointTourGuide}myTrips/createTrip', data: tripModel);
       String trip=data['message'];
       return Right(trip);
     }
@@ -29,7 +29,7 @@ class PrivateTourRepoImp implements PrivateTourRepo{
   @override
   Future<Either<Failure, String>> deletePrivateTrip({required Map<String,dynamic>data}) async{
     try{
-      var response=await apiServices.delete(endPoint: '${homeEndPoint}myTrips/deleteTrip', data: data);
+      var response=await apiServices.delete(endPoint: '${homeEndPointTourGuide}myTrips/deleteTrip', data: data);
       String trip=response['message'];
       return Right(trip);
 
@@ -47,7 +47,7 @@ class PrivateTourRepoImp implements PrivateTourRepo{
   @override
   Future<Either<Failure, String>> editPrivateTrip({required FormData tripModel})async {
     try{
-      var response=await apiServices.patchWithPhoto(endPoint: '${homeEndPoint}myTrips/editTrip', data: tripModel);
+      var response=await apiServices.patchWithPhoto(endPoint: '${homeEndPointTourGuide}myTrips/editTrip', data: tripModel);
       String trip=response['message'];
       return Right(trip);
 
@@ -65,7 +65,7 @@ class PrivateTourRepoImp implements PrivateTourRepo{
   @override
   Future<Either<Failure, List<Trip>>> getPrivateTrip() async{
     try{
-      var response=await apiServices.get(endPoint: '${homeEndPoint}myTrips/getAllTrips',);
+      var response=await apiServices.get(endPoint:'${homeEndPointTourGuide}myTrips/getAllTrips',);
       List<Trip> trips=List<Trip>.from(response['trips'].map((x) => Trip.fromJson(x)));
       return Right(trips);
 

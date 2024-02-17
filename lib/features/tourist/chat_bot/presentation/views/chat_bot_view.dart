@@ -10,11 +10,12 @@ import 'package:prepare_project/features/tourist/chat_bot/presentation/views/wid
 import '../../../../../core/widget/custom_alert_widget/alert_container.dart';
 import '../../../../../core/widget/custom_alert_widget/alert_types.dart';
 class ChatBotView extends StatelessWidget {
-  const ChatBotView({super.key});
+  const ChatBotView({super.key,this.initialMessage});
+  final String?initialMessage;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=>ChatBotCubit(chatBotRepo: getIt.get<ChatBotRepoImp>()),
+      create: (context)=>ChatBotCubit(chatBotRepo: getIt.get<ChatBotRepoImp>(),initialMessage: initialMessage)..initSpeech()..initChatBot(),
       child:BlocConsumer<ChatBotCubit,ChatBotState>(
         builder:(context,state)
         {

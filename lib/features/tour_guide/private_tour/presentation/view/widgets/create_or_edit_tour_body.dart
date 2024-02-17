@@ -28,72 +28,67 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        SingleChildScrollView(
+        ListView(
           padding: EdgeInsets.only(left: 20.0,right: 20,top: height*0.03,),
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('title of the trip'),
-                  const SizedBox(height: 5,),
-                  CustomTextFormField(
-                    controller: cubit.titleTextController,
-                    label: 'add title for the trip.....',
-                    border: 20,
-                    fillColor: thirdColor,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    filled: true,
-                    enableOutLine: false,),
-                ],
-              ),
-              const SizedBox(height: 20,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('brief of the trip'),
-                  const SizedBox(height: 5,),
-                  CustomTextFormField(
-                    controller: cubit.briefTextController,
-                    label: 'add brief for your trip ....',
-                    border: 20,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    maxLines: 2,
-                    fillColor: thirdColor,
-                    filled: true,
-                    enableOutLine: false,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20,),
-              DetailsDayList(height: height, width: width,cubit: cubit,tripDays: cubit.tripDay,),
-              const SizedBox(height: 20,),
-              BGPrivateTourOption(height: height, cubit: cubit,width: width,),
-              const SizedBox(height: 20,),
-              MinPersonTicketPrice(width: width, minTicket: cubit.pricePerPersonTextController,minPerson: cubit.minimumPersonTextController,),
-              const SizedBox(height: 20,),
-              CustomLoginButton(
-                label:switch(editOrCreate){
-                  // TODO: Handle this case.
-                  CreateOrEdit.create => 'Add',
-                  // TODO: Handle this case.
-                  CreateOrEdit.edit => 'Edit',
-                },
-                onTap:
-                  switch(editOrCreate){
-                  // TODO: Handle this case.
-                    CreateOrEdit.create => (){
-                      cubit.createNewTrip();
-                    },
-                  // TODO: Handle this case.
-                    CreateOrEdit.edit => (){
-                      cubit.editCurrentTrip();
-                    },
-                  }
-              ),
-              const SizedBox(height: 20,),
-            ],
-          ),
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('title of the trip'),
+                const SizedBox(height: 5,),
+                CustomTextFormField(
+                  controller: cubit.titleTextController,
+                  label: 'add title for the trip.....',
+                  border: 20,
+                  fillColor: thirdColor,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  filled: true,
+                  enableOutLine: false,),
+              ],
+            ),
+            const SizedBox(height: 20,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('brief of the trip'),
+                const SizedBox(height: 5,),
+                CustomTextFormField(
+                  controller: cubit.briefTextController,
+                  label: 'add brief for your trip ....',
+                  border: 20,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  maxLines: 2,
+                  fillColor: thirdColor,
+                  filled: true,
+                  enableOutLine: false,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20,),
+            DetailsDayList(height: height, width: width,cubit: cubit,tripDays: cubit.tripDay,),
+            const SizedBox(height: 20,),
+            BGPrivateTourOption(height: height, cubit: cubit,width: width,),
+            const SizedBox(height: 20,),
+            MinPersonTicketPrice(width: width, minTicket: cubit.pricePerPersonTextController,minPerson: cubit.minimumPersonTextController,),
+            const SizedBox(height: 20,),
+            CustomLoginButton(
+              isLoading: cubit.isLoading,
+              label:switch(editOrCreate){
+                CreateOrEdit.create => 'Add',
+                CreateOrEdit.edit => 'Edit',
+              },
+              onTap:
+                switch(editOrCreate){
+                CreateOrEdit.create => (){
+                    cubit.createNewTrip();
+                  },
+                  CreateOrEdit.edit => (){
+                    cubit.editCurrentTrip();
+                  },
+                }
+            ),
+            const SizedBox(height: 20,),
+          ],
         ),
         cubit.showAddDay?
         AddOrEditTripModelBottom(

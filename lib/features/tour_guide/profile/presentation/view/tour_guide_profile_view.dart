@@ -42,6 +42,7 @@ class TourGuideProfileView extends StatelessWidget {
           },
           listener: (context,state)
           {
+            var cubit=BlocProvider.of<TourGuideProfileViewCubit>(context);
             if(state is FailureGetInfoTourGuideProfileView){
               showDialog(context: context, builder: (context)=> ContainerAlertWidget(
                 types: AlertTypes.failed,
@@ -49,6 +50,14 @@ class TourGuideProfileView extends StatelessWidget {
                   context.pop();
                 },
                 content: '${state.errMessage}',));
+            }
+            else if(state is RefreshTokenFailureState) {
+              showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+                types: AlertTypes.failed,
+                onTap: (){
+                  cubit.getData().then((value){Navigator.pop(context);});
+                },
+                content: state.errMessage,));
             }
 
       }),

@@ -48,9 +48,17 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
     var result =await homeTouristRepoImp.logOut();
     result.fold(
         (failure){
+          if(failure.statusCode==401)
+          {
+            emit(RefreshTokenErrorState('error due to refresh token try again'));
+          }
+          else{
           emit(FailureLogOutState(failure.errMessage));
+          }
         }, (logOut) async {
-          await SetAppState.setToken(token:'');
+          await SetAppState.setToken(token: '');
+          await SetAppState.setRole(role: '');
+          await SetAppState.setProfilePic(profileUrl: '');
           emit(SuccessLogOutState());
         }
     );

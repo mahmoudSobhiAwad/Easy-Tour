@@ -52,7 +52,18 @@ class _HomeTouristViewState extends State<HomeTouristView> with SingleTickerProv
                 return false;
               }
               else{
-                return true;
+                final getOut=await
+                showDialog<bool>(context: context, builder: (context)=>ContainerAlertWidget(
+                  types: AlertTypes.leaveApp,content:'Are You Sure To Leave The App ',
+                  onTapYes: (){
+                    Navigator.pop(context,true);
+                  },
+                  onTapNo: (){
+                    Navigator.pop(context,false);
+                  },
+
+                ));
+                return getOut!;
               }
             },
             child: GestureDetector(
@@ -71,12 +82,19 @@ class _HomeTouristViewState extends State<HomeTouristView> with SingleTickerProv
           );
         },
         listener: (context,state){
+          var cubit=BlocProvider.of<HomeTouristCubit>(context);
           if(state is SuccessLogOutState){
             context.go(RouterApp.kLoginView);
           }
-          if(state is FailureLogOutState){
+          else if(state is FailureLogOutState){
             showDialog(context: context, builder: (context)=>ContainerAlertWidget(types: AlertTypes.failed,content:state.errMessage,onTap: (){
               context.pop();
+            },));
+          }
+          else if(state is RefreshTokenErrorState){
+            showDialog(context: context, builder: (context)=>ContainerAlertWidget(types: AlertTypes.failed,content:state.errMessage,
+              onTap: (){
+              cubit.logOut().then((value)=>context.pop());
             },));
           }
         },

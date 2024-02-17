@@ -11,6 +11,10 @@ class FailureUpdateInfoTouristDataState extends ProfileStates{
   final String?errMessage;
   FailureUpdateInfoTouristDataState(this.errMessage);
 }
+class RefreshTokenFailureState extends ProfileStates{
+  final String?errMessage;
+  RefreshTokenFailureState(this.errMessage);
+}
 class SuccessUpdateInfoTouristDataState extends ProfileStates{}
 class ChangeGenderSuccessState extends ProfileStates{}
 class ChangeLanguageSuccessState extends ProfileStates{}

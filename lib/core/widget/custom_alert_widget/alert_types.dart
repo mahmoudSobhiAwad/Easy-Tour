@@ -3,4 +3,6 @@ enum AlertTypes{
   failed,
   warning,
   optionChoice,
+  leaveApp,
+
 }

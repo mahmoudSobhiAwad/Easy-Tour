@@ -35,21 +35,24 @@ class ServerFailure extends Failure {
 
   factory ServerFailure.fromResponse(int? statusCode,Map<String,dynamic> data)  {
 
-    if (statusCode == 400 || statusCode == 403) {
+    if (statusCode == 400 || statusCode == 403)
+    {
       return ServerFailure(data['message']??"Error due to Server",statusCode: 400);
     }
-   else if(statusCode ==401){
-
+   else if(statusCode ==401)
+   {
      SetAppState.setToken(token: data['newToken']).then((value){});
      return ServerFailure('error due to refresh token',statusCode: 401);
     }
     else if (statusCode == 404) {
       return ServerFailure('Your request not found, Please try later!',statusCode: 404);
-    } else if (statusCode == 500)
+    }
+    else if (statusCode == 500)
     {
       return ServerFailure('${data['message']}Internal Server error, Please try later',statusCode: 500);
-
-    } else {
+    }
+    else
+    {
       return ServerFailure("Server may be not exist at that moment");
     }
   }

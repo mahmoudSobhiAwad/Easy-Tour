@@ -11,7 +11,7 @@ class ChangePasswordRepoImp extends ChangePasswordRepo{
   @override
   Future<Either<Failure, String>> checkOldPassword({required String oldPass}) async{
     try{
-      var result=await apiServices.get(endPoint: '${homeEndPoint}settings/confirmOldPassword',data:{'oldPassword':oldPass} );
+      var result=await apiServices.get(endPoint:'${homeEndMutualPoint}settings/confirmOldPassword',data:{'oldPassword':oldPass} );
       String response= result['message'];
       return right(response);
     }
@@ -30,7 +30,7 @@ class ChangePasswordRepoImp extends ChangePasswordRepo{
   @override
   Future<Either<Failure, String>> updateNewPassword({required Map<String,dynamic>passwords})async {
     try{
-      var result=await apiServices.patch(endPoint: '${homeEndPoint}settings/changeOldPass',data:passwords);
+      var result=await apiServices.patch(endPoint:'${homeEndMutualPoint}settings/changeOldPass',data:passwords);
 
       String response= result['message'];
       return right(response);

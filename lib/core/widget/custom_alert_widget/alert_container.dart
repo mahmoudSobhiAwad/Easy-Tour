@@ -24,6 +24,9 @@ final void Function()? onTapNo;
           return HeaderOption.warningWidget;
         case AlertTypes.optionChoice:
           return HeaderOption.warningWidget;
+          case AlertTypes.leaveApp:
+          return HeaderOption.leaveWidget;
+
         default:
           return HeaderOption.successWidget;
       }
@@ -38,8 +41,8 @@ final void Function()? onTapNo;
           return ButtonOption.warningButton;
         case AlertTypes.optionChoice:
           return OptionChoice(onTapNo: onTapNo, onTapYes: onTapYes);
-
-
+        case AlertTypes.leaveApp:
+          return LeaveApp(onTapNo: onTapNo, onTapYes: onTapYes);
       }
     }
     return  Padding(
@@ -79,6 +82,11 @@ class HeaderOption{
     radius: 30,
     backgroundColor: Color(0xffFFB636),
     child:  FaIcon(FontAwesomeIcons.exclamation,color: Colors.white,),
+  );
+  static Widget leaveWidget=const CircleAvatar(
+    radius: 30,
+    backgroundColor: thirdColor,
+    child:  Icon(FontAwesomeIcons.faceSadTear,color: basicColor,),
   );
   static Widget errorWidget=const CircleAvatar(
     radius: 30,
@@ -126,6 +134,40 @@ class ButtonOption{
 
 class OptionChoice extends StatelessWidget {
   const OptionChoice({super.key, required this.onTapNo, required this.onTapYes,});
+  final void Function()? onTapYes;
+  final void Function()? onTapNo;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap:onTapYes,
+          child: Container(
+            height: 50,
+            width: 100,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+              color: thirdColor,),
+            child: const Center(child:  DefaultTextStyle(style:TextStyle(color: basicColor,fontWeight: FontWeight.bold,fontSize: 16),child:Text('Yes',))),
+          ),
+        ),
+        const SizedBox(width: 30,),
+        GestureDetector(
+          onTap: onTapNo,
+          child: Container(
+            height: 50,
+            width: 100,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+              color: thirdColor,),
+            child: const Center(child:  DefaultTextStyle(style:TextStyle(color: basicColor,fontWeight: FontWeight.bold,fontSize: 16,),child:Text('No',))),
+          ),
+        ),
+      ],
+    );
+  }
+}
+class LeaveApp extends StatelessWidget {
+  const LeaveApp({super.key, required this.onTapNo, required this.onTapYes,});
   final void Function()? onTapYes;
   final void Function()? onTapNo;
   @override

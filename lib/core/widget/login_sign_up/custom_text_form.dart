@@ -36,7 +36,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
+      minLines: 1,
       onFieldSubmitted: onFiledSubmitted,
       focusNode:focusNode ,
       initialValue: initialValue,

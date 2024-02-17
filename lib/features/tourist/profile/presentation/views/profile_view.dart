@@ -31,8 +31,8 @@ class ProfileView extends StatelessWidget {
           );
         },
         listener: (context,state){
-          if(state is FailureGetInfoTouristDataState)
-          {
+          var cubit=BlocProvider.of<ProfileCubit>(context);
+          if(state is FailureGetInfoTouristDataState) {
             showDialog(context: context, builder: (context)=> ContainerAlertWidget(
               types: AlertTypes.failed,
               onTap: (){
@@ -40,6 +40,14 @@ class ProfileView extends StatelessWidget {
               },
               content: '${state.errMessage}',));
 
+          }
+          else if(state is RefreshTokenFailureState) {
+            showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+              types: AlertTypes.failed,
+              onTap: (){
+                cubit.getProfileData().then((value){Navigator.pop(context);});
+              },
+              content: '${state.errMessage}',));
           }
 
 

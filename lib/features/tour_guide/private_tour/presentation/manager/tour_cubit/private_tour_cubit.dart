@@ -16,7 +16,7 @@ class PrivateTourCubit extends Cubit<PrivateTourStates>{
    result.fold(
            (failure) {
              if(failure.statusCode==401){
-               getAllMyTrip();
+               emit(RefreshTokenFailureState(errMessage: 'Error due to refresh token,try again'));
              }
              else{
              isLoading=false;

@@ -26,7 +26,7 @@ class BGPrivateTourOption extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: secondaryColor.withOpacity(0.5),),
-          color: const Color(0xffF6F3F3)),
+          color: thirdColor),
       child:cubit.bgPath==''?
       GestureDetector(
         onLongPress: (){

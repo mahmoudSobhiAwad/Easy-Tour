@@ -33,12 +33,18 @@ class TourGuideHomeCubit extends Cubit<TourGuideHomeStates>{
     var result =await homeTourGuideRepoImp.logOut();
     result.fold(
             (failure){
+              if(failure.statusCode==401){
+                emit(RefreshTokenErrorState('error due to refresh token,please try again'));
+              }
           emit(FailureLogOutTourGuideState(failure.errMessage));
         }, (logOut) async {
-              SetAppState.setToken(token: '');
-              emit(SuccessLogOutTourGuideState());}
+              await SetAppState.setToken(token: '');
+              await SetAppState.setRole(role: '');
+              await SetAppState.setProfilePic(profileUrl: '');
+              emit(SuccessLogOutTourGuideState());
+            }
     );
 
-  }
+   }
 
 }

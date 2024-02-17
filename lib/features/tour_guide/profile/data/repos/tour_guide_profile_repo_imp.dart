@@ -14,7 +14,7 @@ class TourGuideProfileRepoImp implements TourGuideProfileRepo{
     // TODO: implement getTourGuideInfo
     try
     {
-      var data=await apiServices.get(endPoint: '${homeEndPoint}profile/getProfile',);
+      var data=await apiServices.get(endPoint: '${homeEndPointTourGuide}profile/getProfile',);
       TourGuidePersonalInfoModel infoModel= TourGuidePersonalInfoModel.fromJson(data['user']);
       return right(infoModel);
     }
@@ -33,7 +33,7 @@ class TourGuideProfileRepoImp implements TourGuideProfileRepo{
   Future<Either<Failure, TourGuidePersonalInfoModel>> updateContactInfo({required FormData infoModel }) async{
     try
     {
-      var data=await apiServices.patchWithPhoto(endPoint: '${homeEndPoint}profile/updateProfile', data:infoModel);
+      var data=await apiServices.patchWithPhoto(endPoint: '${homeEndPointTourGuide}profile/updateProfile', data:infoModel);
       TourGuidePersonalInfoModel model= TourGuidePersonalInfoModel.fromJson(data['updated_user']);
       return right(model);
     }
@@ -51,7 +51,7 @@ class TourGuideProfileRepoImp implements TourGuideProfileRepo{
   Future<Either<Failure, TourGuidePersonalInfoModel>> updatePersonalInfo({required FormData infoModel}) async{
     try
     {
-      var data=await apiServices.patchWithPhoto(endPoint: '${homeEndPoint}profile/updateProfile', data:infoModel);
+      var data=await apiServices.patchWithPhoto(endPoint: '${homeEndPointTourGuide}profile/updateProfile', data:infoModel);
       TourGuidePersonalInfoModel model= TourGuidePersonalInfoModel.fromJson(data['updated_user']);
       return right(model);
     }
@@ -68,7 +68,7 @@ class TourGuideProfileRepoImp implements TourGuideProfileRepo{
   Future<Either<Failure, TourGuidePersonalInfoModel>> updateCvFile({required FormData infoModel}) async{
     try
     {
-      var data=await apiServices.patchWithPhoto(endPoint: '${homeEndPoint}profile/updateProfile', data:infoModel);
+      var data=await apiServices.patchWithPhoto(endPoint: '${homeEndPointTourGuide}profile/updateProfile', data:infoModel);
       TourGuidePersonalInfoModel model= TourGuidePersonalInfoModel.fromJson(data['updated_user']);
       return right(model);
     }

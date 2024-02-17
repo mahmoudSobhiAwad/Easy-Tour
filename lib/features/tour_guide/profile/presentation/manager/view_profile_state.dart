@@ -10,3 +10,7 @@ class FailureOpenAppUrlState extends TourGuideProfileViewState{
   final String errMessage;
   FailureOpenAppUrlState({required this.errMessage});
 }
+class RefreshTokenFailureState extends TourGuideProfileViewState{
+  final String errMessage;
+  RefreshTokenFailureState({required this.errMessage});
+}

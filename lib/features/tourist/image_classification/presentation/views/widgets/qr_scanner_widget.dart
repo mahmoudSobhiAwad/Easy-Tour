@@ -25,7 +25,6 @@ class QrScannerWidget extends StatelessWidget {
         SizedBox(
             height: height*0.4,
             child:MobileScanner(
-
               controller:cubit.scannerController,
               onDetect: (barCode){
                 cubit.isScanComplete(barcode: barCode);
@@ -47,6 +46,7 @@ class QrScannerWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomLoginButton(label: 'Get Data',enable: true,onTap: (){
+              cubit.getData();
             },),
           ],
         ) :

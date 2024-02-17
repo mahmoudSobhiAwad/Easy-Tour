@@ -47,7 +47,14 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState>{
     var response=await changePasswordRepo.checkOldPassword(oldPass: passwordController.text);
     response.fold((failure)
     {
+      if(failure.statusCode==401)
+      {
+        emit(RefreshTokenFailureState('Unknown Error,Please try again'));
+      }
+      else
+      {
       emit(FailureOldPasswordState(failure.errMessage));
+      }
     }, (message)
     {
       emit(SuccessOldPasswordState());

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/widget/custom_alert_widget/alert_container.dart';
+import 'package:prepare_project/core/widget/custom_alert_widget/alert_types.dart';
 import 'package:prepare_project/features/tour_guide/basic/presentation/manager/basic_home_cubit.dart';
 import 'package:prepare_project/features/tour_guide/basic/presentation/manager/basic_home_state.dart';
 import 'package:prepare_project/features/tour_guide/home/data/data_ui/icons.dart';
@@ -18,21 +20,43 @@ class BasicHome extends StatelessWidget {
       child: BlocBuilder<BasicHomeCubit,BasicHomeState>(
           builder: (context,state){
         var cubit=BlocProvider.of<BasicHomeCubit>(context);
-        return Scaffold(
-          extendBody: true,
-          backgroundColor: const Color(0xffF7F7F9),
-          body: [const TourGuideHomeView(),PrivateToursView(width: width,height: height,),TourGuideProfileView(height: height,width: width,),][cubit.currIndex],
-          bottomNavigationBar:
-          cubit.noDrawer? MyBottomNavBar(
-            enableClip: false,
-            height: height,
-            width: width,
-            barIcons: tourGuideBottomNavIcon,
-            changeBottomNavIndex: (int index)
-            {
-              cubit.changeBottomNavIndex(index);
-              },
-            currIndex: cubit.currIndex,): null,
+        return WillPopScope(
+          onWillPop: ()async{
+            if(!cubit.noDrawer){
+              cubit.close();
+              return false;
+            }
+            else{
+              final getOut=await
+              showDialog<bool>(context: context, builder: (context)=>ContainerAlertWidget(
+                types: AlertTypes.leaveApp,content:'Are You Sure To Leave The App ',
+                onTapYes: (){
+                  Navigator.pop(context,true);
+                },
+                onTapNo: (){
+                  Navigator.pop(context,false);
+                },
+
+              ));
+              return getOut!;
+            }
+          },
+          child: Scaffold(
+            extendBody: true,
+            backgroundColor: const Color(0xffF7F7F9),
+            body: [const TourGuideHomeView(),PrivateToursView(width: width,height: height,),TourGuideProfileView(height: height,width: width,),][cubit.currIndex],
+            bottomNavigationBar:
+            cubit.noDrawer? MyBottomNavBar(
+              enableClip: false,
+              height: height,
+              width: width,
+              barIcons: tourGuideBottomNavIcon,
+              changeBottomNavIndex: (int index)
+              {
+                cubit.changeBottomNavIndex(index);
+                },
+              currIndex: cubit.currIndex,): null,
+          ),
         );
       }),
     );

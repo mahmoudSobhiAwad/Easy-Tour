@@ -12,8 +12,7 @@ import '../../../custom_alert_widget/alert_container.dart';
 import '../../../custom_alert_widget/alert_types.dart';
 
 class ChangePasswordView extends StatelessWidget {
-  const ChangePasswordView({
-    super.key,});
+  const ChangePasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +25,7 @@ class ChangePasswordView extends StatelessWidget {
           return ChangePasswordBody(cubit: cubit, height: height);
         },
         listener: (context,state){
+          var cubit=BlocProvider.of<ChangePasswordCubit>(context);
           if(state is SuccessNewPasswordState){
             showDialog(context: context, builder: (context)=>const ContainerAlertWidget(types: AlertTypes.success,content: 'Updated Successfully !',)).then((value) {
               context.pop();
@@ -37,6 +37,14 @@ class ChangePasswordView extends StatelessWidget {
           }
           else if (state is FailureNewPasswordState){
             showDialog(context: context, builder: (context)=>ContainerAlertWidget(types: AlertTypes.failed,content: state.errMessage,onTap:(){context.pop();},));
+          }
+          else if(state is RefreshTokenFailureState) {
+            showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+              types: AlertTypes.failed,
+              onTap: (){
+                cubit.checkOldPassword().then((value){Navigator.pop(context);});
+              },
+              content: '${state.errMessage}',));
           }
         },
 

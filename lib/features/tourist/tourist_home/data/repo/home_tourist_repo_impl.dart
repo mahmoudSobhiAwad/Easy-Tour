@@ -10,7 +10,7 @@ class HomeTouristRepoImp implements HomeTouristRepo{
   @override
   Future<Either<Failure, String>> logOut() async{
     try{
-      var result=await apiServices.post(endPoint: '${homeEndPoint}logout',);
+      var result=await apiServices.post(endPoint: '${homeEndPointTourist}logout',);
       String response=result['message'];
       return right(response);
     }

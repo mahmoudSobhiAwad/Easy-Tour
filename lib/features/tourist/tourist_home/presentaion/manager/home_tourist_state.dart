@@ -9,3 +9,7 @@ class FailureLogOutState extends HomeTouristState{
   final String?errMessage;
   FailureLogOutState(this.errMessage);
 }
+class RefreshTokenErrorState extends HomeTouristState{
+  final String?errMessage;
+  RefreshTokenErrorState(this.errMessage);
+}

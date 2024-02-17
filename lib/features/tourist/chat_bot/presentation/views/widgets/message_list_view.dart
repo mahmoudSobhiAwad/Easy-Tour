@@ -14,7 +14,7 @@ class MessagesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
+      child:cubit.messages.isNotEmpty? ListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           controller: cubit.scrollController,
           reverse: true,
@@ -28,7 +28,8 @@ class MessagesListView extends StatelessWidget {
             TouristBubble(
               message: cubit.messages[index].message??"",
               isLoading: cubit.messages[index].sent,);
-          }),
+          }):
+      const Center(child: Text('Lets Send Your First Message'),),
     );
   }
 }

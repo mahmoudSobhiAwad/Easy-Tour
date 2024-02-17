@@ -12,7 +12,7 @@ class ProfileRepoImpl implements ProfileRepo{
   @override
   Future<Either<Failure, TouristInfoModel>> getTourismInfo() async{
     try{
-      var data=await apiServices.get(endPoint: '${homeEndPoint}profile/getProfile',);
+      var data=await apiServices.get(endPoint: '${homeEndPointTourist}profile/getProfile',);
       TouristInfoModel infoModel= TouristInfoModel.fromJson(data['user']);
       return right(infoModel);
     }
@@ -30,7 +30,7 @@ class ProfileRepoImpl implements ProfileRepo{
   Future<Either<Failure, String>> updateTourismInfo({ required FormData infoModel})async {
     try
     {
-      var data=await apiServices.postWithPhoto(endPoint: '${homeEndPoint}profile/profileSetUp', data:infoModel);
+      var data=await apiServices.postWithPhoto(endPoint: '${homeEndPointTourist}profile/profileSetUp', data:infoModel);
       String response= data['message'];
       return right(response);
     }

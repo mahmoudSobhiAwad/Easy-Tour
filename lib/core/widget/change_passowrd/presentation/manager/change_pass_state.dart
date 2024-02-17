@@ -18,3 +18,7 @@ class FailureNewPasswordState extends ChangePasswordState{
   final String?errMessage;
   FailureNewPasswordState(this.errMessage);
 }
+class RefreshTokenFailureState extends ChangePasswordState{
+  final String?errMessage;
+  RefreshTokenFailureState(this.errMessage);
+}

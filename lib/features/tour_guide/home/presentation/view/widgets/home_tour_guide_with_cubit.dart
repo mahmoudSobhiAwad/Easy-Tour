@@ -62,6 +62,7 @@ class TourGuideHomeWithProvider extends StatelessWidget {
         },
         listener: (context,state){
           var basicCubit=BlocProvider.of<BasicHomeCubit>(context);
+          var cubit=BlocProvider.of<TourGuideHomeCubit>(context);
           if(state is ChangeTourGuideHomeMenuState){
             basicCubit.changeMenuState();
           }
@@ -72,6 +73,15 @@ class TourGuideHomeWithProvider extends StatelessWidget {
             showDialog(context: context, builder: (context)=>ContainerAlertWidget(types: AlertTypes.failed,content:state.errMessage,onTap: (){
               context.pop();
             },));
+          }
+
+          else if(state is RefreshTokenErrorState){
+            showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+              types: AlertTypes.failed,
+              onTap: (){
+                cubit.logOut().then((value){Navigator.pop(context);});
+              },
+              content: '${state.errMessage}',));
           }
         },
 

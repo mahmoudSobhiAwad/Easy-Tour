@@ -27,6 +27,8 @@ class DeleteAccountCubit extends Cubit<DeleteAccountState>{
             isLoading=false;
             emit(SuccessDeleteAccountState());
             await SetAppState.setToken(token: '');
+            await SetAppState.setRole(role: '');
+            await SetAppState.setProfilePic(profileUrl: '');
           });
         }
       });
@@ -40,8 +42,13 @@ class DeleteAccountCubit extends Cubit<DeleteAccountState>{
     var response=await deleteAccountRepo.checkOldPassword(oldPass: passwordController.text);
     response.fold((failure)
     {
+      if(failure.statusCode==401){
+        emit(RefreshTokenFailureState(errMessage: 'Unknown Error,Please try again'));
+      }
+      else{
       isLoading=false;
       emit(FailureCheckOldPasswordState(errMessage:failure.errMessage));
+      }
     }, (message)
     {
       emit(SuccessCheckOldPasswordState());

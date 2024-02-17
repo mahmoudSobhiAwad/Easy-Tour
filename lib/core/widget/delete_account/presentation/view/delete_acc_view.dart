@@ -22,6 +22,7 @@ class DeleteAccountView extends StatelessWidget {
           return DeleteAccountBody(cubit: cubit, height: height);
         },
         listener: (context,state){
+          var cubit=BlocProvider.of<DeleteAccountCubit>(context);
           if(state is SuccessDeleteAccountState){
             showDialog(context: context, builder: (context)=>const ContainerAlertWidget(types: AlertTypes.success,content: 'User Deleted !',));
             Future.delayed(const Duration(seconds: 2),(){
@@ -34,6 +35,14 @@ class DeleteAccountView extends StatelessWidget {
           }
           else if (state is FailureCheckOldPasswordState){
             showDialog(context: context, builder: (context)=>ContainerAlertWidget(types: AlertTypes.failed,content: state.errMessage,onTap:(){context.pop();},));
+          }
+          else if(state is RefreshTokenFailureState) {
+            showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+              types: AlertTypes.failed,
+              onTap: (){
+                cubit.checkOldPassword().then((value){Navigator.pop(context);});
+              },
+              content: '${state.errMessage}',));
           }
 
         },

@@ -28,8 +28,13 @@ class TourGuideProfileViewCubit extends Cubit<TourGuideProfileViewState>{
     emit(LoadingGetInfoTourGuideProfileView());
     var result=await tourGuideProfileRepo.getTourGuideInfo();
     result.fold((failure) {
+      if(failure.statusCode==401){
+        emit(RefreshTokenFailureState(errMessage: 'Error due to refresh token,try again'));
+      }
+      else{
       showLoading=false;
       emit(FailureGetInfoTourGuideProfileView(errMessage: failure.errMessage));
+      }
     }, (profileTourGuideData){
       showLoading=false;
       prepareTourGuideDate(profileTourGuideData);

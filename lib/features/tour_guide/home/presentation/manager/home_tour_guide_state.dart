@@ -8,3 +8,7 @@ class FailureLogOutTourGuideState extends TourGuideHomeStates{
   final String? errMessage;
   FailureLogOutTourGuideState( this.errMessage);
 }
+class RefreshTokenErrorState extends TourGuideHomeStates{
+  final String? errMessage;
+  RefreshTokenErrorState( this.errMessage);
+}

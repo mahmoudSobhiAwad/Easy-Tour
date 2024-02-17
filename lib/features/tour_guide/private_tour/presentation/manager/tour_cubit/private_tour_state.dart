@@ -15,5 +15,9 @@ class FailureDeletePrivateTourState extends PrivateTourStates {
   final String? errMessage;
   FailureDeletePrivateTourState({this.errMessage});
 }
+class RefreshTokenFailureState extends PrivateTourStates {
+  final String? errMessage;
+  RefreshTokenFailureState({this.errMessage});
+}
 
 

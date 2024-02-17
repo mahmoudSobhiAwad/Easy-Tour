@@ -17,7 +17,7 @@ class ProfileCubit extends Cubit<ProfileStates>{
       return  result.fold((failure) async {
         if(failure.statusCode==401)
         {
-          emit(FailureGetInfoTouristDataState('that error due to refresh token'));
+          emit(RefreshTokenFailureState('Unknown Error,Please try again'));
         }
         else
         {

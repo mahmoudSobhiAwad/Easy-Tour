@@ -11,6 +11,7 @@ class TextFormAndSendMessage extends StatelessWidget {
   });
 
   final double width;
+
   final ChatBotCubit cubit;
 
   @override
@@ -32,6 +33,12 @@ class TextFormAndSendMessage extends StatelessWidget {
             ),
             width: width*0.8,
             child: CustomTextFormField(
+
+              maxLines: 3,
+              suffix: IconButton(onPressed: (){
+                cubit.startListening();
+                // cubit.speechToText.isNotListening?(){cubit.startListening; }:(){cubit.stopListening;};
+              }, icon:Icon(cubit.speechToText.isNotListening?Icons.mic_off:Icons.mic)),
               controller: cubit.messageController,
               filled: true,
               fillColor: Colors.white,

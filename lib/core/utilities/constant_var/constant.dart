@@ -72,7 +72,9 @@ List<String> prefs = const [
 enum Role{tourist,tourGuide}
 const String authTourist='auth/tourist/';
 const String authTourGuide='auth/tourGuide/';
-String homeEndPoint='home/${SetAppState.prefs?.get('role')}/';
+const String homeEndPointTourist='home/tourist/';
+const String homeEndPointTourGuide='home/tourGuide/';
+String homeEndMutualPoint='home/${SetAppState.prefs?.get('role')}/';
 const baseUrl='http://54.162.144.241:8081/';
-
-const chatBotUrl='http://184.73.59.25:8000/chatbot';
+const chatBotUrl='http://34.201.135.1460:8000/chatbot';
+const scanQrUrl='http://184.72.88.92:8000/decrypt/';

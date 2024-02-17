@@ -134,6 +134,7 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
 
 
   Future<void> editCurrentTrip() async {
+    isLoading=true;
     trip=Trip(
       tripId: tripId,
       title: titleTextController.text,

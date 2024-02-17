@@ -22,11 +22,20 @@ class PrivateToursView extends StatelessWidget {
           PrivateToursListBody(height: height, cubit: cubit, width: width);
         } , 
       listener: (context,state){
+        var cubit=BlocProvider.of<PrivateTourCubit>(context);
         if(state is FailureGetALLPrivateTourState ){
           showDialog(context: context, builder: (context)=> ContainerAlertWidget(
             types: AlertTypes.failed,
             onTap: (){
               Navigator.pop(context);
+            },
+            content: '${state.errMessage}',));
+        }
+        else if(state is RefreshTokenFailureState) {
+          showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+            types: AlertTypes.failed,
+            onTap: (){
+              cubit.getAllMyTrip().then((value){Navigator.pop(context);});
             },
             content: '${state.errMessage}',));
         }
