@@ -8,6 +8,10 @@ class GetImageFromGalleryState extends CreateEditPrivateTourState {}
 class DeleteBGTourState extends CreateEditPrivateTourState {}
 class EditBGTourSuccessState extends CreateEditPrivateTourState {}
 class AddAnotherPlaceInOneDay extends CreateEditPrivateTourState {}
+class AddIncludedValueState extends CreateEditPrivateTourState {}
+class RemoveIncludedValueState extends CreateEditPrivateTourState {}
+class AddExcludedValueState extends CreateEditPrivateTourState {}
+class RemoveExcludedValueState extends CreateEditPrivateTourState {}
 class LoadingCreateTrip extends CreateEditPrivateTourState {}
 class SuccessCreateTrip extends CreateEditPrivateTourState {}
 class ChangeShowAddDayState extends CreateEditPrivateTourState {}

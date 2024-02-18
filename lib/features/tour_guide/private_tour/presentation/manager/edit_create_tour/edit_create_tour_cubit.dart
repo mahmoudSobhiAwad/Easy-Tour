@@ -10,6 +10,8 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
   CreateEditPrivateTourCubit({required this.privateTourRepo,this.trip}):super(InitialCreateEditPrivateState());
   TextEditingController  titleTextController=TextEditingController();
   TextEditingController  briefTextController=TextEditingController();
+  TextEditingController  includedTextController=TextEditingController();
+  TextEditingController  excludedTextController=TextEditingController();
   TextEditingController  pricePerPersonTextController=TextEditingController();
   TextEditingController  minimumPersonTextController=TextEditingController();
   String bgPath='';
@@ -23,6 +25,8 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
   PrivateTourRepo privateTourRepo;
   Trip? trip;
   List<TripDay>tripDay=[];
+  List<String>included=[];
+  List<String>excluded=[];
   List<Place> places=[Place(placeName: '', placeType: '', activity: '')];
   void prepareFields(){
     if(trip!=null){
@@ -173,5 +177,24 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
     }
     return true;
   }
+  void addToIncludedList(){
+    included.add(includedTextController.text);
+    includedTextController.clear();
+    emit(AddIncludedValueState());
+  }
+  void addToExcludedList(){
+    excluded.add(excludedTextController.text);
+    excludedTextController.clear();
+    emit(AddExcludedValueState());
+  }
+  void removeFromIncludedList(int index){
+    included.removeAt(index);
+    emit(RemoveIncludedValueState());
+  }
+  void removeFromExcludedList(int index){
+    excluded.removeAt(index);
+    emit(RemoveExcludedValueState());
+  }
+
 
 }

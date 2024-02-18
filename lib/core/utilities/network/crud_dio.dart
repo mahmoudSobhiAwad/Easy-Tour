@@ -91,7 +91,6 @@ class ApiServices{
 
 
   Future<Map<String,dynamic>>sendQrCode({required dynamic data})async {
-
     final response=await dio.post(scanQrUrl,data: data,options: Options(
       headers: {
         'Content-Type':'application/json',

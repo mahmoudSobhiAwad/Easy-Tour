@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/core/widget/custom_alert_widget/alert_container.dart';
 import 'package:prepare_project/core/widget/custom_alert_widget/alert_types.dart';
@@ -14,11 +15,11 @@ class PrivateToursView extends StatelessWidget {
   final double width;
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(create: (context)=>PrivateTourCubit(privateTourRepo: getIt.get<PrivateTourRepoImp>())..getAllMyTrip(),
+    return  BlocProvider(create: (context)=>PrivateTourCubit(privateTourRepo: getIt.get<PrivateTourRepoImp>()),
     child: BlocConsumer<PrivateTourCubit,PrivateTourStates>(
       builder:(context,state){
         var cubit=BlocProvider.of<PrivateTourCubit>(context);
-        return cubit.isLoading?const Center(child: CircularProgressIndicator(),):
+        return cubit.isLoading?const Center(child: CircularProgressIndicator(color:basicColor),):
           PrivateToursListBody(height: height, cubit: cubit, width: width);
         } , 
       listener: (context,state){

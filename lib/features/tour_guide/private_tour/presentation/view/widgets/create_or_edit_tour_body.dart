@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/manager/edit_create_tour/edit_create_tour_cubit.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/bg_tour.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/details_day_list.dart';
+import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/include_exclude_widgets.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/min_person_tickets.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/model_bottom_create_edit.dart';
 
@@ -34,7 +36,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('title of the trip'),
+                const Text('title of the trip',style:CustomTextStyle.commonSignDark,),
                 const SizedBox(height: 5,),
                 CustomTextFormField(
                   controller: cubit.titleTextController,
@@ -50,7 +52,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('brief of the trip'),
+                const Text('brief of the trip',style:CustomTextStyle.commonSignDark,),
                 const SizedBox(height: 5,),
                 CustomTextFormField(
                   controller: cubit.briefTextController,
@@ -71,15 +73,29 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
             const SizedBox(height: 20,),
             MinPersonTicketPrice(width: width, minTicket: cubit.pricePerPersonTextController,minPerson: cubit.minimumPersonTextController,),
             const SizedBox(height: 20,),
+            IncludedOrExcludedFeatures(height: height, width: width, title: 'Included Feature in the trip', icon: Icons.check_circle, iconColor: whatsAppColor,
+              incOrExc: cubit.included, addIncOrExc: () {
+              cubit.addToIncludedList();
+              }, removeIncOrExc: (int index) {
+              cubit.removeFromIncludedList(index);
+              }, controller: cubit.includedTextController,),
+            const SizedBox(height: 20,),
+            IncludedOrExcludedFeatures(height: height, width: width, title: 'Excluded Feature in the trip', icon: Icons.close, iconColor: closeColor,
+              incOrExc: cubit.excluded, addIncOrExc: () {
+              cubit.addToExcludedList();
+              }, removeIncOrExc: (int index) {
+              cubit.removeFromExcludedList(index);
+              }, controller: cubit.excludedTextController,),
+            const SizedBox(height: 20,),
             CustomLoginButton(
-              isLoading: cubit.isLoading,
-              label:switch(editOrCreate){
-                CreateOrEdit.create => 'Add',
-                CreateOrEdit.edit => 'Edit',
-              },
-              onTap:
+                isLoading: cubit.isLoading,
+                label:switch(editOrCreate){
+                  CreateOrEdit.create => 'Add',
+                  CreateOrEdit.edit => 'Edit',
+                },
+                onTap:
                 switch(editOrCreate){
-                CreateOrEdit.create => (){
+                  CreateOrEdit.create => (){
                     cubit.createNewTrip();
                   },
                   CreateOrEdit.edit => (){
@@ -114,6 +130,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
     );
   }
 }
+
 
 
 enum CreateOrEdit{create,edit}
