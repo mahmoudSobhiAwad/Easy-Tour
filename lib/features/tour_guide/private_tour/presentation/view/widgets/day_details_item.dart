@@ -75,6 +75,7 @@ class DayDetailsItem extends StatelessWidget {
               ),
             ),
             EditOrAddTripOptionMenu(
+
                 editTrip: (){
                   showModalBottomSheet(
                   isScrollControlled: true,

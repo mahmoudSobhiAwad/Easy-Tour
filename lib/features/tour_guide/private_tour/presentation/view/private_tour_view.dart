@@ -15,7 +15,7 @@ class PrivateToursView extends StatelessWidget {
   final double width;
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(create: (context)=>PrivateTourCubit(privateTourRepo: getIt.get<PrivateTourRepoImp>()),
+    return  BlocProvider(create: (context)=>PrivateTourCubit(privateTourRepo: getIt.get<PrivateTourRepoImp>())..getAllMyTrip(),
     child: BlocConsumer<PrivateTourCubit,PrivateTourStates>(
       builder:(context,state){
         var cubit=BlocProvider.of<PrivateTourCubit>(context);

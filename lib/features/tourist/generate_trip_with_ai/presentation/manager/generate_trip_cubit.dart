@@ -6,7 +6,6 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/data
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/type_of_places_toursim.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repos/generate_trip_repo_imp.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/generate_trip_state.dart';
-
 class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
   GenerateAiTripCubit({required this.generateTripRepoImp}):super(InitialGenerateTripState());
   final GenerateTripRepoImp generateTripRepoImp;
@@ -129,6 +128,4 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
 
     position=await Geolocator.getCurrentPosition();
   }
-
-
 }

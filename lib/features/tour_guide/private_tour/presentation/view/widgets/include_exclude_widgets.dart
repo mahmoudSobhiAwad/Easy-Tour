@@ -23,7 +23,7 @@ class IncludedOrExcludedFeatures extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color iconColor;
-  final List<String>incOrExc;
+  final List<dynamic>incOrExc;
   final void Function()addIncOrExc;
   final void Function(int index)removeIncOrExc;
   final TextEditingController controller;

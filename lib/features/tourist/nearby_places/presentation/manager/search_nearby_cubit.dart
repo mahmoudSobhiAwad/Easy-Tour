@@ -23,7 +23,6 @@ class NearbySearchCubit extends Cubit<NearbySearchState>{
       typesOfList.add(typeOfCategories[index].typeName);
     }
     emit(ChangeCategoryPickedSearchState());
-
   }
 
 }

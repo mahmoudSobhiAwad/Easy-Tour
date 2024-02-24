@@ -1,4 +1,4 @@
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/type_of_places_toursim.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 
 abstract class GenerateAiTripState{}
 class InitialGenerateTripState extends GenerateAiTripState {}

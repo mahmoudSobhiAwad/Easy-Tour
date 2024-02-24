@@ -17,7 +17,8 @@ class AddOrEditTripModelBottom extends StatelessWidget {
     required this.addAnotherPlaceInDay,
     required this.placesOfDay,
     required this.onClose,
-    required this.clearDay
+    required this.clearDay,
+    this.changeType,
   });
 
   final double height;
@@ -27,6 +28,7 @@ class AddOrEditTripModelBottom extends StatelessWidget {
   final bool? enable;
   final void Function() onTap;
   final void Function() onClose;
+  final void Function()? changeType;
   final void Function() addAnotherPlaceInDay;
   final void Function(int indedx) clearDay;
   final List<Place>placesOfDay;
@@ -56,7 +58,7 @@ class AddOrEditTripModelBottom extends StatelessWidget {
             ),
             Column(
               children: [
-                PlacesListOfOneDay(height: height, width: width,enable: enable,placesOfDay:placesOfDay,clearDay:clearDay,),
+                PlacesListOfOneDay(height: height, width: width,enable: enable,placesOfDay:placesOfDay,clearDay:clearDay,changeType: changeType,),
                 Align(
                   alignment: Alignment.center,
                   child: Container(

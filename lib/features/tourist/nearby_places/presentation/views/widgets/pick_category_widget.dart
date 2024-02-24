@@ -13,6 +13,7 @@ class PickCategoryForSearch extends StatelessWidget {
     required this.pickCategory,
     this.heightPercent,
     this.title,
+
   });
 
   final double height;
@@ -21,6 +22,7 @@ class PickCategoryForSearch extends StatelessWidget {
   final List<TypeOfTourism> typeOfCategory;
   final void Function(int index)pickCategory;
   final String?title;
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,6 @@ class PickCategoryForSearch extends StatelessWidget {
                   Text(typeOfCategory[index].typeName,style: CustomTextStyle.commonSignDark,overflow: TextOverflow.ellipsis,),
                 ],
               );
-
             },
           ),
         ),

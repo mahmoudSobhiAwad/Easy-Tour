@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/constant_var/constant.dart';
+import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
 
@@ -10,14 +12,15 @@ class PlacesListOfOneDay extends StatelessWidget {
     required this.width,
     required this.enable,
     required this.placesOfDay,
-    required this.clearDay
-
+    required this.clearDay,
+    this.changeType,
   });
   final double height;
   final double width;
   final bool? enable;
   final List<Place>placesOfDay;
   final void Function(int index) clearDay;
+  final void Function()? changeType;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -57,11 +60,25 @@ class PlacesListOfOneDay extends StatelessWidget {
                           children: [
                             const Text('type'),
                             CustomTextFormField(
+                              style: CustomTextStyle.commonFontThin,
+                              suffix:PopupMenuButton(
+                                constraints: BoxConstraints(
+                                  maxHeight: height*0.15,
+                                ),
+                                  color: thirdColor,
+                                icon: const Icon(Icons.keyboard_arrow_down_outlined,color: basicColor,),
+                                  onSelected: (String value) {
+                                    placesOfDay[index].placeType=value;
+                                    changeType!();
+                                  },
+                                  itemBuilder: (BuildContext ctx) => [
+                                    ...List.generate(prefs.length, (index) => PopupMenuItem(value: prefs[index], child: Text(prefs[index])),),
+                                  ]),
                               floatingLabelBehavior: FloatingLabelBehavior.never,
                               labelFontSize: 10,
-                              label: 'Historical,Islamic and other',
-                              initialValue: placesOfDay[index].placeType,
+                              //initialValue: placesOfDay[index].placeType,
                               border: 20,
+                              controller: TextEditingController(text:placesOfDay[index].placeType??''),
                               onChanged: (String value){
                                 placesOfDay[index].placeType=value;
                               },
@@ -91,3 +108,4 @@ class PlacesListOfOneDay extends StatelessWidget {
     );
   }
 }
+const List<String>typesOfTourismPlaces=['Historical','Islamic','Safari',''];

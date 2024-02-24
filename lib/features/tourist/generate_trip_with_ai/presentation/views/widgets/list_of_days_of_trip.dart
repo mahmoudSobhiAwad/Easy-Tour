@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
-
-import '../../../data/model/type_of_places_toursim.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 
 class ListOfDaysOfTrip extends StatelessWidget {
   const ListOfDaysOfTrip({

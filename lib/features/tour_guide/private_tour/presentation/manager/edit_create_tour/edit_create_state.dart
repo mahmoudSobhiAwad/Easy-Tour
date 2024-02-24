@@ -25,3 +25,6 @@ class FailureEditTrip extends CreateEditPrivateTourState {
   final String? errMessage;
   FailureEditTrip({this.errMessage});
 }
+class ChangePlanTypePickedState extends CreateEditPrivateTourState {}
+class ChangePlaceTypeInTripDayState extends CreateEditPrivateTourState {}
+class AddToTicketPlaneState extends CreateEditPrivateTourState {}

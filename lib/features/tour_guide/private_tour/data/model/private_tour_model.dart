@@ -2,19 +2,23 @@ import 'package:dio/dio.dart';
 class Trip {
   String? title;
   String? brief;
-  num? ticketPerPerson;
-  num? minimumNumber;
+  num? maximumNumber;
   List<TripDay>? tripDetails;
+  List<dynamic>? included;
+  List<dynamic>? excluded;
   String?bgImagePath;
   String?tripId;
+  Map<String,dynamic>?tripTicket;
   Trip({
     this.title,
     this.brief,
-    this.ticketPerPerson,
-    this.minimumNumber,
+    this.maximumNumber,
     this.tripDetails,
     this.bgImagePath,
     this.tripId,
+    this.tripTicket,
+    this.included,
+    this.excluded,
   });
 
   factory Trip.fromJson(Map<String, dynamic> json) {
@@ -23,8 +27,10 @@ class Trip {
       bgImagePath:ProfileImageUrl.fromJson(json['image']).imageUrl??"",
       title: json['title']??'',
       brief: json['brief']??'',
-      ticketPerPerson: json['ticketPerPerson']??0,
-      minimumNumber: json['minimumNumber']??0,
+      included: json['included']??[],
+      excluded: json['excluded']??[],
+      tripTicket: json['plans']??{},
+      maximumNumber: json['maximumNumber']??0,
       tripDetails: (json['tripDetails']as List).map((dayData) => TripDay.fromJson(dayData)).toList(),
     );
   }
@@ -32,8 +38,10 @@ class Trip {
     FormData formData=FormData.fromMap({
       'title':title,
       "brief":brief,
-      "ticketPerPerson":ticketPerPerson,
-      "minimumNumber":minimumNumber,
+      "maximumNumber":maximumNumber,
+      "plans":tripTicket,
+      "included":included,
+      "excluded":excluded,
       'tripDetails':tripDetails?.map((tripDetails) => tripDetails.toJson()).toList(),
       'image':bgImagePath!=null?[await MultipartFile.fromFile(bgImagePath!,filename: 'background image')]:[]
     });
@@ -44,8 +52,10 @@ class Trip {
       'trip_id':tripId,
       'title':title,
       "brief":brief,
-      "ticketPerPerson":ticketPerPerson,
-      "minimumNumber":minimumNumber,
+      "included":included,
+      "excluded":excluded,
+      "maximumNumber":maximumNumber,
+      "plans":tripTicket,
       'newTripDetails':tripDetails?.map((tripDetails) => tripDetails.toJson()).toList(),
       'image':bgImagePath!=null?[await MultipartFile.fromFile(bgImagePath!,filename: 'background image')]:[]
     });

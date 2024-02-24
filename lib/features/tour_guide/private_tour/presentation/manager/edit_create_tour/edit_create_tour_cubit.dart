@@ -3,40 +3,56 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:prepare_project/core/utilities/function/crop_image.dart';
+import 'package:prepare_project/features/tour_guide/private_tour/data/data_ui.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/data/repos/private_tour_repo.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/manager/edit_create_tour/edit_create_state.dart';
-class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
+import '../../../../../tourist/generate_trip_with_ai/data/model/type_of_places_toursim.dart';
+class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState> {
   CreateEditPrivateTourCubit({required this.privateTourRepo,this.trip}):super(InitialCreateEditPrivateState());
   TextEditingController  titleTextController=TextEditingController();
   TextEditingController  briefTextController=TextEditingController();
   TextEditingController  includedTextController=TextEditingController();
   TextEditingController  excludedTextController=TextEditingController();
-  TextEditingController  pricePerPersonTextController=TextEditingController();
-  TextEditingController  minimumPersonTextController=TextEditingController();
+  TextEditingController  maxPersonTextController=TextEditingController();
   String bgPath='';
   final ImagePicker picker=ImagePicker();
   File?bgFile;
-  ///new
   bool isLoading=false;
   bool showAddDay=false;
   bool editDay=false;
   String?tripId;
+  int pickedPlane=0;
   PrivateTourRepo privateTourRepo;
   Trip? trip;
   List<TripDay>tripDay=[];
-  List<String>included=[];
-  List<String>excluded=[];
+  List<dynamic>included=[];
+  List<dynamic>excluded=[];
+
+  List<TextEditingController>planeController=[
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
   List<Place> places=[Place(placeName: '', placeType: '', activity: '')];
+  List<TypeOfTourism>planType=[
+    TypeOfTourism(typeImage: standardPlan, typeName: 'standard', picked: true),
+    TypeOfTourism(typeImage: comfortPlan, typeName: 'comfort', picked: false),
+    TypeOfTourism(typeImage: luxuryPlan, typeName: 'VIP', picked: false),
+  ];
   void prepareFields(){
     if(trip!=null){
       tripId=trip?.tripId;
       titleTextController.text=trip?.title??"";
       briefTextController.text=trip?.brief??"";
       tripDay.addAll(trip?.tripDetails??[]);
-      minimumPersonTextController.text=trip?.minimumNumber?.toString()??"";
-      pricePerPersonTextController.text=trip?.ticketPerPerson?.toString()??"";
+      maxPersonTextController.text=trip?.maximumNumber?.toString()??"";
       bgPath=trip?.bgImagePath??'';
+      planeController[0].text=trip?.tripTicket?['standard']?.toString()??"";
+      planeController[1].text=trip?.tripTicket?['luxury'].toString()??"";
+      planeController[2].text=trip?.tripTicket?['VIP'].toString()??"";
+      included=trip?.included??[];
+      excluded=trip?.excluded??[];
     }
   }
   void clearPlaceInOneDay(int index){
@@ -109,15 +125,19 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
     tripDay.removeAt(index);
     emit(RemoveDetailsDaySuccessState());
   }
-
+  void changeTypeDay(){
+    emit(ChangePlaceTypeInTripDayState());
+  }
   Future<void> createNewTrip() async {
     trip=Trip(
+      included: included,
+      excluded: excluded,
       title: titleTextController.text,
       brief:briefTextController.text,
       bgImagePath: bgFile?.path,
-      minimumNumber:num.parse(minimumPersonTextController.text),
-      ticketPerPerson: double.parse(pricePerPersonTextController.text),
+      maximumNumber:num.parse(maxPersonTextController.text),
       tripDetails: tripDay,
+      tripTicket: planeTicketMap(),
     );
     isLoading=true;
     emit(LoadingCreateTrip());
@@ -134,19 +154,19 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
               isLoading=false;
               emit(SuccessCreateTrip());
     });
-  }
-
-
+   }
   Future<void> editCurrentTrip() async {
     isLoading=true;
     trip=Trip(
+      included: included,
+      excluded: excluded,
       tripId: tripId,
       title: titleTextController.text,
       brief:briefTextController.text,
       bgImagePath: bgFile?.path,
-      minimumNumber:num.parse(minimumPersonTextController.text),
-      ticketPerPerson: num.parse(pricePerPersonTextController.text),
+      maximumNumber:num.parse(maxPersonTextController.text),
       tripDetails: tripDay,
+      tripTicket: planeTicketMap(),
     );
     emit(LoadingEditTrip());
     var result=await privateTourRepo.editPrivateTrip(tripModel: await trip!.updateTrip());
@@ -170,6 +190,7 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
     emit(ChangeShowAddDayState());
   }
   bool checkIsThereChanges(){
+
     if(trip?.brief==briefTextController.text&&trip?.title==titleTextController.text
         &&bgFile==null
     ) {
@@ -195,6 +216,20 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState>{
     excluded.removeAt(index);
     emit(RemoveExcludedValueState());
   }
+  void changePickedCategory(int index){
+    for(var item in planType){
+      item.picked==true?item.picked=false:null;
+    }
+    planType[index].picked=true;
+    pickedPlane=index;
 
-
+    emit(ChangePlanTypePickedState());
+  }
+  Map<String,dynamic>planeTicketMap(){
+    return {
+      'standard':double.parse(planeController[0].text),
+      'luxury':double.parse(planeController[1].text),
+      'VIP':double.parse(planeController[2].text),
+    };
+  }
 }

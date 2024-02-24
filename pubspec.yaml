@@ -106,6 +106,7 @@ flutter:
      - assets/payment_images/
      - assets/entertainment_places/
      - assets/gen_trip_images/
+     - assets/type_of_trip/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
