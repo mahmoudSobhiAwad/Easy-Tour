@@ -9,7 +9,7 @@ class TourGuideHomeCubit extends Cubit<TourGuideHomeStates>{
   int currIndex=0;
   bool isMenuActive=false;
   String touristName= SetAppState.prefs?.getString('name')??"";
-  String? profileUrl= SetAppState.prefs?.getString('profileUrl');
+  String profileUrl= SetAppState.prefs?.getString('profileUrl')??"";
   final HomeTourGuideRepoImp homeTourGuideRepoImp;
   final AnimationController? controller;
   void changeMenuState(){

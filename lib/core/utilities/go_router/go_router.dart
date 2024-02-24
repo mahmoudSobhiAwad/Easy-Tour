@@ -6,6 +6,7 @@ import 'package:prepare_project/features/sign_up/presentation/views/sign_up_view
 import 'package:prepare_project/features/tour_guide/basic/presentation/view/home_basic_view.dart';
 import 'package:prepare_project/features/tour_guide/settings/presentation/view/tour_guide_settings_view.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/chat_bot_view.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/chat_with_other_view.dart';
 import 'package:prepare_project/features/tourist/entertainment_places/presentation/views/entertainment_places_view.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/generate_trip_wit_ai.dart';
 import 'package:prepare_project/features/tourist/historical_places/presentation/view/historical_places_view.dart';
@@ -30,6 +31,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
   static const kImageClassification='/ImageClassification';
   static const kHistoricalPlace='/HistoricalPlaces';
   static const kEntertainmentPlaces='/EntertainmentPlaces';
+  static const kChatTouristView='/ChatTouristView';
   static final router=GoRouter(routes:[
    GoRoute(path: '/',builder: (context,state){
    // return const OnBoardingView();
@@ -67,5 +69,6 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kImageClassification,builder: (context,state)=>const ImageClassificationView(),),
    GoRoute(path: kHistoricalPlace,builder: (context,state)=>const HistoricalPLacesView(),),
    GoRoute(path: kEntertainmentPlaces,builder: (context,state)=>const EntertainmentPlacesView(),),
+   GoRoute(path: kChatTouristView,builder: (context,state)=>const TouristChatWithOtherView(),),
   ]);
 }

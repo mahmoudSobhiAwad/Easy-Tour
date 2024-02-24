@@ -1,10 +1,11 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
-class BotBubble extends StatelessWidget {
-  const BotBubble({Key? key,required this.message,required this.isLoading}) : super(key: key);
+class OtherChatBubble extends StatelessWidget {
+  const OtherChatBubble({Key? key,required this.message,required this.isLoading,required this.replacedMessage}) : super(key: key);
   final String message;
   final bool isLoading;
+  final String replacedMessage;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,9 +29,9 @@ class BotBubble extends StatelessWidget {
               totalRepeatCount: 1,
               isRepeatingAnimation: false,
               animatedTexts: [
-                TyperAnimatedText(message.replaceAll('<bot>', '',),textStyle: const TextStyle(color: basicColor))
+                TyperAnimatedText(message.replaceAll(replacedMessage, '',),textStyle: const TextStyle(color: basicColor))
               ]):
-          Text(message.replaceAll('<bot>', '',),style: const TextStyle(color: basicColor),),
+          Text(message.replaceAll(replacedMessage, '',),style: const TextStyle(color: basicColor),),
         ),
       ),
     );

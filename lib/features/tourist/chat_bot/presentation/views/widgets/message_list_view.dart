@@ -21,7 +21,8 @@ class MessagesListView extends StatelessWidget {
           itemCount: cubit.messages.length,
           itemBuilder: (context,index){
             return cubit.messages[index].message!.endsWith('<bot>')?
-            BotBubble(
+            OtherChatBubble(
+              replacedMessage:'<bot>',
               message: cubit.messages[index].message??"",
               isLoading: index==0,
             ):

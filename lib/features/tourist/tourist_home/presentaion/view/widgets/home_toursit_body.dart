@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:prepare_project/core/utilities/go_router/go_router.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/manager/home_tourist_cubit.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/ai_part.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/app_bar.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/booking_part.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/dicover_part.dart';
-
 import '../../../../../../core/utilities/basics.dart';
 
 class HomeTouristBody extends StatelessWidget {
@@ -23,7 +24,9 @@ class HomeTouristBody extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             HomeTouristTourGuideAppBar(
-              rightIcon: const IconButton(onPressed: null,icon: FaIcon(FontAwesomeIcons.facebookMessenger,color: basicColor,),),
+              rightIcon: IconButton(onPressed: (){
+                context.push(RouterApp.kChatTouristView);
+              },icon: const FaIcon(FontAwesomeIcons.facebookMessenger,color: basicColor,),),
               height: height, width: width, openSidePar:(){cubit.openSideBar();},),
             const SizedBox(height: 20,),
             BookingPart(height: height, width: width,isMenuActive: cubit.isMenuActive,),

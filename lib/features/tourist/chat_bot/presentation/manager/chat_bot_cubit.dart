@@ -14,12 +14,13 @@ class ChatBotCubit extends Cubit<ChatBotState>{
   final String?initialMessage;
   final TextEditingController messageController=TextEditingController();
   final ScrollController scrollController=ScrollController();
+  List<ChatBotModel>messages=[];
   String? requestMessage;
   bool enableSend=false;
   SpeechToText speechToText = SpeechToText();
   bool enableSpeech=false;
   bool enableMic=false;
-  List<ChatBotModel>messages=[];
+
   int chatBotCurrentPage=SetAppState.prefs?.getInt('pageIndex')??0;
   void getFromBot(String response){
     ChatBotModel model=ChatBotModel(message: '');
