@@ -19,28 +19,28 @@ class PlacesWrapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height*0.15,
+      height:places!.isEmpty? height*0.08:height*0.2,
       width: width,
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.only(top: 10),
       decoration: BoxDecoration(color: thirdColor,borderRadius: commonBorderRadius(),boxShadow: [buildBoxShadow()]),
       child: SingleChildScrollView(
         child:places!.isEmpty?
         const Text('Try To Add Places ',textAlign: TextAlign.center,) :
         Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 12,
+            alignment: WrapAlignment.start,
+            spacing: 7,
             children:[
               ...List.generate(places?.length??0, (index) => Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Container(
-                  height: height*0.05,
+                  height: height*0.07,
                   width: width*0.3,
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(color: const Color(0xff5F92D9),boxShadow: [buildBoxShadow()],borderRadius: commonBorderRadius()),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(width: width*0.15,child: Text(places?[index]??'',style: CustomTextStyle.commonFontThinLight.copyWith(color: Colors.white,),maxLines: 1,)),
+                      SizedBox(width: width*0.15,child: Text(places?[index]??'',style: CustomTextStyle.commonFontThinLight.copyWith(color: Colors.white,),maxLines: 2,)),
                       IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: (){

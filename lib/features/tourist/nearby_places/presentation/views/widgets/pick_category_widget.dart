@@ -10,22 +10,26 @@ class PickCategoryForSearch extends StatelessWidget {
     required this.height,
     required this.width,
     required this.typeOfCategory,
-    required this.pickCategory
+    required this.pickCategory,
+    this.heightPercent,
+    this.title,
   });
 
   final double height;
+  final double? heightPercent;
   final double width;
   final List<TypeOfTourism> typeOfCategory;
   final void Function(int index)pickCategory;
+  final String?title;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Pick Category or More',style: CustomTextStyle.commonSignDark,),
+        Text(title??'Pick Category or More',style: CustomTextStyle.commonSignDark,),
         SizedBox(
-          height: height*0.17,
+          height:heightPercent?? height*0.17,
           child: ListView.separated(
             physics: const BouncingScrollPhysics(),
             padding: EdgeInsets.zero,
@@ -41,22 +45,12 @@ class PickCategoryForSearch extends StatelessWidget {
                     onTap:(){
                       pickCategory(index);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 15.0),
-                      child: Container(
-                        height:height*0.12,
-                        width:width*0.22,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                            boxShadow: [buildBoxShadow()],
-                            border: Border.all(color:typeOfCategory[index].picked?whatsAppColor:secondaryColor,width: 5)
-                        ),
-                        child: Center(child: Image.asset(typeOfCategory[index].typeImage,fit: BoxFit.fitHeight,height: height*0.06,)),
-                      ),
-                    ),
+                    child: PickedCategoryItem(height: height, width: width, picked: typeOfCategory[index].picked,typeImage: typeOfCategory[index].typeImage,),
                   ),
-                  // const SizedBox(height: 7,),
+                  heightPercent!=null?SizedBox(
+                      width: width*0.25,
+                      height: height*0.08,
+                      child: Text(typeOfCategory[index].typeName,textAlign: TextAlign.center,style: CustomTextStyle.commonFontThin,maxLines: 3,)):
                   Text(typeOfCategory[index].typeName,style: CustomTextStyle.commonSignDark,overflow: TextOverflow.ellipsis,),
                 ],
               );
@@ -65,6 +59,41 @@ class PickCategoryForSearch extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class PickedCategoryItem extends StatelessWidget {
+  const PickedCategoryItem({
+    super.key,
+    required this.height,
+    required this.width,
+    required this.typeImage,
+    required this.picked,
+    this.padding
+  });
+
+  final double height;
+  final double width;
+  final String typeImage;
+  final bool picked;
+  final EdgeInsets?padding;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding?? const EdgeInsets.only(right: 15.0),
+      child: Container(
+        height:height*0.12,
+        width:width*0.22,
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+            boxShadow: [buildBoxShadow()],
+            border: Border.all(color:picked?whatsAppColor:secondaryColor,width: 5)
+        ),
+        child: Center(child: Image.asset(typeImage,fit: BoxFit.fitHeight,height: height*0.07,width: width*0.14,)),
+      ),
     );
   }
 }

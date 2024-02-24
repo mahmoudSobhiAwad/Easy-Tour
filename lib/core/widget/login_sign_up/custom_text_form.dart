@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 class CustomTextFormField extends StatelessWidget {
-   const CustomTextFormField({super.key, this.label,this.suffix,this.prefix,this.controller,
+   const CustomTextFormField({super.key,this.label,this.suffix,this.prefix,this.controller,
      this.border,this.borderWidth,this.type,this.enablePassword,this.enableOutLine=true,this.labelFontSize,
      this.floatingLabelBehavior,this.onSaved,this.onChanged,this.validator,
      this.maxLength,this.inputFormatters,this.onFiledSubmitted,this.borderColor,this.focusNode,this.style,this.initialValue,this.enable=true,this.align,this.autoFocus,this.maxLines,this.fillColor,this.filled});

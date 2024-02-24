@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/data_ui.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/type_of_places_toursim.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repos/generate_trip_repo_imp.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/generate_trip_state.dart';
 
 class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
-  GenerateAiTripCubit():super(InitialGenerateTripState());
+  GenerateAiTripCubit({required this.generateTripRepoImp}):super(InitialGenerateTripState());
+  final GenerateTripRepoImp generateTripRepoImp;
   int pageCurrIndex=SetAppState.prefs?.getInt('tripIndex')??0;
   String ?firstPickedDay;
   String? lastPickedDay;
   int? numOfDay;
+  bool isLoading=false;
   List<String>pickedPlaces=[];
-  List<String>?pickedTypes;
+  late Position position;
+  TextEditingController numberOfPlaceInDayController=TextEditingController();
+  List<String> pickedTypes=[];
   List<TypeOfTourism>typeOfTourismList=[
-    TypeOfTourism(typeImage:'assets/tourist_home/historical places.png', typeName: 'Historical', picked: false),
-    TypeOfTourism(typeImage:'assets/tourist_home/historical places.png', typeName: 'Beach&Sea',picked: false),
-    TypeOfTourism(typeImage:'assets/tourist_home/historical places.png', typeName: 'Safari',picked: false),
-    TypeOfTourism(typeImage:'assets/tourist_home/historical places.png', typeName: 'Islamic',picked: false),
+    TypeOfTourism(typeImage:ancientEgyptianSite, typeName: 'Ancient Egyptian Site', picked: false),
+    TypeOfTourism(typeImage:museumsAndCulturalCenter, typeName: 'Museums and Cultural Center',picked: false),
+    TypeOfTourism(typeImage:beachesAndWaterBodies, typeName: 'Beaches and water bodies',picked: false),
+    TypeOfTourism(typeImage:safariAndAdventures, typeName: 'Safari and adventures',picked: false),
+    TypeOfTourism(typeImage:historicalAndArchitecturalLandmark, typeName: 'Historical and Architectural Landmark',picked: false),
+    TypeOfTourism(typeImage:islamicSite, typeName: 'Islamic Site',picked: false),
+    TypeOfTourism(typeImage:christianSite, typeName: 'Christian Site',picked: false),
+    TypeOfTourism(typeImage:naturalLandmarks, typeName: 'Natural landmarks',picked: false),
   ];
   void navToGenerateTripScreen()async{
     pageCurrIndex=1;
@@ -62,15 +73,62 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
   void toggleBetweenTypes(int index) {
     if(typeOfTourismList[index].picked==true){
       typeOfTourismList[index].picked=false;
-      pickedTypes?.remove(typeOfTourismList[index].typeName);
     }
     else{
       typeOfTourismList[index].picked=true;
-      pickedTypes?.add(typeOfTourismList[index].typeName);
     }
     emit(ChangeToggleForSelectedTypeState());
   }
+  Future<void>requestGenerateTrip()async{
+    for(var item in typeOfTourismList){
+      if(item.picked==true){
+        pickedTypes.add(item.typeName);
+      }
+    }
+     emit(LoadingSendRequestToGenerateTrip());
+     isLoading=true;
+     var result=await generateTripRepoImp.requestToGenerateDate(data: RequestTripModel(
+       numOfPlaceInDay:int.parse(numberOfPlaceInDayController.text).toInt() ,
+       numOfDay:numOfDay ,
+       lat: position.latitude,
+       long: position.longitude,
+       preferred: pickedTypes,
+       governments: pickedPlaces,
+     ).toJsonEncode());
+     result.fold((failure){
+       emit(FailureSendRequestToGenerateTrip(errMessage:failure.errMessage));
+       isLoading=false;
+     }, (generatedTrip) {
+       isLoading=false;
+       emit(SuccessSendRequestToGenerateTrip(model: generatedTrip));
+     });
+  }
 
+  Future<void> requestAllowLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    position=await Geolocator.getCurrentPosition();
+  }
 
 
 }

@@ -42,7 +42,10 @@ class TripPlaceTypeItem extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 7,),
-        Text(typeOfTourism.typeName,style: CustomTextStyle.commonSignDark,),
+        SizedBox(
+            width: width*0.25,
+            height: height*0.08,
+            child: Text(typeOfTourism.typeName,textAlign: TextAlign.center,style: CustomTextStyle.commonFontThin,maxLines: 3,)),
       ],
     );
   }

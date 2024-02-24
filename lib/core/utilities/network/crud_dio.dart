@@ -88,6 +88,16 @@ class ApiServices{
     );
     return response.data;
   }
+  Future<Map<String,dynamic>>requestGenerateTrip({String? data})async {
+    final response=await dio.post(generateTripUrl,data: data,options: Options(
+      headers: {
+        'Content-Type':'application/json',
+      },
+    ),
+
+    );
+    return response.data;
+  }
 
 
   Future<Map<String,dynamic>>sendQrCode({required dynamic data})async {

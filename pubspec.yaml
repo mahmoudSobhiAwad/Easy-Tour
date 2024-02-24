@@ -65,6 +65,8 @@ dependencies:
   mobile_scanner: ^3.5.5
   qr_scanner_overlay: ^0.0.2
   speech_to_text: ^6.6.0
+  geolocator: ^11.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -103,6 +105,7 @@ flutter:
      - assets/tourist_home/
      - assets/payment_images/
      - assets/entertainment_places/
+     - assets/gen_trip_images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

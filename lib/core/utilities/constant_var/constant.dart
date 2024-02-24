@@ -77,4 +77,5 @@ const String homeEndPointTourGuide='home/tourGuide/';
 String homeEndMutualPoint='home/${SetAppState.prefs?.get('role')}/';
 const baseUrl='http://54.162.144.241:8081/';
 const chatBotUrl='http://34.201.135.1460:8000/chatbot';
+const generateTripUrl='http://54.83.187.170:8000/generate_trip';
 const scanQrUrl='http://184.72.88.92:8000/decrypt/';

@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 
 class CustomColumnWithTextForm extends StatelessWidget {
-  const CustomColumnWithTextForm({super.key,this.text,this.customTextFormField});
+  const CustomColumnWithTextForm({super.key,this.text,this.customTextFormField,this.align,this.style,this.maxLine});
   final String?text;
   final Widget? customTextFormField;
+  final TextStyle? style;
+  final int? maxLine;
+  final TextAlign? align;
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment:CrossAxisAlignment.start,
       children: [
         text!=null ? Padding(
           padding: const EdgeInsets.only(left: 10.0),
-          child: Text(text??"",style:CustomTextStyle.commonSignDark),
+          child: Text(text??"",style:style??CustomTextStyle.commonSignDark,maxLines: maxLine,textAlign: align,),
         ):
         const SizedBox(),
         const SizedBox(height: 5,),

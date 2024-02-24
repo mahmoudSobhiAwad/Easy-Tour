@@ -35,7 +35,6 @@ class AddIncOrExcModelBottomSheet extends StatelessWidget {
               return SingleChildScrollView(
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Container(
-                  // height: height*0.28,
                   padding:const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: thirdColor,
