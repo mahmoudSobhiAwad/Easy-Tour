@@ -17,6 +17,18 @@ class ApiServices{
     );
     return response.data;
   }
+  Future<Map<String,dynamic>>dynamicPost({required String endPoint, dynamic data,})async {
+    final String? tokenId=SetAppState.prefs?.getString('token');
+    final response=await dio.post('$baseUrl$endPoint',data: data,options: Options(
+      headers: {
+        'Content-Type':'application/json',
+        'Authorization':'token $tokenId'
+      },
+    ),
+
+    );
+    return response.data;
+  }
 
   Future<Map<String,dynamic>>postWithPhoto({required String endPoint,required FormData data,})async {
     final String? tokenId=SetAppState.prefs?.getString('token');

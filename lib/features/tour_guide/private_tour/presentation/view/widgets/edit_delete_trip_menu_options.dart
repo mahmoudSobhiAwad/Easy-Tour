@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 class EditOrAddTripOptionMenu extends StatelessWidget {
-  const EditOrAddTripOptionMenu({super.key,required this.editTrip,required this.removeTrip});
-  final void Function() editTrip;
-  final void Function() removeTrip;
+  const EditOrAddTripOptionMenu({super.key, this.editTrip, this.removeTrip,this.saveTrip});
+  final void Function()? editTrip;
+  final void Function()? removeTrip;
+  final void Function()? saveTrip;
   @override
   Widget build(BuildContext context) {
     return MenuAnchor(
@@ -25,6 +26,7 @@ class EditOrAddTripOptionMenu extends StatelessWidget {
           );
         },
         menuChildren:[
+          removeTrip!=null?
           MenuItemButton(
               onPressed: editTrip,
               child:const Row(
@@ -34,7 +36,9 @@ class EditOrAddTripOptionMenu extends StatelessWidget {
                   SizedBox(width: 20,),
                   Icon(Icons.edit_rounded,color: basicColor,)
                 ],
-              )),
+              )):
+          const SizedBox(),
+          editTrip!=null?
           MenuItemButton(
               onPressed: removeTrip,
               child:const Row(
@@ -44,7 +48,20 @@ class EditOrAddTripOptionMenu extends StatelessWidget {
                   SizedBox(width: 20,),
                   Icon(Icons.delete_rounded,color: closeColor,)
                 ],
-              )),
+              )):
+          const SizedBox(),
+          saveTrip!=null?
+          MenuItemButton(
+              onPressed: saveTrip,
+              child:const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Save the Trip'),
+                  SizedBox(width: 20,),
+                  Icon(Icons.save_alt_outlined,color: closeColor,)
+                ],
+              )):
+          const SizedBox(),
         ]
     );
   }

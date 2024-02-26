@@ -36,7 +36,7 @@ class OneTripPerDayItem extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children:[
                   Text(placeItem.name,style: CustomTextStyle.commonSignDark,),
-                  Text(placeItem.activity,style: CustomTextStyle.commonFontThin,),
+                  Text(placeItem.activity,style: CustomTextStyle.commonFontThinNoOverFlow,maxLines: 5,),
                 ],
               ),
             ),

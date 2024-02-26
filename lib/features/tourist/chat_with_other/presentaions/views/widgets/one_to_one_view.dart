@@ -12,24 +12,27 @@ class ChatTouristOneToOtherOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:(context)=>ChatOneToOneCubit(),
+      create:(context)=>ChatOneToOneCubit()..connect(),
       child: BlocConsumer<ChatOneToOneCubit,ChatOneToOneStates>(builder: (context,state){
         var cubit=BlocProvider.of<ChatOneToOneCubit>(context);
         return Scaffold(
-          resizeToAvoidBottomInset: true,
+          //resizeToAvoidBottomInset: true,
           body: Padding(
             padding: EdgeInsets.only(top:height*0.03,bottom: 10),
             child: Column(
               children: [
                 CustomChatOneToOneAppBar(height: height, width: width),
                 ListChatOneToOne(messages: cubit.messages,controller: cubit.scrollController,),
-                SendMessageFormField(width: width, controller: cubit.scrollController, messageController: cubit.messageController,
-                  enableSend: cubit.enableSend,
-                  checkExistOfText: () {
-                  cubit.checkExistOfText();
-                  }, addToMessageModel: () {
-                  cubit.addToMessageModel();
-                  },),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SendMessageFormField(width: width, controller: cubit.scrollController, messageController: cubit.messageController,
+                    enableSend: cubit.enableSend,
+                    checkExistOfText: () {
+                    cubit.checkExistOfText();
+                    }, addToMessageModel: () {
+                    cubit.addToMessageModel();
+                    },),
+                ),
               ],
             ),
           ),

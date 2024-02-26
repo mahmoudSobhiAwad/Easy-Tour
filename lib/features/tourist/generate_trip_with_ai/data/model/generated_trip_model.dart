@@ -13,6 +13,7 @@ class GeneratedTripModel {
       days:day,
     );
   }
+
 }
 
 class Day {
@@ -46,13 +47,25 @@ class Place {
     required this.category,
   });
 
-  factory Place.fromJson(Map<String, dynamic> json,int i) {
+  factory Place.fromJson(Map<String, dynamic> json, int i) {
+    print(json['activity']);
     return Place(
-      name: json['place${i+1}'], // handle missing place name
+      name: json['place${i + 1}'],
+      // handle missing place name
       longitude: json['longitude'],
       latitude: json['latitude'],
       activity: json['activity'],
       category: json['category'],
     );
   }
+
+  Map<String, dynamic> toJson(int i) =>
+      {
+        "place${i + 1}": name,
+        "longitude": longitude,
+        "latitude": latitude,
+        "activity": activity,
+        "category": category,
+      };
+
 }

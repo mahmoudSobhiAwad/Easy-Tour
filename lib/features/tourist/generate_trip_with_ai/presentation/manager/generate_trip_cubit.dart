@@ -99,7 +99,13 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
        isLoading=false;
      }, (generatedTrip) {
        isLoading=false;
+       if(generatedTrip.days.isEmpty){
+         emit(FailureSendRequestToGenerateTrip(errMessage:'Sorry No Date Please try to Pick Different Data'));
+       }
+       else
+       {
        emit(SuccessSendRequestToGenerateTrip(model: generatedTrip));
+       }
      });
   }
 

@@ -15,7 +15,7 @@ class ListChatOneToOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child:messages.isNotEmpty? ListView.builder(
-          shrinkWrap: true,
+          // shrinkWrap: true,
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           cacheExtent: double.infinity, // And this one
           padding: const EdgeInsets.symmetric(horizontal: 16),
