@@ -14,6 +14,9 @@ class SetAppState{
   static Future<void> setName({required String? name})async{
     await prefs?.setString('name',name??'');
   }
+  static Future<void> setEmail({required String? email})async{
+    await prefs?.setString('email',email??'');
+  }
   static Future<void> setProfilePic({required String? profileUrl})async{
     await prefs?.setString('profileUrl',profileUrl??"");
   }

@@ -48,32 +48,47 @@ class ChatWithOtherList extends StatelessWidget {
                 ),
                 onDismissed:(_){} ,
                 key: UniqueKey(),
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Container(
-                    width: width,
-                    height: height*0.1,
-                    decoration: BoxDecoration(
-                      color: thirdColor,
-                      borderRadius: commonBorderRadius(),
-                    ),
-                    child: ListTile(
-                      leading: ProfilePicWidget(imageUrl: '', height: height*0.06),
-                      title: const Text('Sara Ahmed',style:CustomTextStyle.commonSignDark,),
-                      subtitle: SizedBox(width: width*0.5,child: const Text('Hello How Are You Today',style: CustomTextStyle.commonFontThin,)),
-                      trailing: Column(
-                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('9:01 am',style: CustomTextStyle.commonSignLight,),
-
-                          CircleAvatar(backgroundColor: basicColor,radius: 15,child: Center( child: Text('3',style: CustomTextStyle.commonFontThinLight.copyWith(color: Colors.white,fontSize: 12),)),)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                child: OneChatItemWidget(width: width, height: height),
               ),
             );
           },itemCount: 20,));
+  }
+}
+
+class OneChatItemWidget extends StatelessWidget {
+  const OneChatItemWidget({
+    super.key,
+    required this.width,
+    required this.height,
+  });
+
+  final double width;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: Container(
+        width: width,
+        height: height*0.1,
+        decoration: BoxDecoration(
+          color: thirdColor,
+          borderRadius: commonBorderRadius(),
+        ),
+        child: ListTile(
+          leading: ProfilePicWidget(imageUrl: '', height: height*0.06),
+          title: const Text('Sara Ahmed',style:CustomTextStyle.commonSignDark,),
+          subtitle: SizedBox(width: width*0.5,child: const Text('Hello How Are You Today',style: CustomTextStyle.commonFontThin,)),
+          trailing: Column(
+           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('9:01 am',style: CustomTextStyle.commonSignLight,),
+              CircleAvatar(backgroundColor: basicColor,radius: 15,child: Center( child: Text('3',style: CustomTextStyle.commonFontThinLight.copyWith(color: Colors.white,fontSize: 12),)),)
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

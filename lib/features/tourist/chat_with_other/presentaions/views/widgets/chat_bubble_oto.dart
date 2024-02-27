@@ -5,16 +5,17 @@ class ChatBubbleOfOTO extends StatelessWidget {
   const ChatBubbleOfOTO({super.key,required this.message,required this.index,required this.replacedWord});
   final String message;
   final int index;
-  final String replacedWord;
+  final String? replacedWord;
   @override
   Widget build(BuildContext context) {
-    return message.endsWith(replacedWord)?
+    return replacedWord=='destination'?
     OtherChatBubble(
-      replacedMessage:replacedWord,
+      replacedMessage:'',
       message: message,
       isLoading:index==0,
     ):
     TouristBubble(
+      isNormalChat: true,
         message:message,
         isLoading:true);
   }

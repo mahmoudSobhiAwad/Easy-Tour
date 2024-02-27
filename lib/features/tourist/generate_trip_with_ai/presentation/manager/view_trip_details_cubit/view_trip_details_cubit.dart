@@ -10,11 +10,13 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
   final GeneratedTripModel generatedTripModel;
   final GenerateTripRepoImp generateTripRepoImp;
 
+
   ScrollController controller=ScrollController();
-  void moveToNextDay(double width,){
+  void moveToNextDay(double width){
     if(currentDay<generatedTripModel.days.length-1) {
       double offset = (currentDay + 1) * width;
       currentDay++;
+
       controller.animateTo(
         offset,
         duration: const Duration(milliseconds: 500),
@@ -24,7 +26,7 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
     }
 
   }
-  void moveToPrevDay(double width) {
+  void moveToPrevDay(double width,) {
     if(currentDay>0){
       double offset = (currentDay - 1) * width;
       currentDay--;

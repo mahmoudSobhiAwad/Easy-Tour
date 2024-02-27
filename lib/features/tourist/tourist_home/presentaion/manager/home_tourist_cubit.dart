@@ -58,6 +58,7 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
         }, (logOut) async {
           await SetAppState.setToken(token: '');
           await SetAppState.setRole(role: '');
+          await SetAppState.setEmail(email: '');
           await SetAppState.setProfilePic(profileUrl: '');
           emit(SuccessLogOutState());
         }

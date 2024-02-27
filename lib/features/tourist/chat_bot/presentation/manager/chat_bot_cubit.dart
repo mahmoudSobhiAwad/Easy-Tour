@@ -27,7 +27,7 @@ class ChatBotCubit extends Cubit<ChatBotState>{
     response='$response<bot>';
     model.message=response;
     model.messageDateTime=DateTime.now();
-    Future.delayed(const Duration(seconds: 2),(){
+    Future.delayed(const Duration(seconds: 2),() {
       messages.add(model);
       emit(AddedToListMessagesChatBotState());
       sortMessages();
@@ -57,7 +57,6 @@ class ChatBotCubit extends Cubit<ChatBotState>{
             emit(FailureSendRequestChatBotState(errMessage: failure.errMessage));
           },
               (response) {
-
             emit(SuccessSendRequestChatBotState());
             getFromBot(response.message??"");
           }

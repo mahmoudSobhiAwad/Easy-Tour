@@ -47,7 +47,7 @@ class NextPrevDay extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            cubit.moveToNextDay(width*0.16);
+            cubit.moveToNextDay(width*0.16,);
           },
           child: ClipPath(
             clipper: CustomClipPathForNextTrip(),

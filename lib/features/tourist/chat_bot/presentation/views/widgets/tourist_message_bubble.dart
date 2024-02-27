@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:prepare_project/core/utilities/basics.dart';
 class TouristBubble extends StatelessWidget {
-  const TouristBubble({Key? key,required this.message,required this.isLoading}) : super(key: key);
+  const TouristBubble({Key? key,required this.message,required this.isLoading,this.isNormalChat=false}) : super(key: key);
   final String message;
   final bool isLoading;
+  final bool isNormalChat;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,18 +17,19 @@ class TouristBubble extends StatelessWidget {
               padding: const EdgeInsets.all(
                 12,
               ),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
+              decoration: BoxDecoration(
+                color:isNormalChat?const Color(0xff5F92D9):null,
+                gradient:!isNormalChat? const LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomLeft,
                     colors: [Color(0xff5F92D9), Color(0xffB588DC),]
-                ),
-                borderRadius: BorderRadius.only(
+                ):null,
+                borderRadius:const BorderRadius.only(
                   topLeft: Radius.circular(25),
                   topRight: Radius.circular(25),
                   bottomLeft: Radius.circular(25),
                 ),
-                color: basicColor ,
+                //color: basicColor ,
               ),
               child: Text(message,style: const TextStyle(color: Colors.white),),
             ),

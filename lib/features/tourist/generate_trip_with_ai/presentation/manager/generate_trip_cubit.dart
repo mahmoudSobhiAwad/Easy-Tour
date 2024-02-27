@@ -19,14 +19,15 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
   TextEditingController numberOfPlaceInDayController=TextEditingController();
   List<String> pickedTypes=[];
   List<TypeOfTourism>typeOfTourismList=[
-    TypeOfTourism(typeImage:ancientEgyptianSite, typeName: 'Ancient Egyptian Site', picked: false),
-    TypeOfTourism(typeImage:museumsAndCulturalCenter, typeName: 'Museums and Cultural Center',picked: false),
-    TypeOfTourism(typeImage:beachesAndWaterBodies, typeName: 'Beaches and water bodies',picked: false),
+    TypeOfTourism(typeImage:ancientEgyptianSite, typeName: 'Ancient Egyptian Sites', picked: false),
+    TypeOfTourism(typeImage:museumsAndCulturalCenter, typeName: 'Museums And Cultural Centers',picked: false),
+    TypeOfTourism(typeImage:beachesAndWaterBodies, typeName: 'Beaches And Water Bodies',picked: false),
     TypeOfTourism(typeImage:safariAndAdventures, typeName: 'Safari and adventures',picked: false),
     TypeOfTourism(typeImage:historicalAndArchitecturalLandmark, typeName: 'Historical and Architectural Landmark',picked: false),
-    TypeOfTourism(typeImage:islamicSite, typeName: 'Islamic Site',picked: false),
+    TypeOfTourism(typeImage:islamicSite, typeName: 'Islamic Sites',picked: false),
     TypeOfTourism(typeImage:christianSite, typeName: 'Christian Site',picked: false),
-    TypeOfTourism(typeImage:naturalLandmarks, typeName: 'Natural landmarks',picked: false),
+    TypeOfTourism(typeImage:naturalLandmarks, typeName: 'Natural Landmarks',picked: false),
+    TypeOfTourism(typeImage:entertainmentPlaces, typeName: 'Game And Entertainment Centers',picked: false),
   ];
   void navToGenerateTripScreen()async{
     pageCurrIndex=1;

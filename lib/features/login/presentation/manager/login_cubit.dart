@@ -57,6 +57,7 @@ class LoginCubit extends Cubit<LoginState>{
         await SetAppState.setToken(token:tourismInfo.token);
         await SetAppState.setRole(role:'tourist');
         await SetAppState.setName(name:tourismInfo.name);
+        await SetAppState.setEmail(email:tourismInfo.email);
         showLoading=false;
         emit(SuccessLoginState());
       }
@@ -86,6 +87,7 @@ class LoginCubit extends Cubit<LoginState>{
           await SetAppState.setToken(token:tourGuideInfo.token);
           await SetAppState.setRole(role:'tourGuide');
           await SetAppState.setName(name:'${tourGuideInfo.firstName}${tourGuideInfo.lastName}');
+          await SetAppState.setEmail(email:tourGuideInfo.email);
           showLoading=false;
           emit(SuccessTourGuideLoginState());
         }

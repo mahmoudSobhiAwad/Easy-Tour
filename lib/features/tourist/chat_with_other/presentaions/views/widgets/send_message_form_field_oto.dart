@@ -7,7 +7,11 @@ class SendMessageFormField extends StatelessWidget {
     super.key,
     required this.width,
     required this.enableSend,
-    required this.controller, required this.messageController, required this.checkExistOfText, required this.addToMessageModel,
+    required this.controller,
+    required this.messageController,
+
+    required this.checkExistOfText,
+    required this.addToMessageModel,
   });
 
   final double width;
@@ -36,6 +40,7 @@ class SendMessageFormField extends StatelessWidget {
               ],
             ),
             child: CustomTextFormField(
+
               autoFocus: true,
               maxLines: 3,
               controller: messageController,

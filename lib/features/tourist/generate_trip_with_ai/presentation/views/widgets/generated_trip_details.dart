@@ -41,14 +41,15 @@ final GeneratedTripModel model;
                     ListOfDaysOfTrip(height: height, currentDay: cubit.currentDay,controller: cubit.controller, width: width,tripDaysName: model.days,),
                     Expanded(
                       child: SizedBox(
-                          height: height*0.6,
+                          height: height*0.75,
+                          width: width,
                           child: ListView.builder(
                             itemCount: model.days[cubit.currentDay].places.length,
                             padding: EdgeInsets.zero,
                             physics:const BouncingScrollPhysics(),
                             itemBuilder: (context,index){
                               return OneTripPerDayItem(height: height, width: width,placeItem: model.days[cubit.currentDay].places[index],);
-                              },
+                            },
                           )
                       ),
                     ),

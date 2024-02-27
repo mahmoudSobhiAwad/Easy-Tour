@@ -5,7 +5,6 @@ import 'package:prepare_project/features/tourist/chat_with_other/presentaions/vi
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/other_pic_with_name.dart';
 class TouristChatWithOtherView extends StatelessWidget {
   const TouristChatWithOtherView({super.key});
-
   @override
   Widget build(BuildContext context) {
     double width=BasicDimension.screenWidth(context);
