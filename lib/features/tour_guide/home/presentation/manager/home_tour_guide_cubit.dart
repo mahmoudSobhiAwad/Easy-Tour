@@ -34,9 +34,12 @@ class TourGuideHomeCubit extends Cubit<TourGuideHomeStates>{
     result.fold(
             (failure){
               if(failure.statusCode==401){
-                emit(RefreshTokenErrorState('error due to refresh token,please try again'));
+                logOut();
+                //emit(RefreshTokenErrorState('error due to refresh token,please try again'));
               }
+              else{
           emit(FailureLogOutTourGuideState(failure.errMessage));
+              }
         }, (logOut) async {
               await SetAppState.setToken(token: '');
               await SetAppState.setRole(role: '');

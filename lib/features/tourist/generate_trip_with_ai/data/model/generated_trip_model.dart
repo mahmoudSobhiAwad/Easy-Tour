@@ -32,7 +32,7 @@ class Day {
   }
 }
 
-class Place {
+class Place{
   final String name;
   final double longitude;
   final double latitude;
@@ -48,10 +48,8 @@ class Place {
   });
 
   factory Place.fromJson(Map<String, dynamic> json, int i) {
-    print(json['activity']);
     return Place(
       name: json['place${i + 1}'],
-      // handle missing place name
       longitude: json['longitude'],
       latitude: json['latitude'],
       activity: json['activity'],

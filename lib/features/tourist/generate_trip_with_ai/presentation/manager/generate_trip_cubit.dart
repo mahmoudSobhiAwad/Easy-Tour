@@ -15,7 +15,7 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
   int? numOfDay;
   bool isLoading=false;
   List<String>pickedPlaces=[];
-  late Position position;
+  late Position? position;
   TextEditingController numberOfPlaceInDayController=TextEditingController();
   List<String> pickedTypes=[];
   List<TypeOfTourism>typeOfTourismList=[
@@ -34,6 +34,31 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
     await SetAppState.generateTripCurrentPage(1);
     emit(ChangeCurrPageIndex());
   }
+  bool checkBeforeSend(){
+    if(numberOfPlaceInDayController.text.isEmpty){
+      emit(NotEnoughDataSubmittedState(errMessage: 'Please Select How Many Places You Want In one Day'));
+      return false;
+    }
+    else if(numOfDay==null){
+      emit(NotEnoughDataSubmittedState(errMessage: 'Please Select How Many Days You Want'));
+      return false;
+    }
+    else if(pickedPlaces.isEmpty){
+      emit(NotEnoughDataSubmittedState(errMessage: 'Please Pick Places To Search In'));
+      return false;
+    }
+    else if(pickedTypes.isEmpty){
+      emit(NotEnoughDataSubmittedState(errMessage: 'Please Select What Are The Kinds of The Trip'));
+      return false;
+    }
+    else if(position==null){
+      emit(NotEnoughDataSubmittedState(errMessage: 'You Dont\'t Allow Your Position to Get Trip Ordered'));
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
   void getRangeDate(BuildContext context)async{
     DateTimeRange? dateTimeRange= await showDateRangePicker(
       context: context,
@@ -46,7 +71,7 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
     {
     firstPickedDay=dateTimeRange.start.toString().split(' ')[0];
     lastPickedDay=dateTimeRange.end.toString().split(' ')[0];
-    numOfDay=dateTimeRange.duration.inDays;
+    numOfDay=dateTimeRange.duration.inDays+1;
     emit(ChangeRangeDatePickerState());
     }
 
@@ -85,29 +110,31 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
         pickedTypes.add(item.typeName);
       }
     }
-     emit(LoadingSendRequestToGenerateTrip());
-     isLoading=true;
-     var result=await generateTripRepoImp.requestToGenerateDate(data: RequestTripModel(
-       numOfPlaceInDay:int.parse(numberOfPlaceInDayController.text).toInt() ,
-       numOfDay:numOfDay ,
-       lat: position.latitude,
-       long: position.longitude,
-       preferred: pickedTypes,
-       governments: pickedPlaces,
-     ).toJsonEncode());
-     result.fold((failure){
-       emit(FailureSendRequestToGenerateTrip(errMessage:failure.errMessage));
-       isLoading=false;
-     }, (generatedTrip) {
-       isLoading=false;
-       if(generatedTrip.days.isEmpty){
-         emit(FailureSendRequestToGenerateTrip(errMessage:'Sorry No Date Please try to Pick Different Data'));
-       }
-       else
-       {
-       emit(SuccessSendRequestToGenerateTrip(model: generatedTrip));
-       }
-     });
+    if(checkBeforeSend()){
+      emit(LoadingSendRequestToGenerateTrip());
+      isLoading=true;
+      var result=await generateTripRepoImp.requestToGenerateDate(data: RequestTripModel(
+        numOfPlaceInDay:int.parse(numberOfPlaceInDayController.text).toInt() ,
+        numOfDay:numOfDay ,
+        lat: position?.latitude,
+        long: position?.longitude,
+        preferred: pickedTypes,
+        governments: pickedPlaces,
+      ).toJsonEncode());
+      result.fold((failure){
+        emit(FailureSendRequestToGenerateTrip(errMessage:failure.errMessage));
+        isLoading=false;
+      }, (generatedTrip) {
+        isLoading=false;
+        if(generatedTrip.days.isEmpty){
+          emit(FailureSendRequestToGenerateTrip(errMessage:'Sorry No Date Please try to Pick Different Data'));
+        }
+        else
+        {
+          emit(SuccessSendRequestToGenerateTrip(model: generatedTrip,startDate:firstPickedDay,endDate:lastPickedDay));
+        }
+      });
+    }
   }
 
   Future<void> requestAllowLocation() async {

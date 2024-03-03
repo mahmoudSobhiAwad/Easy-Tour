@@ -6,10 +6,12 @@ import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 import 'package:prepare_project/features/tourist/nearby_places/presentation/views/widgets/pick_category_widget.dart';
 class OneTripPerDayItem extends StatelessWidget {
-  const OneTripPerDayItem({super.key,required this.height,required this.width,required this.placeItem});
+  const OneTripPerDayItem({super.key,required this.height,this.bgColor,this.showLocation=true,required this.width,required this.placeItem});
   final double height;
   final double width;
   final Place placeItem;
+  final Color? bgColor;
+  final bool showLocation;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +21,7 @@ class OneTripPerDayItem extends StatelessWidget {
         height:height*0.2 ,
         width: width,
         decoration:BoxDecoration(
-          color: Colors.white,
+          color: bgColor??Colors.white,
           borderRadius: commonBorderRadius(),
           boxShadow: [
             buildBoxShadow(),
@@ -30,7 +32,7 @@ class OneTripPerDayItem extends StatelessWidget {
           children: [
             PickedCategoryItem(padding: EdgeInsets.zero,height: height*0.7, width: width*0.7, typeImage:getImageFromType(placeItem.category), picked: false),
             SizedBox(
-              width: width*0.5,
+              width:bgColor==null?width*0.5:width*0.7,
               height: height*0.15,
               child: ListView(
                 padding: EdgeInsets.zero,
@@ -40,13 +42,15 @@ class OneTripPerDayItem extends StatelessWidget {
                 ],
               ),
             ),
-            Column(
+           showLocation?
+           Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(onPressed:(){},tooltip: 'Location in google Map',icon:const Icon(Icons.location_on_rounded,color: basicColor,)),
                 IconButton(onPressed:(){},tooltip: 'Discover Places Around',icon:const Icon(Icons.language,color: basicColor,)),
               ],
-            ),
+            ):
+           const SizedBox(),
           ],
         ),
       ),

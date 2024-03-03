@@ -61,7 +61,6 @@ class SelectDateAndViewTripHistory extends StatelessWidget {
                   style: CustomTextStyle.commonFontThin,
                   text: 'Num of place in each day',
                   customTextFormField: SizedBox(
-                    //height: height*0.08,
                     child: CustomTextFormField(
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,

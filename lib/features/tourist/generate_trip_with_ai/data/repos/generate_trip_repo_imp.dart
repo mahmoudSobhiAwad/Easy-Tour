@@ -32,9 +32,10 @@ class GenerateTripRepoImp implements GenerateTripRepo{
   }
 
   @override
-  Future<Either<Failure, String>> uploadGeneratedDate() async{
+  Future<Either<Failure, String>> uploadGeneratedDate({required Map<String, dynamic> data}) async{
     try{
-      var result=await apiServices.dynamicPost(data: tripUploaded, endPoint:'${homeEndPointTourist}AI/trip/createTrip');
+      data.addAll({'tripDetails':tripUploaded});
+      var result=await apiServices.dynamicPost(data: data, endPoint:'${homeEndPointTourist}AI/trip/createTrip');
       return Right(result['message']);
     }
     catch(e){

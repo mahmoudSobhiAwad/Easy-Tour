@@ -3,7 +3,7 @@ import 'package:prepare_project/features/tourist/tourist_home/data/model/card_mo
 List<CardModel>bookingItems=[
   CardModel(imagePath: 'assets/tourist_home/hotels.png', labelName: 'hotel '),
   CardModel(imagePath: 'assets/tourist_home/plane_ticket.png', labelName: 'plane tickets'),
-  CardModel(imagePath: 'assets/tourist_home/travel_company.png', labelName: 'company travel'),
+  CardModel(imagePath: 'assets/login/tour_guide.png', labelName: 'Tour Guides'),
   CardModel(imagePath: 'assets/tourist_home/book_cars.png', labelName: 'book a car'),
 ];
 List<CardModel>placesItem=[
@@ -16,10 +16,10 @@ List<CardModel>aiTool=[
   CardModel(imagePath: 'assets/tourist_home/travel_company.png', labelName: 'Generate A Trip'),
 ];
 List<CardModel>entertainmentItems=[
-  CardModel(imagePath: 'assets/entertainment_places/food.png', labelName: 'Restaurants'),
-  CardModel(imagePath: 'assets/entertainment_places/museum.png', labelName: 'Museums'),
-  CardModel(imagePath: 'assets/entertainment_places/beach_places.png', labelName: 'Beaches&sea'),
-  CardModel(imagePath: 'assets/entertainment_places/cinema.png', labelName: 'Cinemas'),
-  CardModel(imagePath: 'assets/entertainment_places/travel.png', labelName: 'Medical Place'),
-  CardModel(imagePath: 'assets/entertainment_places/bazar.png', labelName: 'Bazars'),
+  CardModel(imagePath: 'assets/entertainment_places/food.png', labelName: 'Restaurants',endPoint: 'restaurant'),
+  CardModel(imagePath: 'assets/entertainment_places/museum.png', labelName: 'Museums',endPoint: 'museum'),
+  CardModel(imagePath: 'assets/entertainment_places/beach_places.png', labelName: 'Beaches&sea',endPoint: 'museum'),
+  CardModel(imagePath: 'assets/entertainment_places/cinema.png', labelName: 'Cinemas',endPoint: 'cinema'),
+  CardModel(imagePath: 'assets/entertainment_places/travel.png', labelName: 'Medical Place',endPoint: 'medical'),
+  CardModel(imagePath: 'assets/entertainment_places/bazar.png', labelName: 'Bazaars',endPoint: 'bazar'),
 ];

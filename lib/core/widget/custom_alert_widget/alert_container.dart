@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/custom_alert_widget/alert_types.dart';
 
 class ContainerAlertWidget extends StatelessWidget {
-  const ContainerAlertWidget({super.key,required this.types,this.content, this.onTap,this.onTapYes,this.onTapNo});
+  const ContainerAlertWidget({super.key,this.controller,required this.types,this.content, this.onTap,this.onTapYes,this.onTapNo});
 final AlertTypes types;
 final String?content;
 final void Function()? onTap;
 final void Function()? onTapYes;
 final void Function()? onTapNo;
+final TextEditingController?controller;
   @override
   Widget build(BuildContext context) {
     final double width=BasicDimension.screenWidth(context);
@@ -26,6 +28,8 @@ final void Function()? onTapNo;
           return HeaderOption.warningWidget;
           case AlertTypes.leaveApp:
           return HeaderOption.leaveWidget;
+        case AlertTypes.textTitle:
+          return HeaderOption.textWidgetTitle;
 
         default:
           return HeaderOption.successWidget;
@@ -36,6 +40,8 @@ final void Function()? onTapNo;
         case AlertTypes.success:
           return const SizedBox(height: 0,);
         case AlertTypes.failed:
+          return ButtonOption.errorButton;
+        case AlertTypes.textTitle:
           return ButtonOption.errorButton;
         case AlertTypes.warning:
           return ButtonOption.warningButton;
@@ -65,7 +71,9 @@ final void Function()? onTapNo;
             children: [
               buildHeader(),
               const SizedBox(height: 20,),
+              // controller==null?
               DefaultTextStyle(style: const TextStyle(color: basicColor,fontSize: 16,fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis,),textAlign: TextAlign.center, child: Text('$content')),
+                  //: CustomTextFormField(controller: controller,),
               const SizedBox(height: 20,),
               GestureDetector(onTap: (){
                 onTap!();
@@ -98,6 +106,9 @@ class HeaderOption{
     backgroundColor: Color(0xff4BD37B),
     child:  FaIcon(FontAwesomeIcons.check,color: Colors.white,),
   );
+  static Widget textWidgetTitle=const DefaultTextStyle(style: CustomTextStyle.commonSignDark,child: Text('Trip Title'),);
+
+
 }
 
 class ButtonOption{
@@ -166,6 +177,7 @@ class OptionChoice extends StatelessWidget {
     );
   }
 }
+
 class LeaveApp extends StatelessWidget {
   const LeaveApp({super.key, required this.onTapNo, required this.onTapYes,});
   final void Function()? onTapYes;

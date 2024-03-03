@@ -58,7 +58,7 @@ class NextPrevDay extends StatelessWidget {
                   height: height*0.2,
                   width: width*0.35,
                   decoration: BoxDecoration(
-                    color:cubit.currentDay==9?const Color(0xff5F92D9).withOpacity(0.6):const Color(0xff5F92D9),
+                    color:cubit.currentDay==(cubit.generatedTripModel.days.length-1)?const Color(0xff5F92D9).withOpacity(0.6):const Color(0xff5F92D9),
                   ),
                   child: Center(
                     child: Row(

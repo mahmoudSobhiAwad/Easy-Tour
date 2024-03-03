@@ -13,6 +13,7 @@ import 'package:prepare_project/features/tour_guide/home/data/repo/tour_guide_ho
 import 'package:prepare_project/features/tour_guide/private_tour/data/repos/private_tour_repo_impl.dart';
 import 'package:prepare_project/features/tour_guide/profile/data/repos/tour_guide_profile_repo_imp.dart';
 import 'package:prepare_project/features/tourist/chat_bot/data/repo/chat_bot_repo_impl.dart';
+import 'package:prepare_project/features/tourist/entertainment_places/data/repos/entertainment_repo_imp.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repos/generate_trip_repo_imp.dart';
 import 'package:prepare_project/features/tourist/image_classification/data/repos/qr_scanned_repo_imp.dart';
 import 'package:prepare_project/features/tourist/profile/data/repos/profie_repo_imp.dart';
@@ -36,6 +37,7 @@ getIt.registerSingleton<DeleteAccountRepoImpl>(DeleteAccountRepoImpl(apiServices
 getIt.registerSingleton<ChangePasswordRepoImp>(ChangePasswordRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<ChatBotRepoImp>(ChatBotRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<GenerateTripRepoImp>(GenerateTripRepoImp(apiServices:getIt.get<ApiServices>()));
+getIt.registerSingleton<EntertainmentPlaceRepoImp>(EntertainmentPlaceRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<QrScannedRepoImp>(QrScannedRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<LogInterceptor>(LogInterceptor());
 

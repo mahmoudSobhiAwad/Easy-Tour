@@ -44,7 +44,6 @@ class GenerateTripBody extends StatelessWidget {
                 Center(
                     child:  CustomLoginButton(isLoading: cubit.isLoading,color: Colors.black,label:'Generate A Trip',altWidth: width*0.5,onTap: (){
                   cubit.requestGenerateTrip();
-                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>const GeneratedTripDetailsView()));
                 },)),
                 const SizedBox(height: 20,),
               ],

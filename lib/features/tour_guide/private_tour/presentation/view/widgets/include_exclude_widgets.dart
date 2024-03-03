@@ -13,9 +13,10 @@ class IncludedOrExcludedFeatures extends StatelessWidget {
     required this.icon,
     required this.iconColor,
     required this.incOrExc,
-    required this.addIncOrExc,
-    required this.removeIncOrExc,
-    required this.controller,
+    this.addIncOrExc,
+    this.removeIncOrExc,
+    this.controller,
+    this.showAddInc=true,
   });
 
   final double height;
@@ -24,9 +25,10 @@ class IncludedOrExcludedFeatures extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final List<dynamic>incOrExc;
-  final void Function()addIncOrExc;
-  final void Function(int index)removeIncOrExc;
-  final TextEditingController controller;
+  final void Function()?addIncOrExc;
+  final void Function(int index)?removeIncOrExc;
+  final TextEditingController ?controller;
+  final bool showAddInc;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -60,9 +62,11 @@ class IncludedOrExcludedFeatures extends StatelessWidget {
                           Icon(icon,color: iconColor,),
                           const SizedBox(width: 10,),
                           SizedBox(width: width*0.65,child:Text(incOrExc[index],style: CustomTextStyle.commonSignThinDark,)),
+                          showAddInc?
                           IconButton(padding: EdgeInsets.zero,onPressed:(){
-                            removeIncOrExc(index);
-                          },icon:const Icon(Icons.minimize_rounded,color: closeColor),),
+                            showAddInc?removeIncOrExc!(index):();
+                          },icon:const Icon(Icons.minimize_rounded,color: closeColor),):
+                         const SizedBox(),
                         ],
                       );
                     }),
@@ -70,7 +74,8 @@ class IncludedOrExcludedFeatures extends StatelessWidget {
             ],
           ),
         ),
-        AddIncOrExcModelBottomSheet(height: height, title: title, icon: icon, iconColor: iconColor, controller: controller, width: width, addIncOrExc: addIncOrExc)
+       showAddInc?AddIncOrExcModelBottomSheet(height: height, title: title, icon: icon, iconColor: iconColor, controller: controller, width: width, addIncOrExc: addIncOrExc):
+       const SizedBox(),
       ],
     );
   }

@@ -10,6 +10,7 @@ class ListOfDaysOfTrip extends StatelessWidget {
     required this.width,
     required this.currentDay,required this.controller,
     required this.tripDaysName,
+    required this.onTap,
   });
 
   final double height;
@@ -17,6 +18,7 @@ class ListOfDaysOfTrip extends StatelessWidget {
   final ScrollController controller;
   final double width;
   final List<Day>tripDaysName;
+  final void Function(int index) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -28,24 +30,29 @@ class ListOfDaysOfTrip extends StatelessWidget {
           padding: EdgeInsets.zero,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context,index){
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 20.0),
-                  child: Text('Day ${index+1}',style: CustomTextStyle.placesTitle,),
-                ),
-                index==currentDay?
-                Container(
-                  padding: EdgeInsets.zero,
-                  width:width*0.16,
-                  height:height*0.015,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: commonBorderRadius(),
-                  ),):
-                const SizedBox(),
-              ],
+            return GestureDetector(
+              onTap: (){
+                onTap(index);
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: Text('Day ${index+1}',style: CustomTextStyle.placesTitle,),
+                  ),
+                  index==currentDay?
+                  Container(
+                    padding: EdgeInsets.zero,
+                    width:width*0.16,
+                    height:height*0.015,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: commonBorderRadius(),
+                    ),):
+                  const SizedBox(),
+                ],
+              ),
             );
           },
         ));

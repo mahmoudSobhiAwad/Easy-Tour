@@ -5,18 +5,28 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repo
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_state.dart';
 
 class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
-  ViewTripDetailsCubit({required this.generatedTripModel,required this.generateTripRepoImp}):super(InitialViewTripDetailsState());
+  ViewTripDetailsCubit({required this.generatedTripModel,required this.generateTripRepoImp,required this.endDate,required this.startDate}):super(InitialViewTripDetailsState());
   int currentDay=0;
   final GeneratedTripModel generatedTripModel;
   final GenerateTripRepoImp generateTripRepoImp;
-
-
+  final String? startDate;
+  final String?endDate;
+  PageController pageController=PageController();
+  bool isLoading=false;
+  TextEditingController titleController=TextEditingController();
+  FocusNode focusNode=FocusNode();
+  void pageChange(int index){
+    currentDay=index;
+    emit(MoveToNextDayState());
+  }
   ScrollController controller=ScrollController();
   void moveToNextDay(double width){
     if(currentDay<generatedTripModel.days.length-1) {
+      pageController.nextPage(
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,);
       double offset = (currentDay + 1) * width;
       currentDay++;
-
       controller.animateTo(
         offset,
         duration: const Duration(milliseconds: 500),
@@ -28,6 +38,9 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
   }
   void moveToPrevDay(double width,) {
     if(currentDay>0){
+      pageController.previousPage(
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,);
       double offset = (currentDay - 1) * width;
       currentDay--;
       controller.animateTo(
@@ -38,16 +51,27 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
       emit(MoveToPrevDayState());
     }
   }
-  void uploadTrip()async{
-
+  void moveToSpecificDay(int pageNum) {
+   pageController.jumpToPage(pageNum);
+   emit(MoveToPrevDayState());
+  }
+  Future<void> uploadTrip()async{
+    isLoading=true;
+    Map<String,dynamic>data={
+      "title":titleController.text,
+      "from":startDate,
+      "to":endDate,
+    };
     emit(LoadingUploadTripState());
-
-    var result=await generateTripRepoImp.uploadGeneratedDate();
+    var result=await generateTripRepoImp.uploadGeneratedDate(data: data);
     result.fold(
             (failure){
+              isLoading=false;
               emit(FailedToUploadTripState());
             },
             (success){
+              isLoading=false;
+              titleController.clear();
               emit(SuccessToUploadTripState());
             }
     );

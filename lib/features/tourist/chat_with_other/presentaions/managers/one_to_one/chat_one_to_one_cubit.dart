@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prepare_project/core/utilities/constant_var/constant.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/models/chat_to_other_model.dart';
-import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/one_to_one_view.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/data/models/stream_socket.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/managers/one_to_one/chat_one_to_one_state.dart';
 import 'package:socket_io_client/socket_io_client.dart';
@@ -34,7 +35,8 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
   }
   void connect()
   {
-    socket= io.io('http://192.168.1.10:8000',{"transports":['websocket'],"autoConnect":false,} );
+    //http://192.168.56.1:8000--home
+    socket= io.io(baseUrl,{"transports":['websocket'],"autoConnect":false,} );
     socket.connect();
     socket.emit('signing',sourceEmail);
     socket.onConnect((data) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 
 class CustomLoginButton extends StatelessWidget {
   const CustomLoginButton({super.key,this.altWidth,this.onTap,this.label,this.color,this.isLoading=false,this.enable=false});
@@ -19,11 +20,9 @@ class CustomLoginButton extends StatelessWidget {
           width:altWidth??width*0.4,
           height:height*0.055,
           decoration: BoxDecoration(
-            boxShadow:const[
-               BoxShadow(
-              blurRadius: 4,
-              offset: Offset(0, 4),
-            )],
+            boxShadow:[
+               buildBoxShadow(),
+            ],
             borderRadius: const BorderRadius.all(
               Radius.circular(20),),color:color?? basicColor,),
           child: Center(

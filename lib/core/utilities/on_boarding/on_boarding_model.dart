@@ -10,4 +10,4 @@ List<OnBoardingModel>onBoardList=[
 ];
 const String onBoardingBath_1='assets/on_boarding_images/on_boarding_1.jpg';
 const String onBoardingBath_2='assets/on_boarding_images/on_boarding_2.jpg';
-const String onBoardingBath_3='assets/on_boarding_images/on_boarding_3.jpg';
+const String onBoardingBath_3='assets/on_boarding_images/on_boarding_3.png';

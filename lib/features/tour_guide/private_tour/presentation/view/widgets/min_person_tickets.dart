@@ -10,14 +10,14 @@ class MaxPersonPlanPrice extends StatelessWidget {
   const MaxPersonPlanPrice({
     super.key,
     required this.width,
-    required this.minPerson,
+    required this.maxPerson,
     required this.cubit,
     required this.height,
   });
 
   final double width;
   final double height;
-  final TextEditingController minPerson;
+  final TextEditingController maxPerson;
   final CreateEditPrivateTourCubit cubit;
 
   @override
@@ -50,9 +50,6 @@ class MaxPersonPlanPrice extends StatelessWidget {
                     height:height*0.07,
                     width:width*0.25,
                     child: CustomTextFormField(
-                      // onChanged: (String?value){
-                      //   cubit.addToPlanTicket(index);
-                      // },
                       type: TextInputType.number,
                       controller: cubit.planeController[index],
                       enable: index==cubit.pickedPlane,
@@ -88,7 +85,7 @@ class MaxPersonPlanPrice extends StatelessWidget {
                 ],
                 enableOutLine: false,
                 type: const TextInputType.numberWithOptions(decimal: true),
-                controller: minPerson,
+                controller: maxPerson,
                 suffix:SizedBox(
                     width: width*0.25,
                     child: const Padding(

@@ -4,5 +4,6 @@ enum AlertTypes{
   warning,
   optionChoice,
   leaveApp,
+  textTitle,
 
 }

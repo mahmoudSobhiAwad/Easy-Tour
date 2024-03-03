@@ -10,10 +10,17 @@ class ChangeToggleForSelectedTypeState extends GenerateAiTripState {}
 class LoadingSendRequestToGenerateTrip extends GenerateAiTripState {}
 class SuccessSendRequestToGenerateTrip extends GenerateAiTripState {
   final GeneratedTripModel model;
-  SuccessSendRequestToGenerateTrip({required this.model});
+  final String?startDate;
+  final String?endDate;
+  SuccessSendRequestToGenerateTrip({required this.model,required this.startDate,required this.endDate});
 }
 class FailureSendRequestToGenerateTrip extends GenerateAiTripState {
   final String?errMessage;
   FailureSendRequestToGenerateTrip({this.errMessage});
 }
+class NotEnoughDataSubmittedState extends GenerateAiTripState {
+  final String?errMessage;
+  NotEnoughDataSubmittedState({this.errMessage});
+}
+
 

@@ -10,11 +10,15 @@ class PrivateTourWithoutImage extends StatelessWidget {
     required this.height,
     required this.width,
     required this.model,
+    this.moreDet=false,
+    this.text='',
   });
 
   final double height;
   final double width;
-  final Trip model;
+  final Trip? model;
+  final bool moreDet;
+  final String?text;
 
   @override
   Widget build(BuildContext context) {
@@ -23,24 +27,29 @@ class PrivateTourWithoutImage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: height*0.03,child: Text('Egypt ${model.tripDetails?.length} days',style: CustomTextStyle.commonFontThin,)),
-          SizedBox(height: height*0.08,child: Text('${model.title}',maxLines: 2,style: CustomTextStyle.privateTourTitle,)),
-          SizedBox(height: height*0.05,child: Text('${model.brief}',maxLines: 2,style: CustomTextStyle.commonFontThin,)),
+          SizedBox(height: height*0.03,child: Text('Egypt| ${model?.tripDetails?.length??0} days',style: CustomTextStyle.commonFontThin,)),
+          SizedBox(height: height*0.08,child: Text('${model?.title}',maxLines: 2,style: CustomTextStyle.privateTourTitle,)),
+          SizedBox(height: height*0.05,child: Text('${model?.brief}',maxLines: 2,style: CustomTextStyle.commonFontThin,)),
           const SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: width*0.4,
-                height: height*0.05,
-                decoration: BoxDecoration(borderRadius: commonBorderRadius(),color: secondaryColor),
-                child: Center(child: Text('minimum :${model.maximumNumber} persons',style: CustomTextStyle.commonFontThin,),),
+              Expanded(
+                child: Container(
+                  width: width*0.4,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(borderRadius: commonBorderRadius(),color: secondaryColor),
+                  child: Center(child: Text('$text ${model?.tripTicket?['standard']??'20'} \$ per person',style: CustomTextStyle.commonFontThin,maxLines: 2,textAlign: TextAlign.center,),),
+                ),
               ),
-              Container(
-                width: width*0.4,
-                height: height*0.05,
-                decoration: BoxDecoration(borderRadius: commonBorderRadius(),color: secondaryColor),
-                child: Center(child: Text('${model.tripTicket?['standard']} \$ per person',style: CustomTextStyle.commonFontThin,),),
+              moreDet?TextButton(onPressed: null, child:Text('Tour Guide Profile',style: CustomTextStyle.commonSignDark.copyWith(decoration: TextDecoration.underline),),):
+              Expanded(
+                child: Container(
+                  width: width*0.4,
+                  height: height*0.05,
+                  decoration: BoxDecoration(borderRadius: commonBorderRadius(),color: secondaryColor),
+                  child: Center(child: Text('Maximum :${model?.maximumNumber} persons',style: CustomTextStyle.commonFontThin,),),
+                ),
               ),
             ],
           ),

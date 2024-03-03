@@ -5,6 +5,7 @@ import 'package:prepare_project/features/login/presentation/view/login_view.dart
 import 'package:prepare_project/features/sign_up/presentation/views/sign_up_view.dart';
 import 'package:prepare_project/features/tour_guide/basic/presentation/view/home_basic_view.dart';
 import 'package:prepare_project/features/tour_guide/settings/presentation/view/tour_guide_settings_view.dart';
+import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/book_with_tour_guide_view.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/chat_bot_view.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/chat_with_other_view.dart';
 import 'package:prepare_project/features/tourist/entertainment_places/presentation/views/entertainment_places_view.dart';
@@ -32,6 +33,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
   static const kHistoricalPlace='/HistoricalPlaces';
   static const kEntertainmentPlaces='/EntertainmentPlaces';
   static const kChatTouristView='/ChatTouristView';
+  static const kTourGuideTripsBooking='/TourGuideBookingTrips';
   static final router=GoRouter(routes:[
    GoRoute(path: '/',builder: (context,state){
    // return const OnBoardingView();
@@ -67,8 +69,9 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    }),
    GoRoute(path: kTourGuideHome,builder: (context,state)=>const BasicHome(),),
    GoRoute(path: kImageClassification,builder: (context,state)=>const ImageClassificationView(),),
-   GoRoute(path: kHistoricalPlace,builder: (context,state)=>const HistoricalPLacesView(),),
+   GoRoute(path: kHistoricalPlace, builder: (context,state)=>const HistoricalPLacesView(),),
    GoRoute(path: kEntertainmentPlaces,builder: (context,state)=>const EntertainmentPlacesView(),),
    GoRoute(path: kChatTouristView,builder: (context,state)=>const TouristChatWithOtherView(),),
+   GoRoute(path: kTourGuideTripsBooking,builder: (context,state)=>const BookTripWithTourGuides(),),
   ]);
 }

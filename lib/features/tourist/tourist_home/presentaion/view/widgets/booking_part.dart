@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:prepare_project/core/utilities/go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/tourist/tourist_home/data/model/home_data.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/card_element.dart';
@@ -31,6 +33,14 @@ class BookingPart extends StatelessWidget {
                 separatorBuilder: (context,index)=>const SizedBox(width: 20,),
                 itemBuilder:(context,index){
                   return GestureDetector(
+                      onTap:  [
+                            (){},
+                            (){},
+                            (){
+                        context.push(RouterApp.kTourGuideTripsBooking);
+                            },
+                            (){},
+                      ][index],
                       child: CardElement(height: height,width: width,cardModel: bookingItems[index],));
                   }
                 ,scrollDirection: Axis.horizontal,itemCount: bookingItems.length,)),

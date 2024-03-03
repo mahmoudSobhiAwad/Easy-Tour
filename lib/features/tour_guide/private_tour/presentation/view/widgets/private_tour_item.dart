@@ -16,7 +16,7 @@ class PrivateTourItem extends StatelessWidget {
 
   final double height;
   final double width;
-  final Trip model;
+  final Trip? model;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class PrivateTourItem extends StatelessWidget {
           children: [
             ClipRRect(
                 borderRadius: const BorderRadius.only(topLeft:Radius.circular(20) ,topRight:Radius.circular(20)),
-                child: model.bgImagePath!=''?Image.network(model.bgImagePath!,fit: BoxFit.cover,height:height*0.12,width: width,):
+                child: model?.bgImagePath!=''?Image.network(model!.bgImagePath!,fit: BoxFit.cover,height:height*0.12,width: width,):
                 Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(color: entertainmentColor.withOpacity(0.2),borderRadius: BorderRadius.circular(10)),

@@ -35,9 +35,18 @@ class GenerateAiTrip extends StatelessWidget {
         );
       }, listener:(context,state){
             if(state is SuccessSendRequestToGenerateTrip){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratedTripDetailsView(model:state.model)));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratedTripDetailsView(model:state.model,startDate: state.startDate,endDate: state.endDate,)));
             }
             else if (state is FailureSendRequestToGenerateTrip) {
+              showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+                types: AlertTypes.failed,
+                onTap: (){
+                  context.pop();
+                },
+                content: '${state.errMessage}',));
+
+            }
+            else if (state is NotEnoughDataSubmittedState) {
               showDialog(context: context, builder: (context)=> ContainerAlertWidget(
                 types: AlertTypes.failed,
                 onTap: (){

@@ -11,18 +11,18 @@ class AddIncOrExcModelBottomSheet extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.iconColor,
-    required this.controller,
+    this.controller,
     required this.width,
-    required this.addIncOrExc,
+    this.addIncOrExc,
   });
 
   final double height;
   final String title;
   final IconData icon;
   final Color iconColor;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final double width;
-  final void Function() addIncOrExc;
+  final void Function()? addIncOrExc;
 
   @override
   Widget build(BuildContext context) {

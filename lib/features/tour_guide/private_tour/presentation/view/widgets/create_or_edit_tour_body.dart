@@ -71,7 +71,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
             const SizedBox(height: 20,),
             BGPrivateTourOption(height: height, cubit: cubit,width: width,),
             const SizedBox(height: 20,),
-            MaxPersonPlanPrice(width: width,minPerson: cubit.maxPersonTextController, cubit: cubit, height: height,),
+            MaxPersonPlanPrice(width: width,maxPerson: cubit.maxPersonTextController, cubit: cubit, height: height,),
             const SizedBox(height: 20,),
             IncludedOrExcludedFeatures(height: height, width: width, title: 'Included Feature in the trip', icon: Icons.check_circle, iconColor: whatsAppColor,
               incOrExc: cubit.included, addIncOrExc: () {
