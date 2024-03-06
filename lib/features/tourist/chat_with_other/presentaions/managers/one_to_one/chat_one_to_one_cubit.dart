@@ -35,10 +35,15 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
   }
   void connect()
   {
-    //http://192.168.56.1:8000--home
-    socket= io.io(baseUrl,{"transports":['websocket'],"autoConnect":false,} );
+    socket = io.io(baseUrl,
+        OptionBuilder()
+            .setTransports(['websocket'])// for Flutter or Dart VM
+            .disableAutoConnect()  // disable auto-connection
+            .setExtraHeaders({'email': sourceEmail}) // optional
+            .build()
+    );
     socket.connect();
-    socket.emit('signing',sourceEmail);
+    // socket.emit('signing',sourceEmail);
     socket.onConnect((data) {
       debugPrint('connected Success');
       socket.on("message", (data){
@@ -70,7 +75,8 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
  Stream socketMessage(){
     socket.on("message", (data){
       emit(LoadingAddToMessageOTOState());
-      if(data!=null){
+      if(data!=null)
+      {
         String type=sourceEmail==data['source']?'source':'destination';
         if(type=='source'){
           messages.first.sent=true;

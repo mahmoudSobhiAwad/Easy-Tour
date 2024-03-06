@@ -5,6 +5,7 @@ import 'package:prepare_project/features/login/presentation/view/widgets/login_b
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/include_exclude_widgets.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/plan_to_stay.dart';
+import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/request_trip_view.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/review_for_each_trip.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/stepper_trip_days.dart';
 import 'package:prepare_project/features/tourist/profile/presentation/views/widgets/cover_profile_wiget.dart';
@@ -57,7 +58,11 @@ class ShowTourGuideTripsDetailsForTouristBody extends StatelessWidget {
                 TypeOfStay(height: height, width: width),
                 ShowReviewInTourGuideTrip(height: height, width: width),
                 const SizedBox(height: 20,),
-                const Center(child: CustomLoginButton(color: forthColor,label: 'Request',))
+                Center(child: CustomLoginButton(color: forthColor,label: 'Request',onTap: (){
+                  MaterialPageRoute(builder: (context){
+                    return const RequestTripView();
+                  });
+                },))
               ],
             ),
           ),

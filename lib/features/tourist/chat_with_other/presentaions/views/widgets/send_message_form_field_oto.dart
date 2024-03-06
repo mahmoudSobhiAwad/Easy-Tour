@@ -41,11 +41,11 @@ class SendMessageFormField extends StatelessWidget {
             ),
             child: CustomTextFormField(
               onFiledSubmitted: (String?value){
-                if(value!=null){
+                if(value!.isNotEmpty&&value.trim()!=''){
                   addToMessageModel();
                 }
               },
-              autoFocus: true,
+              //autoFocus: true,
               maxLines: 3,
               controller: messageController,
               filled: true,

@@ -3,7 +3,6 @@ import 'package:prepare_project/features/tourist/profile/presentation/manager/ed
 import 'package:prepare_project/features/tourist/profile/presentation/views/widgets/pick_country.dart';
 import '../../../../../../core/utilities/constant_var/constant.dart';
 import '../../../../../../core/widget/sign_up_edit/custom_drop_down.dart';
-import '../../manager/profile_cubit.dart';
 
 class GenderAndCountry extends StatelessWidget {
   const GenderAndCountry({

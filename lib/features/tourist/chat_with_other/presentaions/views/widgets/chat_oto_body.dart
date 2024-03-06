@@ -20,19 +20,21 @@ class ChatOneToOneBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top:height*0.03,bottom: 10),
       child: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomChatOneToOneAppBar(height: height, width: width),
-          ListChatOneToOne( messages: cubit.messages, stream: cubit.socketMessage(),controller: cubit.scrollController,),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SendMessageFormField(width: width, controller: cubit.scrollController, messageController: cubit.messageController,
-              enableSend: cubit.enableSend,
-              checkExistOfText: () {
-                cubit.checkExistOfText();
-              }, addToMessageModel: (){
-                cubit.sendMessage();
-              },),
-          ),
+          ListChatOneToOne(messages: cubit.messages, stream: cubit.socketMessage(),controller: cubit.scrollController,),
+          SendMessageFormField(
+            width: width,
+            controller: cubit.scrollController,
+            messageController: cubit.messageController,
+            enableSend: cubit.enableSend,
+            checkExistOfText: () {
+              cubit.checkExistOfText();
+            }, addToMessageModel: (){
+              cubit.sendMessage();
+            },),
         ],
       ),
     );

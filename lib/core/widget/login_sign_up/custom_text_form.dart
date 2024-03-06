@@ -5,9 +5,10 @@ class CustomTextFormField extends StatelessWidget {
    const CustomTextFormField({super.key,this.label,this.suffix,this.prefix,this.controller,
      this.border,this.borderWidth,this.type,this.enablePassword,this.enableOutLine=true,this.labelFontSize,
      this.floatingLabelBehavior,this.onSaved,this.onChanged,this.validator,
-     this.maxLength,this.inputFormatters,this.onFiledSubmitted,this.borderColor,this.focusNode,this.style,this.initialValue,this.enable=true,this.align,this.autoFocus,this.maxLines,this.fillColor,this.filled});
+     this.maxLength,this.inputFormatters,this.expand=false,this.minLine,this.onFiledSubmitted,this.borderColor,this.focusNode,this.style,this.initialValue,this.enable=true,this.align,this.autoFocus,this.maxLines,this.fillColor,this.filled});
    final String?label;
    final Widget?suffix ;
+
    final Widget?prefix;
    final double?border;
    final double?borderWidth;
@@ -31,13 +32,15 @@ class CustomTextFormField extends StatelessWidget {
    final Color?fillColor;
    final bool?filled;
    final bool? enable;
+   final bool expand;
    final String?initialValue;
    final FocusNode?focusNode;
+   final int?minLine;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
-      minLines: 1,
+      minLines: minLine,
+      expands: expand,
       onFieldSubmitted: onFiledSubmitted,
       focusNode:focusNode ,
       initialValue: initialValue,
@@ -52,7 +55,7 @@ class CustomTextFormField extends StatelessWidget {
       validator: validator,
       controller:controller,
       keyboardType: type??TextInputType.text,
-      maxLines: maxLines??1,
+      maxLines: maxLines,
       obscureText: enablePassword==true ? true : false,
       obscuringCharacter: '*',
       cursorColor: basicColor,

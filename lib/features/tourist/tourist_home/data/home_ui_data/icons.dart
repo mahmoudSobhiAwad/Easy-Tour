@@ -4,7 +4,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 List<Icon>bottomNavIcons= const [
   Icon(Icons.home_rounded,size: 33,),
   Icon(Icons.feed_rounded,size: 33,),
-  Icon(Icons.location_on_rounded,size: 33,),
+  Icon(Icons.near_me_rounded,size: 33,),
   Icon(Icons.person_rounded,size: 33,)
 ];
 List<Icon>touristDrawerListTile=const [

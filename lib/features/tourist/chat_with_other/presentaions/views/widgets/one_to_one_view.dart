@@ -16,10 +16,8 @@ class ChatTouristOneToOtherOne extends StatelessWidget {
       child: BlocConsumer<ChatOneToOneCubit,ChatOneToOneStates>(builder: (context,state){
         var cubit=BlocProvider.of<ChatOneToOneCubit>(context);
         return Scaffold(
-          resizeToAvoidBottomInset: true,
           body: ChatOneToOneBody(height: height, width: width, cubit: cubit),
         );
-
       }, listener: (context,state){
 
       }),

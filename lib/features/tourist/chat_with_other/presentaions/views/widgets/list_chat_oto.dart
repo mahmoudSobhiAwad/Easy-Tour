@@ -7,17 +7,18 @@ class ListChatOneToOne extends StatelessWidget {
     required this.messages,
     required this.controller,
     required this.stream,
+
   });
 
   final List<ChatToOtherModel> messages;
   final ScrollController controller;
 final Stream stream;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child:messages.isNotEmpty? StreamBuilder(stream: stream, builder: (BuildContext context, AsyncSnapshot snapshot){
         return ListView.builder(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             controller: controller,
             reverse: true,
@@ -26,7 +27,11 @@ final Stream stream;
               return ChatBubbleOfOTO(message: messages[index].message!, index: index,replacedWord: messages[index].type,);
             });
       }):
-      const Center(child: Text('Lets Send Your First Message'),),
+      ListView(
+        children: const [
+          Text('Lets Send Your First Message'),
+        ],
+      ),
     );
   }
 }

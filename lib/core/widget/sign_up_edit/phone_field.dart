@@ -12,6 +12,7 @@ class PhoneFormField extends StatelessWidget {
     return SizedBox(
         width :width*0.43,
         child:  CustomTextFormField(
+          maxLines: 1,
           inputFormatters: [
             FilteringTextInputFormatter.deny(RegExp(r'^0')), // Deny leading 0
           ],
@@ -22,11 +23,11 @@ class PhoneFormField extends StatelessWidget {
             child: Container(
               width: 50,
               padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(12),color: thirdColor),
-              child: const Center(child: Text('+20',)),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(12),color: basicColor),
+              child: const Center(child: Text('+20',style: TextStyle(color: Colors.white),)),
             ),
           ),
-          fillColor: formFillColor,
+          fillColor: thirdColor,
           filled: true,
           border: 20,)
     );
