@@ -13,6 +13,7 @@ final TextEditingController controller;
     return SizedBox(
         width :MediaQuery.of(context).size.width*0.4,
         child:  CustomTextFormField(
+          maxLines: 1,
           fillColor: formFillColor,filled: true,border: 20,controller: controller,));
   }
 }

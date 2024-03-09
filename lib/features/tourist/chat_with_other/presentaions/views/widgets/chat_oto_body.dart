@@ -20,7 +20,7 @@ class ChatOneToOneBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top:height*0.03,bottom: 10),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomChatOneToOneAppBar(height: height, width: width),

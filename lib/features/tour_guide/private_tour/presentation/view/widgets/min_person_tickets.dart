@@ -27,7 +27,7 @@ class MaxPersonPlanPrice extends StatelessWidget {
       children: [
         const Text('Select Type Of The Trip',style: CustomTextStyle.commonSignDark,),
         SizedBox(
-          height:height*0.22,
+          height:height*0.23,
           child: ListView.separated(
             physics: const BouncingScrollPhysics(),
             padding: EdgeInsets.zero,
@@ -47,21 +47,16 @@ class MaxPersonPlanPrice extends StatelessWidget {
                   ),
                   Text(cubit.planType[index].typeName,style: CustomTextStyle.commonSignDark,overflow: TextOverflow.ellipsis,),
                   SizedBox(
-                    height:height*0.07,
                     width:width*0.25,
                     child: CustomTextFormField(
+                      maxLines: 1,
+                      align: TextAlign.center,
                       type: TextInputType.number,
                       controller: cubit.planeController[index],
                       enable: index==cubit.pickedPlane,
                       borderColor: index==cubit.pickedPlane?whatsAppColor:null,
                       label:'....',
                       floatingLabelBehavior:FloatingLabelBehavior.never,
-                      suffix: SizedBox(
-                        width:width*0.1,
-                        child: Align(
-                            alignment:Alignment.centerRight,
-                            child: Text('\$ Per One',style:CustomTextStyle.commonFontThin.copyWith(fontSize: 10),textAlign: TextAlign.center,)),
-                      ),
                     ),
                   ),
 
@@ -70,6 +65,7 @@ class MaxPersonPlanPrice extends StatelessWidget {
             },
           ),
         ),
+        const Text('This Price is Per Person',style: CustomTextStyle.commonFontThinLight,),
         const SizedBox(height: 15,),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -77,6 +73,7 @@ class MaxPersonPlanPrice extends StatelessWidget {
             SizedBox(
               width: width*0.43,
               child: CustomTextFormField(
+                maxLines: 1,
                 border: 20,
                 fillColor: thirdColor,
                 filled: true,

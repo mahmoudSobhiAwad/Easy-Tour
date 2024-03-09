@@ -18,7 +18,7 @@ class PlacesListOfOneDay extends StatelessWidget {
   final double height;
   final double width;
   final bool? enable;
-  final List<Place>placesOfDay;
+  final List<TripPlace>placesOfDay;
   final void Function(int index) clearDay;
   final void Function()? changeType;
   @override
@@ -44,6 +44,7 @@ class PlacesListOfOneDay extends StatelessWidget {
                           children: [
                             Text('Place ${index+1}'),
                             CustomTextFormField(
+                              maxLines: 1,
                               initialValue: placesOfDay[index].placeName,
                               border: 20,
                               onChanged: (String value){
@@ -60,6 +61,7 @@ class PlacesListOfOneDay extends StatelessWidget {
                           children: [
                             const Text('type'),
                             CustomTextFormField(
+                              maxLines: 1,
                               style: CustomTextStyle.commonFontThin,
                               suffix:PopupMenuButton(
                                 constraints: BoxConstraints(
@@ -94,6 +96,7 @@ class PlacesListOfOneDay extends StatelessWidget {
                   const SizedBox(height: 10,),
                   const Text('Activity'),
                   CustomTextFormField(
+                    maxLines: 1,
                     initialValue: placesOfDay[index].activity,
                     onChanged: (String value){
                       placesOfDay[index].activity=value;

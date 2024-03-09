@@ -39,7 +39,6 @@ class ProfileView extends StatelessWidget {
                 context.pop();
               },
               content: '${state.errMessage}',));
-
           }
           else if(state is RefreshTokenFailureState) {
             showDialog(context: context, builder: (context)=> ContainerAlertWidget(

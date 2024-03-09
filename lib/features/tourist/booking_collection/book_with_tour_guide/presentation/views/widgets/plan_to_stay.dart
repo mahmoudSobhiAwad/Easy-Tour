@@ -7,34 +7,44 @@ class TypeOfStay extends StatelessWidget {
     super.key,
     required this.height,
     required this.width,
+    required this.plan,
   });
 
   final double height;
   final double width;
+  final Map<String,dynamic>?plan;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height*0.22,
       child: ListView.builder(
-          itemCount: 3,
+          itemCount: plan?.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context,index){
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Column(
                 children: [
-                  PickedCategoryItem(height: height, width: width, typeImage: standardPlan, picked: true),
-                  const Text('Standard',style: CustomTextStyle.commonFontThin,),
-                  const Column(
+                  PickedCategoryItem(height: height, width: width, typeImage: getPlanType(plan?.keys.elementAt(index)??""), picked: true),
+                  Text(plan?.keys.elementAt(index)??"",style: CustomTextStyle.commonFontThin,),
+                  Column(
                     children: [
-                      Text('20 \$',style: CustomTextStyle.commonSignDark,),
-                      Text('per person',style: CustomTextStyle.commonFontThinLight,),
+                      Text('${plan?.values.elementAt(index)??""} \$',style: CustomTextStyle.commonSignDark,),
+                      const Text('per person',style: CustomTextStyle.commonFontThinLight,),
                     ],)
                 ],
               ),
             );
           }),
     );
+  }
+}
+String getPlanType(String plan){
+  switch(plan){
+    case 'standard':return standardPlan;
+    case 'luxury':return comfortPlan;
+    case 'VIP':return luxuryPlan ;
+    default:return standardPlan;
   }
 }

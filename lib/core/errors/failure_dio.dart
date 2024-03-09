@@ -21,7 +21,6 @@ class ServerFailure extends Failure {
 
       case DioException.receiveTimeout:
         return ServerFailure('Receive timeout with ApiServer',);
-
       case DioException.badResponse:
         return ServerFailure.fromResponse(
             dioError.response?.statusCode,
@@ -49,7 +48,7 @@ class ServerFailure extends Failure {
     }
     else if (statusCode == 500)
     {
-      return ServerFailure('${data['message']}Internal Server error, Please try later',statusCode: 500);
+      return ServerFailure('${data['message']}',statusCode: 500);
     }
     else
     {

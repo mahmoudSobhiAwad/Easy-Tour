@@ -51,7 +51,7 @@ class RequestTripView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20,),
-          TypeOfStay(height: height, width: width),
+          TypeOfStay(height: height, width: width, plan: const {},),
           const SizedBox(height: 20,),
           CustomTwoFieldForm(
             firstText: 'Travelers',

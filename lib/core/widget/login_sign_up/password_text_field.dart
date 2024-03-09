@@ -20,29 +20,23 @@ class PasswordTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.1),blurRadius:4 ,offset:const Offset(0,2))
-          ]
-      ),
-      child: CustomTextFormField(
-        focusNode: passFocusNode,
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        filled: true,
-        fillColor: Colors.white,
-        enableOutLine: true,
-        label: 'Password',
-        enablePassword: enablePassword,//cubit.showPassword
-        prefix: const Icon(Icons.lock_outline,color: secondaryColor,),
-        suffix: IconButton(
-          onPressed:changeShowing,
-            icon:enablePassword
-            ? const Icon(Icons.visibility_off,color: basicColor,)
-            :const Icon(Icons.visibility,color: basicColor,),),
-        controller: passwordController,
+    return CustomTextFormField(
+      maxLines: 1,
+      focusNode: passFocusNode,
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+      filled: true,
+      fillColor: Colors.white,
+      enableOutLine: true,
+      label: 'Password',
+      enablePassword: enablePassword,//cubit.showPassword
+      prefix: const Icon(Icons.lock_outline,color: secondaryColor,),
+      suffix: IconButton(
+        onPressed:changeShowing,
+          icon:enablePassword
+          ? const Icon(Icons.visibility_off,color: basicColor,)
+          :const Icon(Icons.visibility,color: basicColor,),),
+      controller: passwordController,
 
-      ),
     );
   }
 }

@@ -47,6 +47,7 @@ class SendMessageFormField extends StatelessWidget {
               },
               //autoFocus: true,
               maxLines: 3,
+              minLine: 1,
               controller: messageController,
               filled: true,
               fillColor: Colors.white,

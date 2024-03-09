@@ -24,7 +24,7 @@ class LoginBody extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(bottom:MediaQuery.of(context).viewInsets.bottom,),
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
+            physics:const BouncingScrollPhysics(),
             scrollDirection: Axis.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

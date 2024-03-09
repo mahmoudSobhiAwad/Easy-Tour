@@ -34,7 +34,7 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState> {
     TextEditingController(),
     TextEditingController(),
   ];
-  List<Place> places=[Place(placeName: '', placeType: '', activity: '')];
+  List<TripPlace> places=[TripPlace(placeName: '', placeType: '', activity: '')];
   List<TypeOfTourism>planType=[
     TypeOfTourism(typeImage: standardPlan, typeName: 'standard', picked: true),
     TypeOfTourism(typeImage: comfortPlan, typeName: 'comfort', picked: false),
@@ -104,12 +104,12 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState> {
   }
   void addNewPlaceInNewDay()
   {
-    places.add(Place(placeName: '',placeType: '',activity: ''));
+    places.add(TripPlace(placeName: '',placeType: '',activity: ''));
     emit(AddAnotherPlaceInOneDay());
   }
 
   void addNewPlaceInExistedDay(int index){
-    tripDay[index].dayPlaces?.add(Place(placeName: '',placeType: '',activity: ''));
+    tripDay[index].dayPlaces?.add(TripPlace(placeName: '',placeType: '',activity: ''));
     emit(AddAnotherPlaceInOneDay());
   }
 
@@ -117,7 +117,7 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState> {
   {
     tripDay.add(TripDay(dayName:'Day${tripDay.length+1}' ,dayPlaces:places));
     emit(AddDetailsDaySuccessState());
-    places=[Place(placeName: '',placeType: '',activity: '')];
+    places=[TripPlace(placeName: '',placeType: '',activity: '')];
 
   }
 

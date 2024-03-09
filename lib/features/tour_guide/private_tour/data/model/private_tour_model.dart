@@ -9,6 +9,8 @@ class Trip {
   String?bgImagePath;
   String?tripId;
   Map<String,dynamic>?tripTicket;
+  String?guidePic;
+  String?guideEmail;
   Trip({
     this.title,
     this.brief,
@@ -19,19 +21,23 @@ class Trip {
     this.tripTicket,
     this.included,
     this.excluded,
+    this.guidePic,
+    this.guideEmail,
   });
 
-  factory Trip.fromJson(Map<String, dynamic> json) {
+  factory Trip.fromJson(Map<String, dynamic> ?json) {
     return Trip(
-      tripId: json['id']??"",
-      bgImagePath:ProfileImageUrl.fromJson(json['image']).imageUrl??"",
-      title: json['title']??'',
-      brief: json['brief']??'',
-      included: json['included']??[],
-      excluded: json['excluded']??[],
-      tripTicket: json['plans']??{},
-      maximumNumber: json['maximumNumber']??0,
-      tripDetails: (json['tripDetails']as List).map((dayData) => TripDay.fromJson(dayData)).toList(),
+      tripId: json?['id']??"",
+      bgImagePath:ProfileImageUrl.fromJson(json?['image']).imageUrl??"",
+      guideEmail: TourGuideOfTheTripInfo.fromJson(json?['createdBy']).email??"",
+      guidePic: TourGuideOfTheTripInfo.fromJson(json?['createdBy']).profilePic??"",
+      title: json?['title']??'',
+      brief: json?['brief']??'',
+      included: json?['included']??[],
+      excluded: json?['excluded']??[],
+      tripTicket: json?['plans']??{},
+      maximumNumber: json?['maximumNumber']??0,
+      tripDetails: (json?['tripDetails']as List).map((dayData) => TripDay.fromJson(dayData)).toList(),
     );
   }
   Future<FormData>toFormData()async{
@@ -66,7 +72,7 @@ class Trip {
 class TripDay
 {
   String? dayName;
-  List<Place>? dayPlaces;
+  List<TripPlace>? dayPlaces;
 
   TripDay({
     this.dayName,
@@ -76,7 +82,7 @@ class TripDay
   factory TripDay.fromJson(Map<String,dynamic> json) {
     return TripDay(
       dayName: json['dayName']??'',
-      dayPlaces: (json['dayPlaces']as List).map((placeData) => Place.fromJson(placeData)).toList(),
+      dayPlaces: (json['dayPlaces']as List).map((placeData) => TripPlace.fromJson(placeData)).toList(),
     );
   }
   Map<String,dynamic>toJson()=>{
@@ -85,14 +91,14 @@ class TripDay
   };
 }
 
-class Place {
+class TripPlace {
   String? placeName;
   String? placeType;
   String? longitude;
   String? latitude;
   String? activity;
 
-  Place({
+  TripPlace({
     this.placeName,
     this.placeType,
     this.longitude,
@@ -100,8 +106,8 @@ class Place {
     this.activity,
   });
 
-  factory Place.fromJson(Map<String, dynamic> json) {
-    return Place(
+  factory TripPlace.fromJson(Map<String, dynamic> json) {
+    return TripPlace(
       placeName: json['placeName']??'' ,
       placeType: json['placeType'] ??'',
       longitude: json['longitude'] ??'',
@@ -115,6 +121,18 @@ class Place {
     'activity':activity,
   };
 }
+class TourGuideOfTheTripInfo{
+  String?profilePic;
+  String?email;
+  TourGuideOfTheTripInfo({this.email,this.profilePic});
+  factory TourGuideOfTheTripInfo.fromJson(Map<String,dynamic>?json){
+
+    return TourGuideOfTheTripInfo(
+    email: json?['email']??"",
+    profilePic:ProfileImageUrl.fromJson(json?['profilePicture']).imageUrl??"",
+  );
+    }
+  }
 class ProfileImageUrl{
   String?imageUrl;
   ProfileImageUrl({this.imageUrl,});

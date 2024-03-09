@@ -12,7 +12,7 @@ class ProfileRepoImpl implements ProfileRepo{
   @override
   Future<Either<Failure, TouristInfoModel>> getTourismInfo() async{
     try{
-      var data=await apiServices.get(endPoint: '${homeEndPointTourist}profile/getProfile',);
+      var data=await apiServices.get(endPoint:'${homeEndPointTourist}profile/getProfile',);
       TouristInfoModel infoModel= TouristInfoModel.fromJson(data['user']);
       return right(infoModel);
     }

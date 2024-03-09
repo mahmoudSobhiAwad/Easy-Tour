@@ -17,6 +17,7 @@ class HomeTouristViewUi extends StatelessWidget {
     required this.width,
     required this.animation,
     required this.scaleAnimation,
+    this.currIndex,
   });
 
   final HomeTouristCubit cubit;
@@ -24,6 +25,7 @@ class HomeTouristViewUi extends StatelessWidget {
   final double width;
   final Animation<double> animation;
   final Animation<double> scaleAnimation;
+  final int?currIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class HomeTouristViewUi extends StatelessWidget {
         const TouristFeedView(),
         const NearbySearchView(),
         const ProfileView(),
-      ][cubit.currIndex],
+      ][currIndex??cubit.currIndex],
       floatingActionButton:cubit.isMenuActive?null:FloatingActionButton(
         onPressed: (){
           Navigator.push(context,MaterialPageRoute(builder: (context)=>const GoogleMapView()));

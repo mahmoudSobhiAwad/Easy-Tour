@@ -39,6 +39,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
                 const Text('title of the trip',style:CustomTextStyle.commonSignDark,),
                 const SizedBox(height: 5,),
                 CustomTextFormField(
+                  maxLines: 1,
                   controller: cubit.titleTextController,
                   label: 'add title for the trip.....',
                   border: 20,
@@ -133,7 +134,4 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
     );
   }
 }
-
-
-
 enum CreateOrEdit{create,edit}

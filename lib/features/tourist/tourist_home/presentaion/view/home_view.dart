@@ -51,6 +51,11 @@ class _HomeTouristViewState extends State<HomeTouristView> with SingleTickerProv
                 cubit.closeSideBar();
                 return false;
               }
+              else if(cubit.currIndex!=0)
+              {
+                cubit.goToHome();
+                return false;
+              }
               else{
                 final getOut=await
                 showDialog<bool>(context: context, builder: (context)=>ContainerAlertWidget(

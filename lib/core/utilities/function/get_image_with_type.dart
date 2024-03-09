@@ -11,7 +11,7 @@ String getImageFromType(String typeImage){
     case 'Christian Site':return christianSite;
     case 'Natural Landmarks':return naturalLandmarks;
     case 'Game And Entertainment Centers':return entertainmentPlaces;
-    default:return'';
+    default:return entertainmentPlaces;
   }
 
 }

@@ -11,21 +11,15 @@ class NameTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.1),blurRadius:4 ,offset:const Offset(0,2))
-          ]
-      ),
-      child: CustomTextFormField(
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        filled: true,
-        fillColor: Colors.white,
-        enableOutLine: true,
-        prefix:const Icon(Icons.person,color: secondaryColor,),
-        label: 'UserName',
-        controller: nameController,
-      ),
+    return CustomTextFormField(
+      maxLines: 1,
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+      filled: true,
+      fillColor: Colors.white,
+      enableOutLine: true,
+      prefix:const Icon(Icons.person,color: secondaryColor,),
+      label: 'UserName',
+      controller: nameController,
     );
   }
 }

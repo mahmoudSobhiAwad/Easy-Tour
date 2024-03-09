@@ -29,7 +29,7 @@ final Stream stream;
       }):
       ListView(
         children: const [
-          Text('Lets Send Your First Message'),
+          Center(child: Text('Lets Send Your First Message')),
         ],
       ),
     );

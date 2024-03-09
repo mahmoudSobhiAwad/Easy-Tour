@@ -8,10 +8,12 @@ class TourGuideTripForTouristList extends StatelessWidget {
     super.key,
     required this.height,
     required this.width,
+    required this.tripList,
   });
 
   final double height;
   final double width;
+  final List<Trip>tripList;
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +23,20 @@ class TourGuideTripForTouristList extends StatelessWidget {
         children: [
           CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Book With Egyptian Tour Guides',appBarWidth: width*0.7,),
           Expanded(
-            child: ListView.builder(
+            child:tripList.isEmpty?
+            const Center(child: Text('There Is No Current Trips '),) :
+            ListView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemCount: 5,
+                itemCount: tripList.length,
                 itemBuilder: (context,index)
                 {
                   return GestureDetector(
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return const ShowTourGuideTripsDetailsForTouristView();
+                        return  ShowTourGuideTripsDetailsForTouristView(tripItem: tripList[index],);
                       }));
                     },
-                    child: OneTourGuideTripForTourist(height: height, width: width, model: Trip(
-                        title: 'Discovering Spiritual Egypt in 11 days',
-                        brief: 'Pyramids Meditation, Luxor Banks, 3-night Dahabiya Nile Cruise',
-                        bgImagePath: 'https://th.bing.com/th/id/OIP.7nc4uNs8hqHYnZldJH8gNAHaEK?rs=1&pid=ImgDetMain')),
+                    child: OneTourGuideTripForTourist(height: height, width: width, model: tripList[index]),
                   );
                 }
             ),

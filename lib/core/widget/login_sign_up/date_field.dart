@@ -12,6 +12,7 @@ final double width;
     return SizedBox(
         width :width*0.43,
         child:  CustomTextFormField(
+          maxLines: 1,
           floatingLabelBehavior: FloatingLabelBehavior.never,
           controller: controller,
           suffix: IconButton(

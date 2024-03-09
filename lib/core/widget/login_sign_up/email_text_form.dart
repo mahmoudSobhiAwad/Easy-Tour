@@ -11,26 +11,20 @@ class EmailTextFormField extends StatelessWidget {
   final FocusNode? passFocusNode;
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.1),blurRadius:4 ,offset:const Offset(0,2))
-        ]
-      ),
-      child: CustomTextFormField(
-        type: TextInputType.emailAddress,
-        onFiledSubmitted: (value){
-         FocusScope.of(context).requestFocus(passFocusNode);
-        },
-        focusNode:emailFocusNode ,
-        fillColor: Colors.white,
-        filled: true,
-        enableOutLine: true,
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        prefix:const  Icon(Icons.email,color: secondaryColor,),
-        label: 'Email Address',
-        controller: emailTextEditingController,
-      ),
+    return CustomTextFormField(
+      maxLines: 1,
+      type: TextInputType.emailAddress,
+      onFiledSubmitted: (value){
+       FocusScope.of(context).requestFocus(passFocusNode);
+      },
+      focusNode:emailFocusNode ,
+      fillColor: Colors.white,
+      filled: true,
+      enableOutLine: true,
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+      prefix:const  Icon(Icons.email,color: secondaryColor,),
+      label: 'Email Address',
+      controller: emailTextEditingController,
     );
   }
 }

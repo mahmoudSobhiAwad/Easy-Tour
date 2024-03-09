@@ -11,13 +11,14 @@ class ProfileCubit extends Cubit<ProfileStates>{
   bool showGetLoading=false;
   TouristInfoModel? touristModel;
   Future<void>getProfileData()async {
-     showGetLoading=true;
+    showGetLoading=true;
      emit(LoadingGetInfoTouristDataState());
       var result=await profileRepo.getTourismInfo();
       return  result.fold((failure) async {
         if(failure.statusCode==401)
         {
-          emit(RefreshTokenFailureState('Unknown Error,Please try again'));
+          getProfileData();
+          //emit(RefreshTokenFailureState('Unknown Error,Please try again'));
         }
         else
         {

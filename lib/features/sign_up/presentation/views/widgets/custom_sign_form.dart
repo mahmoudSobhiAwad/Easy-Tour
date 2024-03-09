@@ -32,7 +32,6 @@ class CustomSignUpForm extends StatelessWidget {
           ):
           const SizedBox(height: 0,),
           PasswordTextFormField(
-
             passwordController:cubit.passwordTextEditingController ,
             changeShowing: cubit.changeShowing,
             enablePassword: cubit.showPassword,

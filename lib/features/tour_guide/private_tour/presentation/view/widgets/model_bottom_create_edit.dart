@@ -31,7 +31,7 @@ class AddOrEditTripModelBottom extends StatelessWidget {
   final void Function()? changeType;
   final void Function() addAnotherPlaceInDay;
   final void Function(int indedx) clearDay;
-  final List<Place>placesOfDay;
+  final List<TripPlace>placesOfDay;
 
   @override
   Widget build(BuildContext context) {
