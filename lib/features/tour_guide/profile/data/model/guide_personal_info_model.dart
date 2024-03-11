@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
 
 class TourGuidePersonalInfoModel{
   String? firstName;
@@ -7,28 +8,32 @@ class TourGuidePersonalInfoModel{
   String? describeText;
   String? date;
   String? phoneNumber;
-  String?profileUrl;
-  String?minId;
-  String?profileFile;
-  String?cvUrl;
-  String?cvFile;
-  String?synId;
-  List<dynamic> ?lang;
+  String? profileUrl;
+  String? minId;
+  String? profileFile;
+  String? cvUrl;
+  String? cvFile;
+  String? synId;
+  String?status;
+  List<dynamic>? lang;
   Map<String,dynamic>?contactInfo;
-  TourGuidePersonalInfoModel({ this.date,this.profileFile,this.describeText,this.cvUrl,this.cvFile,this.firstName, this.lastName, this.address,this.profileUrl, this.lang,this.phoneNumber,this.minId,this.synId,this.contactInfo,});
+  List<Trip>?trips;
+  TourGuidePersonalInfoModel({ this.date,this.status,this.profileFile,this.describeText,this.trips,this.cvUrl,this.cvFile,this.firstName, this.lastName, this.address,this.profileUrl, this.lang,this.phoneNumber,this.minId,this.synId,this.contactInfo,});
   factory TourGuidePersonalInfoModel.fromJson(Map<String,dynamic>json)=>TourGuidePersonalInfoModel(
-     firstName: json['firstName'],
-     date: json['birthDate'],
-     lastName: json['lastName'],
+    firstName: json['firstName'],
+    date: json['birthDate'],
+    lastName: json['lastName'],
     describeText: json['description'],
-     address: json['address']??"",
-     profileUrl:ProfileImageUrl.fromJson(json['profilePicture']).imageUrl??"",
-      minId: ProfileImageUrl.fromJson(json['ministyliscence']).imageUrl??"",
-      synId: ProfileImageUrl.fromJson(json['syndicateLiscence']).imageUrl??"",
-      cvUrl: ProfileImageUrl.fromJson(json['CV']).imageUrl??"",
-     lang: json['languages']??[],
-     phoneNumber: json['phoneNumber'],
-      contactInfo:json['contact_info']
+    address: json['address']??"",
+    status: json['status']??'offline',
+    profileUrl:ProfileImageUrl.fromJson(json['profilePicture']).imageUrl??"",
+    minId: ProfileImageUrl.fromJson(json['ministyliscence']).imageUrl??"",
+    synId: ProfileImageUrl.fromJson(json['syndicateLiscence']).imageUrl??"",
+    cvUrl: ProfileImageUrl.fromJson(json['CV']).imageUrl??"",
+    lang: json['languages']??[],
+    phoneNumber: json['phoneNumber'],
+    contactInfo:json['contact_info'],
+    trips:(json['createdTrips']as List).map((oneTrip) => Trip.fromJson(oneTrip)).toList(),
   );
   Future<FormData> updateTourGuideInfo() async{
     FormData formData = FormData.fromMap({

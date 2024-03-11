@@ -125,12 +125,20 @@ class TourGuideOfTheTripInfo{
   String?profilePic;
   String?email;
   TourGuideOfTheTripInfo({this.email,this.profilePic});
-  factory TourGuideOfTheTripInfo.fromJson(Map<String,dynamic>?json){
+  factory TourGuideOfTheTripInfo.fromJson(dynamic json){
+    if(json is String){
+      return TourGuideOfTheTripInfo(
+        email: null,
+        profilePic:null,
+      );
+    }
+    else{
+      return TourGuideOfTheTripInfo(
+        email: json?['email']??"",
+        profilePic:ProfileImageUrl.fromJson(json?['profilePicture']).imageUrl??"",
+      );
+    }
 
-    return TourGuideOfTheTripInfo(
-    email: json?['email']??"",
-    profilePic:ProfileImageUrl.fromJson(json?['profilePicture']).imageUrl??"",
-  );
     }
   }
 class ProfileImageUrl{

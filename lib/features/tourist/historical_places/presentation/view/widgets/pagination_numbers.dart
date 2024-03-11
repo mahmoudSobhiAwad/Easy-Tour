@@ -39,7 +39,7 @@ class PaginationNumbers extends StatelessWidget {
             {
               return const SizedBox(width: 20,);
             }
-            , itemCount: 10),
+            , itemCount: pagNumbers.length),
       ),
     );
   }

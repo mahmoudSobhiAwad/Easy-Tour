@@ -5,13 +5,15 @@ import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/tour_info_without_image.dart';
+import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/guide_profile_from_toursit_view.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/request_trip_view.dart';
 import 'package:prepare_project/features/tourist/profile/presentation/views/widgets/pic_profile_widget.dart';
 class OneTourGuideTripForTourist extends StatelessWidget {
-  const OneTourGuideTripForTourist({super.key,required this.width,required this.height,this.model});
+  const OneTourGuideTripForTourist({super.key,required this.width,required this.height,this.model,this.viewProfile=true});
   final double height;
   final double width;
   final Trip? model;
+  final bool viewProfile;
   @override
   Widget build(BuildContext context) {
     final String?imagePath=model?.guidePic;
@@ -78,10 +80,16 @@ class OneTourGuideTripForTourist extends StatelessWidget {
           //     ),
           //   ),
           // ),
+          viewProfile?
           Positioned(
               left: width*0.68,
               top: height*0.08,
-              child: ProfilePicWidget(height: height*0.1, imageUrl: imagePath??"",)),
+              child: GestureDetector(
+                  onTap:(){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> ViewGuideProfileFromTouristView(email: model?.guideEmail??"",)));
+                  },
+                  child: ProfilePicWidget(height: height*0.1, imageUrl: imagePath??"",))) :
+          const SizedBox(),
         ],
       ),
     );

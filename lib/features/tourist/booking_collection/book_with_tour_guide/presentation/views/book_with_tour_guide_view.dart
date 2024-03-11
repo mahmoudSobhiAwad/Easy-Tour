@@ -15,14 +15,22 @@ class BookTripWithTourGuides extends StatelessWidget {
   Widget build(BuildContext context) {
     final double height=BasicDimension.screenHeight(context);
     final double width=BasicDimension.screenWidth(context);
-    return  BlocProvider(create: (context)=>TripsToViewCubit(tourGuideTripsForTouristRepoImp: getIt.get<TourGuideTripsForTouristRepoImp>())..getAllTrips(),
+    return  BlocProvider(create: (context)=>TripsToViewCubit(tourGuideTripsForTouristRepoImp: getIt.get<TourGuideTripsForTouristRepoImp>())..getAllTripsLength(),
       child: BlocConsumer<TripsToViewCubit,TripsToViewStates>(builder: (context,state){
         var cubit=BlocProvider.of<TripsToViewCubit>(context);
         return Scaffold(
-          body:cubit.isLoading?const Center(child: CircularProgressIndicator(color: basicColor,),):TourGuideTripForTouristList(height: height, width: width,tripList: cubit.tripList,),
+          body:TourGuideTripForTouristList(height: height, width: width,tripList: cubit.tripList,cubit: cubit,isLoading: cubit.isLoading,),
         );
       }, listener: (context,state){
         if(state is FailureGetAllTripsToViewState){
+          showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+            types: AlertTypes.failed,
+            onTap: (){
+              Navigator.pop(context);
+            },
+            content: '${state.errMessage}',));
+        }
+        else if(state is FailureGetAllTripsLengthState){
           showDialog(context: context, builder: (context)=> ContainerAlertWidget(
             types: AlertTypes.failed,
             onTap: (){

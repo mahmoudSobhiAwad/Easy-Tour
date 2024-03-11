@@ -18,7 +18,6 @@ class ProfileCubit extends Cubit<ProfileStates>{
         if(failure.statusCode==401)
         {
           getProfileData();
-          //emit(RefreshTokenFailureState('Unknown Error,Please try again'));
         }
         else
         {

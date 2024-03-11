@@ -4,7 +4,7 @@ import 'package:prepare_project/core/widget/tour_guide/get_social_widget.dart';
 import 'package:prepare_project/features/tour_guide/profile/presentation/manager/view_profile_cubit.dart';
 import 'package:prepare_project/features/tour_guide/profile/presentation/view/widgets/contact_info_view.dart';
 import 'package:prepare_project/features/tour_guide/profile/presentation/view/widgets/edit_profile_view.dart';
-import 'package:prepare_project/features/tour_guide/profile/presentation/view/widgets/licence_view.dart';
+import 'package:prepare_project/features/tour_guide/profile/presentation/view/widgets/licence_button.dart';
 import 'package:prepare_project/features/tourist/settings/presentaion/views/widgets/payment_setting_item.dart';
 
 class TourGuideProfileInfo extends StatelessWidget {
@@ -43,19 +43,7 @@ class TourGuideProfileInfo extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: height*0.11,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:[
-                const Text('Licence',style: CustomTextStyle.commonSignThinDark),
-                const Expanded(child:  SizedBox(height: 10,)),
-                ProfileSettingItem(text: 'Ministry ID,Syndicate ID', onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LicencesView(height: height,licences:cubit.licenceNames,width: width,cvUrl:cubit.cvUrl ,)));
-                },height: height*0.07,child: const Icon(Icons.arrow_forward_ios),),
-              ],
-            ),
-          ),
+          LicenceButton(height: height, licenceNames: cubit.licenceNames,cvUrl: cubit.cvUrl, width: width),
           SizedBox(
             height: height*0.11,
             child: Column(
@@ -63,11 +51,14 @@ class TourGuideProfileInfo extends StatelessWidget {
               children:[
                 const Text('Contact Info',style: CustomTextStyle.commonSignThinDark),
                 const Expanded(child:  SizedBox(height: 10,)),
-                ProfileSettingItem(
+                ProfileSettingItem (
                   rightWidget:  Row(
                   children: [
                     ...List.generate(cubit.socialLinks.keys.length, (index) => GestureDetector(
-                      onTap: (){cubit.openLauncherApp(Uri.parse(cubit.socialLinks.values.elementAt(index)));},
+                      onTap: (){
+                        cubit.openLauncherApp(
+                          index
+                      );},
                       child: Padding(
                         padding: const EdgeInsets.only(right: 20.0),
                         child: getSocialIcon(cubit.socialLinks.keys.elementAt(index)),
@@ -89,3 +80,5 @@ class TourGuideProfileInfo extends StatelessWidget {
     );
   }
 }
+
+

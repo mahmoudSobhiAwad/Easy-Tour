@@ -4,7 +4,7 @@ import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import '../../../../../../core/utilities/basics.dart';
 
 class ProfileSettingItem extends StatelessWidget {
-  const ProfileSettingItem({super.key,this.text,required this.child,this.height,this.onTap,this.rightWidget});
+  const ProfileSettingItem({super.key,this.text,this.child,this.height,this.onTap,this.rightWidget});
   final String?text;
   final Widget?child;
   final Widget?rightWidget;

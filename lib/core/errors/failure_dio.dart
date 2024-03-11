@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
+import 'dart:developer';
 
 abstract class Failure {
   final String? errMessage;
@@ -32,8 +33,8 @@ class ServerFailure extends Failure {
     }
   }
 
-  factory ServerFailure.fromResponse(int? statusCode,Map<String,dynamic> data)  {
-
+  factory ServerFailure.fromResponse(int? statusCode,Map<String,dynamic> data){
+    log(data['message']??"");
     if (statusCode == 400 || statusCode == 403)
     {
       return ServerFailure(data['message']??"Error due to Server",statusCode: 400);

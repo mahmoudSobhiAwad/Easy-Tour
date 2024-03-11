@@ -54,7 +54,8 @@ class StepperTripDay extends StatelessWidget {
                   return OneTripPerDayItem(
                       showLocation: false,bgColor: thirdColor,height: height, width: width,
                       placeItem:Place(
-                          name: tripDays?[cubit.currDay].dayPlaces?[index].placeName??"", longitude: 1547, latitude: 54464,
+                          name: tripDays?[cubit.currDay].dayPlaces?[index].placeName??"",
+                          longitude: 1547, latitude: 54464,
                           activity:tripDays?[cubit.currDay].dayPlaces?[index].activity??"",
                           category: tripDays?[cubit.currDay].dayPlaces?[index].placeType??""
                       ),

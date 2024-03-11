@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 import 'package:prepare_project/features/tourist/historical_places/presentation/view/widgets/pagination_numbers.dart';
 
 class PaginationInHistoricalPlaces extends StatelessWidget {
@@ -31,15 +32,12 @@ class PaginationInHistoricalPlaces extends StatelessWidget {
       child: Container(
         width: width,
         height: height*0.07,
-        decoration:const BoxDecoration(
+        decoration: BoxDecoration(
           color: thirdColor,
           boxShadow: [
-            BoxShadow(
-              blurRadius: 6,
-              offset: Offset(0,4),
-            ),
+            buildBoxShadow(),
           ],
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topRight: Radius.circular(26),
               topLeft:Radius.circular(26),
               bottomRight: Radius.circular(26),

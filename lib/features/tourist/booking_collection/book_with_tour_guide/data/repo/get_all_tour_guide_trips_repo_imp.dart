@@ -11,9 +11,10 @@ class TourGuideTripsForTouristRepoImp implements TourGuideTripsForTouristRepo {
 
   TourGuideTripsForTouristRepoImp({required this.apiServices});
   @override
-  Future<Either<Failure, List<Trip>>> getAllTourGuideTrips() async {
+  Future<Either<Failure, List<Trip>>> getAllTourGuideTrips(Map<String, dynamic>? queryParam) async {
     try {
       var response = await apiServices.get(
+        queryParam: queryParam,
         endPoint: '${homeEndPointTourist}book/TGtrip/getAllTrips',);
       List<Trip> trips = List<Trip>.from(
           response['tourGuideTrips'].map((x) => Trip.fromJson(x)));
@@ -25,6 +26,22 @@ class TourGuideTripsForTouristRepoImp implements TourGuideTripsForTouristRepo {
       }
       else {
         return left(ServerFailure(e.toString()));
+      }
+    }
+  }
+  @override
+  Future<Either<Failure,int>> getAllTripsLength()async {
+    try{
+      var response=await apiServices.get(endPoint: '${homeEndPointTourist}book/TGtrip/getTripsLength',);
+      int number=response['tripsLength'];
+      return Right(number);
+    }
+    catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      else {
+        return Left(ServerFailure(e.toString()));
       }
     }
   }

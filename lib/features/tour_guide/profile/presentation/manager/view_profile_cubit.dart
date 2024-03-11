@@ -77,7 +77,8 @@ class TourGuideProfileViewCubit extends Cubit<TourGuideProfileViewState>{
         address: address, profileUrl: profileUrl,
         lang: languages, phoneNumber: phoneNum);
   }
-  void openLauncherApp(Uri url)async{
+  void openLauncherApp(int index)async{
+    Uri url= Uri.parse(socialLinks.values.elementAt(index));
     try {
       await launchUrl(url,mode: LaunchMode.externalApplication);
     } catch (error) {

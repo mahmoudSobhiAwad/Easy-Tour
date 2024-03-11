@@ -13,15 +13,15 @@ import 'package:prepare_project/features/tour_guide/profile/presentation/manager
 import '../../../../../../core/utilities/basics.dart';
 
 class LicencesView extends StatelessWidget {
-  const LicencesView({super.key,required this.height,required this.width,required this.cvUrl,required this.licences});
+  const LicencesView({super.key,required this.height,required this.width,this.cvUrl,required this.licences});
   final double width;
   final double height;
   final List<String>licences;
-  final String cvUrl;
+  final String? cvUrl;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context)=>LicencesCubit(tourGuideProfileRepo:getIt.get<TourGuideProfileRepoImp>(),cvUrl: cvUrl),
+      create: (context)=>LicencesCubit(tourGuideProfileRepo:getIt.get<TourGuideProfileRepoImp>(),cvUrl: cvUrl),
       child:BlocConsumer<LicencesCubit,LicencesStates>(
           builder: (context,state){
             var cubit=BlocProvider.of<LicencesCubit>(context);
@@ -36,7 +36,7 @@ class LicencesView extends StatelessWidget {
                       const SizedBox(height: 20,),
                       IconButton(onPressed: (){
                         context.pop();
-                      }, icon: const Icon(Icons.close),),
+                        }, icon: const Icon(Icons.close),),
                       ...List.generate(licences.length, (index) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
