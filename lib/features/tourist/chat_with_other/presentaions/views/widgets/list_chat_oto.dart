@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prepare_project/features/tourist/chat_with_other/data/models/chat_to_other_model.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/data/models/recent_chat_model.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/chat_bubble_oto.dart';
 class ListChatOneToOne extends StatelessWidget {
   const ListChatOneToOne({
@@ -7,13 +7,13 @@ class ListChatOneToOne extends StatelessWidget {
     required this.messages,
     required this.controller,
     required this.stream,
-
+    required this.sourceEmail,
   });
 
-  final List<ChatToOtherModel> messages;
+  final List<OneMessageModel> messages;
   final ScrollController controller;
-final Stream stream;
-
+  final Stream stream;
+  final String sourceEmail;
   @override
   Widget build(BuildContext context) {
     return Expanded(

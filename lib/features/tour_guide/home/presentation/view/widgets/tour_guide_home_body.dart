@@ -33,7 +33,7 @@ class HomeTourGuideBody extends StatelessWidget {
             padding:EdgeInsets.only(top: 10.0,left: 10),
             child:Text('Chats',style: CustomTextStyle.homePartTitle,),
           ),
-          ChatWithOtherList(width: width, height: height),
+          RecentChatWithOther(width: width, height: height,recentChatList: cubit.chatsList,isRecentChatLoading: cubit.isLoadingRecentChats,emptyMessages: 'No Tourist Talks To Yet, When Chat Starts Will Be Here..',),
         ],
       ),
     );

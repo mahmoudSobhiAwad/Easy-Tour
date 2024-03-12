@@ -8,6 +8,7 @@ import 'package:prepare_project/features/tour_guide/home/data/repo/tour_guide_ho
 import 'package:prepare_project/features/tour_guide/home/presentation/manager/home_tour_guide_cubit.dart';
 import 'package:prepare_project/features/tour_guide/home/presentation/manager/home_tour_guide_state.dart';
 import 'package:prepare_project/features/tour_guide/home/presentation/view/widgets/tour_guide_home_view_ui.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/data/repos/get_guide_meta_data/get_guide_meta_data_repo_imp.dart';
 
 import '../../../../../../core/utilities/go_router/go_router.dart';
 import '../../../../../../core/widget/custom_alert_widget/alert_container.dart';
@@ -31,7 +32,10 @@ class TourGuideHomeWithProvider extends StatelessWidget {
     double height=BasicDimension.screenHeight(context);
     double width=BasicDimension.screenWidth(context);
     return BlocProvider(
-      create: (context)=>TourGuideHomeCubit(controller: animationController,homeTourGuideRepoImp: getIt.get<HomeTourGuideRepoImp>()),
+      create: (context)=>TourGuideHomeCubit(
+          controller: animationController,
+          homeTourGuideRepoImp: getIt.get<HomeTourGuideRepoImp>(),
+          guideMetaDataRepoImp: getIt.get<GuideMetaDataAndChatRecentRepoImp>())..connect()..getRecentChats(),
       child: BlocConsumer<TourGuideHomeCubit,TourGuideHomeStates>(
         builder: (context,state){
           var cubit=BlocProvider.of<TourGuideHomeCubit>(context);
@@ -62,26 +66,19 @@ class TourGuideHomeWithProvider extends StatelessWidget {
         },
         listener: (context,state){
           var basicCubit=BlocProvider.of<BasicHomeCubit>(context);
-          var cubit=BlocProvider.of<TourGuideHomeCubit>(context);
-          if(state is ChangeTourGuideHomeMenuState){
+          if(state is ChangeTourGuideHomeMenuState)
+          {
             basicCubit.changeMenuState();
           }
-          else if(state is SuccessLogOutTourGuideState){
+          else if(state is SuccessLogOutTourGuideState)
+          {
             context.go(RouterApp.kLoginView);
           }
-          else if(state is FailureLogOutTourGuideState){
+          else if(state is FailureLogOutTourGuideState)
+          {
             showDialog(context: context, builder: (context)=>ContainerAlertWidget(types: AlertTypes.failed,content:state.errMessage,onTap: (){
               context.pop();
             },));
-          }
-
-          else if(state is RefreshTokenErrorState){
-            showDialog(context: context, builder: (context)=> ContainerAlertWidget(
-              types: AlertTypes.failed,
-              onTap: (){
-                cubit.logOut().then((value){Navigator.pop(context);});
-              },
-              content: '${state.errMessage}',));
           }
         },
 

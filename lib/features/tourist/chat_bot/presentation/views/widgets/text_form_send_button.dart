@@ -33,6 +33,7 @@ class TextFormAndSendMessage extends StatelessWidget {
               ],
             ),
             child: CustomTextFormField(
+              minLine: 1,
               maxLines: 3,
               suffix: IconButton(onPressed: (){
                 cubit.startListening();

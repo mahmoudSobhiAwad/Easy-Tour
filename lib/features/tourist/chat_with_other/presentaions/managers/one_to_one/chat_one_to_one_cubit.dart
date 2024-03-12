@@ -1,68 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prepare_project/core/utilities/constant_var/constant.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
-import 'package:prepare_project/features/tourist/chat_with_other/data/models/chat_to_other_model.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/data/models/one_to_one_chat_model.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/data/models/recent_chat_model.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/models/stream_socket.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/data/repos/chat_oto/chat_oto_repo_imp.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/managers/one_to_one/chat_one_to_one_state.dart';
-import 'package:socket_io_client/socket_io_client.dart';
 
 class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
 
-  ChatOneToOneCubit():super(InitialChatOneToOneState());
+  ChatOneToOneCubit({required this.chatOTORepoImp,this.chatID}):super(InitialChatOneToOneState());
   final TextEditingController messageController=TextEditingController();
   final ScrollController scrollController=ScrollController();
+  final ChatOTORepoImp chatOTORepoImp;
   bool enableSend=false;
+  bool loadingGetChat=false;
+  final String?chatID;
+  String?targetEmail;
+  String?targetProfile;
   StreamSocket streamSocket =StreamSocket();
-  List<ChatToOtherModel>messages=[];
+  List<OneMessageModel>messagesList=[];
   String?requestMessage;
   late io.Socket socket ;
   final String sourceEmail=SetAppState.prefs?.getString('email')??"";
-  final String role=SetAppState.prefs?.getString('role')??"";
-  void addToMessageModel(){
-    ChatToOtherModel model=ChatToOtherModel();
+  void addToMessageModel() {
+    OneMessageModel model=OneMessageModel();
     enableSend=false;
     model.message=messageController.text;
     model.sent=false;
-    model.dateTime=DateTime.now();
+    model.messageDate=DateTime.now().toString();
     requestMessage=messageController.text;
     messageController.clear();
-    messages.add(model);
+    messagesList.add(model);
     sortMessages();
-    // scrollController.animateTo(scrollController.position.maxScrollExtent,
-    //     duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
-  }
-  void connect()
-  {
-    socket = io.io(baseUrl,
-        OptionBuilder()
-            .setTransports(['websocket'])// for Flutter or Dart VM
-            .disableAutoConnect()  // disable auto-connection
-            .setExtraHeaders({'email': sourceEmail}) // optional
-            .build()
-    );
-    socket.connect();
-    // socket.emit('signing',sourceEmail);
-    socket.onConnect((data) {
-      debugPrint('connected Success');
-      socket.on("message", (data){
-        streamSocket.addResponse;
-        debugPrint(data);
-        debugPrint('working');
-      });
-    });
-
-    socket.onDisconnect((_) => debugPrint('disconnect'));
-
+    scrollController.animateTo(scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
   }
   void sortMessages(){
-    messages.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
+    messagesList.sort((a, b) => b.messageDate!.compareTo(a.messageDate!));
   }
-  void deleteChat(){
-    messages.clear();
-   // emit(DeleteChatBotMessagesState());
-  }
+  // void deleteChat() {
+  //   messages.clear();
+  // }
   void checkExistOfText(){
     if(messageController.text.trim()!=""){
       enableSend=true;
@@ -73,13 +53,13 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     emit(EnableSendMessageInOTOState());
   }
  Stream socketMessage(){
-    socket.on("message", (data){
+    socket.on("receiveMessage", (data){
       emit(LoadingAddToMessageOTOState());
       if(data!=null)
       {
-        String type=sourceEmail==data['source']?'source':'destination';
+        String type=sourceEmail==data['from']?'source':'destination';
         if(type=='source'){
-          messages.first.sent=true;
+          messagesList.first.sent=true;
         }
         else{
           getFromOther(data['message']);
@@ -90,24 +70,61 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
       else{
         emit(FailureAddToMessageOTOState());
       }
-
    });
    return streamSocket.getResponse;
 }
-  void sendMessage(){
+  void sendMessage()async{
     addToMessageModel();
-    String targetID='';
-    role=='tourist'?targetID='sobhimahmoud003@gmail.com':targetID='modyelgen243@gmail.com';
-    socket.emit('message',{'message':requestMessage,'source':sourceEmail,'targetId':targetID});
+    emit(LoadingSendMessageToOtherState());
+    var result=await chatOTORepoImp.sendMessageToOther(SendOTOMessageModel(desID: targetEmail, contentMessage: requestMessage).toJson());
+    result.fold(
+            (failure){
+              emit(FailureSendMessageToOtherState(errMessage: failure.errMessage));
+            },
+            (successSent) {
+              emit(SuccessSendMessageToOtherState());
+            }
+    );
     emit(SuccessAddToMessageOTOState());
   }
-  void getFromOther(String response){
-    ChatToOtherModel model=ChatToOtherModel(message: response,type: 'destination',dateTime: DateTime.now());
-    Future.delayed(const Duration(seconds: 1),()
+  void getFromOther(String response) {
+    OneMessageModel model=OneMessageModel(message: response,type:'destination',messageDate: DateTime.now().toString());
+    Future.delayed(const Duration(milliseconds: 300),()
     {
-      messages.add(model);
+      messagesList.add(model);
       emit(SuccessAddToMessageOTOState());
       sortMessages();
     });
+  }
+  void getAllChatOTO(String?chatId)async{
+    if(chatId==null){}
+    else{
+      loadingGetChat=true;
+      emit(LoadingGetAllChatOTOState());
+      var result=await chatOTORepoImp.getAllChatOTO();
+      result.fold(
+              (failure) {
+                loadingGetChat=false;
+                emit(FailureGetAllChatOTOState(errMessage:failure.errMessage));
+              },
+              (otoModel){
+                getDestinationData(pOne:otoModel.personOne ,pTwo: otoModel.personTwo);
+                emit(SuccessGetAllChatOTOState());
+                loadingGetChat=false;
+              }
+      );
+
+    }
+  }
+  void getDestinationData({required PersonInChatData? pOne, required PersonInChatData? pTwo}) {
+    if(pOne?.email==sourceEmail){
+      targetEmail=pTwo?.email;
+      targetProfile=pTwo?.profilePic;
+    }
+    else{
+      targetEmail=pOne?.email;
+      targetProfile=pOne?.profilePic;
+    }
+
   }
 }

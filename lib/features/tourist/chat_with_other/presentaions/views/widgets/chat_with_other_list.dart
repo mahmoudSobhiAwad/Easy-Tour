@@ -2,23 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/data/models/recent_chat_model.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/one_to_one_view.dart';
-import 'package:prepare_project/features/tourist/profile/presentation/views/widgets/pic_profile_widget.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/recent_chat_item_out_side.dart';
 
-class ChatWithOtherList extends StatelessWidget {
-  const ChatWithOtherList({
+class RecentChatWithOther extends StatelessWidget {
+  const RecentChatWithOther({
     super.key,
     required this.width,
     required this.height,
+    this.recentChatList,
+    required this.isRecentChatLoading,
+    this.emptyMessages,
   });
-
+  final String?emptyMessages;
   final double width;
   final double height;
+  final bool isRecentChatLoading;
+  final List<RecentChatModel>?recentChatList;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView.builder(
+    return
+      isRecentChatLoading?
+      const Center(child: CircularProgressIndicator(color: basicColor,),):
+      Expanded(
+        child:recentChatList!.isNotEmpty?
+        ListView.builder(
           physics:const BouncingScrollPhysics(),
           padding: EdgeInsets.only(top: height*0.02,left: 20,right: 20),
           itemBuilder: (context,index){
@@ -46,49 +56,21 @@ class ChatWithOtherList extends StatelessWidget {
                     ),
                   ),
                 ),
-                onDismissed:(_){} ,
+                // onDismissed:(_){} ,
                 key: UniqueKey(),
-                child: OneChatItemWidget(width: width, height: height),
+                child: RecentChatItemOutSideListTile(width: width, height: height,model: recentChatList?[index],),
               ),
             );
-          },itemCount: 20,));
-  }
-}
-
-class OneChatItemWidget extends StatelessWidget {
-  const OneChatItemWidget({
-    super.key,
-    required this.width,
-    required this.height,
-  });
-
-  final double width;
-  final double height;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
-      child: Container(
-        width: width,
-        height: height*0.1,
-        decoration: BoxDecoration(
-          color: thirdColor,
-          borderRadius: commonBorderRadius(),
+          },itemCount: recentChatList?.length??0,):
+        Column(
+          children: [
+            Icon(Icons.messenger_outlined,color: thirdColor,size: height*0.07,),
+            SizedBox(
+                width: width*0.7,
+                child: Text('$emptyMessages',style: CustomTextStyle.commonSignLight,)),
+          ],
         ),
-        child: ListTile(
-          leading: ProfilePicWidget(imageUrl: '', height: height*0.06),
-          title: const Text('Sara Ahmed',style:CustomTextStyle.commonSignDark,),
-          subtitle: SizedBox(width: width*0.5,child: const Text('Hello How Are You Today',style: CustomTextStyle.commonFontThin,)),
-          trailing: Column(
-           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('9:01 am',style: CustomTextStyle.commonSignLight,),
-              CircleAvatar(backgroundColor: basicColor,radius: 15,child: Center( child: Text('3',style: CustomTextStyle.commonFontThinLight.copyWith(color: Colors.white,fontSize: 12),)),)
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
+

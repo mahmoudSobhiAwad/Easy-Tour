@@ -48,9 +48,12 @@ class ApiServices{
     return response.data;
   }
   /// get request
-  Future<Map<String,dynamic>>get({required String endPoint,Map<String,dynamic>?data,Map<String,dynamic>?queryParam})async {
+  Future<Map<String,dynamic>>get({required String endPoint,Map<String,dynamic>?data,Map<String,dynamic>?queryParam,String?chatID})async {
     final String? tokenId=SetAppState.prefs?.getString('token');
-    var response=await dio.get('$baseUrl$endPoint',data: data,queryParameters: queryParam,options: Options(headers: {'Authorization':'token $tokenId'}));
+    var response=await dio.get('$baseUrl$endPoint',data: data,queryParameters: queryParam,options: Options(headers: {
+      'Authorization':'token $tokenId',
+      'chatid':chatID,
+    }));
 
     return response.data;
   }

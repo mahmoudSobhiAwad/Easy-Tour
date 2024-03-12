@@ -8,10 +8,14 @@ class CustomChatOneToOneAppBar extends StatelessWidget {
     super.key,
     required this.height,
     required this.width,
+    this.profileUrl,
+    this.name
   });
 
   final double height;
   final double width;
+  final String?profileUrl;
+  final String?name;
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +31,17 @@ class CustomChatOneToOneAppBar extends StatelessWidget {
           IconButton(onPressed: (){
             Navigator.pop(context);
           }, icon: const Icon(Icons.arrow_back_ios_new)),
-          ProfilePicWidget(imageUrl: '', height: height*0.06,),
+          ProfilePicWidget(imageUrl: profileUrl??'', height: height*0.06,),
           Padding(
             padding: const EdgeInsets.only(bottom: 15.0,left: 5),
             child: SizedBox(
               width: width*0.4,
-              child: const Align(
+              child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
                   children: [
-                    Text('Mahmoud Sobhi',style: CustomTextStyle.commonFontThin,),
-                    Icon(Icons.circle,color: whatsAppColor,size: 15,),
+                    Text(name??"",style: CustomTextStyle.commonFontThin,),
+                    const Icon(Icons.circle,color: whatsAppColor,size: 15,),
                   ],
                 ),
               ),
