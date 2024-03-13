@@ -22,6 +22,7 @@ import 'package:prepare_project/features/tourist/image_classification/data/repos
 import 'package:prepare_project/features/tourist/profile/data/repos/profie_repo_imp.dart';
 import 'package:prepare_project/features/tourist/tourist_home/data/repo/home_tourist_repo_impl.dart';
 import '../../../features/sign_up/data/repos/sign_up_repo_imp.dart';
+import '../../../features/tourist/chat_with_other/data/repos/get_guide_meta_data/get_guide_meta_data_repo_imp.dart';
 
 final getIt=GetIt.instance;
 void setUp()
@@ -35,13 +36,13 @@ getIt.registerSingleton<TourGuideProfileRepoImp>(TourGuideProfileRepoImp(apiServ
 getIt.registerSingleton<PrivateTourRepoImp>(PrivateTourRepoImp(apiServices: getIt.get<ApiServices>()));
 getIt.registerSingleton<HomeTouristRepoImp>(HomeTouristRepoImp(getIt.get<ApiServices>()));
 getIt.registerSingleton<HomeTourGuideRepoImp>(HomeTourGuideRepoImp(getIt.get<ApiServices>()));
-// getIt.registerSingleton<SettingRepoImp>(SettingRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<DeleteAccountRepoImpl>(DeleteAccountRepoImpl(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<TourGuideTripsForTouristRepoImp>(TourGuideTripsForTouristRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<ChangePasswordRepoImp>(ChangePasswordRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<GetGuideInfoForTouristRepImp>(GetGuideInfoForTouristRepImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<ChatOTORepoImp>(ChatOTORepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<ChatBotRepoImp>(ChatBotRepoImp(apiServices:getIt.get<ApiServices>()));
+getIt.registerSingleton<GuideMetaDataAndChatRecentRepoImp>(GuideMetaDataAndChatRecentRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<GenerateTripRepoImp>(GenerateTripRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<EntertainmentPlaceRepoImp>(EntertainmentPlaceRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<QrScannedRepoImp>(QrScannedRepoImp(apiServices:getIt.get<ApiServices>()));

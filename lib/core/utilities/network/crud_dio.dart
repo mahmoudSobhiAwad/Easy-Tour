@@ -54,7 +54,9 @@ class ApiServices{
       'Authorization':'token $tokenId',
       'chatid':chatID,
     }));
-
+    if(response.statusCode==204){
+      return {};
+    }
     return response.data;
   }
   /// patch with photo

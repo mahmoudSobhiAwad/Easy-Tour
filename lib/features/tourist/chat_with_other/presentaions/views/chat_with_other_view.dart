@@ -4,6 +4,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/core/widget/custom_alert_widget/alert_container.dart';
 import 'package:prepare_project/core/widget/custom_alert_widget/alert_types.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/data/repos/get_guide_meta_data/get_guide_meta_data_repo_imp.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/managers/chat_with_other_cubit.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/managers/chat_with_other_states.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/app_bar_with_search.dart';
@@ -15,8 +16,7 @@ class TouristChatWithOtherView extends StatelessWidget {
   Widget build(BuildContext context) {
     double width=BasicDimension.screenWidth(context);
     double height=BasicDimension.screenHeight(context);
-
-    return BlocProvider(create: (context)=>TouristChatWithOtherCubit(guideMetaDataRepoImp: getIt.get()),
+    return BlocProvider(create: (context)=>TouristChatWithOtherCubit(guideMetaDataRepoImp: getIt.get<GuideMetaDataAndChatRecentRepoImp>())..getTourGuidesToChatWith()..getRecentChats(),
       child: BlocConsumer<TouristChatWithOtherCubit,TouristsChatWithOtherStates>(builder: (context,state){
         var cubit=BlocProvider.of<TouristChatWithOtherCubit>(context);
         return Scaffold(
@@ -35,7 +35,7 @@ class TouristChatWithOtherView extends StatelessWidget {
           ),
         );
       }, listener: (context,state){
-        if(state is FailureGetChatsMetaDataState){
+        if(state is FailureGetGuidesMetaDataState){
           showDialog(context: context, builder: (context)=> ContainerAlertWidget(
             types: AlertTypes.failed,
             onTap: ()

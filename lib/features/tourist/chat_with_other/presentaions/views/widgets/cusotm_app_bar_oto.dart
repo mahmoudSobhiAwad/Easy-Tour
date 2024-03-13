@@ -9,13 +9,15 @@ class CustomChatOneToOneAppBar extends StatelessWidget {
     required this.height,
     required this.width,
     this.profileUrl,
-    this.name
+    this.name,
+    this.status,
   });
 
   final double height;
   final double width;
   final String?profileUrl;
   final String?name;
+  final String?status;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class CustomChatOneToOneAppBar extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(name??"",style: CustomTextStyle.commonFontThin,),
-                    const Icon(Icons.circle,color: whatsAppColor,size: 15,),
+                    Icon(Icons.circle,color: status=='Online'?whatsAppColor:closeColor,size: 15,),
                   ],
                 ),
               ),

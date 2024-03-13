@@ -31,11 +31,16 @@ class GuideMetaDataAndChatRecentRepoImp implements GuideMetaDataAndChatRecentRep
   @override
   Future<Either<Failure, List<RecentChatModel>>> getRecentChatList() async{
     try{
-      var response=await apiServices.get(endPoint: '${homeEndPointTourist}chat/getRecentChats');
+      var response=await apiServices.get(endPoint:'${homeEndPointTourist}chat/getRecentChats');
+      if(response.isEmpty){
+        return right ([]);
+      }
+      else{
       List<RecentChatModel> chats=List<RecentChatModel>.from(
-          response['chats'].map((recentChat)=>ViewGuideMetaDataModel.fromJson(recentChat))
+          response['chats'].map((recentChat)=>RecentChatModel.fromJson(recentChat))
       );
       return right(chats);
+      }
     }
     catch (e) {
       if (e is DioException) {

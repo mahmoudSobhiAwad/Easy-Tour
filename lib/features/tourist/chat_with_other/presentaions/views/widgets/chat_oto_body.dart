@@ -9,12 +9,19 @@ class ChatOneToOneBody extends StatelessWidget {
     required this.height,
     required this.width,
     required this.cubit,
+    required this.name,
+    required this.profileUrl,
+    required this.destEmail,
+    required this.status,
   });
 
   final double height;
   final double width;
   final ChatOneToOneCubit cubit;
-
+  final String?profileUrl;
+  final String?name;
+  final String?status;
+  final String?destEmail;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +30,7 @@ class ChatOneToOneBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomChatOneToOneAppBar(height: height, width: width),
+          CustomChatOneToOneAppBar(height: height, width: width,profileUrl:profileUrl ,name: name,status: status,),
           ListChatOneToOne(messages: cubit.messagesList, stream: cubit.socketMessage(),controller: cubit.scrollController,sourceEmail: cubit.sourceEmail,),
           SendMessageFormField(
             width: width,

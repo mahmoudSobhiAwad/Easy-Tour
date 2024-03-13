@@ -11,9 +11,9 @@ class ChatOTORepoImp implements ChatOTORepo{
   final ApiServices apiServices;
   ChatOTORepoImp({required this.apiServices});
   @override
-  Future<Either<Failure, GetOTOChatModel>> getAllChatOTO()async {
+  Future<Either<Failure, GetOTOChatModel>> getAllChatOTO(String chatId)async {
     try{
-      var response=await apiServices.get(endPoint: '${homeEndPointTourist}chat/getChat');
+      var response=await apiServices.get(endPoint: '${homeEndPointTourist}chat/getChat',chatID:chatId );
       GetOTOChatModel chat=GetOTOChatModel.fromJson(response['chat']);
       return right(chat);
     }

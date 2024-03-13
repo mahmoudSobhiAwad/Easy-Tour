@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/models/recent_chat_model.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/models/view_guide_meta_data.dart';
@@ -34,6 +36,7 @@ class TouristChatWithOtherCubit extends Cubit<TouristsChatWithOtherStates>{
     result.fold(
             (failure){
               isLoadingRecentChats=false;
+              log(failure.errMessage.toString());
               emit(FailureGetChatsMetaDataState(errMessage: failure.errMessage));
               },
             (chats){

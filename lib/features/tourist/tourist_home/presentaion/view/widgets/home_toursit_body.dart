@@ -25,7 +25,7 @@ class HomeTouristBody extends StatelessWidget {
           children: [
             HomeTouristTourGuideAppBar(
               rightIcon: IconButton(onPressed: (){
-                context.push(RouterApp.kChatTouristView);
+                context.push(RouterApp.kChatTouristView,);
               },icon: const FaIcon(FontAwesomeIcons.facebookMessenger,color: basicColor,),),
               height: height, width: width, openSidePar:(){cubit.openSideBar();},),
             const SizedBox(height: 20,),

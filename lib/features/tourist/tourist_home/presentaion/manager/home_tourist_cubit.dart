@@ -18,8 +18,7 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
   String profileUrl= SetAppState.prefs?.getString('profileUrl')??'';
   final HomeTouristRepoImp homeTouristRepoImp;
   int currIndex=0;
-
-   late io.Socket socket ;
+  late io.Socket socket ;
   Future<void>getProfilePicture()async{
     profileUrl= SetAppState.prefs?.getString('profileUrl')??'';
   }
@@ -35,7 +34,7 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
     emit(ChangeHomeTouristAnimationState());
     }
   }
-  void connect() {
+  void connect(){
     socket = io.io(baseUrl,
         OptionBuilder()
             .setTransports(['websocket'])// for Flutter or Dart VM
@@ -45,7 +44,6 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
     );
     socket.connect();
     socket.onConnect((data) {
-      debugPrint('connected Success');
       socket.on("receiveMessage", (data) {
         log('Listening Now To Socket');
       });

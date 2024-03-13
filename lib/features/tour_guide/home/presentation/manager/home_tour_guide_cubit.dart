@@ -43,10 +43,16 @@ class TourGuideHomeCubit extends Cubit<TourGuideHomeStates>{
     emit(LoadingLogOutTourGuideState());
     var result =await homeTourGuideRepoImp.logOut();
     result.fold(
-            (failure){
+            (failure) async {
               if(failure.statusCode==401)
               {
                 logOut();
+              }
+             else if(failure.statusCode==500){
+                await SetAppState.setToken(token: '');
+                await SetAppState.setRole(role: '');
+                await SetAppState.setProfilePic(profileUrl: '');
+                emit(SuccessLogOutTourGuideState());
               }
               else{
                 emit(FailureLogOutTourGuideState(failure.errMessage));
@@ -77,7 +83,8 @@ class TourGuideHomeCubit extends Cubit<TourGuideHomeStates>{
     });
     socket.onDisconnect((_) => log('disconnect'));
   }
-  void getRecentChats()async{
+  void getRecentChats()async
+  {
     isLoadingRecentChats=true;
     emit(LoadingGetRecentChatForTourGuideState());
     var result=await guideMetaDataRepoImp.getRecentChatList();
@@ -93,5 +100,4 @@ class TourGuideHomeCubit extends Cubit<TourGuideHomeStates>{
         }
     );
   }
-
 }

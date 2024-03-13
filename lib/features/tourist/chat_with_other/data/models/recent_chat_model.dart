@@ -37,9 +37,9 @@ class OneMessageModel{
   OneMessageModel({this.fromPerson,this.messageDate,this.toPerson,this.message,this.sent,this.type});
   factory OneMessageModel.fromJson(Map<String,dynamic>json){
     return OneMessageModel(
-        message: json['from'],
+        message: json['message'],
         toPerson: json['to'],
-        fromPerson: json['message'],
+        fromPerson: json['from'],
         messageDate: json['date']
       );
   }

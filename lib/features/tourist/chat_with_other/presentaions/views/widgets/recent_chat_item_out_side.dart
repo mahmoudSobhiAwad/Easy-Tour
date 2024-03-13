@@ -18,8 +18,8 @@ class RecentChatItemOutSideListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String?profPic=model?.personOne?.email==null?model?.personTwo?.profilePic:"";
-    String?name=model?.personOne?.email==null?model?.personTwo?.name:"";
+    String?profPic=model?.personOne?.email==null?model?.personTwo?.profilePic:model?.personOne?.profilePic;
+    String?name=model?.personOne?.email==null?model?.personTwo?.name:model?.personOne?.name;
     String?message=model?.oneMessage?.message??"";
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
@@ -37,7 +37,7 @@ class RecentChatItemOutSideListTile extends StatelessWidget {
           trailing: Column(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(model?.oneMessage?.messageDate??"",style: CustomTextStyle.commonSignLight,),
+              Text(model?.oneMessage?.messageDate?.substring(0,10)??"",style: CustomTextStyle.commonSignLight,),
               CircleAvatar(backgroundColor: basicColor,radius: 15,child: Center( child: Text('3',style: CustomTextStyle.commonFontThinLight.copyWith(color: Colors.white,fontSize: 12),)),)
             ],
           ),

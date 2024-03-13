@@ -11,7 +11,7 @@ class RecentChatWithOther extends StatelessWidget {
     super.key,
     required this.width,
     required this.height,
-    this.recentChatList,
+     this.recentChatList,
     required this.isRecentChatLoading,
     this.emptyMessages,
   });
@@ -35,7 +35,7 @@ class RecentChatWithOther extends StatelessWidget {
             return GestureDetector(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return ChatTouristOneToOtherOne(height: height, width: width);
+                  return ChatTouristOneToOtherOne(height: height, width: width,chatId: recentChatList?[index].chatId,);
                 }));
               },
               child: Dismissible(
@@ -62,13 +62,16 @@ class RecentChatWithOther extends StatelessWidget {
               ),
             );
           },itemCount: recentChatList?.length??0,):
-        Column(
-          children: [
-            Icon(Icons.messenger_outlined,color: thirdColor,size: height*0.07,),
-            SizedBox(
-                width: width*0.7,
-                child: Text('$emptyMessages',style: CustomTextStyle.commonSignLight,)),
-          ],
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.messenger_outlined,color: thirdColor,size: height*0.1,),
+              SizedBox(
+                  width: width*0.7,
+                  child: Text('$emptyMessages',style: CustomTextStyle.commonSignLight,)),
+            ],
+          ),
         ),
     );
   }

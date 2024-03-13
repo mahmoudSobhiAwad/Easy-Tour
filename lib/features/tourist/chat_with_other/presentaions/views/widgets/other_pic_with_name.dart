@@ -33,7 +33,12 @@ class OtherPeoplePicWithName extends StatelessWidget {
           return GestureDetector(
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context){
-                return ChatTouristOneToOtherOne(height: height, width: width);
+                return ChatTouristOneToOtherOne(
+                  height: height, width: width,
+                  name: listOfGuide?[index].fName,
+                  profileUrl: listOfGuide?[index].profileUrl,
+                  destEmail: listOfGuide?[index].email,
+                  status: listOfGuide?[index].status,);
               }));
             },
             child: SizedBox(
@@ -48,7 +53,7 @@ class OtherPeoplePicWithName extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: height*0.01,),
-                  SizedBox(width:width*0.2,height: height*0.05,child: Text(listOfGuide?[index].fName??"",style: CustomTextStyle.commonFontThin,maxLines: 2,overflow: TextOverflow.ellipsis,))
+                  SizedBox(width:width*0.2,height: height*0.05,child: Text(listOfGuide?[index].fName??"",style: CustomTextStyle.commonFontThin,maxLines: 2,overflow: TextOverflow.ellipsis,textAlign: TextAlign.center,))
                 ],
               ),
             ),
