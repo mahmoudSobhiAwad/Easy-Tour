@@ -1,65 +1,154 @@
-import 'dart:ui'as ui;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-class GoogleMapView extends StatefulWidget {
+import 'package:prepare_project/features/tourist/google_map/presentaion/manager/map_cubit/google_map_cubit.dart';
+import 'package:prepare_project/features/tourist/google_map/presentaion/manager/map_cubit/google_map_states.dart';
+class GoogleMapView extends StatelessWidget {
   const GoogleMapView({super.key});
 
   @override
-  State<GoogleMapView> createState() => _GoogleMapViewState();
+  Widget build(BuildContext context) {
+    return  BlocProvider(
+      create: (context)=>GoogleMapCubit()..requestAllowLocation(),
+      child:BlocConsumer<GoogleMapCubit,GoogleMapStates>(builder:(context,state){
+        var cubit=BlocProvider.of<GoogleMapCubit>(context);
+        return GoogleMapBody(cubit: cubit,);
+      } ,listener: (context,state){},),
+    );
+  }
 }
 
-class _GoogleMapViewState extends State<GoogleMapView> {
-  late CameraPosition initialCameraPosition;
-  Set<Marker>markers={};
-  @override
-  void initState(){
-    initialCameraPosition =const CameraPosition(target:LatLng(29.97416777 ,31.1339477975),);
-    createMarkers();
-    super.initState();
-  }
+class GoogleMapBody extends StatefulWidget {
+  const GoogleMapBody({
+    super.key,
+    required this.cubit,
+  });
+
+  final GoogleMapCubit cubit;
 
   @override
+  State<GoogleMapBody> createState() => _GoogleMapBodyState();
+}
+
+class _GoogleMapBodyState extends State<GoogleMapBody> {
+  @override
+  void initState() {
+    updateMyLocation();
+    super.initState();
+  }
+  @override
+  void dispose(){
+    super.dispose();
+  }
+  GoogleMapController? googleMapController;
+  Set<Marker>markers={};
+  @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       resizeToAvoidBottomInset: false,
       body: GoogleMap(
-        markers: markers,
-          initialCameraPosition: initialCameraPosition,
+        onMapCreated:(controller){
+          googleMapController=controller;
+        },
+        markers:markers,
+        initialCameraPosition: const CameraPosition(zoom: 14,target:LatLng(29.97416777 ,31.1339477975),)
       ),
     );
   }
-  void createMarkers()async{
-    BitmapDescriptor icons= BitmapDescriptor.fromBytes(await getImageFormRawData('assets/gen_trip_images/islamic.png', 200));
-    Set<Marker> myMarkers= placeMapModelList.map((placeModel) {
-     return  Marker(
-         icon:icons,
-         markerId: MarkerId(placeModel.id!),infoWindow: InfoWindow(title:placeModel.name),position: placeModel.latLng!);
-     },
-   ).toSet();
-   markers.addAll(myMarkers);
-   setState(() {
 
-   });
+  void getPositionStream(){
+    LocationSettings locationSetting=const LocationSettings(distanceFilter: 2,);
+    Geolocator.getPositionStream(locationSettings: locationSetting).listen((locationData)
+    {
+      markers.add(Marker(markerId: const MarkerId('liveMarker'),position: LatLng(locationData.latitude, locationData.longitude)));
+      setState(() {
+
+      });
+      googleMapController?.animateCamera(CameraUpdate.newLatLng(LatLng(locationData.latitude,locationData.longitude,)));
+    });
+
+  }
+
+  void updateMyLocation() async {
+    if(await widget.cubit.askToEnableMyLocation()){
+      getPositionStream();
+    }
   }
 }
-
-class PlaceMapModel{
-  String?id;
-  String?name;
-  LatLng?latLng;
-  String?iconName;
-  PlaceMapModel({this.latLng,this.name,this.id,this.iconName});
-}
-List<PlaceMapModel>placeMapModelList=[
-  PlaceMapModel(id: '1',name: 'Pyramids',latLng: const LatLng(30.593758, 32.269860),iconName: 'assets/gen_trip_images/safari.jpg'),
-  PlaceMapModel(id: '2',name: 'Egyptian Museum ',latLng: const LatLng(30.619222, 31.732507),iconName: 'assets/gen_trip_images/islamic.png'),
-  PlaceMapModel(id: '3',name: 'Karnak Temple ',latLng: const LatLng(25.722175, 32.660821),iconName: 'assets/gen_trip_images/safari.png'),
-];
-Future<Uint8List>getImageFormRawData(String imagePath,double width)async{
-  ByteData imageDate=await rootBundle.load(imagePath);
-  var imageCodec=await ui.instantiateImageCodec(imageDate.buffer.asUint8List(),targetWidth:width.round());
-  var imageFrame=await imageCodec.getNextFrame();
-  var imageByteDate=await imageFrame.image.toByteData(format: ui.ImageByteFormat.png);
-  return imageByteDate!.buffer.asUint8List();
-}
+// Future<bool>askToEnableLocationServices()async{
+//   bool serviceEnabled;
+//   serviceEnabled = await Geolocator.isLocationServiceEnabled();
+//   if (!serviceEnabled)
+//   {
+//     // emit(AllowLocationFailedState(errMessage:'Location services are disabled.Please Enable it.' ));
+//     return false;
+//   }
+//   else{
+//     return true;
+//   }
+// }
+// Future<bool>askToEnableMyLocation()async{
+//   LocationPermission permission;
+//   if(await askToEnableLocationServices()){
+//     permission = await Geolocator.checkPermission();
+//     if(permission==LocationPermission.deniedForever){
+//       // emit(AllowLocationFailedState());
+//       return false;
+//     }
+//     else if (permission == LocationPermission.denied)
+//     {
+//       permission = await Geolocator.requestPermission();
+//       if (permission == LocationPermission.always||permission==LocationPermission.whileInUse) {
+//         // emit(AllowLocationSuccessState());
+//         return true;
+//       }
+//       else{
+//         // emit(AllowLocationFailedState());
+//         return false;
+//       }
+//     }
+//     else{
+//       return true;
+//     }
+//   }
+//   else{
+//     // emit(AllowLocationFailedState());
+//     return false;
+//   }
+// }
+// Future<void> requestAllowLocation() async {
+//   if(await askToEnableMyLocation()){
+//     // enableMyLocation=true;
+//   }
+//   //   bool serviceEnabled;
+//   //   LocationPermission permission;
+//   //
+//   //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
+//   //   if (!serviceEnabled)
+//   //   {
+//   //     emit(AllowLocationFailedState(errMessage:'Location services are disabled.Please Enable it.' ));
+//   //     return Future.error('Location services are disabled.Please Enable it.');
+//   //   }
+//   //   else {
+//   //   permission = await Geolocator.checkPermission();
+//   //   if (permission == LocationPermission.denied) {
+//   //     permission = await Geolocator.requestPermission();
+//   //     if (permission == LocationPermission.denied) {
+//   //       emit(AllowLocationFailedState(errMessage:'Location permissions are denied' ));
+//   //       return Future.error('Location permissions are denied');
+//   //     }
+//   //   }
+//   //
+//   //   if (permission == LocationPermission.deniedForever) {
+//   //     emit(AllowLocationFailedState(errMessage:'Location permissions are permanently denied, we cannot request permissions.' ));
+//   //     return Future.error(
+//   //         'Location permissions are permanently denied, we cannot request permissions.');
+//   //   }
+//   //   if(permission == LocationPermission.always||permission==LocationPermission.whileInUse){
+//   //     enableMyLocation=true;
+//   //     // position=await Geolocator.getCurrentPosition();
+//   //     emit(AllowLocationSuccessState());
+//   //   }
+//   // }
+// }

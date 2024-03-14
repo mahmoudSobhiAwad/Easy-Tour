@@ -29,7 +29,8 @@ class TouristChatWithOtherView extends StatelessWidget {
               [
                 AppBarWithSearchWidget(height: height),
                 OtherPeoplePicWithName(height: height, width: width,listOfGuide: cubit.tourGuidesList,isGuidesLoading: cubit.isLoadingGuides,),
-                RecentChatWithOther(width: width, height: height,recentChatList:cubit.chatsList,isRecentChatLoading: cubit.isLoadingRecentChats,emptyMessages: 'you don’t have started any chat yet, when you chat with any tour guide your messages will be here',),
+                RecentChatWithOther(
+                  width: width, height: height,recentChatList:cubit.chatsList,isRecentChatLoading: cubit.isLoadingRecentChats,emptyMessages: 'you don’t have started any chat yet, when you chat with any tour guide your messages will be here',),
               ],
             ),
           ),

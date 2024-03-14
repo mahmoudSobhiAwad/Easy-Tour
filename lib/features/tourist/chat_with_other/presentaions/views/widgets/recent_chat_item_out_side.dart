@@ -37,7 +37,7 @@ class RecentChatItemOutSideListTile extends StatelessWidget {
           trailing: Column(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(model?.oneMessage?.messageDate?.substring(0,10)??"",style: CustomTextStyle.commonSignLight,),
+              Text(model?.oneMessage?.messageDate?.toString().substring(0,10)??"",style: CustomTextStyle.commonSignLight,),
               CircleAvatar(backgroundColor: basicColor,radius: 15,child: Center( child: Text('3',style: CustomTextStyle.commonFontThinLight.copyWith(color: Colors.white,fontSize: 12),)),)
             ],
           ),

@@ -32,7 +32,7 @@ class OneMessageModel{
   String?fromPerson;
   String?toPerson;
   bool?sent;
-  String?messageDate;
+  DateTime?messageDate;
   String?type;
   OneMessageModel({this.fromPerson,this.messageDate,this.toPerson,this.message,this.sent,this.type});
   factory OneMessageModel.fromJson(Map<String,dynamic>json){
@@ -40,7 +40,7 @@ class OneMessageModel{
         message: json['message'],
         toPerson: json['to'],
         fromPerson: json['from'],
-        messageDate: json['date']
+        messageDate: DateTime.parse(json['date']),
       );
   }
 }

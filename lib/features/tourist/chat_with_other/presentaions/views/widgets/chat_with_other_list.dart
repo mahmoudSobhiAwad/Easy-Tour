@@ -32,10 +32,12 @@ class RecentChatWithOther extends StatelessWidget {
           physics:const BouncingScrollPhysics(),
           padding: EdgeInsets.only(top: height*0.02,left: 20,right: 20),
           itemBuilder: (context,index){
+            PersonInChatData? personInChatData;
+            personInChatData = checkWhichIsSource(index, personInChatData);
             return GestureDetector(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return ChatTouristOneToOtherOne(height: height, width: width,chatId: recentChatList?[index].chatId,);
+                  return ChatTouristOneToOtherOne(height: height, width: width,chatId: recentChatList?[index].chatId,destEmail: personInChatData?.email,profileUrl: personInChatData?.profilePic,name: personInChatData?.name,status: 'Online',);
                 }));
               },
               child: Dismissible(
@@ -74,6 +76,16 @@ class RecentChatWithOther extends StatelessWidget {
           ),
         ),
     );
+  }
+
+  PersonInChatData? checkWhichIsSource(int index, PersonInChatData? personInChatData) {
+    if(recentChatList?[index].personOne?.email==null){
+      personInChatData=recentChatList?[index].personTwo;
+    }
+    else{
+      personInChatData=recentChatList?[index].personOne;
+    }
+    return personInChatData;
   }
 }
 

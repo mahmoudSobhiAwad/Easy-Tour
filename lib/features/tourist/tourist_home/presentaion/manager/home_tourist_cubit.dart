@@ -66,6 +66,7 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
     emit(ChangeHomeTouristNavBottomState());
   }
   Future<void> logOut()async{
+    await makeDataNull();
     emit(LoadingLogOutState());
     var result =await homeTouristRepoImp.logOut();
     result.fold(

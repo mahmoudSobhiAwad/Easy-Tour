@@ -6,7 +6,7 @@ import 'package:prepare_project/features/tourist/chat_with_other/presentaions/ma
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/managers/one_to_one/chat_one_to_one_state.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/chat_oto_body.dart';
 class ChatTouristOneToOtherOne extends StatelessWidget {
-  const ChatTouristOneToOtherOne({super.key,required this.height,required this.width,this.chatId, this.status, this.profileUrl, this.name,this.destEmail});
+  const ChatTouristOneToOtherOne({super.key,required this.height,required this.width,this.chatId, this.status,required this.profileUrl, this.name,this.destEmail});
   final double height;
   final double width;
   final String? chatId;

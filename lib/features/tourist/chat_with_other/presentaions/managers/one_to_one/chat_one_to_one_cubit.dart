@@ -33,7 +33,7 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     enableSend=false;
     model.message=messageController.text;
     model.sent=false;
-    model.messageDate=DateTime.now().toString();
+    model.messageDate=DateTime.now();
     requestMessage=messageController.text;
     messageController.clear();
     messagesList.add(model);
@@ -67,7 +67,7 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
          else{
            getFromOther(data['message']);
          }
-         streamSocket.addResponse;
+          streamSocket.addResponse;
          emit(SuccessAddToMessageOTOState());
        }
        else{
@@ -79,7 +79,6 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
    return streamSocket.getResponse;
 }
   void sendMessage()async{
-
     addToMessageModel();
     emit(LoadingSendMessageToOtherState());
     var result=await chatOTORepoImp.sendMessageToOther(SendOTOMessageModel(desID: targetEmail, contentMessage: requestMessage).toJson());
@@ -94,13 +93,10 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     emit(SuccessAddToMessageOTOState());
   }
   void getFromOther(String response) {
-    OneMessageModel model=OneMessageModel(message: response,type:'destination',messageDate: DateTime.now().toString());
-    Future.delayed(const Duration(milliseconds: 300),()
-    {
-      messagesList.add(model);
-      emit(SuccessAddToMessageOTOState());
-      sortMessages();
-    });
+    OneMessageModel model=OneMessageModel(message: response,type:'destination',messageDate: DateTime.now());
+    messagesList.add(model);
+    emit(SuccessAddToMessageOTOState());
+    sortMessages();
   }
   void getAllChatOTO(String?chatId)async{
     socket = io.io(baseUrl,
@@ -134,6 +130,7 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
   }
   void editMessagesToChat(List<OneMessageModel>message){
     for (var element in message) {
+
       if(element.fromPerson!=sourceEmail){
         element.type='destination';
       }

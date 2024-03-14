@@ -24,13 +24,14 @@ class OtherChatBubble extends StatelessWidget {
             ),
             color: thirdColor ,
           ),
-          child: isLoading?
-          AnimatedTextKit(
-              totalRepeatCount: 1,
-              isRepeatingAnimation: false,
-              animatedTexts: [
-                TyperAnimatedText(message.replaceAll(replacedMessage, '',),textStyle: const TextStyle(color: basicColor))
-              ]):
+          child:
+          // isLoading?
+          // AnimatedTextKit(
+          //     totalRepeatCount: 1,
+          //     isRepeatingAnimation: false,
+          //     animatedTexts: [
+          //       TyperAnimatedText(message.replaceAll(replacedMessage, '',),textStyle: const TextStyle(color: basicColor))
+          //     ]):
           Text(message.replaceAll(replacedMessage, '',),style: const TextStyle(color: basicColor),),
         ),
       ),
