@@ -13,7 +13,7 @@ class ViewGuideMetaDataModel{
       fName: json['firstName']??"",
       status: json['status']??"offline",
       email: json['email']??"",
-      chatId: json['chatID'],
+      chatId: json['chats'][0]['_id'],
     );
   }
 }

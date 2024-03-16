@@ -67,6 +67,7 @@ dependencies:
   speech_to_text: ^6.6.0
   geolocator: ^11.0.0
   socket_io_client: ^2.0.3+1
+  geocoding: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -108,6 +109,7 @@ flutter:
      - assets/entertainment_places/
      - assets/gen_trip_images/
      - assets/type_of_trip/
+     - assets/google_map_assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

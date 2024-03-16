@@ -9,7 +9,8 @@ import 'package:prepare_project/features/tourist/nearby_places/presentation/view
 import 'package:prepare_project/features/tourist/nearby_places/presentation/views/widgets/pick_category_widget.dart';
 
 class NearbySearchView extends StatelessWidget {
-  const NearbySearchView({super.key});
+  const NearbySearchView({super.key,this.showBackIcon=true});
+  final bool showBackIcon;
   @override
   Widget build(BuildContext context) {
     final double height=BasicDimension.screenHeight(context);
@@ -25,7 +26,7 @@ class NearbySearchView extends StatelessWidget {
             padding: const EdgeInsets.only(top:30,left: 10),
             child: Column(
               children: [
-                CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Nearby Places',),
+                CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Nearby Places',showBackIcon: showBackIcon,),
                 PickCategoryForSearch(height: height, width: width,typeOfCategory:cubit.typeOfCategories,pickCategory: (index){
                   cubit.changePickedCategory(index);
                 },),

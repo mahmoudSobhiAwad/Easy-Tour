@@ -12,8 +12,8 @@ import '../../../../../core/widget/custom_alert_widget/alert_container.dart';
 import '../../../../../core/widget/custom_alert_widget/alert_types.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
-
+  const ProfileView({super.key,this.showBackIcon=true});
+final bool showBackIcon;
   @override
   Widget build(BuildContext context) {
     double height=BasicDimension.screenHeight(context);
@@ -27,7 +27,7 @@ class ProfileView extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             body:cubit.showGetLoading?
             const Center(child: CircularProgressIndicator(color: basicColor,),) :
-            TouristProfileBody(screenWidth: width, screenHeight: height,cubit: cubit,),
+            TouristProfileBody(screenWidth: width, screenHeight: height,cubit: cubit,showBackIcon: showBackIcon,),
           );
         },
         listener: (context,state){

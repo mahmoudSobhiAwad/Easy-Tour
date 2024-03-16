@@ -19,8 +19,13 @@ class TouristChatWithOtherCubit extends Cubit<TouristsChatWithOtherStates>{
     var result=await guideMetaDataRepoImp.getTourGuideMetaData();
     result.fold(
             (failure){
+              if(failure.statusCode==401){
+                getTourGuidesToChatWith();
+              }
+              else{
               isLoadingGuides=false;
               emit(FailureGetGuidesMetaDataState(errMessage: failure.errMessage));
+              }
             },
             (tourGuides){
               tourGuidesList.addAll(tourGuides);
@@ -35,9 +40,14 @@ class TouristChatWithOtherCubit extends Cubit<TouristsChatWithOtherStates>{
     var result=await guideMetaDataRepoImp.getRecentChatList();
     result.fold(
             (failure){
+              if(failure.statusCode==401){
+                getTourGuidesToChatWith();
+              }
+              else{
               isLoadingRecentChats=false;
               log(failure.errMessage.toString());
               emit(FailureGetChatsMetaDataState(errMessage: failure.errMessage));
+              }
               },
             (chats){
               chatsList.addAll(chats);

@@ -43,6 +43,7 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
   }
   GoogleMapController? googleMapController;
   Set<Marker>markers={};
+  bool isFirstCall=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,20 +53,29 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
           googleMapController=controller;
         },
         markers:markers,
-        initialCameraPosition: const CameraPosition(zoom: 14,target:LatLng(29.97416777 ,31.1339477975),)
+        initialCameraPosition: const CameraPosition(zoom: 1,target:LatLng(29.97416777 ,31.1339477975),)
       ),
     );
   }
 
-  void getPositionStream(){
+  void getPositionStream()async{
     LocationSettings locationSetting=const LocationSettings(distanceFilter: 2,);
+    BitmapDescriptor iconImage=BitmapDescriptor.fromBytes(await getImageFormRawData('assets/google_map_assets/live location.png', 100));
     Geolocator.getPositionStream(locationSettings: locationSetting).listen((locationData)
     {
-      markers.add(Marker(markerId: const MarkerId('liveMarker'),position: LatLng(locationData.latitude, locationData.longitude)));
-      setState(() {
+      markers.add(Marker(infoWindow: const InfoWindow(title: 'My Location'),icon:iconImage,markerId: const MarkerId('liveMarker'),position: LatLng(locationData.latitude, locationData.longitude)));
+      if(mounted){
+        setState(() {
+        });
+        if(isFirstCall){
+          googleMapController?.animateCamera(CameraUpdate.newCameraPosition(
+              CameraPosition(zoom: 17,target: LatLng(locationData.latitude,locationData.longitude,))));
+        }
+        else{
+          googleMapController?.animateCamera(CameraUpdate.newLatLng(LatLng(locationData.latitude,locationData.longitude,)));
+        }
+      }
 
-      });
-      googleMapController?.animateCamera(CameraUpdate.newLatLng(LatLng(locationData.latitude,locationData.longitude,)));
     });
 
   }
@@ -76,79 +86,3 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
     }
   }
 }
-// Future<bool>askToEnableLocationServices()async{
-//   bool serviceEnabled;
-//   serviceEnabled = await Geolocator.isLocationServiceEnabled();
-//   if (!serviceEnabled)
-//   {
-//     // emit(AllowLocationFailedState(errMessage:'Location services are disabled.Please Enable it.' ));
-//     return false;
-//   }
-//   else{
-//     return true;
-//   }
-// }
-// Future<bool>askToEnableMyLocation()async{
-//   LocationPermission permission;
-//   if(await askToEnableLocationServices()){
-//     permission = await Geolocator.checkPermission();
-//     if(permission==LocationPermission.deniedForever){
-//       // emit(AllowLocationFailedState());
-//       return false;
-//     }
-//     else if (permission == LocationPermission.denied)
-//     {
-//       permission = await Geolocator.requestPermission();
-//       if (permission == LocationPermission.always||permission==LocationPermission.whileInUse) {
-//         // emit(AllowLocationSuccessState());
-//         return true;
-//       }
-//       else{
-//         // emit(AllowLocationFailedState());
-//         return false;
-//       }
-//     }
-//     else{
-//       return true;
-//     }
-//   }
-//   else{
-//     // emit(AllowLocationFailedState());
-//     return false;
-//   }
-// }
-// Future<void> requestAllowLocation() async {
-//   if(await askToEnableMyLocation()){
-//     // enableMyLocation=true;
-//   }
-//   //   bool serviceEnabled;
-//   //   LocationPermission permission;
-//   //
-//   //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
-//   //   if (!serviceEnabled)
-//   //   {
-//   //     emit(AllowLocationFailedState(errMessage:'Location services are disabled.Please Enable it.' ));
-//   //     return Future.error('Location services are disabled.Please Enable it.');
-//   //   }
-//   //   else {
-//   //   permission = await Geolocator.checkPermission();
-//   //   if (permission == LocationPermission.denied) {
-//   //     permission = await Geolocator.requestPermission();
-//   //     if (permission == LocationPermission.denied) {
-//   //       emit(AllowLocationFailedState(errMessage:'Location permissions are denied' ));
-//   //       return Future.error('Location permissions are denied');
-//   //     }
-//   //   }
-//   //
-//   //   if (permission == LocationPermission.deniedForever) {
-//   //     emit(AllowLocationFailedState(errMessage:'Location permissions are permanently denied, we cannot request permissions.' ));
-//   //     return Future.error(
-//   //         'Location permissions are permanently denied, we cannot request permissions.');
-//   //   }
-//   //   if(permission == LocationPermission.always||permission==LocationPermission.whileInUse){
-//   //     enableMyLocation=true;
-//   //     // position=await Geolocator.getCurrentPosition();
-//   //     emit(AllowLocationSuccessState());
-//   //   }
-//   // }
-// }

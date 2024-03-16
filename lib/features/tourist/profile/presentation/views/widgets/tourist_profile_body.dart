@@ -9,10 +9,11 @@ import 'package:prepare_project/features/tourist/profile/presentation/views/widg
 import 'package:prepare_project/features/tourist/profile/presentation/views/widgets/pic_profile_widget.dart';
 
 class TouristProfileBody extends StatelessWidget {
-  const TouristProfileBody({super.key,required this.screenWidth,required this.screenHeight,required this.cubit});
+  const TouristProfileBody({super.key,required this.screenWidth,required this.screenHeight,required this.cubit,this.showBackIcon=true});
   final double screenHeight;
   final double screenWidth;
   final ProfileCubit cubit;
+  final bool showBackIcon;
   @override
   Widget build(BuildContext context) {
     return  Padding(
@@ -26,7 +27,8 @@ class TouristProfileBody extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            SizedBox(
+           showBackIcon?
+           SizedBox(
               height: screenHeight*0.04,
               child: Row(
                 children: [
@@ -41,7 +43,8 @@ class TouristProfileBody extends StatelessWidget {
                   Text('${cubit.name}',style: CustomTextStyle.commonProfileDark,),
                 ],
               ),
-            ),
+            ):
+           const SizedBox(),
             SizedBox(height: screenHeight*0.01,),
             SizedBox(
               height: screenHeight*0.24,

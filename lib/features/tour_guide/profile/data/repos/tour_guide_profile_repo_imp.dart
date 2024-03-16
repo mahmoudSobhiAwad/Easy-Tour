@@ -11,7 +11,6 @@ class TourGuideProfileRepoImp implements TourGuideProfileRepo{
   TourGuideProfileRepoImp({required this.apiServices});
   @override
   Future<Either<Failure, TourGuidePersonalInfoModel>> getTourGuideInfo() async{
-    // TODO: implement getTourGuideInfo
     try
     {
       var data=await apiServices.get(endPoint: '${homeEndPointTourGuide}profile/getProfile',);

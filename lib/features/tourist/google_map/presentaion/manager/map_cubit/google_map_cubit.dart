@@ -6,12 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 class GoogleMapCubit extends Cubit<GoogleMapStates>{
   GoogleMapCubit():super(InitialGoogleMapState());
-    Set<Marker>markers={};
+  Set<Marker>markers={};
   bool enableMyLocation=false;
-  late Stream<Position>?streamPosition;
-
-  late CameraPosition initialCameraPosition;
-  Geolocator geoLocator=Geolocator();
   // void initPolylines() {
   //   Polyline polyline=const Polyline(
   //       width: 5,
@@ -64,10 +60,6 @@ class GoogleMapCubit extends Cubit<GoogleMapStates>{
   //       circleId:const CircleId('1'),center:const LatLng(40.453079066668025, -3.688285805372625));
   //   circlesSet.add(realMadrid);
   // }
-  void setInitialCameraPosition(){
-    initialCameraPosition =const CameraPosition(zoom: 14,target:LatLng(29.97416777 ,31.1339477975),);
-    emit(InitialCameraPositionSuccessState());
-  }
   Future<bool>askToEnableLocationServices()async{
     bool serviceEnabled;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();

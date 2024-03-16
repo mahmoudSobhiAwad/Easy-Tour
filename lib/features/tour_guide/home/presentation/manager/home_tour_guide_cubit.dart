@@ -75,12 +75,12 @@ class TourGuideHomeCubit extends Cubit<TourGuideHomeStates>{
             .build()
     );
     socket.connect();
-    socket.onConnect((data) {
-      log('connected Success');
-      socket.on("receiveMessage", (data) {
-        log('Listening Now To Socket');
-      });
-    });
+    // socket.onConnect((data) {
+    //   log('connected Success');
+    //   socket.on("receiveMessage", (data) {
+    //     log('Listening Now To Socket');
+    //   });
+    // });
     socket.onDisconnect((_) => log('disconnect'));
   }
   void getRecentChats()async
@@ -90,8 +90,13 @@ class TourGuideHomeCubit extends Cubit<TourGuideHomeStates>{
     var result=await guideMetaDataRepoImp.getRecentChatList();
     result.fold(
             (failure){
-          isLoadingRecentChats=false;
-          emit(FailureGetRecentChatForTourGuideState(errMessage: failure.errMessage));
+              if(failure.statusCode==401){
+                getRecentChats();
+              }
+              else{
+                isLoadingRecentChats=false;
+                emit(FailureGetRecentChatForTourGuideState(errMessage: failure.errMessage));
+              }
         },
             (chats){
           chatsList.addAll(chats);

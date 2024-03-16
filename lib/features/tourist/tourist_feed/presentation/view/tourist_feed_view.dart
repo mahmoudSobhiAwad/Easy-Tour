@@ -5,7 +5,8 @@ class TouristFeedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-        child: Text('Tourist Feed Will be Here...soon'),
+        child:Text('Tourist Feed Will be Here...soon'),
     );
   }
+
 }

@@ -31,7 +31,7 @@ class ChatOneToOneBody extends StatelessWidget {
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomChatOneToOneAppBar(height: height, width: width,profileUrl:profileUrl ,name: name,status: status,),
-          ListChatOneToOne(messages: cubit.messagesList, stream: cubit.socketMessage(),controller: cubit.scrollController,sourceEmail: cubit.sourceEmail,),
+          ListChatOneToOne(messages: cubit.messagesList, stream: cubit.streamSocket.getResponse,controller: cubit.scrollController,sourceEmail: cubit.sourceEmail,),
           SendMessageFormField(
             width: width,
             controller: cubit.scrollController,

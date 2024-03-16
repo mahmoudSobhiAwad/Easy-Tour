@@ -34,6 +34,7 @@ class OtherPeoplePicWithName extends StatelessWidget {
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context){
                 return ChatTouristOneToOtherOne(
+                  chatId: listOfGuide?[index].chatId,
                   height: height, width: width,
                   name: listOfGuide?[index].fName,
                   profileUrl: listOfGuide?[index].profileUrl,

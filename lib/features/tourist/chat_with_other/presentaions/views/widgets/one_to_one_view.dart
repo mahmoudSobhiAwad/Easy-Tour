@@ -9,7 +9,7 @@ class ChatTouristOneToOtherOne extends StatelessWidget {
   const ChatTouristOneToOtherOne({super.key,required this.height,required this.width,this.chatId, this.status,required this.profileUrl, this.name,this.destEmail});
   final double height;
   final double width;
-  final String? chatId;
+  final String?chatId;
   final String?profileUrl;
   final String?name;
   final String?status;
@@ -17,7 +17,7 @@ class ChatTouristOneToOtherOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:(context)=>ChatOneToOneCubit(chatID:chatId,targetEmail: destEmail,chatOTORepoImp: getIt.get<ChatOTORepoImp>())..getAllChatOTO(chatId),
+      create:(context)=>ChatOneToOneCubit(chatID:chatId,targetEmail: destEmail,chatOTORepoImp: getIt.get<ChatOTORepoImp>())..getAllChatOTO(chatId)..connectToServer(),
       child: BlocConsumer<ChatOneToOneCubit,ChatOneToOneStates>(builder: (context,state){
         var cubit=BlocProvider.of<ChatOneToOneCubit>(context);
         return Scaffold(

@@ -33,7 +33,7 @@ class TourGuidePersonalInfoModel{
     lang: json['languages']??[],
     phoneNumber: json['phoneNumber'],
     contactInfo:json['contact_info'],
-    trips:(json['createdTrips']as List).map((oneTrip) => Trip.fromJson(oneTrip)).toList(),
+    trips:json['createdTrips']!=null ?(json['createdTrips'] as List).map((oneTrip) => Trip.fromJson(oneTrip)).toList():[],
   );
   Future<FormData> updateTourGuideInfo() async{
     FormData formData = FormData.fromMap({

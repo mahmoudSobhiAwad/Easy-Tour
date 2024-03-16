@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/features/tour_guide/profile/data/model/guide_personal_info_model.dart';
@@ -32,6 +34,7 @@ class TourGuideProfileViewCubit extends Cubit<TourGuideProfileViewState>{
         emit(RefreshTokenFailureState(errMessage: 'Error due to refresh token,try again'));
       }
       else{
+        log(failure.errMessage.toString());
       showLoading=false;
       emit(FailureGetInfoTourGuideProfileView(errMessage: failure.errMessage));
       }

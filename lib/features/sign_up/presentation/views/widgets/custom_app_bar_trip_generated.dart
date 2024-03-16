@@ -3,12 +3,13 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 class CustomGeneratedAiTripAppBar extends StatelessWidget {
-  const CustomGeneratedAiTripAppBar({super.key,required this.height,this.appBarTitle,required this.width,this.menuToSaveTrip,this.appBarWidth});
+  const CustomGeneratedAiTripAppBar({super.key,this.showBackIcon=true,required this.height,this.appBarTitle,required this.width,this.menuToSaveTrip,this.appBarWidth});
   final double height;
   final double width;
   final double? appBarWidth;
   final String? appBarTitle;
   final Widget?menuToSaveTrip;
+  final bool showBackIcon;
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
@@ -17,6 +18,7 @@ class CustomGeneratedAiTripAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          showBackIcon?
           Container(
             height:height*0.1,
             width:width*0.13,
@@ -26,12 +28,13 @@ class CustomGeneratedAiTripAppBar extends StatelessWidget {
                 boxShadow: [buildBoxShadow()],
                 border: Border.all(color: secondaryColor,width: 3)
             ),
-            child: GestureDetector(
+            child:GestureDetector(
                 onTap: (){
                   Navigator.pop(context);
                 },
                 child: const Icon(Icons.arrow_back_sharp,color: basicColor,)),
-          ),
+          ):
+          SizedBox(width: width*0.13,),
           const Expanded(child: SizedBox(width: 5,)),
           appBarTitle==null?const SizedBox():SizedBox(
               width: appBarWidth,

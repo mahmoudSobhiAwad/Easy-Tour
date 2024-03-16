@@ -17,7 +17,8 @@ class ListChatOneToOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child:messages.isNotEmpty? StreamBuilder(stream: stream, builder: (BuildContext context, AsyncSnapshot snapshot){
+      child:messages.isNotEmpty?
+      StreamBuilder(stream: stream, builder: (BuildContext context, AsyncSnapshot snapshot){
         return ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             controller: controller,

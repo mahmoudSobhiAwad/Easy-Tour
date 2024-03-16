@@ -35,8 +35,8 @@ class TourGuideHomeWithProvider extends StatelessWidget {
       create: (context)=>TourGuideHomeCubit(
           controller: animationController,
           homeTourGuideRepoImp: getIt.get<HomeTourGuideRepoImp>(),
-          guideMetaDataRepoImp: getIt.get<GuideMetaDataAndChatRecentRepoImp>())..connect()..getRecentChats(),
-      child: BlocConsumer<TourGuideHomeCubit,TourGuideHomeStates>(
+          guideMetaDataRepoImp: getIt.get<GuideMetaDataAndChatRecentRepoImp>())..getRecentChats(),//..connect()..getRecentChats(),
+       child: BlocConsumer<TourGuideHomeCubit,TourGuideHomeStates>(
         builder: (context,state){
           var cubit=BlocProvider.of<TourGuideHomeCubit>(context);
           return WillPopScope(

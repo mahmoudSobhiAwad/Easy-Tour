@@ -34,8 +34,8 @@ class HomeTouristViewUi extends StatelessWidget {
       body: [
         TouristHomeFirstPage(animation: animation, cubit: cubit, width: width, scaleAnimation: scaleAnimation, height: height),
         const TouristFeedView(),
-        const NearbySearchView(),
-        const ProfileView(),
+        const NearbySearchView(showBackIcon: false,),
+        const ProfileView(showBackIcon: false),
       ][currIndex??cubit.currIndex],
       floatingActionButton:cubit.isMenuActive?null:FloatingActionButton(
         onPressed: (){

@@ -26,7 +26,8 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
   StreamSocket streamSocket =StreamSocket();
   List<OneMessageModel>messagesList=[];
   String?requestMessage;
-  late io.Socket socket ;
+  late io.Socket socket;
+  bool addOneMessage=true;
   final String sourceEmail=SetAppState.prefs?.getString('email')??"";
   void addToMessageModel() {
     OneMessageModel model=OneMessageModel();
@@ -53,31 +54,26 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     }
     emit(EnableSendMessageInOTOState());
   }
- Stream socketMessage(){
-   socket.onConnect((data) {
-     socket.on("receiveMessage", (data){
-       log('receiving message is ON');
-       emit(LoadingAddToMessageOTOState());
-       if(data!=null)
-       {
-         String type=sourceEmail==data['from']?'source':'destination';
-         if(type=='source'){
-           messagesList.first.sent=true;
-         }
-         else{
-           getFromOther(data['message']);
-         }
-          streamSocket.addResponse;
-         emit(SuccessAddToMessageOTOState());
-       }
-       else{
-         emit(FailureAddToMessageOTOState());
-       }
-     });
-   });
 
-   return streamSocket.getResponse;
-}
+//  Stream socketMessage(){
+//    socket.on("receiveMessage", (data){
+//      log('receiving message is ON');
+//      if(data!=null)
+//      {
+//        String type=sourceEmail==data['from']?'source':'destination';
+//        if(type=='source'){
+//          messagesList.first.sent=true;
+//        }
+//        else{
+//          getFromOther(data['message']);
+//        }
+//      }
+//      else {
+//        emit(FailureAddToMessageOTOState());
+//      }
+//    });
+//    return streamSocket.getResponse;
+// }
   void sendMessage()async{
     addToMessageModel();
     emit(LoadingSendMessageToOtherState());
@@ -93,12 +89,13 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     emit(SuccessAddToMessageOTOState());
   }
   void getFromOther(String response) {
+    debugPrint('message is: $response');
     OneMessageModel model=OneMessageModel(message: response,type:'destination',messageDate: DateTime.now());
     messagesList.add(model);
     emit(SuccessAddToMessageOTOState());
     sortMessages();
   }
-  void getAllChatOTO(String?chatId)async{
+  void connectToServer(){
     socket = io.io(baseUrl,
         OptionBuilder()
             .setTransports(['websocket'])// for Flutter or Dart VM
@@ -107,6 +104,34 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
             .build()
     );
     socket.connect();
+    socket.onConnect((data) {
+      log('Socking is ON');
+    });
+    socket.on("receiveMessage", (data)
+    {
+      log('receiving message is ON');
+      addResponse(data);
+
+    });
+    socket.onDisconnect((_) => log('Disconnect'));
+  }
+  void addResponse(data){
+    streamSocket.addResponse;
+    if(data!=null)
+    {
+      String type=sourceEmail==data['from']?'source':'destination';
+      if(type=='source'){
+        messagesList.first.sent=true;
+      }
+      else{
+        getFromOther(data['message']);
+      }
+    }
+    else {
+      emit(FailureAddToMessageOTOState());
+    }
+  }
+  void getAllChatOTO(String?chatId)async{
     if(chatId==null){}
     else{
       loadingGetChat=true;

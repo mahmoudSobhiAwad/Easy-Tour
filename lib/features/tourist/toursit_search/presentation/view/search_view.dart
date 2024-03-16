@@ -13,48 +13,50 @@ class SearchView extends StatelessWidget {
     double width=BasicDimension.screenWidth(context);
     return  Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: EdgeInsets.only(top:height*0.01,bottom: MediaQuery.of(context).viewInsets.bottom),
-        child: Column(
-          children: [
-            Container(height: height*0.1,decoration: const BoxDecoration(color: thirdColor,
-                borderRadius: BorderRadius.only(topRight:Radius.circular(20) ,topLeft:Radius.circular(20) )),
-              child: Row(
-                children: [
-                  IconButton(onPressed: (){Navigator.pop(context);}, icon: const Icon(Icons.arrow_back_ios_new),),
-                  SizedBox(
-                      width: width*0.7,
-                      child: const CustomTextFormField(label: 'Search...',borderColor: thirdColor,floatingLabelBehavior: FloatingLabelBehavior.never,)
-                  ),
-                  const IconButton(onPressed: null, icon:  FaIcon(FontAwesomeIcons.magnifyingGlass),),
-                ],
-              ),
-            ),
-            Expanded(
-              child: SizedBox(
-                height: height*0.5,
-                child: ListView(
-                  padding:const EdgeInsets.symmetric(horizontal: 16,vertical: 20),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(top:height*0.01,bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Column(
+            children: [
+              Container(height: height*0.1,decoration: const BoxDecoration(color: thirdColor,
+                  borderRadius: BorderRadius.only(topRight:Radius.circular(20) ,topLeft:Radius.circular(20) )),
+                child: Row(
                   children: [
-                    ...List.generate(5, (index){
-                      return const Padding(
-                        padding: EdgeInsets.only(bottom: 25),
-                        child: Row(
-                          children: [
-                            Icon(Icons.history,size: 30,),
-                            SizedBox(width: 5,),
-                            Text('Pyramids',style: CustomTextStyle.commonSignLight,),
-                            Spacer(),
-                            Icon(Icons.close),
-                          ],
-                        ),
-                      );
-                    })
-                    ],
+                    IconButton(onPressed: (){Navigator.pop(context);}, icon: const Icon(Icons.arrow_back_ios_new),),
+                    SizedBox(
+                        width: width*0.7,
+                        child: const CustomTextFormField(label: 'Search...',borderColor: thirdColor,floatingLabelBehavior: FloatingLabelBehavior.never,)
+                    ),
+                    const IconButton(onPressed: null, icon:  FaIcon(FontAwesomeIcons.magnifyingGlass),),
+                  ],
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: SizedBox(
+                  height: height*0.5,
+                  child: ListView(
+                    padding:const EdgeInsets.symmetric(horizontal: 16,vertical: 20),
+                    children: [
+                      ...List.generate(5, (index){
+                        return const Padding(
+                          padding: EdgeInsets.only(bottom: 25),
+                          child: Row(
+                            children: [
+                              Icon(Icons.history,size: 30,),
+                              SizedBox(width: 5,),
+                              Text('Pyramids',style: CustomTextStyle.commonSignLight,),
+                              Spacer(),
+                              Icon(Icons.close),
+                            ],
+                          ),
+                        );
+                      })
+                      ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
