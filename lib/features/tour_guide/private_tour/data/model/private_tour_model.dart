@@ -29,7 +29,7 @@ class Trip {
     return Trip(
       tripId: json?['id']??"",
       bgImagePath:ProfileImageUrl.fromJson(json?['image']).imageUrl??"",
-      guideEmail: TourGuideOfTheTripInfo.fromJson(json?['createdBy']).email??"",
+      guideEmail: TourGuideOfTheTripInfo.fromJson(json?['createdBy']).email,
       guidePic: TourGuideOfTheTripInfo.fromJson(json?['createdBy']).profilePic??"",
       title: json?['title']??'',
       brief: json?['brief']??'',
@@ -134,7 +134,7 @@ class TourGuideOfTheTripInfo{
     }
     else{
       return TourGuideOfTheTripInfo(
-        email: json?['email']??"",
+        email: json?['email'],
         profilePic:ProfileImageUrl.fromJson(json?['profilePicture']).imageUrl??"",
       );
     }

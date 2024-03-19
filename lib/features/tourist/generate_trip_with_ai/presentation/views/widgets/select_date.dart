@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
-import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/two_beside_form.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/generate_trip_cubit.dart';
@@ -38,10 +37,10 @@ class SelectDateAndViewTripHistory extends StatelessWidget {
             children: [
               SizedBox(
                 width: width*0.45,
-                child:cubit.numOfDay==null? const Text('Pick Range Of Date',style: CustomTextStyle.commonFontThin,):Text('From: ${cubit.firstPickedDay}\nTo : ${cubit.lastPickedDay}\nNumber of days :${cubit.numOfDay}',style: CustomTextStyle.commonFontThin,),
+                // child:cubit.numOfDay==null? const Text('Pick Range Of Date',style: CustomTextStyle.commonFontThin,):Text('From: ${cubit.firstPickedDay}\nTo : ${cubit.lastPickedDay}\nNumber of days :${cubit.numOfDay}',style: CustomTextStyle.commonFontThin,),
               ),
               GestureDetector(onTap:(){
-                cubit.getRangeDate(context);
+                //cubit.getRangeDate(context);
                 },
                   child:const Icon(Icons.calendar_month_rounded,color: Colors.black,))
             ],

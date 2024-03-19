@@ -87,8 +87,9 @@ class TripsToViewCubit extends Cubit<TripsToViewStates>{
       log(failure.errMessage.toString());
       isLoading=false;
       }
-    }, (trips) {
+    }, (trips)async{
       tripList.addAll(trips);
+      await editTrips();
       emit(SuccessGetAllTripsToViewState());
       isLoading=false;
     });
@@ -96,5 +97,14 @@ class TripsToViewCubit extends Cubit<TripsToViewStates>{
   void goToSelectedDay(int index){
     currDay=index;
     emit(MoveToSelectedDayInTrips());
+  }
+  Future<void> editTrips()async{
+    for(int i=0;i<tripList.length;i++)
+    {
+      if(tripList[i].guideEmail==null)
+      {
+        tripList.removeAt(i);
+      }
+    }
   }
 }

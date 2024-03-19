@@ -1,87 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
-import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/generate_trip_cubit.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/add_new_destination.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/place_range_time_list.dart';
 class PlacesWrapWidget extends StatelessWidget {
   const PlacesWrapWidget({
     super.key,
     required this.height,
     required this.width,
-    required this.places,
-    required this.removeAt
+    required this.cubit
   });
 
   final double height;
   final double width;
-  final List<String>?places;
-  final void Function(int index)removeAt;
+  final GenerateAiTripCubit cubit;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height:places!.isEmpty? height*0.08:height*0.2,
-      width: width,
-      padding: const EdgeInsets.only(top: 10),
-      decoration: BoxDecoration(color: thirdColor,borderRadius: commonBorderRadius(),boxShadow: [buildBoxShadow()]),
-      child: places!.isEmpty?
-      const Text('Try To Add Places ',textAlign: TextAlign.center,) :
-          PickedPlaceWithNumberOfDays(height: height, width: width,places: places,),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: width*0.025),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Select your Destinations ',style: CustomTextStyle.commonSignDark,),
+          Container(
+            width: width,
+            padding: const EdgeInsets.only(top: 10,bottom: 10),
+            decoration: BoxDecoration(color: thirdColor,borderRadius: commonBorderRadius(),boxShadow: [buildBoxShadow()]),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PlaceWithRangeTimeList(
+                  height: height, width: width,
+                  destinationList: cubit.destinationWithDayList,removeAt: (index){
+                    cubit.decreaseDestinationWithDayList(index);
+                  }, pickDate: (int index) {
+                    cubit.getRangeDate(context,index);
+                  }, onSelect: (String? value,int index) {
+                    cubit.addToPlaces(value,index);
+                  },),
+                AddNewDestination(addNewDestination:(){cubit.increaseDestinationWithDayList();}, width: width),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-class PickedPlaceWithNumberOfDays extends StatelessWidget {
-  const PickedPlaceWithNumberOfDays({super.key,required this.height,required this.width,this.places});
-final double height;
-final double width;
-final List<String>?places;
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-        itemCount: places?.length,
-        itemBuilder:(context,index){
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              height: height*0.07,
-              width: width*0.4,
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(color: const Color(0xff5F92D9),boxShadow: [buildBoxShadow()],borderRadius: commonBorderRadius()),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(width: width*0.25,child: Text(places?[index]??'',style: CustomTextStyle.commonFontThinLight.copyWith(color: Colors.white,),maxLines: 2,)),
-                  IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: (){
-                        }, icon:const Icon(Icons.arrow_drop_down),color: Colors.white,)
-                ],
-              ),
-            ),
-            SizedBox(
-              height: height*0.07,
-              width: width*0.4,
-              child: CustomTextFormField(
-                filled: true,
-                fillColor: Colors.white,
-                label: 'Num Of Days',
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                maxLines: 1,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(1),
-                ],
-              ),
-            ),
-            const IconButton(onPressed: null, icon: Icon(Icons.remove,color: closeColor,)),
-          ],
-        ),
-      );
-    });
-  }
-}
+
+
+

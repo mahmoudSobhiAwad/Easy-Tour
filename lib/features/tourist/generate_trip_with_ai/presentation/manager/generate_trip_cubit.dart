@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/data_ui.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/destination_with_number_model.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/type_of_places_toursim.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repos/generate_trip_repo_imp.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/generate_trip_state.dart';
@@ -10,25 +12,30 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
   GenerateAiTripCubit({required this.generateTripRepoImp}):super(InitialGenerateTripState());
   final GenerateTripRepoImp generateTripRepoImp;
   int pageCurrIndex=SetAppState.prefs?.getInt('tripIndex')??0;
-  String ?firstPickedDay;
-  String? lastPickedDay;
   int? numOfDay;
   bool isLoading=false;
-  List<String>pickedPlaces=[];
+  final formatter = DateFormat('d MMM y');
+  List<String>pickedPlaces=['Luxor'];
   late Position? position;
+  int? currActivity;
+  List<DestinationPlaceDayModel>destinationWithDayList=[DestinationPlaceDayModel()];
   TextEditingController numberOfPlaceInDayController=TextEditingController();
   List<String> pickedTypes=[];
+  DateTime?nextDate;
+  List<String>activityNames=['2 activity','3 activity','4 or more activity'];
   List<TypeOfTourism>typeOfTourismList=[
     TypeOfTourism(typeImage:ancientEgyptianSite, typeName: 'Ancient Egyptian Sites', picked: false),
     TypeOfTourism(typeImage:museumsAndCulturalCenter, typeName: 'Museums And Cultural Centers',picked: false),
-    TypeOfTourism(typeImage:beachesAndWaterBodies, typeName: 'Beaches And Water Bodies',picked: false),
-    TypeOfTourism(typeImage:safariAndAdventures, typeName: 'Safari and adventures',picked: false),
     TypeOfTourism(typeImage:historicalAndArchitecturalLandmark, typeName: 'Historical and Architectural Landmark',picked: false),
     TypeOfTourism(typeImage:islamicSite, typeName: 'Islamic Sites',picked: false),
     TypeOfTourism(typeImage:christianSite, typeName: 'Christian Site',picked: false),
     TypeOfTourism(typeImage:naturalLandmarks, typeName: 'Natural Landmarks',picked: false),
-    TypeOfTourism(typeImage:entertainmentPlaces, typeName: 'Game And Entertainment Centers',picked: false),
   ];
+  void changeActivityIndex(int index)
+  {
+    currActivity=index;
+    emit(ChangePickedActivityIndexState());
+  }
   void navToGenerateTripScreen()async{
     pageCurrIndex=1;
     await SetAppState.generateTripCurrentPage(1);
@@ -59,41 +66,45 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
       return true;
     }
   }
-  void getRangeDate(BuildContext context)async{
+  void increaseDestinationWithDayList(){
+    destinationWithDayList.add(DestinationPlaceDayModel());
+    emit(AddPlaceToPickedPlacesList());
+  }
+  void decreaseDestinationWithDayList(int index){
+    if(destinationWithDayList.length>1){
+      destinationWithDayList.removeAt(index);
+      emit(RemovePlaceFromPickedPlacesList());
+    }
+  }
+  void editFirstDate(int index){
+    if(index>0){
+      nextDate=formatter.parse(destinationWithDayList[index-1].lastDate!);
+    }
+  }
+  void getRangeDate(BuildContext context,int index)async{
+    editFirstDate(index);
     DateTimeRange? dateTimeRange= await showDateRangePicker(
       context: context,
-      firstDate: DateTime.now(),
+      firstDate: nextDate??DateTime.now(),
       lastDate: DateTime(DateTime.now().year+3, 12, 31),
       currentDate: DateTime.now(),
       saveText: 'Pick',
     );
     if(dateTimeRange!=null)
     {
-    firstPickedDay=dateTimeRange.start.toString().split(' ')[0];
-    lastPickedDay=dateTimeRange.end.toString().split(' ')[0];
-    numOfDay=dateTimeRange.duration.inDays+1;
-    emit(ChangeRangeDatePickerState());
+      String firstPickedDay=formatter.format(dateTimeRange.start);
+      String lastPickedDay=formatter.format(dateTimeRange.end);
+      int numOfDay=dateTimeRange.duration.inDays+1;
+      destinationWithDayList[index].numOfDay=numOfDay;
+      destinationWithDayList[index].startDate=firstPickedDay;
+      destinationWithDayList[index].lastDate=lastPickedDay;
+      emit(ChangeRangeDatePickerState());
     }
 
   }
-  void addToPlaces(String?value){
-    if(pickedPlaces.isNotEmpty&&!pickedPlaces.contains(value))
-    {
-      pickedPlaces.add(value??"");
-      emit(AddPlaceToPickedPlacesList());
-    }
-    else if(pickedPlaces.isEmpty){
-      pickedPlaces.add(value??"sa");
-
-      emit(AddPlaceToPickedPlacesList());
-    }
-  }
-  void removeFromPlaces(int index){
-    if(pickedPlaces.isNotEmpty)
-    {
-      pickedPlaces.removeAt(index);
-      emit(RemovePlaceFromPickedPlacesList());
-    }
+  void addToPlaces(String?value,int index){
+    destinationWithDayList[index].placeName=value;
+    emit(AddPlaceToPickedPlacesList());
   }
   void toggleBetweenTypes(int index) {
     if(typeOfTourismList[index].picked==true){
@@ -131,12 +142,11 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
         }
         else
         {
-          emit(SuccessSendRequestToGenerateTrip(model: generatedTrip,startDate:firstPickedDay,endDate:lastPickedDay));
+          emit(SuccessSendRequestToGenerateTrip(model: generatedTrip,startDate:'firstPickedDay',endDate:'lastPickedDay'));
         }
       });
     }
   }
-
   Future<void> requestAllowLocation() async {
     bool serviceEnabled;
     LocationPermission permission;

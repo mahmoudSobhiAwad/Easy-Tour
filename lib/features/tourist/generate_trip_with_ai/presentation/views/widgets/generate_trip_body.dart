@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:prepare_project/core/utilities/basics.dart';
-import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
-import 'package:prepare_project/core/widget/sign_up_edit/custom_column_with_text_form.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/generate_trip_cubit.dart';
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/add_place_type.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/picked_places.dart';
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/select_date.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/select_num_of_activity.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/select_type_of_place.dart';
 
 class GenerateTripBody extends StatelessWidget {
@@ -31,46 +26,46 @@ class GenerateTripBody extends StatelessWidget {
             child:ListView(
               padding: EdgeInsets.only(bottom:MediaQuery.of(context).viewInsets.bottom),
               children: [
-                SelectDateAndViewTripHistory(cubit: cubit, height: height, width: width),
-                const SizedBox(height: 12,),
-                CustomColumnWithTextForm(
-                  text: 'Number Of Place In Each Day',
-                  customTextFormField:  SizedBox(
-                    width: width*0.5,
-                    child: CustomTextFormField(
-                      controller: cubit.numberOfPlaceInDayController,
-                      maxLines: 1,
-                      align: TextAlign.center,
-                      fillColor: thirdColor,
-                      filled: true,
-                      prefix: const Padding(
-                        padding:  EdgeInsets.only(left: 5.0),
-                        child: CircleAvatar(radius: 20,backgroundColor: basicColor,child: Center(child: FaIcon(FontAwesomeIcons.minus,color: Colors.white,)),),
-                      ),
-                      suffix: const Padding(
-                        padding: EdgeInsets.only(right: 5.0),
-                        child: CircleAvatar(radius: 20,backgroundColor: basicColor,child: Center(child: Icon(Icons.add,color: Colors.white,)),),
-                      ),
-                    ),
-                  ),
-                ),
+                // SelectDateAndViewTripHistory(cubit: cubit, height: height, width: width),
+                // const SizedBox(height: 12,),
+                // CustomColumnWithTextForm(
+                //   text: 'Number Of Place In Each Day',
+                //   customTextFormField:  SizedBox(
+                //     width: width*0.5,
+                //     child: CustomTextFormField(
+                //       controller: cubit.numberOfPlaceInDayController,
+                //       maxLines: 1,
+                //       align: TextAlign.center,
+                //       fillColor: thirdColor,
+                //       filled: true,
+                //       prefix: const Padding(
+                //         padding:  EdgeInsets.only(left: 5.0),
+                //         child: CircleAvatar(radius: 20,backgroundColor: basicColor,child: Center(child: FaIcon(FontAwesomeIcons.minus,color: Colors.white,)),),
+                //       ),
+                //       suffix: const Padding(
+                //         padding: EdgeInsets.only(right: 5.0),
+                //         child: CircleAvatar(radius: 20,backgroundColor: basicColor,child: Center(child: Icon(Icons.add,color: Colors.white,)),),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 const SizedBox(height: 12,),
                 SelectTypesOfPlaces(height: height, width: width,typeOfTourismList: cubit.typeOfTourismList,changeToggle: (index){
                   cubit.toggleBetweenTypes(index);
                 },),
                 const SizedBox(height: 12,),
-                AddPlaceType(width: width, onSelect: (value){
-                  cubit.addToPlaces(value);
-                }),
+                PlacesWrapWidget(cubit: cubit,width: width,height: height,),
                 const SizedBox(height: 12,),
-                PlacesWrapWidget(height: height, width: width,places: cubit.pickedPlaces,removeAt: (index){
-                  cubit.removeFromPlaces(index);
+                SelectNumOfActivityInDay(width: width, height: height,currActivity: cubit.currActivity ,activityNames: cubit.activityNames,changeActivity: (int index) {
+                  cubit.changeActivityIndex(index);
                 },),
                 const SizedBox(height: 20,),
                 Center(
                     child:  CustomLoginButton(isLoading: cubit.isLoading,color: Colors.black,label:'Generate A Trip',altWidth: width*0.5,onTap: (){
-                  cubit.requestGenerateTrip();
-                },)),
+                      cubit.requestGenerateTrip();
+                      },
+                    )
+                ),
                 const SizedBox(height: 20,),
               ],
             ),
@@ -86,6 +81,7 @@ class GenerateTripBody extends StatelessWidget {
     );
   }
 }
+
 
 
 

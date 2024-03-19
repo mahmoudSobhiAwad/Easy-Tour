@@ -7,7 +7,8 @@ class SelectTypesOfPlaces extends StatelessWidget {
     super.key,
     required this.height,
     required this.width,
-    required this.typeOfTourismList,required this.changeToggle
+    required this.typeOfTourismList,
+    required this.changeToggle
   });
 
   final double height;

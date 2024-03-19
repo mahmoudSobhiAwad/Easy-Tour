@@ -22,7 +22,7 @@ class AddPlaceType extends StatelessWidget {
       children: [
         const Text('Pick Places To Go',style: CustomTextStyle.commonSignDark,),
         CustomDropDownMenu(
-          width: width*0.7,
+          width: width*0.4,
           fillColor: Colors.white,
           list: placesForGeneratedTrip,
           initialValue: placesForGeneratedTrip[0],
