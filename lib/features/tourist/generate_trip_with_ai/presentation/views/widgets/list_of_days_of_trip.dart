@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 
 class ListOfDaysOfTrip extends StatelessWidget {
   const ListOfDaysOfTrip({
@@ -9,7 +8,7 @@ class ListOfDaysOfTrip extends StatelessWidget {
     required this.height,
     required this.width,
     required this.currentDay,required this.controller,
-    required this.tripDaysName,
+    required this.listOfDaysLength,
     required this.onTap,
   });
 
@@ -17,7 +16,7 @@ class ListOfDaysOfTrip extends StatelessWidget {
   final int currentDay;
   final ScrollController controller;
   final double width;
-  final List<Day>tripDaysName;
+  final int listOfDaysLength;
   final void Function(int index) onTap;
 
   @override
@@ -26,7 +25,7 @@ class ListOfDaysOfTrip extends StatelessWidget {
         height: height*0.08,
         child: ListView.builder(
           controller: controller,
-          itemCount: tripDaysName.length,
+          itemCount: listOfDaysLength,
           padding: EdgeInsets.zero,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context,index){

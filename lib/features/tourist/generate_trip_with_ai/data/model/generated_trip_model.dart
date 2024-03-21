@@ -13,7 +13,6 @@ class GeneratedTripModel {
       days:day,
     );
   }
-
 }
 
 class Day {

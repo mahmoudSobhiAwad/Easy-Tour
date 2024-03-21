@@ -9,8 +9,8 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repo
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/generate_trip_cubit.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/generate_trip_state.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/generate_trip_body.dart';
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/generated_trip_details.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/intro_generate_trip.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_widgets/result_trip_view.dart';
 
 class GenerateAiTrip extends StatelessWidget {
   const GenerateAiTrip({super.key});
@@ -35,7 +35,7 @@ class GenerateAiTrip extends StatelessWidget {
         );
       }, listener:(context,state){
             if(state is SuccessSendRequestToGenerateTrip){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratedTripDetailsView(model:state.model,startDate: state.startDate,endDate: state.endDate,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratedTripDetailsWithAiView(startDate: state.startDate,)));
             }
             else if (state is FailureSendRequestToGenerateTrip) {
               showDialog(context: context, builder: (context)=> ContainerAlertWidget(

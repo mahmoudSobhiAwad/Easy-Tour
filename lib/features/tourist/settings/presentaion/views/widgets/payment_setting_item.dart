@@ -4,12 +4,13 @@ import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import '../../../../../../core/utilities/basics.dart';
 
 class ProfileSettingItem extends StatelessWidget {
-  const ProfileSettingItem({super.key,this.text,this.child,this.height,this.onTap,this.rightWidget});
+  const ProfileSettingItem({super.key,this.text,this.child,this.height,this.onTap,this.rightWidget,this.enableDivider=true});
   final String?text;
   final Widget?child;
   final Widget?rightWidget;
   final double?height;
   final void Function()?onTap;
+  final bool enableDivider;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -30,10 +31,11 @@ class ProfileSettingItem extends StatelessWidget {
               ),
             ),
           ),
-          const Divider(
+          enableDivider?const Divider(
             thickness: 1.5,
             color: thirdColor,
-          ),
+          ):
+          const SizedBox(),
         ],
       ),
     );

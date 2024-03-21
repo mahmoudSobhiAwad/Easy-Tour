@@ -13,9 +13,8 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repo
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_cubit.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_state.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/list_of_days_of_trip.dart';
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/next_prev_bubbles.dart';
+// import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/next_prev_bubbles.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_in_one_day.dart';
-
 import '../../../../../tour_guide/private_tour/presentation/view/widgets/edit_delete_trip_menu_options.dart';
 
 class GeneratedTripDetailsView extends StatelessWidget {
@@ -34,7 +33,8 @@ final String?endDate;
         return Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor:const Color(0xffF7F7F9),
-          body: Stack(
+          body: ListView(
+            padding: EdgeInsets.only(right: 20,left: 20,top: height*0.05,),
             children: [
               Padding(
                 padding: EdgeInsets.only(right: 20,left: 20,top: height*0.05,),
@@ -69,13 +69,14 @@ final String?endDate;
                         onPageChanged: (index){
                           cubit.pageChange(index);
                         },
-                          itemCount: cubit.generatedTripModel.days.length,
+                          itemCount: cubit.generatedTripModel!.days.length,
                           itemBuilder: (context,pageIndex){
                         return Column(
                           children: [
-                            ListOfDaysOfTrip(onTap: (index){
+                            ListOfDaysOfTrip(onTap: (index)
+                            {
                               cubit.moveToSpecificDay(index);
-                            },height: height, currentDay: pageIndex,controller: cubit.controller, width: width,tripDaysName: model.days,),
+                            },height: height, currentDay: pageIndex,controller: cubit.controller, width: width,listOfDaysLength: model.days.length,),
                             SizedBox(
                                 height: height*0.75,
                                 width: width,
@@ -94,7 +95,6 @@ final String?endDate;
                   ],
                 ),
               ),
-              NextPrevDay(cubit: cubit, width: width, height: height),
             ],
           ),
         );

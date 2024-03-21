@@ -8,3 +8,4 @@ class FailedToUploadTripState extends ViewTripDetailsState {
   FailedToUploadTripState({this.errMessage});
 }
 class SuccessToUploadTripState extends ViewTripDetailsState {}
+class ChangeShowActivityState extends ViewTripDetailsState {}

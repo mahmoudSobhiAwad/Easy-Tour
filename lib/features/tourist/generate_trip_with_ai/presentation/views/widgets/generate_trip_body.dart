@@ -26,29 +26,6 @@ class GenerateTripBody extends StatelessWidget {
             child:ListView(
               padding: EdgeInsets.only(bottom:MediaQuery.of(context).viewInsets.bottom),
               children: [
-                // SelectDateAndViewTripHistory(cubit: cubit, height: height, width: width),
-                // const SizedBox(height: 12,),
-                // CustomColumnWithTextForm(
-                //   text: 'Number Of Place In Each Day',
-                //   customTextFormField:  SizedBox(
-                //     width: width*0.5,
-                //     child: CustomTextFormField(
-                //       controller: cubit.numberOfPlaceInDayController,
-                //       maxLines: 1,
-                //       align: TextAlign.center,
-                //       fillColor: thirdColor,
-                //       filled: true,
-                //       prefix: const Padding(
-                //         padding:  EdgeInsets.only(left: 5.0),
-                //         child: CircleAvatar(radius: 20,backgroundColor: basicColor,child: Center(child: FaIcon(FontAwesomeIcons.minus,color: Colors.white,)),),
-                //       ),
-                //       suffix: const Padding(
-                //         padding: EdgeInsets.only(right: 5.0),
-                //         child: CircleAvatar(radius: 20,backgroundColor: basicColor,child: Center(child: Icon(Icons.add,color: Colors.white,)),),
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 const SizedBox(height: 12,),
                 SelectTypesOfPlaces(height: height, width: width,typeOfTourismList: cubit.typeOfTourismList,changeToggle: (index){
                   cubit.toggleBetweenTypes(index);
@@ -61,7 +38,7 @@ class GenerateTripBody extends StatelessWidget {
                 },),
                 const SizedBox(height: 20,),
                 Center(
-                    child:  CustomLoginButton(isLoading: cubit.isLoading,color: Colors.black,label:'Generate A Trip',altWidth: width*0.5,onTap: (){
+                    child:CustomLoginButton(isLoading: cubit.isLoading,color: Colors.black,label:'Generate A Trip',altWidth: width*0.5,onTap: (){
                       cubit.requestGenerateTrip();
                       },
                     )
