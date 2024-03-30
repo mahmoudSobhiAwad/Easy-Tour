@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
-import 'package:prepare_project/core/utilities/constant_var/constant.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
+import 'package:prepare_project/features/tour_guide/private_tour/data/data_ui.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
 
 class PlacesListOfOneDay extends StatelessWidget {
@@ -74,7 +74,7 @@ class PlacesListOfOneDay extends StatelessWidget {
                                     changeType!();
                                   },
                                   itemBuilder: (BuildContext ctx) => [
-                                    ...List.generate(prefs.length, (index) => PopupMenuItem(value: prefs[index], child: Text(prefs[index])),),
+                                    ...List.generate(tripsTypes.length, (index) => PopupMenuItem(value: tripsTypes[index], child: Text(tripsTypes[index])),),
                                   ]),
                               floatingLabelBehavior: FloatingLabelBehavior.never,
                               labelFontSize: 10,

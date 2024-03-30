@@ -28,3 +28,4 @@ class FailureEditTrip extends CreateEditPrivateTourState {
 class ChangePlanTypePickedState extends CreateEditPrivateTourState {}
 class ChangePlaceTypeInTripDayState extends CreateEditPrivateTourState {}
 class AddToTicketPlaneState extends CreateEditPrivateTourState {}
+class MoveToNextDayOfTripDays extends CreateEditPrivateTourState {}

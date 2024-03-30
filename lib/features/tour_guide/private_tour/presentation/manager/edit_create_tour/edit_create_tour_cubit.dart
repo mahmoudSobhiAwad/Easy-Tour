@@ -28,7 +28,7 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState> {
   List<TripDay>tripDay=[];
   List<dynamic>included=[];
   List<dynamic>excluded=[];
-
+  int currDay=0;
   List<TextEditingController>planeController=[
     TextEditingController(),
     TextEditingController(),
@@ -55,10 +55,24 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState> {
       excluded=trip?.excluded??[];
     }
   }
+  void goToSelectedDay(int index)
+  {
+    currDay=index;
+    emit(MoveToNextDayOfTripDays());
+  }
   void clearPlaceInOneDay(int index){
     places.removeAt(index);
     emit(AddAnotherPlaceInOneDay());
   }
+  void removeSpecificTripFromDay(int dayIndex,int tripIndex){
+   tripDay[dayIndex].dayPlaces?.removeAt(tripIndex);
+   if(tripDay[dayIndex].dayPlaces!.isEmpty)
+   {
+     tripDay.removeAt(dayIndex);
+   }
+   emit(AddAnotherPlaceInOneDay());
+  }
+
   void deleteImage() {
     if(bgPath!=''&&bgFile?.path==null){
       bgPath='';
@@ -115,16 +129,16 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState> {
 
   void addTripDay(int index)
   {
-    tripDay.add(TripDay(dayName:'Day${tripDay.length+1}' ,dayPlaces:places));
+    tripDay.add(TripDay(dayName:'Day${tripDay.length+1}',dayPlaces:places));
     emit(AddDetailsDaySuccessState());
     places=[TripPlace(placeName: '',placeType: '',activity: '')];
 
   }
 
-  void removeTripDay(int index){
-    tripDay.removeAt(index);
-    emit(RemoveDetailsDaySuccessState());
-  }
+  // void removeTripDay(int index){
+  //   tripDay.removeAt(index);
+  //   emit(RemoveDetailsDaySuccessState());
+  // }
   void changeTypeDay(){
     emit(ChangePlaceTypeInTripDayState());
   }

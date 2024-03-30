@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
+
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/manager/edit_create_tour/edit_create_tour_cubit.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/bg_tour.dart';
-import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/details_day_list.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/include_exclude_widgets.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/min_person_tickets.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/model_bottom_create_edit.dart';
+import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/stepper_trip_days.dart';
 
 class CreateOrEditPrivateTourBody extends StatelessWidget {
   const CreateOrEditPrivateTourBody({
@@ -68,7 +69,35 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20,),
-            DetailsDayList(height: height, width: width,cubit: cubit,tripDays: cubit.tripDay,),
+            Column(
+              children: [
+                cubit.tripDay.isEmpty?
+                const ClipRRect(
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20),bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20)),
+                  child: ColoredBox(
+                    color: thirdColor,
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Center(child: Text('Try To Add Days Of Trips In Egypt',style: CustomTextStyle.commonSignThinDark,)),
+                    ),
+                  ),
+                ):
+                StepperTripDay(cubit: cubit, height: height, width: width, tripDays: cubit.tripDay, currDay: cubit.currDay, goToSelectedDay: (int index){
+                  cubit.goToSelectedDay(index);}),
+                const SizedBox(height: 10,),
+                Container(
+                  width: width*0.4,
+                  decoration: BoxDecoration(borderRadius:BorderRadius.circular(10),border: Border.all(color:secondaryColor),color: basicColor),
+                  child:  TextButton(
+                      onPressed:(){
+                        cubit.changeShowAddDays();
+                      },
+                      child: Text("Add a Trip",
+                        style: CustomTextStyle.commonProfileDark.copyWith(color: Colors.white))),
+                ),
+              ],
+            ),
+             // DetailsDayList(height: height, width: width,cubit: cubit,tripDays: cubit.tripDay,),
             const SizedBox(height: 20,),
             BGPrivateTourOption(height: height, cubit: cubit,width: width,),
             const SizedBox(height: 20,),

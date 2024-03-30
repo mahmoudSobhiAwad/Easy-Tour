@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:prepare_project/features/tour_guide/private_tour/data/data_ui.dart';
 class Trip {
   String? title;
   String? brief;
@@ -94,6 +95,7 @@ class TripDay
 class TripPlace {
   String? placeName;
   String? placeType;
+  String?typeImageUrl;
   String? longitude;
   String? latitude;
   String? activity;
@@ -104,15 +106,17 @@ class TripPlace {
     this.longitude,
     this.latitude,
     this.activity,
+    this.typeImageUrl,
   });
 
   factory TripPlace.fromJson(Map<String, dynamic> json) {
     return TripPlace(
       placeName: json['placeName']??'' ,
-      placeType: json['placeType'] ??'',
-      longitude: json['longitude'] ??'',
+      placeType: json['placeType']??'',
+      longitude: json['longitude']??'',
       latitude: json['latitude']??'',
       activity: json['activity'] ??'',
+      typeImageUrl: getImageUrlFromType(json['placeType'])
     );
   }
   Map<String,dynamic>toJson()=>{
@@ -147,4 +151,15 @@ class ProfileImageUrl{
   factory ProfileImageUrl.fromJson(Map<String,dynamic>?json)=>ProfileImageUrl(
       imageUrl: json?['secure_url']
   );
+}
+String getImageUrlFromType(String?type){
+  switch(type){
+    case 'Historical and Cultural Tours':return historicalPlace;
+    case 'Nile River Cruises':return nileRiver;
+    case 'Desert Adventures':return desertAdventures;
+    case 'Beach and Red Sea Resorts':return beaches;
+    case 'Religious and Pilgrimage Trips':return religiousPlaces;
+    case 'Food and Culinary Tours':return foodPlaces;
+    default:return defaultImage;
+  }
 }

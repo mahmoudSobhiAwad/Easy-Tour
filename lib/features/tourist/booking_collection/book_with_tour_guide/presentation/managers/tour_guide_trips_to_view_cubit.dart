@@ -107,4 +107,5 @@ class TripsToViewCubit extends Cubit<TripsToViewStates>{
       }
     }
   }
+
 }

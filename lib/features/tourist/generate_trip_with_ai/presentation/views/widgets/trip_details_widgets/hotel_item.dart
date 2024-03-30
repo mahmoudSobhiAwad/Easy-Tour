@@ -37,6 +37,7 @@ class HotelItemInGeneratedTrip extends StatelessWidget {
               ),
               const Divider(height: 3,color: thirdColor,),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('58\$ Per Night '),
                   Container(
@@ -46,6 +47,7 @@ class HotelItemInGeneratedTrip extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Row(
+
                       children: [
                         Icon(Icons.star,color: Colors.orangeAccent,),
                         Text('4.3',style: CustomTextStyle.commonFontThin,),

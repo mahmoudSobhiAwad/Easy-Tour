@@ -36,17 +36,15 @@ class PrivateTourWithoutImage extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  width: width*0.4,
-                  padding: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(borderRadius: commonBorderRadius(),color: secondaryColor),
                   child: Center(child: Text('$text ${model?.tripTicket?['standard']??'20'} \$ per person',style: CustomTextStyle.commonFontThin,maxLines: 2,textAlign: TextAlign.center,),),
                 ),
               ),
-              moreDet?TextButton(onPressed: null, child:Text('Tour Guide Profile',style: CustomTextStyle.commonSignDark.copyWith(decoration: TextDecoration.underline),),):
+              const SizedBox(width: 5,),
               Expanded(
                 child: Container(
-                  width: width*0.4,
-                  height: height*0.05,
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(borderRadius: commonBorderRadius(),color: secondaryColor),
                   child: Center(child: Text('Maximum :${model?.maximumNumber} persons',style: CustomTextStyle.commonFontThin,),),
                 ),

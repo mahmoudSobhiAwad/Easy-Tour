@@ -13,8 +13,6 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repo
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_cubit.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_state.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/list_of_days_of_trip.dart';
-// import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/next_prev_bubbles.dart';
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_in_one_day.dart';
 import '../../../../../tour_guide/private_tour/presentation/view/widgets/edit_delete_trip_menu_options.dart';
 
 class GeneratedTripDetailsView extends StatelessWidget {
@@ -84,7 +82,8 @@ final String?endDate;
                                   itemCount: model.days[pageIndex].places.length,
                                   physics:const BouncingScrollPhysics(),
                                   itemBuilder: (context,index){
-                                    return OneTripPerDayItem(height: height, width: width,placeItem: model.days[pageIndex].places[index],);
+                                    /// make new trip per day for generate trip
+                                    return const SizedBox();
                                   },
                                 )
                             ),

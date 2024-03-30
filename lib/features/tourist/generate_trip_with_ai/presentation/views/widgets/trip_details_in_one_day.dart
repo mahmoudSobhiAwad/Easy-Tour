@@ -1,56 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
-import 'package:prepare_project/core/utilities/function/get_image_with_type.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
-import 'package:prepare_project/features/tourist/nearby_places/presentation/views/widgets/pick_category_widget.dart';
+import 'package:prepare_project/features/tour_guide/private_tour/data/data_ui.dart';
+import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
+
 class OneTripPerDayItem extends StatelessWidget {
-  const OneTripPerDayItem({super.key,required this.height,this.bgColor,this.showLocation=true,required this.width,required this.placeItem});
+  const OneTripPerDayItem({super.key,required this.height,this.editOrDeleteWidget,this.fullWidth=true,required this.width,required this.placeItem});
   final double height;
   final double width;
-  final Place placeItem;
-  final Color? bgColor;
-  final bool showLocation;
+  final TripPlace? placeItem;
+  final Widget? editOrDeleteWidget;
+  final bool fullWidth;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Container(
-        padding: const EdgeInsets.all(10),
-        height:height*0.2 ,
-        width: width,
+        width: fullWidth?width*0.95:width*.785,
+        padding: EdgeInsets.zero,
         decoration:BoxDecoration(
-          color: bgColor??Colors.white,
+          border: Border.all(color: secondaryColor,width: 5),
+          color: thirdColor,
           borderRadius: commonBorderRadius(),
           boxShadow: [
             buildBoxShadow(),
           ],
         ),
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            PickedCategoryItem(padding: EdgeInsets.zero,height: height*0.7, width: width*0.7, typeImage:getImageFromType(placeItem.category), picked: false),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(placeItem?.typeImageUrl??defaultImage,fit: BoxFit.fill,height: height*0.12,width: width,)),
+            ),
             SizedBox(
-              width:bgColor==null?width*0.5:width*0.7,
-              height: height*0.15,
+              height: height*0.1,
               child: ListView(
-                padding: EdgeInsets.zero,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 children:[
-                  Text(placeItem.name,style: CustomTextStyle.commonSignDark,),
-                  Text(placeItem.activity,style: CustomTextStyle.commonFontThinNoOverFlow,maxLines: 5,),
+                  Text(placeItem?.placeName??"",style: CustomTextStyle.commonSignDark,),
+                  Text(placeItem?.activity??"",style: CustomTextStyle.commonFontThinLight,maxLines: 5,),
                 ],
               ),
             ),
-           showLocation?
-           Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(onPressed:(){},tooltip: 'Location in google Map',icon:const Icon(Icons.location_on_rounded,color: basicColor,)),
-                IconButton(onPressed:(){},tooltip: 'Discover Places Around',icon:const Icon(Icons.language,color: basicColor,)),
-              ],
-            ):
-           const SizedBox(),
           ],
         ),
       ),

@@ -48,7 +48,9 @@ class ShowTourGuideTripsDetailsForTouristBody extends StatelessWidget {
                 Text(tripItem.title??"",style: CustomTextStyle.privateTourTitle,maxLines: 3,),
                 Text(tripItem.brief??"",style: CustomTextStyle.commonFontThinLight,maxLines: 3,),
                 const SizedBox(height: 10,),
-                StepperTripDay(height: height, width: width, tripDays: tripItem.tripDetails,cubit:cubit ,),
+                StepperTripDay(height: height, width: width, tripDays: tripItem.tripDetails,currDay:cubit.currDay, goToSelectedDay: (int index) {
+                  cubit.goToSelectedDay(index);
+                },),
                 const SizedBox(height: 20,),
                 IncludedOrExcludedFeatures(height: height, width: width, title: 'Included Feature', icon: Icons.check, iconColor: whatsAppColor, incOrExc:tripItem.included??[],showAddInc: false,),
                 IncludedOrExcludedFeatures(height: height, width: width, title: 'Excluded Feature', icon: Icons.close, iconColor: closeColor, incOrExc:tripItem.excluded??[],showAddInc: false,),
