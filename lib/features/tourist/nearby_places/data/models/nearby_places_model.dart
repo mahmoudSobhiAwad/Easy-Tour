@@ -2,21 +2,19 @@ import 'package:prepare_project/features/tourist/nearby_places/data/models/photo
 import 'package:prepare_project/features/tourist/nearby_places/data/models/review_model.dart';
 
 class NearbyPlacesModel{
-  String?name;
-  String?id;
   String?nationalPhoneNum;
   String?internationalPhoneNum;
   String?address;
-  double?rating;
+  num?rating;
   String?displayName;
   String?displayType;
   String?primaryType;
+  bool?openNow;
   List<PhotosModel>?photosList;
   List<ReviewModel>?reviewsList;
   NearbyPlacesModel({
-    required this.name,
-    required this.id,
     this.address,
+    this.openNow,
     this.reviewsList,
     this.photosList,
     this.displayName,
@@ -28,9 +26,8 @@ class NearbyPlacesModel{
 });
   factory NearbyPlacesModel.fromJson(Map<String,dynamic>json){
     return NearbyPlacesModel(
-      name: json['name'],
-      id: json['id'],
       address: json['formattedAddress'],
+      openNow: json['regularOpeningHours']['openNow'],
       reviewsList: (json['reviews']as List).map((review) => ReviewModel.fromJson(review)).toList(),
       photosList: (json['photos']as List).map((photo) => PhotosModel.fromJson(photo)).toList(),
       internationalPhoneNum: json['internationalPhoneNumber'],
@@ -43,8 +40,8 @@ class NearbyPlacesModel{
   }
   Map<String,dynamic>toJson({String?type,int?maxResult,double? lat,double? long,double? distance}){
     return {
-      "includedTypes": [type],
-      "maxResultCount": maxResult??10,
+      "includedTypes": [type,type],
+      "maxResultCount": maxResult??5,
       "locationRestriction": {
         "circle":
         {

@@ -1,6 +1,6 @@
 class ReviewModel{
 String?name;
-double?rating;
+num?rating;
 String?reviewText;
 ReviewerInfo?reviewerInfo;
 ReviewModel({

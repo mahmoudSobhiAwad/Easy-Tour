@@ -35,6 +35,7 @@ class ServerFailure extends Failure {
 
   factory ServerFailure.fromResponse(int? statusCode,Map<String,dynamic> data){
     log(data['message']??"");
+    log(data.toString());
     if (statusCode == 400 || statusCode == 403)
     {
       return ServerFailure(data['message']??"Error due to Server",statusCode: 400);

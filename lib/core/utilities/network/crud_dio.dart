@@ -134,7 +134,7 @@ class ApiServices{
       headers: {
         'X-Goog-Api-Key':androidApiGoogleMapKey,
         'Content-Type':'application/json',
-
+        'X-Goog-FieldMask':fieldMask,
       }
     ) );
     return response.data;

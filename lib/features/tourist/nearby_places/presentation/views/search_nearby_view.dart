@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
+import 'package:prepare_project/features/tourist/nearby_places/data/repos/nearby_places_repo_imp.dart';
 import 'package:prepare_project/features/tourist/nearby_places/presentation/manager/search_nearby_cubit.dart';
 import 'package:prepare_project/features/tourist/nearby_places/presentation/manager/search_nearby_state.dart';
 import 'package:prepare_project/features/tourist/nearby_places/presentation/views/widgets/one_category_search.dart';
@@ -16,7 +18,7 @@ class NearbySearchView extends StatelessWidget {
     final double height=BasicDimension.screenHeight(context);
     final double width=BasicDimension.screenWidth(context);
     return BlocProvider(
-        create: (context)=>NearbySearchCubit(),
+        create: (context)=>NearbySearchCubit(nearbySearchRepoImp: getIt.get<NearbyPlacesRepoImpl>()),
       child: BlocBuilder<NearbySearchCubit,NearbySearchState>(builder: (context,state)
       {
         var cubit = BlocProvider.of<NearbySearchCubit>(context);
@@ -40,7 +42,11 @@ class NearbySearchView extends StatelessWidget {
                         itemCount: cubit.typesOfList.length,
                         physics:const BouncingScrollPhysics(),
                         itemBuilder: (context,index){
-                          return OneCategorySearchItem(height: height, width: width,type: cubit.typesOfList[index],);
+                          return GestureDetector(
+                              onTap: [()async{
+                                await cubit.getNearbyPlaces();
+                              },][index],
+                              child: OneCategorySearchItem(height: height, width: width,type: cubit.typesOfList[index],));
                         }),
                   ),
                 ),

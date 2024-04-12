@@ -81,4 +81,5 @@ const generateTripUrl='http://34.229.1.85:8000/generate_trip';
 const scanQrUrl='http://54.144.127.183:8000/decrypt/';
 const searchNearbyPlaceUrl='https://places.googleapis.com/v1/places:searchNearby';
 const String defaultCoverTrip='https://th.bing.com/th/id/R.1243dd08863d375493d067c465ba4d11?rik=EeIrjiNEyiabWA&pid=ImgRaw&r=0';
-const androidApiGoogleMapKey='AIzaSyDCSSYCFWWNF4z0n-BJfZcnWK5PbJldKmE';
+const androidApiGoogleMapKey='AIzaSyDjEPGnACyKEPFkkTOzC1ify2x9_MAnltA';
+const String fieldMask='places.displayName,places.rating,places.photos,places.primaryType,places.primaryTypeDisplayName,places.reviews,places.nationalPhoneNumber,places.internationalPhoneNumber,places.regularOpeningHours.openNow';
