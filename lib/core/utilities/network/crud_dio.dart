@@ -105,6 +105,7 @@ class ApiServices{
     );
     return response.data;
   }
+
   Future<Map<String,dynamic>>requestGenerateTrip({String? data})async {
     final response=await dio.post(generateTripUrl,data: data,options: Options(
       headers: {
@@ -116,7 +117,6 @@ class ApiServices{
     return response.data;
   }
 
-
   Future<Map<String,dynamic>>sendQrCode({required dynamic data})async {
     final response=await dio.post(scanQrUrl,data: data,options: Options(
       headers: {
@@ -125,6 +125,18 @@ class ApiServices{
     ),
 
     );
+    return response.data;
+  }
+
+  /// google-map API
+  Future<Map<String,dynamic>>getNearbyPlaces({required dynamic data})async{
+    final response=await dio.post(searchNearbyPlaceUrl,data:data,options: Options(
+      headers: {
+        'X-Goog-Api-Key':androidApiGoogleMapKey,
+        'Content-Type':'application/json',
+
+      }
+    ) );
     return response.data;
   }
 }

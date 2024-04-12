@@ -40,28 +40,7 @@ class RecentChatWithOther extends StatelessWidget {
                   return ChatTouristOneToOtherOne(height: height, width: width,chatId: recentChatList?[index].chatId,destEmail: personInChatData?.email,profileUrl: personInChatData?.profilePic,name: personInChatData?.name,status: 'Online',);
                 }));
               },
-              child: Dismissible(
-                direction: DismissDirection.startToEnd,
-                background: Container(
-                  decoration: BoxDecoration(
-                    color: closeColor,
-                    borderRadius: commonBorderRadius(),
-                  ),
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  alignment: Alignment.centerLeft,
-                  child:const Padding(
-                    padding:  EdgeInsets.only(left: 10.0),
-                    child:  Icon(
-                      size:30,
-                      Icons.delete,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                // onDismissed:(_){} ,
-                key: UniqueKey(),
-                child: RecentChatItemOutSideListTile(width: width, height: height,model: recentChatList?[index],),
-              ),
+              child: CustomDismissible(child: RecentChatItemOutSideListTile(width: width, height: height,model: recentChatList?[index],),),
             );
           },itemCount: recentChatList?.length??0,):
         Center(
@@ -86,6 +65,40 @@ class RecentChatWithOther extends StatelessWidget {
       personInChatData=recentChatList?[index].personOne;
     }
     return personInChatData;
+  }
+}
+
+class CustomDismissible extends StatelessWidget {
+  const CustomDismissible({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return Dismissible(
+      direction: DismissDirection.startToEnd,
+      background: Container(
+        decoration: BoxDecoration(
+          color: closeColor,
+          borderRadius: commonBorderRadius(),
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 15),
+        alignment: Alignment.centerLeft,
+        child:const Padding(
+          padding:  EdgeInsets.only(left: 10.0),
+          child:  Icon(
+            size:30,
+            Icons.delete,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      // onDismissed:(_){} ,
+      key: UniqueKey(),
+      child: child,
+    );
   }
 }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/tourist/settings/presentaion/views/widgets/payment_item.dart';
 
-import '../../../../../../core/utilities/basics.dart';
 
 class PaymentSettingsPart extends StatelessWidget {
   const PaymentSettingsPart({super.key,required this.height,required this.width});
@@ -14,7 +14,7 @@ class PaymentSettingsPart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Payment Settings',style: TextStyle(color: basicColor,fontWeight: FontWeight.bold),),
+          const Text('Payment Settings',style: CustomTextStyle.commonSignThinDark,),
           const Expanded(child:  SizedBox(height: 10,)),
           SizedBox(
               height: height*0.15,

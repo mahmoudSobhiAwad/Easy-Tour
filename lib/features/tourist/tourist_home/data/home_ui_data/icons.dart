@@ -12,4 +12,5 @@ List<Icon>touristDrawerListTile=const [
   Icon(Icons.settings,color: basicColor,),
   Icon(Icons.favorite_outlined,color: Color(0xffC6262E),),
   Icon(Icons.history,color: basicColor,),
+  Icon(Icons.notifications,color: basicColor,),
 ];

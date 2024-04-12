@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/tour_guide/home/presentation/manager/home_tour_guide_cubit.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/chat_with_other_list.dart';
@@ -23,7 +25,9 @@ class HomeTourGuideBody extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.topRight,
                 children: [
-                  IconButton(onPressed: (){},icon:const Icon(Icons.notifications_none_rounded,color: basicColor,size: 35,),padding: EdgeInsets.zero,),
+                  IconButton(onPressed: (){
+                    context.push(RouterApp.kTourGuideNotifications);
+                  },icon:const Icon(Icons.notifications_none_rounded,color: basicColor,size: 35,),padding: EdgeInsets.zero,),
                   const CircleAvatar(radius: 12,backgroundColor: closeColor,child: Center(child: Text('5',style: TextStyle(color: Colors.white),)),)
                 ],
               ),

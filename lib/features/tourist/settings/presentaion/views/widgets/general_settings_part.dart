@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/delete_account/presentation/view/delete_acc_view.dart';
 import 'package:prepare_project/features/tourist/settings/presentaion/views/widgets/payment_setting_item.dart';
 import 'package:prepare_project/features/tourist/settings/presentaion/views/widgets/setting_details_view.dart';
@@ -15,7 +16,7 @@ class GeneralSettings extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('General Settings',style: TextStyle(color: basicColor,fontWeight: FontWeight.bold),),
+          const Text('General Settings',style: CustomTextStyle.commonSignThinDark,),
           const Expanded(child:  SizedBox(height: 10,)),
           ...List.generate(4, (index) => GestureDetector(
             onTap: [

@@ -31,7 +31,7 @@ class TourGuideSettingView extends StatelessWidget {
           physics:const BouncingScrollPhysics(),
           child: Column(
             children: [
-              ProfileSettingsPart(height: height,),
+              ProfileSettingsPart(height: height,width: width,),
               PaymentSettingsPart(height: height, width: width),
               const SizedBox(height: 20,),
               GeneralSettings(height: height,),

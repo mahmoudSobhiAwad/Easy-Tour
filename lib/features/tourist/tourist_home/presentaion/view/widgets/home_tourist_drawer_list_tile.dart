@@ -28,9 +28,12 @@ class TouristHomeDrawerListTile extends StatelessWidget {
             (){
           context.push(RouterApp.kTouristSettings);
         },
+            (){
+
+        },
       ][index],
       contentPadding: EdgeInsets.zero,
-      title: Text(['Profile','Settings','Favourite Places','History of trips'][index]),
+      title: Text(['Profile','Settings','Favourite Places','History of trips','Notifications'][index]),
       leading:listTileIcons[index],
       trailing:const Icon(Icons.arrow_forward_ios),
     );

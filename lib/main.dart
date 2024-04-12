@@ -5,6 +5,8 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/features/splash/presentation/manager/on_boarding_cubit.dart';
+import 'package:prepare_project/features/tourist/settings/presentaion/manager/tourist_setting_cubit.dart';
+import 'package:prepare_project/features/tourist/settings/presentaion/manager/tourist_setting_state.dart';
 import 'bloc_observer.dart';
 import 'core/utilities/function/set_app_state.dart';
 
@@ -14,7 +16,9 @@ Future<void> main()async {
   cameras=await availableCameras();
   Bloc.observer=SimpleBlocObserver();
   await SetAppState.setShared();
-  runApp(const MyApp());
+  runApp(BlocProvider(
+      create: (context)=>TouristSettingCubit(),
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,20 +27,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider( create: (context)=>OnBoardingCubit()..initOnBoarding(),),
+        BlocProvider(create: (context)=>OnBoardingCubit()..initOnBoarding(),),
       ],
-      child: MaterialApp.router(
-        themeMode: ThemeMode.light,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-           scaffoldBackgroundColor:const Color(0xffffffff) ,
-          iconTheme: const IconThemeData(color:basicColor),
-            useMaterial3: true,
-            primaryColor:basicColor,
-            fontFamily: 'ABeeZee',
-        ),
-        routerConfig: RouterApp.router,
+      child: BlocBuilder<TouristSettingCubit,TouristSettingState>(
+        builder: (context,state){
+          return MaterialApp.router(
+            themeMode:BlocProvider.of<TouristSettingCubit>(context).appMode,
+            debugShowCheckedModeBanner: false,
+            theme: BlocProvider.of<TouristSettingCubit>(context).appTheme,
+            routerConfig: RouterApp.router,
+          );
+        },
       ),
     );
   }
 }
+
+// ThemeData(
+// scaffoldBackgroundColor:const Color(0xffffffff) ,
+// iconTheme: const IconThemeData(color:basicColor),
+// useMaterial3: true,
+// primaryColor:basicColor,
+// fontFamily: 'ABeeZee',
+// ),

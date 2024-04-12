@@ -79,4 +79,6 @@ const baseUrl='http://52.90.226.234:8081/';
 const chatBotUrl='http://3.88.138.209:8000/chatbot';
 const generateTripUrl='http://34.229.1.85:8000/generate_trip';
 const scanQrUrl='http://54.144.127.183:8000/decrypt/';
+const searchNearbyPlaceUrl='https://places.googleapis.com/v1/places:searchNearby';
 const String defaultCoverTrip='https://th.bing.com/th/id/R.1243dd08863d375493d067c465ba4d11?rik=EeIrjiNEyiabWA&pid=ImgRaw&r=0';
+const androidApiGoogleMapKey='AIzaSyDCSSYCFWWNF4z0n-BJfZcnWK5PbJldKmE';
