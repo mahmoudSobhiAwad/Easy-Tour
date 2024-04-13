@@ -20,20 +20,11 @@ class CustomGeneratedAiTripAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           showBackIcon?
-          Container(
-            height:height*0.1,
-            width:width*0.13,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow: [buildBoxShadow()],
-                border: Border.all(color: secondaryColor,width: 3)
-            ),
-            child:GestureDetector(
-                onTap: (){
-                  Navigator.pop(context);
-                },
-                child: const Icon(Icons.arrow_back_sharp,color: basicColor,)),
+          CustomContainerWithStroke(
+            containWidget: const Icon(Icons.arrow_back_sharp,color: basicColor,),
+            height: height, width: width,onTap: (){
+            Navigator.pop(context);
+          },
           ):
           SizedBox(width: width*0.13,),
           const Expanded(child: SizedBox(width: 5,)),
@@ -43,6 +34,39 @@ class CustomGeneratedAiTripAppBar extends StatelessWidget {
           const Expanded(child: SizedBox(width: 5,)),
           menuToSaveTrip??const Expanded(child: SizedBox(width: 5,)),
         ],
+      ),
+    );
+  }
+}
+
+class CustomContainerWithStroke extends StatelessWidget {
+  const CustomContainerWithStroke({
+    super.key,
+    required this.height,
+    required this.width,
+    this.onTap,
+    required this.containWidget,
+  });
+
+  final double height;
+  final double width;
+  final void Function()?onTap;
+  final Widget containWidget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height:height*0.1,
+      width:width*0.13,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [buildBoxShadow()],
+          border: Border.all(color: secondaryColor,width: 3)
+      ),
+      child:GestureDetector(
+          onTap: onTap,
+          child: containWidget
       ),
     );
   }

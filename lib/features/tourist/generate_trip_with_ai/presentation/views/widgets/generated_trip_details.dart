@@ -32,7 +32,7 @@ final String?endDate;
           resizeToAvoidBottomInset: false,
           backgroundColor:const Color(0xffF7F7F9),
           body: ListView(
-            padding: EdgeInsets.only(right: 20,left: 20,top: height*0.05,),
+            padding: EdgeInsets.only(right: 20,left: 20,top: height*0.05),
             children: [
               Padding(
                 padding: EdgeInsets.only(right: 20,left: 20,top: height*0.05,),

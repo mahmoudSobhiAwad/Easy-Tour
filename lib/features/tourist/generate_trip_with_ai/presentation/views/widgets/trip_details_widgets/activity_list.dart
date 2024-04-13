@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_cubit.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/activity_deatils/activity_details_view.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_widgets/activity_item_in_result_trip.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_widgets/widgets_bar.dart';
 class ActivityListWithBar extends StatelessWidget {
@@ -28,7 +29,11 @@ class ActivityListWithBar extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context,index)
               {
-                return OneActivityInGeneratedTrip(height: height, width: width);
+                return GestureDetector(
+                    onTap: (){
+                      Navigator.push(context,MaterialPageRoute(builder:(context)=>const ActivityDetailsView()));
+                    },
+                    child: OneActivityInGeneratedTrip(height: height, width: width));
               },
               separatorBuilder: (context,index)
               {

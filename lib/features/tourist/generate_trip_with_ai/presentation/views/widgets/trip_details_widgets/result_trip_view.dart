@@ -23,11 +23,11 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
         var cubit=BlocProvider.of<ViewTripDetailsCubit>(context);
         return Scaffold(
           body:  Padding(
-            padding: EdgeInsets.only(right: 20,left: 20,top: height*0.05,),
+            padding: EdgeInsets.only(right: 20,left: 20,top: height*0.05,bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Trip Details',),
+                CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Trip Details',menuToSaveTrip: const Icon(Icons.bookmark_border,color: entertainmentColor,size: 30,),),
                 Expanded(
                   child: PageView.builder(
                       physics:const BouncingScrollPhysics(),
