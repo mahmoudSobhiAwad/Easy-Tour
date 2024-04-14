@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_cubit.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/resturants_hotels_details_view/restaurant_hotel_details_view.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_widgets/restaurant_item.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_widgets/widgets_bar.dart';
 
@@ -29,7 +30,13 @@ class RestaurantsListWithBar extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context,index)
               {
-                return RestaurantItemInGeneratedTrip(height: height, width: width);
+                return GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context,){
+                        return const RestaurantOrHotelDetailsView();
+                      }));
+                    },
+                    child: RestaurantItemInGeneratedTrip(height: height, width: width));
               },
               separatorBuilder: (context,index)
               {

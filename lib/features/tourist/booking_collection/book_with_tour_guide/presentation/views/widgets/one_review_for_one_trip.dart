@@ -21,8 +21,9 @@ class ItemReviewForOneTrip extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: width*0.025,vertical: height*0.01),
         decoration: BoxDecoration(
           color: Colors.white,
+          border: Border.all(color: thirdColor,width: 3),
           borderRadius: commonBorderRadius(),
-          boxShadow: [buildBoxShadow()],
+          //boxShadow: [buildBoxShadow()],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

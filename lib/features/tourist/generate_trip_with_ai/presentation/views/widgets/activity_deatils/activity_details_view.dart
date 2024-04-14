@@ -48,6 +48,7 @@ class ActivityDetailsView extends StatelessWidget {
                     ),
                     SizedBox(height: height*0.02,),
                     Center(child: CustomLoginButton(altWidth: width*0.9,color: forthColor,label: 'Go Now',)),
+
                   ],
                 ),
               )
