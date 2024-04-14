@@ -7,7 +7,7 @@ class SelectNumOfActivityInDay extends StatelessWidget {
   final double height;
   final void Function(int index)changeActivity;
   final int ?currActivity;
-  final List<String>activityNames;
+  final Map<int,String>activityNames;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,7 +34,7 @@ class SelectNumOfActivityInDay extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: secondaryColor,width: 2),
                     ),
-                    child:Center(child:  Text(activityNames[index],style: CustomTextStyle.commonFontThin.copyWith(color: currActivity==index?Colors.white:basicColor),maxLines: 2,textAlign: TextAlign.center,)),
+                    child:Center(child:  Text(activityNames.values.elementAt(index),style: CustomTextStyle.commonFontThin.copyWith(color: currActivity==index?Colors.white:basicColor),maxLines: 2,textAlign: TextAlign.center,)),
                   ),
                 );
               })

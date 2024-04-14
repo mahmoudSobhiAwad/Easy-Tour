@@ -3,19 +3,24 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/rest_hotel_cubit/rest_hotel_cubit.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/resturants_hotels_details_view/custom_image_slider.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/resturants_hotels_details_view/rest_or_hotel_info.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/resturants_hotels_details_view/review_list.dart';
+import 'package:prepare_project/features/tourist/nearby_places/data/models/nearby_places_model.dart';
 class RestaurantOrHotelDetailsBody extends StatelessWidget {
   const RestaurantOrHotelDetailsBody({
     super.key,
     required this.width,
     required this.height,
+    required this.model,
+    required this.cubit,
   });
 
   final double width;
+  final NearbyPlacesModel model;
   final double height;
-
+  final RestHotelDetailsCubit cubit;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -25,7 +30,8 @@ class RestaurantOrHotelDetailsBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomImageSlider(width: width, height: height),
+              cubit.isLoadingPhotos?
+              CustomImageSlider(width: width, height: height,photoUrls: cubit.photoUrlList,):const Center(child: CircularProgressIndicator(color: basicColor,)),
               DefaultTabController(length: 2,
                   child: TabBar(
                       onTap: (value){
@@ -38,7 +44,7 @@ class RestaurantOrHotelDetailsBody extends StatelessWidget {
                   )
               ),
               0==0?
-              RestOrHotelInfo(width: width, height: height):
+              RestOrHotelInfo(width: width, height: height,model: model,):
               Expanded(
                   child: ReviewListForHotelsOrRestaurants(height: height, width: width)),
 

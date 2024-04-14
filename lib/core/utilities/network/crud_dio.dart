@@ -139,4 +139,9 @@ class ApiServices{
     ) );
     return response.data;
   }
+
+  Future<Map<String,dynamic>>getPlacePhoto({required String data})async{
+    final response=await dio.get('https://places.googleapis.com/v1/$data/media?key=$androidApiGoogleMapKey&maxHeightPx=${500}&skipHttpRedirect=${true}');
+    return response.data;
+  }
 }

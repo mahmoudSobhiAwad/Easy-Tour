@@ -9,3 +9,9 @@ class FailedToUploadTripState extends ViewTripDetailsState {
 }
 class SuccessToUploadTripState extends ViewTripDetailsState {}
 class ChangeShowActivityState extends ViewTripDetailsState {}
+class LoadingGetNearbyPlacesState extends ViewTripDetailsState {}
+class SuccessGetNearbyPlacesState extends ViewTripDetailsState {}
+class FailureGetNearbyPlacesState extends ViewTripDetailsState {
+  final String?errMessage;
+  FailureGetNearbyPlacesState({this.errMessage});
+}

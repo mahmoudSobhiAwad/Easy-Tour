@@ -20,14 +20,13 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
   List<DestinationPlaceDayModel>destinationWithDayList=[DestinationPlaceDayModel()];
   List<String> pickedTypes=[];
   DateTime nextDate=DateTime.now();
-  List<String>activityNames=['2 activity','3 activity','4 or more activity'];
+  Map<int,String>activityNames={2:'2 activity',3:'3 activity',4:'4 or more activity'};
   List<TypeOfTourism>typeOfTourismList=[
-    TypeOfTourism(typeImage:ancientEgyptianSite, typeName: 'Ancient Egyptian Sites', picked: false),
-    TypeOfTourism(typeImage:museumsAndCulturalCenter, typeName: 'Museums And Cultural Centers',picked: false),
-    TypeOfTourism(typeImage:historicalAndArchitecturalLandmark, typeName: 'Historical and Architectural Landmark',picked: false),
-    TypeOfTourism(typeImage:islamicSite, typeName: 'Islamic Sites',picked: false),
-    TypeOfTourism(typeImage:christianSite, typeName: 'Christian Site',picked: false),
-    TypeOfTourism(typeImage:naturalLandmarks, typeName: 'Natural Landmarks',picked: false),
+    TypeOfTourism(typeImage:ancientEgyptianSite, typeName: 'Ancient Sites', picked: false),
+    TypeOfTourism(typeImage:museumsAndCulturalCenter, typeName: 'Cultural Institutions',picked: false),
+    TypeOfTourism(typeImage:naturalLandmarks, typeName: 'Archaeological Exhibitions',picked: false),
+    TypeOfTourism(typeImage:islamicSite, typeName: 'Religious Sites',picked: false),
+    TypeOfTourism(typeImage:historicalAndArchitecturalLandmark, typeName: 'Historical Sites',picked: false),
   ];
   void changeActivityIndex(int index)
   {
@@ -103,39 +102,39 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
     emit(ChangeToggleForSelectedTypeState());
   }
   Future<void>requestGenerateTrip()async{
-    emit(SuccessSendRequestToGenerateTrip(startDate:destinationWithDayList.first.startDate));
-    // for(var item in typeOfTourismList){
-    //   if(item.picked==true){
-    //     pickedTypes.add(item.typeName);
-    //   }
-    // }
-    // if(checkBeforeSend()){
-    //   emit(LoadingSendRequestToGenerateTrip());
-    //   isLoading=true;
-    //   var result=await generateTripRepoImp.requestToGenerateDate(data: RequestTripModel(
-    //     lat: position?.latitude,
-    //     long: position?.longitude,
-    //     preferred: pickedTypes,
-    //   ).toJsonEncode());
-    //   result.fold((failure){
-    //     emit(FailureSendRequestToGenerateTrip(errMessage:failure.errMessage));
-    //     isLoading=false;
-    //   }, (generatedTrip) {
-    //     isLoading=false;
-    //     if(generatedTrip.days.isEmpty){
-    //       emit(FailureSendRequestToGenerateTrip(errMessage:'Sorry No Date Please try to Pick Different Data'));
-    //     }
-    //     else
-    //     {
-    //       emit(SuccessSendRequestToGenerateTrip(startDate:destinationWithDayList.last.startDate));
-    //     }
-    //   });
-    // }
+    for(var item in typeOfTourismList){
+      if(item.picked==true){
+        pickedTypes.add(item.typeName);
+      }
+    }
+    if(checkBeforeSend()){
+      emit(LoadingSendRequestToGenerateTrip());
+      isLoading=true;
+      var result=await generateTripRepoImp.requestToGenerateDate(data: RequestTripModel(
+        lat: position?.latitude,
+        long: position?.longitude,
+        preferred: pickedTypes,
+        governments:destinationWithDayList,
+        numOfPlaceInDay: activityNames.keys.elementAt(currActivity??0),
+      ).toJsonEncode());
+      result.fold((failure){
+        emit(FailureSendRequestToGenerateTrip(errMessage:failure.errMessage));
+        isLoading=false;
+      }, (generatedTrip) {
+        isLoading=false;
+        if(generatedTrip.days.isEmpty){
+          emit(FailureSendRequestToGenerateTrip(errMessage:'Sorry No Date Please try to Pick Different Data'));
+        }
+        else
+        {
+          emit(SuccessSendRequestToGenerateTrip(startDate:destinationWithDayList.last.startDate));
+        }
+      });
+    }
   }
   Future<void> requestAllowLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
-
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
 

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 import 'package:prepare_project/features/tourist/settings/presentaion/views/widgets/payment_setting_item.dart';
 
 class OneActivityInGeneratedTrip extends StatelessWidget {
-  const OneActivityInGeneratedTrip({super.key,required this.height,required this.width,});
+  const OneActivityInGeneratedTrip({super.key,required this.height,required this.width,required this.place});
   final double height;
   final double width;
-
+  final Place place;
   @override
   Widget build(BuildContext context) {
     const String imageUrl='https://upload.wikimedia.org/wikipedia/commons/0/0c/Cairo_pyramids%2C_Dec_2008_-_59.jpg';
@@ -31,23 +32,23 @@ class OneActivityInGeneratedTrip extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Citadel of Salah-Eldin',style: CustomTextStyle.commonSignDark,),
+                Text(place.name,style: CustomTextStyle.commonSignDark,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       width: width*0.5,
-                      child: const Text('Discover the place there and enjoy with the atmosphere, Discover the place there and enjoy with the atmosphere,',
+                      child: Text(place.activity,
                         style: CustomTextStyle.commonFontThinLight,maxLines: 3,softWrap: true,),),
                     GestureDetector(onTap: null, child:const Text('See More',style: TextStyle(decoration: TextDecoration.underline),)),
                   ],
                 ),
-                const ProfileSettingItem(
+                 ProfileSettingItem(
                   enableDivider: false,
-                  rightWidget: Text('Place Price',style:CustomTextStyle.commonFontThin,),
+                  rightWidget: const Text('Place Price',style:CustomTextStyle.commonFontThin,),
                   child: Row(children: [
-                    Text('5\$',style: CustomTextStyle.commonFontThin,),
-                    Icon(Icons.airplane_ticket,color: basicColor,)
+                    Text('${place.budget}',style: CustomTextStyle.commonFontThin,),
+                    const Icon(Icons.airplane_ticket,color: basicColor,)
                   ],),),
                 ProfileSettingItem(
                   enableDivider: false,
@@ -56,12 +57,7 @@ class OneActivityInGeneratedTrip extends StatelessWidget {
                     width: width*0.35,
                     padding:const EdgeInsets.all(5),
                     decoration: BoxDecoration(color: thirdColor,borderRadius: BorderRadius.circular(10)),
-                    child: const Row(
-                      children: [
-                        Text('8:00 AM',style: CustomTextStyle.tripDetailsInTourGuide,),
-                        Icon(Icons.arrow_forward,color: basicColor,size: 15,),
-                        Text('10:00 AM',style: CustomTextStyle.tripDetailsInTourGuide,),
-                      ],),
+                    child:  Text(place.time??"",style: CustomTextStyle.tripDetailsInTourGuide,),
                   ),),
               ],
             ),

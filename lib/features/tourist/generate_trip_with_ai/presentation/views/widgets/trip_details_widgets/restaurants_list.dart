@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_cubit.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/resturants_hotels_details_view/restaurant_hotel_details_view.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_widgets/restaurant_item.dart';
@@ -18,13 +19,15 @@ class RestaurantsListWithBar extends StatelessWidget {
         ChangeShowForWidgetInGeneratedTrip(
             showDetails:cubit.showRestaurants,
             changeShow:(){
-              cubit.changeShow('Restaurants');
+              cubit.getNearbyRestaurants();
             }, height: height,barName: 'Restaurants'),
         const SizedBox(height: 10,),
         cubit.showRestaurants?
         SizedBox(
           height: height*0.3,
-          child: ListView.separated(
+          child: cubit.restaurant.isEmpty?
+          const Center(child: CircularProgressIndicator(color: basicColor,),):
+          ListView.separated(
               padding: EdgeInsets.zero,
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
@@ -33,16 +36,16 @@ class RestaurantsListWithBar extends StatelessWidget {
                 return GestureDetector(
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context,){
-                        return const RestaurantOrHotelDetailsView();
+                        return RestaurantOrHotelDetailsView(model: cubit.restaurant[index],);
                       }));
                     },
-                    child: RestaurantItemInGeneratedTrip(height: height, width: width));
+                    child: RestaurantItemInGeneratedTrip(height: height, width: width, model: cubit.restaurant[index],));
               },
               separatorBuilder: (context,index)
               {
                 return const SizedBox(width: 15,);
               },
-              itemCount: 5
+              itemCount: cubit.restaurant.length,
           ),
         ):
         const SizedBox(),

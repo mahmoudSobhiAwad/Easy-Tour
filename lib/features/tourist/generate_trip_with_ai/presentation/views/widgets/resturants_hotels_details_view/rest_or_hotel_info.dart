@@ -3,16 +3,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
+import 'package:prepare_project/features/tourist/nearby_places/data/models/nearby_places_model.dart';
 import 'package:prepare_project/features/tourist/settings/presentaion/views/widgets/payment_setting_item.dart';
 class RestOrHotelInfo extends StatelessWidget {
   const RestOrHotelInfo({
     super.key,
     required this.width,
     required this.height,
+    required this.model,
   });
 
   final double width;
   final double height;
+  final NearbyPlacesModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class RestOrHotelInfo extends StatelessWidget {
             children: [
               SizedBox(
                   width: width*0.6,
-                  child: const Text('مطعم قصر الكبابجي',style: CustomTextStyle.privateTourTitle,)),
+                  child: Text('${model.displayName}',style: CustomTextStyle.privateTourTitle,)),
               Container(
                 width: width*0.25,
                 padding:const EdgeInsets.all(5),
@@ -34,33 +37,35 @@ class RestOrHotelInfo extends StatelessWidget {
                   borderRadius: commonBorderRadius(),
                   color: thirdColor,
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:[
-                    Icon(Icons.star,color: goldenColor,),
-                    SizedBox(width: 5,),
-                    Text('4.4',style: CustomTextStyle.commonSignDark,)
+                    const Icon(Icons.star,color: goldenColor,),
+                    const SizedBox(width: 5,),
+                    Text('${model.rating}',style: CustomTextStyle.commonSignDark,)
 
                   ],),
               )
 
             ],),
           SizedBox(height: height*0.02,),
-          const Row(
+           Row(
             children: [
-              Icon(Icons.location_on_rounded,color: entertainmentColor,),
-              Text('Giza,Egypt',style: CustomTextStyle.commonFontThinLight)
+              const Icon(Icons.location_on_rounded,color: entertainmentColor,),
+              SizedBox(
+                  width: width*0.8,
+                  child: Text('${model.address}',style: CustomTextStyle.commonFontThinLight,overflow: TextOverflow.ellipsis,))
             ],
           ),
           SizedBox(height: height*0.02,),
-          const Row(
+           Row(
             children: [
-              Icon(Icons.restaurant_menu_outlined,color: entertainmentColor,),
-              Text('Barbecue restaurant',style: CustomTextStyle.commonFontThinLight)
+              const Icon(Icons.restaurant_menu_outlined,color: entertainmentColor,),
+              Text('${model.displayType}',style: CustomTextStyle.commonFontThinLight)
             ],
           ),
           SizedBox(height: height*0.02,),
-          const ProfileSettingItem(text: 'Menu Price',child: Text('Medium Price',style: CustomTextStyle.commonSignThinDark,),),
+          ProfileSettingItem(text: 'Menu Price',child: Text('${model.priceLevel}',style: CustomTextStyle.commonSignThinDark,),),
           SizedBox(height: height*0.02,),
           const Text('Social Contact',style: CustomTextStyle.commonSignThinDark),
           // SizedBox(height: height*0.02,),

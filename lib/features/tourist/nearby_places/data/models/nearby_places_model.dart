@@ -10,6 +10,8 @@ class NearbyPlacesModel{
   String?displayType;
   String?primaryType;
   bool?openNow;
+  String?priceLevel;
+  String?websiteUri;
   List<PhotosModel>?photosList;
   List<ReviewModel>?reviewsList;
   NearbyPlacesModel({
@@ -22,12 +24,14 @@ class NearbyPlacesModel{
     this.internationalPhoneNum,
     this.nationalPhoneNum,
     this.rating,
-    this.primaryType
+    this.primaryType,
+    this.priceLevel,
+    this.websiteUri,
 });
   factory NearbyPlacesModel.fromJson(Map<String,dynamic>json){
     return NearbyPlacesModel(
-      address: json['formattedAddress'],
-      openNow: json['regularOpeningHours']['openNow'],
+      address: json['shortFormattedAddress'],
+      openNow: json['regularOpeningHours']?['openNow']??false,
       reviewsList: (json['reviews']as List).map((review) => ReviewModel.fromJson(review)).toList(),
       photosList: (json['photos']as List).map((photo) => PhotosModel.fromJson(photo)).toList(),
       internationalPhoneNum: json['internationalPhoneNumber'],
@@ -36,12 +40,14 @@ class NearbyPlacesModel{
       displayName: json['displayName']['text'],
       displayType: json['primaryTypeDisplayName']['text'],
       primaryType: json['primaryType'],
+      priceLevel: json['priceLevel'],
+      websiteUri: json['websiteUri'],
     );
   }
   Map<String,dynamic>toJson({String?type,int?maxResult,double? lat,double? long,double? distance}){
     return {
-      "includedTypes": [type,type],
-      "maxResultCount": maxResult??5,
+      "includedTypes": [type],
+      "maxResultCount": maxResult??3,
       "locationRestriction": {
         "circle":
         {

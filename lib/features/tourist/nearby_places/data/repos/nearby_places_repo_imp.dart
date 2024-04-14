@@ -10,10 +10,8 @@ class NearbyPlacesRepoImpl implements NearbyPlacesRepo{
   NearbyPlacesRepoImpl({required this.apiServices});
   @override
   Future<Either<Failure, List<NearbyPlacesModel>>> getNearbyPlace(Map<String,dynamic>parameters) async{
-    print(parameters);
     try{
       var response=await apiServices.getNearbyPlaces(data:parameters);
-      //print(response.toString());
       List<NearbyPlacesModel> nearbyPlacesList=[];
       for(var item in response['places']){
         nearbyPlacesList.add(NearbyPlacesModel.fromJson(item));

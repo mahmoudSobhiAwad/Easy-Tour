@@ -20,6 +20,7 @@ import 'package:prepare_project/features/tourist/entertainment_places/data/repos
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repos/generate_trip_repo_imp.dart';
 import 'package:prepare_project/features/tourist/image_classification/data/repos/qr_scanned_repo_imp.dart';
 import 'package:prepare_project/features/tourist/nearby_places/data/repos/nearby_places_repo_imp.dart';
+import 'package:prepare_project/features/tourist/nearby_places/data/repos/photo_repo/get_photo_repo_imp.dart';
 import 'package:prepare_project/features/tourist/profile/data/repos/profie_repo_imp.dart';
 import 'package:prepare_project/features/tourist/tourist_home/data/repo/home_tourist_repo_impl.dart';
 import '../../../features/sign_up/data/repos/sign_up_repo_imp.dart';
@@ -42,6 +43,7 @@ getIt.registerSingleton<TourGuideTripsForTouristRepoImp>(TourGuideTripsForTouris
 getIt.registerSingleton<ChangePasswordRepoImp>(ChangePasswordRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<GetGuideInfoForTouristRepImp>(GetGuideInfoForTouristRepImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<ChatOTORepoImp>(ChatOTORepoImp(apiServices:getIt.get<ApiServices>()));
+getIt.registerSingleton<PhotoOfPlaceRepoImp>(PhotoOfPlaceRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<ChatBotRepoImp>(ChatBotRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<NearbyPlacesRepoImpl>(NearbyPlacesRepoImpl(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<GuideMetaDataAndChatRecentRepoImp>(GuideMetaDataAndChatRecentRepoImp(apiServices:getIt.get<ApiServices>()));
