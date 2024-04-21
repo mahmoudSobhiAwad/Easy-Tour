@@ -4,9 +4,11 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
-import 'package:prepare_project/features/tour_guide/private_tour/data/data_ui.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
+import 'package:prepare_project/features/tourist/settings/presentaion/views/widgets/payment_setting_item.dart';
 class ActivityDetailsView extends StatelessWidget {
-  const ActivityDetailsView({super.key});
+  const ActivityDetailsView({super.key,required this.place});
+  final Place place;
   @override
   Widget build(BuildContext context) {
     double width=BasicDimension.screenWidth(context);
@@ -16,27 +18,29 @@ class ActivityDetailsView extends StatelessWidget {
         children: [
           Column(
             children: [
-              Image.network(defaultImage,width: width,height: height*0.45,fit: BoxFit.fill,),
-              Padding(
+              Image.network(place.image??"",errorBuilder: (context,_,s){
+                return const Icon(Icons.warning,color: closeColor,);
+              },width: width,height: height*0.45,fit: BoxFit.fill,),
+              SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Pyramids,Giza',style: CustomTextStyle.privateTourTitle,),
-                    SizedBox(height: height*0.02,),
-                    const Row(
-                      children: [
-                        Icon(Icons.location_on_rounded,color: entertainmentColor,),
-                        Text('Giza,Egypt',style: CustomTextStyle.commonFontThinLight)
-                      ],
-                    ),
-                    SizedBox(height: height*0.02,),
+                    Text(place.name,style: CustomTextStyle.privateTourTitle,),
+                    ProfileSettingItem(
+                      enableDivider: false,
+                      rightWidget: const Text('Time Visiting',style:CustomTextStyle.commonFontThin,),
+                      child: Container(
+                        padding:const EdgeInsets.all(5),
+                        decoration: BoxDecoration(color: thirdColor,borderRadius: BorderRadius.circular(10)),
+                        child:  Text(place.time??"",style: CustomTextStyle.commonFontThin,),
+                      ),),
                     Row(
                       children: [
                       const FaIcon(FontAwesomeIcons.ticket,color: entertainmentColor,),
                       SizedBox(width: width*0.025,),
-                      const Text('5 \$',style: CustomTextStyle.commonFontThinLight)
+                        Text('${place.budget} \$',style: CustomTextStyle.commonFontThinLight)
                       ],
                     ),
                     SizedBox(height: height*0.02,),
@@ -44,7 +48,7 @@ class ActivityDetailsView extends StatelessWidget {
                     SizedBox(height: height*0.02,),
                     SizedBox(
                       height: height*0.2,
-                      child:const SingleChildScrollView(child:  Text(text3bet,style: CustomTextStyle.commonFontThinLight,)),
+                      child: SingleChildScrollView(child:  Text(place.activity,style: CustomTextStyle.commonFontThinLight,)),
                     ),
                     SizedBox(height: height*0.02,),
                     Center(child: CustomLoginButton(altWidth: width*0.9,color: forthColor,label: 'Go Now',)),
@@ -72,4 +76,3 @@ class ActivityDetailsView extends StatelessWidget {
     );
   }
 }
-const String text3bet='You will gYou will get a complete travel package on the beaches. Packages in the form of airline tickets,You will get a complete travel package on the beaches. Packages in the form of airline tickets,You will get a complete travel package on the beaches. Packages in the form of airline tickets,et a complete travel package on the beaches. Packages in the form of airline tickets, recommended Hotel rooms, Transportation, Have you ever been on holiday to the Greek ETC,You will get a complete travel package on the beaches. Packages in the form of airline tickets, ';

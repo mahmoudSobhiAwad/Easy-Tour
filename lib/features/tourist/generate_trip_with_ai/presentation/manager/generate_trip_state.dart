@@ -1,3 +1,5 @@
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
+
 abstract class GenerateAiTripState{}
 class InitialGenerateTripState extends GenerateAiTripState {}
 class ChangeCurrPageIndex extends GenerateAiTripState {}
@@ -8,10 +10,10 @@ class RemovePlaceFromPickedPlacesList extends GenerateAiTripState {}
 class ChangeToggleForSelectedTypeState extends GenerateAiTripState {}
 class LoadingSendRequestToGenerateTrip extends GenerateAiTripState {}
 class SuccessSendRequestToGenerateTrip extends GenerateAiTripState {
-  //final GeneratedTripModel model;
+  final GeneratedTripModel model;
   final String?startDate;
   SuccessSendRequestToGenerateTrip({
-    //required this.model,
+    required this.model,
     required this.startDate});
 }
 class FailureSendRequestToGenerateTrip extends GenerateAiTripState {

@@ -1,65 +1,53 @@
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:prepare_project/features/tourist/google_map/data/models/route_poly_lines_model.dart';
+import 'package:prepare_project/features/tourist/google_map/data/models/text_search_model.dart';
+import 'package:prepare_project/features/tourist/google_map/data/repo/text_search_repo/text_search_repo_imp.dart';
 import 'package:prepare_project/features/tourist/google_map/presentaion/manager/map_cubit/google_map_states.dart';
-import 'dart:ui'as ui;
-import 'package:flutter/services.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../../../../../../core/utilities/basics.dart';
+import '../../../../../../core/utilities/function/decode_poly_lines.dart';
+
 class GoogleMapCubit extends Cubit<GoogleMapStates>{
-  GoogleMapCubit():super(InitialGoogleMapState());
+  GoogleMapCubit({required this.textSearchRepoImp}):super(InitialGoogleMapState());
   Set<Marker>markers={};
+  List<TextSearchModel>textSearchList=[];
+  List<RoutePolyLinesModel>routePolyLinesList=[];
+  final GoogleSearchRepoImp textSearchRepoImp;
+  TextEditingController textController=TextEditingController();
   bool enableMyLocation=false;
-  // void initPolylines() {
-  //   Polyline polyline=const Polyline(
-  //       width: 5,
-  //       //patterns: [PatternItem.dot],//if i need to make the line dash or dot
-  //       //jointType: JointType.bevel,
-  //       color: closeColor,
-  //       endCap: Cap.squareCap,
-  //       polylineId: PolylineId('1'),
-  //       points: [
-  //         LatLng(30.593758, 32.269860 ),//p1
-  //         LatLng(30.619222, 31.732507),//p2
-  //         LatLng(25.722175, 32.660821),//p3
-  //         //then we have path from p1 to p2 ,p2 t0 p3
-  //         // we have 2 paths
-  //       ]);
-  //   polylinesSet.add(polyline);
-  // }
-  //
-  // void initPolygons() {
-  //   Polygon polygon= Polygon(
-  //       strokeColor: secondaryColor,
-  //       strokeWidth: 5,
-  //       fillColor: basicColor.withOpacity(0.5),
-  //       polygonId:const PolygonId('2'),
-  //       points:const [
-  //         LatLng(31.26743684451587, 32.29128411905518),
-  //         LatLng(30.62618266658708, 32.312937747608856),
-  //         LatLng(29.999208001492406, 32.55381230865813),
-  //         LatLng(27.76825761929716, 34.20065647702483),
-  //         LatLng(28.5091769835955, 34.52074652089606),
-  //         LatLng(29.51687440623645, 34.85684106696086),
-  //         LatLng(31.33679802957941, 34.21442304059874),
-  //       ],
-  //       holes: const [
-  //         [
-  //           LatLng(28.688793001245692, 33.67247122100762),
-  //           LatLng(28.469460334373508, 33.890214984499494),
-  //           LatLng(28.76733561662578, 34.30038678445752),
-  //         ],//hole 1
-  //       ]
-  //   );
-  //   polygonSet.add(polygon);
-  // }
-  //
-  // void initCircles() {
-  //   Circle realMadrid= Circle(
-  //       radius: 1000,
-  //       strokeColor: forthColor,
-  //       fillColor: goldenColor.withOpacity(0.3),
-  //       circleId:const CircleId('1'),center:const LatLng(40.453079066668025, -3.688285805372625));
-  //   circlesSet.add(realMadrid);
-  // }
+  Position? myLocation;
+  bool enableLiveLocation=false;
+  List<LatLng> routePoly=[];
+  Timer?debounce;
+  PolylinePoints polylinePoints = PolylinePoints();
+  Set<Polyline>polyLinesSets={};
+  void initPolyLines() {
+    polyLinesSets.clear();
+    Polyline polyline=Polyline(
+      width: 5,
+      jointType: JointType.bevel,
+      color: closeColor,
+      endCap: Cap.squareCap,
+      polylineId: const PolylineId('1'),
+      points: routePoly,
+    );
+    polyLinesSets.add(polyline);
+  }
+  void enableLiveLocationMethod(){
+    enableLiveLocation=true;
+  }
+  void getMarkAtSpecificLatLng(Set<Marker>markers,LatLng latLng){
+    markers.add(Marker(markerId: const MarkerId('new place'),position: latLng));
+    if(markers.contains(const Marker(markerId: MarkerId('markerRoute')))){
+      markers.remove(const Marker(markerId: MarkerId('markerRoute')));
+    }
+    emit(AddNewMarkersWhenPushOnMap());
+  }
   Future<bool>askToEnableLocationServices()async{
     bool serviceEnabled;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -72,6 +60,7 @@ class GoogleMapCubit extends Cubit<GoogleMapStates>{
       return true;
     }
   }
+
   Future<bool>askToEnableMyLocation()async{
     LocationPermission permission;
     if(await askToEnableLocationServices()){
@@ -84,6 +73,7 @@ class GoogleMapCubit extends Cubit<GoogleMapStates>{
       {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.always||permission==LocationPermission.whileInUse) {
+          myLocation=await Geolocator.getCurrentPosition();
           emit(AllowLocationSuccessState());
           return true;
         }
@@ -101,22 +91,83 @@ class GoogleMapCubit extends Cubit<GoogleMapStates>{
     return false;
     }
   }
+
   Future<void> requestAllowLocation() async {
     if(await askToEnableMyLocation()){
       enableMyLocation=true;
     }
   }
 
-  // void onMapCreated(GoogleMapController controller)
-  // {
-  //   googleMapController=controller;
-  //   emit(InitialCameraPositionSuccessState());
-  // }
+  Future<void>getListOfTextSearch()async{
+    textSearchList.clear();
+    if(textController.text.isNotEmpty&&textController.text.trim().isNotEmpty){
+      if(debounce?.isActive??false){
+        debounce?.cancel();
+      }
+      else{
+        debounce=Timer(const Duration(milliseconds: 250), () async{
+          emit(LoadingGetTextSearchList());
+          var result=await textSearchRepoImp.getTextSearchList({'textQuery':textController.text});
+          result.fold(
+                  (failure){
+                emit(FailureGetTextSearchList(errMessage: failure.errMessage));
+              },
+                  (result) {
+                textSearchList.clear();
+                for(var item in result){
+                  textSearchList.add(item);
+                }
+                enableLiveLocation=false;
+                emit(SuccessGetTextSearchList());
+              });
+        });
+      }
+    }
+    else{
+      textSearchList.clear();
+      emit(ClearAllPlacesSearchList());
+    }
+  }
+  Future<void>getListOfRoutes(int index)async{
+    RoutePolyLinesModel model=RoutePolyLinesModel();
+    emit(LoadingGetRoutePolyLinesList());
+    var result=await textSearchRepoImp.getRoutePolyLines(model.toJson(
+        destination: OriginOrDestinationModel(latitude:textSearchList[index].locationModel?.lat ,longitude:textSearchList[index].locationModel?.long),
+        origin: OriginOrDestinationModel(longitude: myLocation?.longitude,latitude:myLocation?.latitude )));
+    result.fold(
+            (failure){
+          emit(FailureGetRoutePolyLinesList(errMessage: failure.errMessage));
+        },
+            (result) {
+              routePolyLinesList.clear();
+              routePoly.clear();
+              for(var item in result){
+                routePolyLinesList.add(item);
+              }
+              enableLiveLocation=false;
+              emit(SuccessGetRoutePolyLinesList());
+        });
+  }
+  void makeMarkerAndAnimateToNewPlace(int index,{Set<Marker>? markers,GoogleMapController?controller}){
+    textController.clear();
+    emit(ClearAllPlacesSearchList());
+    LatLng latLng=LatLng(textSearchList[index].locationModel!.lat!,textSearchList[index].locationModel!.long!);
+    markers?.add(Marker(markerId: const MarkerId('markerRoute'),position:latLng));
+    controller?.animateCamera(CameraUpdate.newLatLngZoom(latLng, 12));
+    emit(UpdateLatLngBoundsAfterGetRoute());
+  }
+  /// while tap on direction
+  void drawRoute(GoogleMapController? controller){
+    routePoly.clear();
+    routePoly = decodePolyline(routePolyLinesList[0].polyLineModel!.encodedPolyLine!);
+    initPolyLines();
+    if(controller!=null){
+      LatLngBounds bounds=LatLngBounds(southwest:getSouthAndNorthEastBounds(routePoly)['southEast']!, northeast:getSouthAndNorthEastBounds(routePoly)['northEast']!);
+      controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 16));
+      emit(UpdateLatLngBoundsAfterGetRoute());
+    }
+  }
+
 }
-Future<Uint8List>getImageFormRawData(String imagePath,double width)async{
-  ByteData imageDate=await rootBundle.load(imagePath);
-  var imageCodec=await ui.instantiateImageCodec(imageDate.buffer.asUint8List(),targetWidth:width.round());
-  var imageFrame=await imageCodec.getNextFrame();
-  var imageByteDate=await imageFrame.image.toByteData(format: ui.ImageByteFormat.png);
-  return imageByteDate!.buffer.asUint8List();
-}
+
+

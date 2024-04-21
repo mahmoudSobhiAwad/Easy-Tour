@@ -4,7 +4,7 @@ import 'package:prepare_project/features/forget_pass/presentation/view/forget_pa
 import 'package:prepare_project/features/login/presentation/view/login_view.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/sign_up_view.dart';
 import 'package:prepare_project/features/tour_guide/basic/presentation/view/home_basic_view.dart';
-import 'package:prepare_project/features/tour_guide/notification/presentaions/view/notification_view.dart';
+import 'package:prepare_project/features/tour_guide/requested_trips/presentaions/view/requested_trip_for_guide_view.dart';
 import 'package:prepare_project/features/tour_guide/settings/presentation/view/tour_guide_settings_view.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/book_with_tour_guide_view.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/chat_bot_view.dart';
@@ -75,6 +75,6 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kEntertainmentPlaces,builder: (context,state)=>const EntertainmentPlacesView(),),
    GoRoute(path: kChatTouristView,builder: (context,state)=>const TouristChatWithOtherView(),),
    GoRoute(path: kTourGuideTripsBooking,builder: (context,state)=>const BookTripWithTourGuides(),),
-   GoRoute(path: kTourGuideNotifications,builder: (context,state)=>const NotificationTourGuideView(),),
+   GoRoute(path: kTourGuideNotifications,builder: (context,state)=>const RequestedTripsTourGuideView(),),
   ]);
 }

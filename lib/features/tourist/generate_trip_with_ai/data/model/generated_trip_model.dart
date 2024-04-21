@@ -1,25 +1,28 @@
 class GeneratedTripModel {
   final List<Day> days;
-  final String dayInPlace;
+  final List<String>placesNames;
 
-  const GeneratedTripModel({required this.days,required this.dayInPlace});
+  const GeneratedTripModel({required this.days,required this.placesNames});
 
   factory GeneratedTripModel.fromJson(Map<String,dynamic> json) {
     List<Day>day=[];
+    List<String>placesNames=[];
     for(int i=0;i<json.length;i++)
     {
       String jsonKey='Day${i+1}';
+      placesNames.add(json[jsonKey]['governorate']??"");
       day.add(Day.fromJson(json[jsonKey]['places']));
     }
     return GeneratedTripModel(
       days:day,
-      dayInPlace: json['governorate']
+      placesNames: placesNames,
     );
   }
 }
 
 class Day {
   final List<Place> places;
+
 
   const Day({required this.places});
 
@@ -40,7 +43,7 @@ class Place{
   final double latitude;
   final String activity;
   final String category;
-  final String?budget;
+  final num?budget;
   final String?time;
   final String?image;
 
@@ -57,14 +60,14 @@ class Place{
 
   factory Place.fromJson(Map<String, dynamic> json, int i) {
     return Place(
-      name: json['place${i + 1}'],
-      longitude: json['longitude'],
-      latitude: json['latitude'],
-      activity: json['activity'],
-      category: json['category'],
-      budget: json['budget'],
-      image: json['image_link'],
-      time: json['time'],
+      name: json['place${i + 1}']??"",
+      longitude: json['longitude']??0,
+      latitude: json['latitude']??0,
+      activity: json['activity']??"",
+      category: json['category']??"",
+      budget: json['budget']??0,
+      image: json['image_link']??"",
+      time: json['time']??"",
     );
   }
 

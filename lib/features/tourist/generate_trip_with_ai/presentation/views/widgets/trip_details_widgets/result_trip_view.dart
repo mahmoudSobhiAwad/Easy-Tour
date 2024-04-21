@@ -5,6 +5,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_cubit.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_state.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/list_of_days_of_trip.dart';
@@ -14,13 +15,14 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentat
 import 'package:prepare_project/features/tourist/nearby_places/data/repos/nearby_places_repo_imp.dart';
 
 class GeneratedTripDetailsWithAiView extends StatelessWidget {
-  const GeneratedTripDetailsWithAiView({super.key,required this.startDate});
+  const GeneratedTripDetailsWithAiView({super.key,required this.startDate,required this.model});
   final String?startDate;
+  final GeneratedTripModel model;
   @override
   Widget build(BuildContext context) {
     final double height=BasicDimension.screenHeight(context);
     final double width=BasicDimension.screenWidth(context);
-    return BlocProvider(create: (context)=>ViewTripDetailsCubit(startDate: startDate,nearbySearchRepoImp: getIt.get<NearbyPlacesRepoImpl>())..addDaysDates(),
+    return BlocProvider(create: (context)=>ViewTripDetailsCubit(startDate: startDate,nearbySearchRepoImp: getIt.get<NearbyPlacesRepoImpl>(),generatedTripModel:model )..addDaysDates(),
       child: BlocConsumer<ViewTripDetailsCubit,ViewTripDetailsState>(builder:(context,state)
       {
         var cubit=BlocProvider.of<ViewTripDetailsCubit>(context);
@@ -38,15 +40,15 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
                       onPageChanged: (index){
                         cubit.pageChange(index);
                       },
-                      itemCount: 4,
+                      itemCount: cubit.generatedTripModel?.days.length??0,
                       itemBuilder: (context,pageIndex){
                         return ListView(
                           padding: EdgeInsets.zero,
                           children: [
                             ListOfDaysOfTrip(onTap: (index) {
                               cubit.moveToSpecificDay(index);
-                            },height: height, currentDay: pageIndex,controller: cubit.controller, width: width,listOfDaysLength:4),
-                            Text(cubit.daysDatesName[pageIndex],style: CustomTextStyle.placesTitle,),
+                            },height: height, currentDay: pageIndex,controller: cubit.controller, width: width,listOfDaysLength:cubit.generatedTripModel?.days.length??0,),
+                            Text('${cubit.daysDatesName[pageIndex]},${cubit.generatedTripModel?.placesNames[pageIndex]}',style: CustomTextStyle.placesTitle,),
                             const SizedBox(height: 15,),
                             ActivityListWithBar(height: height, width: width, cubit:cubit,pageIndex:pageIndex),
                             const SizedBox(height: 15,),

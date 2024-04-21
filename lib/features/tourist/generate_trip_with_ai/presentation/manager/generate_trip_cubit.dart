@@ -64,6 +64,7 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
   void editFirstDate(int index){
     if(index>0){
       nextDate=formatter.parse(destinationWithDayList[index-1].lastDate!);
+      nextDate=nextDate.add(const Duration(days: 1));
     }
   }
   void getRangeDate(BuildContext context,int index)async{
@@ -84,6 +85,7 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
       destinationWithDayList[index].numOfDay=numOfDay;
       destinationWithDayList[index].startDate=firstPickedDay;
       destinationWithDayList[index].lastDate=lastPickedDay;
+      debugPrint(destinationWithDayList[index].numOfDay.toString());
       emit(ChangeRangeDatePickerState());
     }
 
@@ -107,6 +109,7 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
         pickedTypes.add(item.typeName);
       }
     }
+    Map<String, int> map = { for (var item in destinationWithDayList) item.placeName as String : item.numOfDay as int };
     if(checkBeforeSend()){
       emit(LoadingSendRequestToGenerateTrip());
       isLoading=true;
@@ -114,7 +117,7 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
         lat: position?.latitude,
         long: position?.longitude,
         preferred: pickedTypes,
-        governments:destinationWithDayList,
+        governments:map,
         numOfPlaceInDay: activityNames.keys.elementAt(currActivity??0),
       ).toJsonEncode());
       result.fold((failure){
@@ -127,7 +130,7 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
         }
         else
         {
-          emit(SuccessSendRequestToGenerateTrip(startDate:destinationWithDayList.last.startDate));
+          emit(SuccessSendRequestToGenerateTrip(startDate:destinationWithDayList.last.startDate,model:generatedTrip ));
         }
       });
     }

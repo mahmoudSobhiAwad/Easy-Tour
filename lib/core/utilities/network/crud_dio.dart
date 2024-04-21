@@ -15,6 +15,9 @@ class ApiServices{
     ),
 
     );
+    if(response.statusCode==204){
+      return {'message':'sent'};
+    }
     return response.data;
   }
   Future<Map<String,dynamic>>dynamicPost({required String endPoint, dynamic data,})async {
@@ -75,6 +78,9 @@ class ApiServices{
   Future<Map<String,dynamic>>patch({required String endPoint,required Map<String,dynamic> data})async {
     final String? tokenId=SetAppState.prefs?.getString('token');
     var response=await dio.patch('$baseUrl$endPoint',data: data,options: Options(headers: {'Authorization':'token $tokenId',}));
+    if(response.statusCode==204){
+      return {'message':'request Accepted'};
+    }
     return response.data;
   }
   /// patch With token behind used for forget reset password almost
@@ -129,12 +135,22 @@ class ApiServices{
   }
 
   /// google-map API
-  Future<Map<String,dynamic>>getNearbyPlaces({required dynamic data})async{
-    final response=await dio.post(searchNearbyPlaceUrl,data:data,options: Options(
+  Future<Map<String,dynamic>>postGoogleNewApi({required dynamic data,required String endPoint,required String fieldMask})async{
+    final response=await dio.post('$googleNewApiUrl$endPoint',data:data,options: Options(
       headers: {
         'X-Goog-Api-Key':androidApiGoogleMapKey,
         'Content-Type':'application/json',
         'X-Goog-FieldMask':fieldMask,
+      }
+    ) );
+    return response.data;
+  }
+  Future<Map<String,dynamic>>postGoogleRouteApi({required dynamic data,})async{
+    final response=await dio.post(routeApiUrl,data:data,options: Options(
+      headers: {
+        'X-Goog-Api-Key':androidApiGoogleMapKey,
+        'Content-Type':'application/json',
+        'X-Goog-FieldMask':fieldMaskForGetRoute,
       }
     ) );
     return response.data;

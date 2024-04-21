@@ -3,13 +3,14 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 
 class CustomLoginButton extends StatelessWidget {
-  const CustomLoginButton({super.key,this.altWidth,this.onTap,this.label,this.color,this.isLoading=false,this.enable=false});
+  const CustomLoginButton({super.key,this.altWidth,this.onTap,this.label,this.color,this.isLoading=false,this.enable=false,this.borderRadius});
   final void Function()?onTap;
   final String?label;
   final Color? color;
   final bool isLoading;
   final double?altWidth;
   final bool enable;
+  final double?borderRadius;
   @override
   Widget build(BuildContext context) {
     final double height=BasicDimension.screenHeight(context);
@@ -23,8 +24,8 @@ class CustomLoginButton extends StatelessWidget {
             boxShadow:[
                buildBoxShadow(),
             ],
-            borderRadius: const BorderRadius.all(
-              Radius.circular(20),),color:color?? basicColor,),
+            borderRadius:  BorderRadius.all(
+              Radius.circular(borderRadius??20),),color:color?? basicColor,),
           child: Center(
               child: isLoading? const CircularProgressIndicator(color: Colors.white,) :
               Row(

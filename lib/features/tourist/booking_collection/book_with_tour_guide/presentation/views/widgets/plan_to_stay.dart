@@ -8,11 +8,15 @@ class TypeOfStay extends StatelessWidget {
     required this.height,
     required this.width,
     required this.plan,
+     this.onTap,
+     this.pickedIndex,
   });
 
   final double height;
   final double width;
   final Map<String,dynamic>?plan;
+  final void Function(int index)?onTap;
+  final int? pickedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,11 @@ class TypeOfStay extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Column(
                 children: [
-                  PickedCategoryItem(height: height, width: width, typeImage: getPlanType(plan?.keys.elementAt(index)??""), picked: true),
+                  GestureDetector(
+                      onTap:(){
+                        onTap != null?onTap!(index):();
+                      },
+                      child: PickedCategoryItem(height: height, width: width, typeImage: getPlanType(plan?.keys.elementAt(index)??""), picked:pickedIndex==null?true:pickedIndex==index)),
                   Text(plan?.keys.elementAt(index)??"",style: CustomTextStyle.commonFontThin,),
                   Column(
                     children: [

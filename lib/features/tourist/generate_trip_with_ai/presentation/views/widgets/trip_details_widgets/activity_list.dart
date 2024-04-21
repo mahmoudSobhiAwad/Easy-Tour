@@ -32,7 +32,7 @@ class ActivityListWithBar extends StatelessWidget {
               {
                 return GestureDetector(
                     onTap: (){
-                      Navigator.push(context,MaterialPageRoute(builder:(context)=>const ActivityDetailsView()));
+                      Navigator.push(context,MaterialPageRoute(builder:(context)=>ActivityDetailsView(place:cubit.generatedTripModel!.days[pageIndex].places[index],)));
                     },
                     child: OneActivityInGeneratedTrip(height: height, width: width,place: cubit.generatedTripModel!.days[pageIndex].places[index],));
               },
@@ -40,7 +40,7 @@ class ActivityListWithBar extends StatelessWidget {
               {
                 return const SizedBox(height: 10,);
               },
-              itemCount: 5
+              itemCount:cubit.generatedTripModel!.days[pageIndex].places.length,
           ),
         ):
         const SizedBox(),

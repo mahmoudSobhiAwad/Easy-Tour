@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/destination_with_number_model.dart';
 
 class TypeOfTourism{
   String typeImage;
@@ -10,7 +9,7 @@ class TypeOfTourism{
 }
 class RequestTripModel{
   List<String>?preferred;
-  List<DestinationPlaceDayModel>?governments;
+  Map<String,int>?governments;
   double? lat;
   double? long;
   int? numOfPlaceInDay;
@@ -22,7 +21,6 @@ class RequestTripModel{
       "Government": governments,
       "latitude": lat,
       "longitude": long,
-      "noday": numOfDay,
       "no_of_places": numOfPlaceInDay,
     });
     return data;

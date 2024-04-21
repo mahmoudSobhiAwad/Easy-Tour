@@ -144,7 +144,7 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
   Future<void> getNearbyPlace(String type,List<NearbyPlacesModel>list,bool loading)async{
     emit(LoadingGetNearbyPlacesState());
     loading=true;
-    var response=await nearbySearchRepoImp.getNearbyPlace(NearbyPlacesModel().toJson(type:type,long:31.227026858142505,lat:30.03414099707750 ,distance: 750,maxResult: 3));
+    var response=await nearbySearchRepoImp.getNearbyPlace(NearbyPlacesModel().toJson(type:type,long:31.227026858142505,lat:30.03414099707750,distance: 750,maxResult: 3));
     return response.fold((failure){
       loading=false;
       log(failure.errMessage.toString());

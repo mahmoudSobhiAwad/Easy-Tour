@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
@@ -26,7 +27,9 @@ class OneActivityInGeneratedTrip extends StatelessWidget {
         children: [
           ClipRRect(
               borderRadius: commonBorderRadius(),
-              child: Image.network(imageUrl,height: height*0.2,width: width*0.25,fit: BoxFit.fitHeight,)),
+              child: Image.network(place.image??imageUrl,errorBuilder: (context,_,s){
+                return const Icon(Icons.warning_rounded,color: closeColor,);
+              },height: height*0.2,width: width*0.25,fit: BoxFit.fitHeight,)),
           SizedBox(
             width: width*0.6,
             child: Column(
@@ -47,8 +50,8 @@ class OneActivityInGeneratedTrip extends StatelessWidget {
                   enableDivider: false,
                   rightWidget: const Text('Place Price',style:CustomTextStyle.commonFontThin,),
                   child: Row(children: [
-                    Text('${place.budget}',style: CustomTextStyle.commonFontThin,),
-                    const Icon(Icons.airplane_ticket,color: basicColor,)
+                    Text('${place.budget} \$',style: CustomTextStyle.commonFontThin,),
+                    const FaIcon(FontAwesomeIcons.ticket,color: basicColor,)
                   ],),),
                 ProfileSettingItem(
                   enableDivider: false,

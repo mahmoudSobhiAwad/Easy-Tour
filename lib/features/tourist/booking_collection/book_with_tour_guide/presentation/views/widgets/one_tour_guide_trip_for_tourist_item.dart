@@ -6,7 +6,7 @@ import 'package:prepare_project/features/login/presentation/view/widgets/login_b
 import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/presentation/view/widgets/tour_info_without_image.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/guide_profile_from_toursit_view.dart';
-import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/request_trip_view.dart';
+import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/request_trip_widgets/request_trip_view.dart';
 import 'package:prepare_project/features/tourist/profile/presentation/views/widgets/pic_profile_widget.dart';
 class OneTourGuideTripForTourist extends StatelessWidget {
   const OneTourGuideTripForTourist({super.key,required this.width,required this.height,this.model,this.viewProfile=true});
@@ -29,14 +29,16 @@ class OneTourGuideTripForTourist extends StatelessWidget {
               children: [
                 ClipRRect(
                     borderRadius: const BorderRadius.only(topLeft:Radius.circular(20) ,topRight:Radius.circular(20)),
-                    child: model?.bgImagePath!=''?Image.network(model!.bgImagePath!,fit: BoxFit.cover,height:height*0.15,width: width,):
+                    child: model?.bgImagePath!=''?Image.network(model!.bgImagePath!,fit: BoxFit.cover,height:height*0.15,width: width,errorBuilder: (context,_,s){
+                      return const Center( child: Icon(Icons.warning,color: goldenColor,size: 40,));
+                    }):
                     Image.network(defaultCoverTrip,fit: BoxFit.cover,height:height*0.15,width: width,)
                 ),
                 PrivateTourWithoutImage(height: height, width: width,model: model,moreDet: true,text: 'Start With',),
                 SizedBox(height: height*0.02,),
                 CustomLoginButton(color: forthColor,label: 'Request',onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return const RequestTripView();
+                    return RequestTripView(tripId: model!.tripId!,tripTicket: model?.tripTicket,tripDays: model?.tripDetails?.length.toString(),);
                   }));
                 },),
               ],
