@@ -5,5 +5,5 @@ enum AlertTypes{
   optionChoice,
   leaveApp,
   textTitle,
-
+  notification,
 }

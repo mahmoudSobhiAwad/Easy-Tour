@@ -27,7 +27,7 @@ class HomeTouristTourGuideAppBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(onPressed: openSidePar, icon: const Icon(Icons.table_rows_rounded,color: basicColor,),),
+            IconButton(onPressed: openSidePar, icon: const Icon(Icons.table_rows_rounded,),),
             SizedBox(width: width*0.5,child: const Align(alignment: Alignment.centerLeft,child: Text('EGY Tour',style: CustomTextStyle.homePartTitle,))),
             GestureDetector(
               onTap: (){

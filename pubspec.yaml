@@ -68,7 +68,11 @@ dependencies:
   geolocator: ^11.0.0
   socket_io_client: ^2.0.3+1
   geocoding: ^3.0.0
-  flutter_polyline_points: ^2.0.0
+  firebase_core: ^2.24.2
+  firebase_messaging: ^14.7.10
+  awesome_notifications: ^0.8.2
+  record: ^5.0.5
+  just_audio: ^0.9.37
 
 dev_dependencies:
   flutter_test:
@@ -111,6 +115,7 @@ flutter:
      - assets/gen_trip_images/
      - assets/type_of_trip/
      - assets/google_map_assets/
+     - assets/weather_status/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

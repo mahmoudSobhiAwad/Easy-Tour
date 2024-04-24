@@ -5,13 +5,15 @@ import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/custom_alert_widget/alert_types.dart';
 
 class ContainerAlertWidget extends StatelessWidget {
-  const ContainerAlertWidget({super.key,this.controller,required this.types,this.content, this.onTap,this.onTapYes,this.onTapNo});
+  const ContainerAlertWidget({super.key,this.controller,this.textYes,this.textNo,required this.types,this.content, this.onTap,this.onTapYes,this.onTapNo});
 final AlertTypes types;
 final String?content;
 final void Function()? onTap;
 final void Function()? onTapYes;
 final void Function()? onTapNo;
 final TextEditingController?controller;
+final String?textYes;
+final String?textNo;
   @override
   Widget build(BuildContext context) {
     final double width=BasicDimension.screenWidth(context);
@@ -30,7 +32,8 @@ final TextEditingController?controller;
           return HeaderOption.leaveWidget;
         case AlertTypes.textTitle:
           return HeaderOption.textWidgetTitle;
-
+        case AlertTypes.notification:
+          return HeaderOption.notificationWidget;
         default:
           return HeaderOption.successWidget;
       }
@@ -46,9 +49,11 @@ final TextEditingController?controller;
         case AlertTypes.warning:
           return ButtonOption.warningButton;
         case AlertTypes.optionChoice:
-          return OptionChoice(onTapNo: onTapNo, onTapYes: onTapYes);
+          return OptionChoice(onTapNo: onTapNo, onTapYes: onTapYes,textYes:textYes ,textNo:textNo,);
         case AlertTypes.leaveApp:
           return LeaveApp(onTapNo: onTapNo, onTapYes: onTapYes);
+        case AlertTypes.notification:
+          return OptionChoice(onTapNo: onTapNo, onTapYes: onTapYes,textYes:textYes ,textNo:textNo,);
       }
     }
     return  Padding(
@@ -90,6 +95,11 @@ class HeaderOption{
     radius: 30,
     backgroundColor: Color(0xffFFB636),
     child:  FaIcon(FontAwesomeIcons.exclamation,color: Colors.white,),
+  );
+  static Widget notificationWidget=const CircleAvatar(
+    radius: 30,
+    backgroundColor: Color(0xffFFB636),
+    child:  Icon(Icons.notifications,color: basicColor,),
   );
   static Widget leaveWidget=const CircleAvatar(
     radius: 30,
@@ -144,9 +154,11 @@ class ButtonOption{
 }
 
 class OptionChoice extends StatelessWidget {
-  const OptionChoice({super.key, required this.onTapNo, required this.onTapYes,});
+  const OptionChoice({super.key, required this.onTapNo, required this.onTapYes,this.textYes,this.textNo});
   final void Function()? onTapYes;
   final void Function()? onTapNo;
+  final String?textYes;
+  final String?textNo;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -159,7 +171,7 @@ class OptionChoice extends StatelessWidget {
             width: 100,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
               color: thirdColor,),
-            child: const Center(child:  DefaultTextStyle(style:TextStyle(color: basicColor,fontWeight: FontWeight.bold,fontSize: 16),child:Text('Yes',))),
+            child: Center(child:  DefaultTextStyle(style:const TextStyle(color: basicColor,fontWeight: FontWeight.bold,fontSize: 16),child:Text(textYes??'Yes',))),
           ),
         ),
         const SizedBox(width: 30,),
@@ -170,7 +182,7 @@ class OptionChoice extends StatelessWidget {
             width: 100,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
               color: thirdColor,),
-            child: const Center(child:  DefaultTextStyle(style:TextStyle(color: basicColor,fontWeight: FontWeight.bold,fontSize: 16,),child:Text('No',))),
+            child: Center(child:  DefaultTextStyle(style:const TextStyle(color: basicColor,fontWeight: FontWeight.bold,fontSize: 16,),child:Text(textNo??'No',))),
           ),
         ),
       ],

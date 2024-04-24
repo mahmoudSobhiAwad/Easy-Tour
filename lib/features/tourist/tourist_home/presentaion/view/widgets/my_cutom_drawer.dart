@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/drawer_body.dart';
-
 import '../../../../../../core/utilities/constant_var/constant.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -39,7 +37,7 @@ class MyDrawer extends StatelessWidget {
             height: height,
             width: width*0.75,
             decoration: const BoxDecoration(
-              color:thirdColor,
+              //color:thirdColor,
               borderRadius: BorderRadius.only(topRight: Radius.circular(20),bottomRight: Radius.circular(20)),
             ),
             child: CustomDrawerBody(

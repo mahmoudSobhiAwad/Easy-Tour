@@ -48,6 +48,9 @@ class ApiServices{
   Future<Map<String,dynamic>>putData({required Map<String,dynamic> data,required String endPoint})async {
     final String? token=SetAppState.prefs?.getString('token');
     var response=await dio.put('$baseUrl$endPoint',data: data,options: Options(headers: {'Authorization':'token $token',},contentType:'multipart/form-data'));
+    if(response.statusCode==204){
+      return {'message':'success'};
+    }
     return response.data;
   }
   /// get request
@@ -155,9 +158,15 @@ class ApiServices{
     ) );
     return response.data;
   }
-
   Future<Map<String,dynamic>>getPlacePhoto({required String data})async{
     final response=await dio.get('https://places.googleapis.com/v1/$data/media?key=$androidApiGoogleMapKey&maxHeightPx=${500}&skipHttpRedirect=${true}');
     return response.data;
   }
+  Future<Map<String,dynamic>>normalGet(String endPoint,{Map<String,dynamic>?data})async{
+    final response=await dio.get(endPoint,data:data,options: Options(headers: {
+
+    }));
+    return response.data;
+  }
+
 }

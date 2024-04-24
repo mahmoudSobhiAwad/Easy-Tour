@@ -14,7 +14,9 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentat
 import 'package:prepare_project/features/tourist/historical_places/presentation/view/historical_places_view.dart';
 import 'package:prepare_project/features/tourist/image_classification/presentation/views/image_classificarion_view.dart';
 import 'package:prepare_project/features/tourist/settings/presentaion/views/settings_view.dart';
+import 'package:prepare_project/features/tourist/test_audio/test_auido_view.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/home_view.dart';
+import 'package:prepare_project/features/tourist/weather_forecast/presentation/views/weather_forecast_view.dart';
 import '../../../features/splash/presentation/views/splash_view.dart';
 import '../../../features/tourist/profile/presentation/views/profile_view.dart';
 
@@ -27,8 +29,10 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
   static const kResetPasswordView='/ResetPasswordView';
   static const kTouristSettings='/TouristSettings';
   static const kTourGuideNotifications='/TouristNotifications';
+  static const kTestAudio='/TestAudio';
   static const kTourGuideSettings='/TourGuideSettings';
   static const kChatBotView='/ChatBotView';
+  static const kWeatherView='/WeatherView';
   static const kGenerateTripView='/GenerateTripView';
   static const kTourGuideHome='/TourGuideHomeView';
   static const kImageClassification='/ImageClassification';
@@ -76,5 +80,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kChatTouristView,builder: (context,state)=>const TouristChatWithOtherView(),),
    GoRoute(path: kTourGuideTripsBooking,builder: (context,state)=>const BookTripWithTourGuides(),),
    GoRoute(path: kTourGuideNotifications,builder: (context,state)=>const RequestedTripsTourGuideView(),),
+   GoRoute(path: kTestAudio,builder: (context,state)=>const AudioPageView(),),
+   GoRoute(path: kWeatherView,builder: (context,state)=>const WeatherForecastView(),),
   ]);
 }

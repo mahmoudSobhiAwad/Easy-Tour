@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/constant_var/constant.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/tour_guide/home/presentation/view/widgets/drawer_tour_guide_list_tile.dart';
@@ -36,7 +35,7 @@ class CustomDrawerBody extends StatelessWidget {
         children: [
           Align(
               alignment: Alignment.topRight,
-              child: IconButton(onPressed: onClose, icon: const Icon(Icons.close,color: basicColor,size: 30,))),
+              child: IconButton(onPressed: onClose, icon: const Icon(Icons.close,size: 30,))),
           ProfilePicWidget(imageUrl:profileUrl, height: height*0.15,),
           const SizedBox(height: 10,),
            Text('$name',overflow: TextOverflow.ellipsis,style: CustomTextStyle.commonSignDark,),
@@ -49,7 +48,7 @@ class CustomDrawerBody extends StatelessWidget {
                 ...List.generate(drawerList.length, (index) {
                   return role==Role.tourist?TouristHomeDrawerListTile(index: index,listTileIcons:drawerList): TourGuideHomeDrawerListTile(index: index, listTileIcons: drawerList);
                 }),
-                const Divider(color: Colors.white,thickness: 3),
+                const Divider(thickness: 3),
                 ListTile(
                   onTap: () async{
                     await showDialog(
@@ -66,7 +65,7 @@ class CustomDrawerBody extends StatelessWidget {
                     );
                   },
                   contentPadding: EdgeInsets.zero,
-                  leading: const FaIcon(FontAwesomeIcons.arrowRightFromBracket,color: basicColor,),
+                  leading: const FaIcon(FontAwesomeIcons.arrowRightFromBracket),
                   title: const Text('Sign Out'),
                 )
               ],

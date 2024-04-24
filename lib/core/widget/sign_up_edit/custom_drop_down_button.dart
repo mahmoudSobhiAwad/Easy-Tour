@@ -1,28 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:prepare_project/core/utilities/basics.dart';
 
 class CustomDropDownButton extends StatelessWidget {
   const CustomDropDownButton({
     super.key,
-    this.initialValue,
     required this.list,
+    required this.onChanged,
+    required this.maxHeight,
+    this.style
   });
 
-  final String? initialValue;
   final List<String>list;
+  final void Function(String?value) onChanged;
+  final double maxHeight;
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      menuMaxHeight: 150,
-      style: const TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: basicColor),
-      value: initialValue,
-      padding: EdgeInsets.zero,
-      items:list.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),);}).toList(),
-      onChanged:(value){},
-      icon: const Icon(Icons.arrow_drop_down,color: basicColor,size: 25,),);
+    return PopupMenuButton<String>(
+      constraints: BoxConstraints(
+        maxHeight: maxHeight
+      ),
+      onSelected: (String selectedGovernorate){
+        onChanged(selectedGovernorate);
+        //print("Selected governorate: $selectedGovernorate");
+      },
+      itemBuilder: (BuildContext context) {
+        return list.map((String value) =>
+            PopupMenuItem<String>(
+              value: value,
+              child: Text(value,style: style,),
+            )
+        ).toList();
+      },
+      child: const RotatedBox(
+          quarterTurns: 1,
+          child: Icon(Icons.arrow_forward_ios,color: Colors.white,)), // Customize menu button icon
+    );
   }
 }

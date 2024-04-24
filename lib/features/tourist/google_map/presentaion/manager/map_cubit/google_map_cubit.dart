@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:prepare_project/features/tourist/google_map/data/models/route_poly_lines_model.dart';
 import 'package:prepare_project/features/tourist/google_map/data/models/text_search_model.dart';
@@ -24,7 +23,6 @@ class GoogleMapCubit extends Cubit<GoogleMapStates>{
   bool enableLiveLocation=false;
   List<LatLng> routePoly=[];
   Timer?debounce;
-  PolylinePoints polylinePoints = PolylinePoints();
   Set<Polyline>polyLinesSets={};
   void initPolyLines() {
     polyLinesSets.clear();

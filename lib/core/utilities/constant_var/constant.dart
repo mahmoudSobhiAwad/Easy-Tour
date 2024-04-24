@@ -55,6 +55,33 @@ const List<String> languages =<String> [
   "Latvian",
   "Lithuanian",
 ];
+List<String>governments=[
+  "beheira",
+  "cairo",
+  "alexandria",
+  "giza",
+  "sharqiya",
+  "qalyubia",
+  "munufia",
+  "daqahliya",
+  "kafr el-sheikh",
+  "ismailia",
+  "suez",
+  "port said",
+  "south sinai",
+  "north sinai",
+  "red sea",
+  "new valley",
+  "assiut",
+  "sohag",
+  "luxor",
+  "qena",
+  "aswan",
+  "fayoum",
+  "beni suef",
+  "minya",
+  "matruh"
+];
 List<String> prefs = const [
   "Historical and Cultural Tours",
   "Nile River Cruises",
@@ -73,8 +100,12 @@ enum Role{tourist,tourGuide}
 const String authTourist='auth/tourist/';
 const String authTourGuide='auth/tourGuide/';
 const String homeEndPointTourist='home/tourist/';
+const String homeCommon='home/common/';
 const String homeEndPointTourGuide='home/tourGuide/';
 String homeEndMutualPoint='home/${SetAppState.prefs?.get('role')}/';
+const String requestNotificationChannel='request_channel_notify';
+const String chatNotificationChannel='chat_notification_channel';
+const String forecastingWeatherKey='MW0BgPpZeo46MW13eHrMaXM9y2u2c1BJ';
 const baseUrl='http://3.92.88.76:8081/';
 const chatBotUrl='http://3.88.138.209:8000/chatbot';
 const generateTripUrl='http://54.89.254.74:5000/generate_trip';
