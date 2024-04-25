@@ -109,6 +109,7 @@ class LoginCubit extends Cubit<LoginState>{
   }
   /// ForgetPass functions
   void changeShow(){
+
     showPass=!showPass;
     emit(EnablePasswordState());
   }

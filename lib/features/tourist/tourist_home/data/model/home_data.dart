@@ -18,7 +18,7 @@ List<CardModel>aiTool=[
 List<CardModel>helperTool=[
   CardModel(imagePath: 'assets/tourist_home/custom_trip.png', labelName: 'Make Custom Trip'),
   CardModel(imagePath: 'assets/tourist_home/weather_forecast.png', labelName: 'Weather Forecasting'),
-  CardModel(imagePath: 'assets/tourist_home/currency_exchage.png', labelName: 'Currency Exchange'),
+  CardModel(imagePath: 'assets/tourist_home/currency_exchage.png', labelName: 'Currency Converter'),
 ];
 List<CardModel>entertainmentItems=[
   CardModel(imagePath: 'assets/entertainment_places/food.png', labelName: 'Restaurants',endPoint: 'restaurant'),

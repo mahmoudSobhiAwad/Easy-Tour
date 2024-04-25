@@ -7,7 +7,6 @@ import 'package:prepare_project/features/sign_up/presentation/views/widgets/cust
 import 'package:prepare_project/features/tourist/nearby_places/data/repos/nearby_places_repo_imp.dart';
 import 'package:prepare_project/features/tourist/nearby_places/presentation/manager/search_nearby_cubit.dart';
 import 'package:prepare_project/features/tourist/nearby_places/presentation/manager/search_nearby_state.dart';
-import 'package:prepare_project/features/tourist/nearby_places/presentation/views/widgets/one_category_search.dart';
 import 'package:prepare_project/features/tourist/nearby_places/presentation/views/widgets/pick_category_widget.dart';
 
 class NearbySearchView extends StatelessWidget {
@@ -46,7 +45,8 @@ class NearbySearchView extends StatelessWidget {
                               onTap: [()async{
                                 await cubit.getNearbyPlaces();
                               },][index],
-                              child: OneCategorySearchItem(height: height, width: width,type: cubit.typesOfList[index],));
+                          //    child: OneCategorySearchItem(height: height, width: width,type: cubit.typesOfList[index],)
+                          );
                         }),
                   ),
                 ),

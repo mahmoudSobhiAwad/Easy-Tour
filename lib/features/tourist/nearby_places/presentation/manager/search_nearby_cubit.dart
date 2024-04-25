@@ -31,7 +31,7 @@ class NearbySearchCubit extends Cubit<NearbySearchState>{
   }
   Future<void>getNearbyPlaces()async{
     emit(LoadingGetNearbyPlacesState());
-    var response=await nearbySearchRepoImp.getNearbyPlace(NearbyPlacesModel().toJson(type:'restaurant',long:32.65662139529527 ,lat:25.720063225758317 ,distance: 700,maxResult: 3));
+    var response=await nearbySearchRepoImp.getNearbyPlace(NearbyPlacesModel().toJson(type:['restaurant'],long:32.65662139529527 ,lat:25.720063225758317 ,distance: 700,maxResult: 3));
     return response.fold((failure){
       log(failure.errMessage.toString());
       emit(FailureGetNearbyPlacesState(errMessage: failure.errMessage));

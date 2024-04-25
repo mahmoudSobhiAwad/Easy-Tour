@@ -5,6 +5,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/core/utilities/go_router/go_router.dart';
 import 'package:prepare_project/core/widget/custom_alert_widget/alert_types.dart';
+import 'package:prepare_project/features/tourist/settings/data/repo/setting_repo_imp.dart';
 import 'package:prepare_project/features/tourist/tourist_home/data/repo/home_tourist_repo_impl.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/manager/home_tourist_cubit.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/manager/home_tourist_state.dart';
@@ -41,7 +42,7 @@ class _HomeTouristViewState extends State<HomeTouristView> with SingleTickerProv
     double height=BasicDimension.screenHeight(context);
     double width=BasicDimension.screenWidth(context);
     return  BlocProvider(
-      create: (context)=>HomeTouristCubit(controller: animationController,homeTouristRepoImp: getIt.get<HomeTouristRepoImp>()),//..connect(),
+      create: (context)=>HomeTouristCubit(controller: animationController,homeTouristRepoImp: getIt.get<HomeTouristRepoImp>(),settingRepoImp: getIt.get<SettingRepoImp>())..checkAllowingNotify(),//..connect(),
       child: BlocConsumer<HomeTouristCubit,HomeTouristState>(
         builder: (context,state){
           var cubit=BlocProvider.of<HomeTouristCubit>(context);
@@ -102,8 +103,21 @@ class _HomeTouristViewState extends State<HomeTouristView> with SingleTickerProv
               cubit.logOut().then((value)=>context.pop());
             },));
           }
+          else if(state is ShowBoxToGoToSettingPage){
+            showDialog(context: context, builder: (context)=>ContainerAlertWidget(types: AlertTypes.notification,
+              textYes: 'Settings',
+              textNo: 'Not Now',
+              content:'EGY TOUR wants to send notifications to you',
+              onTapYes: (){
+              context.pop();
+              context.push(RouterApp.kTouristSettings);
+              },
+              onTapNo: (){
+              context.pop();
+              },
+            ));
+          }
         },
-
       ),
     );
   }

@@ -34,9 +34,13 @@ class SettingsView extends StatelessWidget {
             physics:const BouncingScrollPhysics(),
             child: Column(
               children: [
-                ProfileSettingsPart(height: height,width: width,enableDarkMode: cubit.enableDarkMode,toggleAppMode: (){
-                  cubit.changeMode();
-                },),
+                ProfileSettingsPart(
+                  enableNotification: cubit.enableNotification,
+                  changeNotify: () {cubit.changeNotificationMode();},
+                  height: height,width: width,
+                  enableDarkMode: cubit.enableDarkMode,
+                  toggleAppMode: (){cubit.changeMode();},
+                ),
                 PaymentSettingsPart(height: height, width: width),
                 const SizedBox(height: 20,),
                 GeneralSettings(height: height,),

@@ -1,5 +1,4 @@
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
-
 List<String>signUpTourGuideButton=const ['Next','Next','Sign Up'];
 List<String>loginResetPassword=const ['Send','Verify','Update'];
 const List<String> genders=<String>['male','female',];
@@ -118,3 +117,6 @@ const androidApiGoogleMapKey='AIzaSyDjEPGnACyKEPFkkTOzC1ify2x9_MAnltA';
 const String fieldMaskForNearbyPlaces='places.displayName,places.rating,places.photos,places.primaryType,places.primaryTypeDisplayName,places.reviews,places.nationalPhoneNumber,places.internationalPhoneNumber,places.regularOpeningHours.openNow,places.websiteUri,places.userRatingCount,places.location,places.priceLevel,places.shortFormattedAddress';
 const String fieldMaskForTextSearch='places.displayName,places.rating,places.regularOpeningHours.openNow,places.location,places.shortFormattedAddress';
 const String fieldMaskForGetRoute='routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline';
+const String fieldMaskForShortNearby='places.displayName,places.primaryTypeDisplayName,places.nationalPhoneNumber,places.internationalPhoneNumber,places.regularOpeningHours.openNow';
+const String currencyConverterBaseUrl='https://v6.exchangerate-api.com/v6/$currencyConverterApiKey/';
+const String currencyConverterApiKey='9a250bed3ba7c9c8dba370f1';

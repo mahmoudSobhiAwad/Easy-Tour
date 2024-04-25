@@ -32,8 +32,8 @@ class NearbyPlacesModel{
     return NearbyPlacesModel(
       address: json['shortFormattedAddress'],
       openNow: json['regularOpeningHours']?['openNow']??false,
-      reviewsList: (json['reviews']as List).map((review) => ReviewModel.fromJson(review)).toList(),
-      photosList: (json['photos']as List).map((photo) => PhotosModel.fromJson(photo)).toList(),
+      reviewsList:json['reviews']!=null?(json['reviews'] as List).map((review) => ReviewModel.fromJson(review)).toList():null,
+      photosList:json['photos']!=null?(json['photos'] as List).map((photo) => PhotosModel.fromJson(photo)).toList():null,
       internationalPhoneNum: json['internationalPhoneNumber'],
       nationalPhoneNum: json['nationalPhoneNumber'],
       rating: json['rating'],
@@ -44,9 +44,9 @@ class NearbyPlacesModel{
       websiteUri: json['websiteUri'],
     );
   }
-  Map<String,dynamic>toJson({String?type,int?maxResult,double? lat,double? long,double? distance}){
+  Map<String,dynamic>toJson({List<String>?type,int?maxResult,double? lat,double? long,double? distance}){
     return {
-      "includedTypes": [type],
+      "includedTypes": type,
       "maxResultCount": maxResult??3,
       "locationRestriction": {
         "circle":

@@ -3,7 +3,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 class CustomGeneratedAiTripAppBar extends StatelessWidget {
-  const CustomGeneratedAiTripAppBar({super.key,this.appBarStyle,this.showBackIcon=true,required this.height,this.appBarTitle,required this.width,this.menuToSaveTrip,this.appBarWidth});
+  const CustomGeneratedAiTripAppBar({super.key,this.borderColor,this.bgColor,this.appBarStyle,this.showBackIcon=true,required this.height,this.appBarTitle,required this.width,this.menuToSaveTrip,this.appBarWidth});
   final double height;
   final double width;
   final double? appBarWidth;
@@ -11,6 +11,8 @@ class CustomGeneratedAiTripAppBar extends StatelessWidget {
   final Widget?menuToSaveTrip;
   final bool showBackIcon;
   final TextStyle? appBarStyle;
+  final Color? bgColor;
+  final Color? borderColor;
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
@@ -21,7 +23,9 @@ class CustomGeneratedAiTripAppBar extends StatelessWidget {
         children: [
           showBackIcon?
           CustomContainerWithStroke(
-            containWidget: const Icon(Icons.arrow_back_sharp,color: basicColor,),
+            bgColor: bgColor,
+            borderColor: borderColor,
+            containWidget: const Icon(Icons.arrow_back_sharp,),
             height: height, width: width,onTap: (){
             Navigator.pop(context);
           },
@@ -46,12 +50,16 @@ class CustomContainerWithStroke extends StatelessWidget {
     required this.width,
     this.onTap,
     required this.containWidget,
+    this.borderColor,
+    this.bgColor,
   });
 
   final double height;
   final double width;
   final void Function()?onTap;
   final Widget containWidget;
+  final Color? borderColor;
+  final Color? bgColor;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +68,9 @@ class CustomContainerWithStroke extends StatelessWidget {
       width:width*0.13,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.white,
+          color: bgColor??Colors.white,
           boxShadow: [buildBoxShadow()],
-          border: Border.all(color: secondaryColor,width: 3)
+          border: Border.all(color: borderColor??secondaryColor,width: 3)
       ),
       child:GestureDetector(
           onTap: onTap,

@@ -10,9 +10,9 @@ class NearbyPlacesRepoImpl implements NearbyPlacesRepo{
   final ApiServices apiServices;
   NearbyPlacesRepoImpl({required this.apiServices});
   @override
-  Future<Either<Failure, List<NearbyPlacesModel>>> getNearbyPlace(Map<String,dynamic>parameters) async{
+  Future<Either<Failure, List<NearbyPlacesModel>>> getNearbyPlace(Map<String,dynamic>parameters,{String?fieldMask}) async{
     try{
-      var response=await apiServices.postGoogleNewApi(data:parameters,endPoint: 'searchNearby',fieldMask: fieldMaskForNearbyPlaces);
+      var response=await apiServices.postGoogleNewApi(data:parameters,endPoint: 'searchNearby',fieldMask: fieldMask??fieldMaskForNearbyPlaces);
       List<NearbyPlacesModel> nearbyPlacesList=[];
       for(var item in response['places']){
         nearbyPlacesList.add(NearbyPlacesModel.fromJson(item));

@@ -43,7 +43,7 @@ class HelperPart extends StatelessWidget {
                           context.push(RouterApp.kWeatherView);
                         },
                             (){
-                          //    context.push(RouterApp.kGenerateTripView);
+                            context.push(RouterApp.kCurrencyConverter);
                         },
                       ][index],
                       child: CardElement(height: height,width: width,cardModel: helperTool[index],));

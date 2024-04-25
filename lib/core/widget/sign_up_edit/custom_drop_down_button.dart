@@ -6,19 +6,26 @@ class CustomDropDownButton extends StatelessWidget {
     required this.list,
     required this.onChanged,
     required this.maxHeight,
-    this.style
+    this.maxWidth,
+    this.style,
+    this.iconSize,
+    this.iconColor
   });
 
   final List<String>list;
   final void Function(String?value) onChanged;
   final double maxHeight;
+  final double? maxWidth;
   final TextStyle? style;
+  final double?iconSize;
+  final Color?iconColor;
 
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
       constraints: BoxConstraints(
-        maxHeight: maxHeight
+        maxHeight: maxHeight,
+        maxWidth: maxWidth??double.infinity,
       ),
       onSelected: (String selectedGovernorate){
         onChanged(selectedGovernorate);
@@ -32,9 +39,9 @@ class CustomDropDownButton extends StatelessWidget {
             )
         ).toList();
       },
-      child: const RotatedBox(
+      child: RotatedBox(
           quarterTurns: 1,
-          child: Icon(Icons.arrow_forward_ios,color: Colors.white,)), // Customize menu button icon
+          child: Icon(Icons.arrow_forward_ios,color: iconColor??Colors.white,size: iconSize,)), // Customize menu button icon
     );
   }
 }

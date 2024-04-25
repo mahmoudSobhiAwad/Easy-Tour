@@ -9,6 +9,7 @@ import 'package:prepare_project/features/tour_guide/settings/presentation/view/t
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/book_with_tour_guide_view.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/chat_bot_view.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/chat_with_other_view.dart';
+import 'package:prepare_project/features/tourist/currency_converter/presentation/view/currency_converter_view.dart';
 import 'package:prepare_project/features/tourist/entertainment_places/presentation/views/entertainment_places_view.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/generate_trip_wit_ai.dart';
 import 'package:prepare_project/features/tourist/historical_places/presentation/view/historical_places_view.dart';
@@ -33,6 +34,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
   static const kTourGuideSettings='/TourGuideSettings';
   static const kChatBotView='/ChatBotView';
   static const kWeatherView='/WeatherView';
+  static const kCurrencyConverter='/CurrencyConverter';
   static const kGenerateTripView='/GenerateTripView';
   static const kTourGuideHome='/TourGuideHomeView';
   static const kImageClassification='/ImageClassification';
@@ -80,6 +82,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kChatTouristView,builder: (context,state)=>const TouristChatWithOtherView(),),
    GoRoute(path: kTourGuideTripsBooking,builder: (context,state)=>const BookTripWithTourGuides(),),
    GoRoute(path: kTourGuideNotifications,builder: (context,state)=>const RequestedTripsTourGuideView(),),
+   GoRoute(path: kCurrencyConverter,builder: (context,state)=>const CurrencyConverterView(),),
    GoRoute(path: kTestAudio,builder: (context,state)=>const AudioPageView(),),
    GoRoute(path: kWeatherView,builder: (context,state)=>const WeatherForecastView(),),
   ]);
