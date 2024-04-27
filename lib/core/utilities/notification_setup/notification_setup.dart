@@ -1,10 +1,40 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/constant_var/constant.dart';
 
 class NotificationSetup{
-  //final FirebaseMessaging firebaseMessaging=FirebaseMessaging.instance;
+  final FirebaseMessaging firebaseMessaging=FirebaseMessaging.instance;
+  Future<bool>checkAllowingNotify()async{
+    bool allowed=false;
+    await AwesomeNotifications().isNotificationAllowed().then((allowed){
+      if(!allowed){
+        allowed= false;
+      }
+      else{
+        allowed=true;
+      }
+    });
+    return allowed;
+  }
+  Future<void>configurePushNotification()async{
+    checkAllowingNotify();
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    FirebaseMessaging.onBackgroundMessage((message)async {
+      return await myBackGroundMessageHandler(message);
+    });
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async{
+      if(message.notification !=null){
+        NotificationSetup().createOrderNotification(message.notification?.title, message.notification?.body, requestNotificationChannel);
+      }
+    });
+  }
   Future<void>initAwesomeNotification()async{
    await AwesomeNotifications().initialize(
       // set the icon to null if you want to use the default app icon
@@ -46,3 +76,6 @@ class NotificationSetup{
     );
   }
 }
+@pragma("vm:entry-point")
+Future<dynamic>myBackGroundMessageHandler(RemoteMessage message)async{
+  await Firebase.initializeApp();}

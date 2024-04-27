@@ -29,7 +29,8 @@ class ChatOTORepoImp implements ChatOTORepo{
   @override
   Future<Either<Failure, String>> sendMessageToOther(Map<String, dynamic> data) async{
     try{
-      var response=await apiServices.post(endPoint: '${homeEndPointTourist}chat/sendMessage',data: data);
+      print(data);
+      var response=await apiServices.post(endPoint:'${homeEndPointTourist}chat/sendMessage',data: data);
       String messageResponse=response['message'];
       return right(messageResponse);
     }

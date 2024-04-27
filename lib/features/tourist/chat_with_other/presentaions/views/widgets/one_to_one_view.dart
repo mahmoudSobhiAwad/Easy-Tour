@@ -5,6 +5,7 @@ import 'package:prepare_project/features/tourist/chat_with_other/data/repos/chat
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/managers/one_to_one/chat_one_to_one_cubit.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/managers/one_to_one/chat_one_to_one_state.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/chat_oto_body.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/custom_image_preview.dart';
 class ChatTouristOneToOtherOne extends StatelessWidget {
   const ChatTouristOneToOtherOne({super.key,required this.height,required this.width,this.chatId, this.status,required this.profileUrl, this.name,this.destEmail});
   final double height;
@@ -17,11 +18,28 @@ class ChatTouristOneToOtherOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:(context)=>ChatOneToOneCubit(chatID:chatId,targetEmail: destEmail,chatOTORepoImp: getIt.get<ChatOTORepoImp>())..getAllChatOTO(chatId)..connectToServer(),
+      create:(context)=>ChatOneToOneCubit(chatID:chatId,targetEmail: destEmail,chatOTORepoImp: getIt.get<ChatOTORepoImp>())..getAllChatOTO(chatId)..connectToServer()..getPermissionToRecord(),
       child: BlocConsumer<ChatOneToOneCubit,ChatOneToOneStates>(builder: (context,state){
         var cubit=BlocProvider.of<ChatOneToOneCubit>(context);
         return Scaffold(
-          body: ChatOneToOneBody(height: height, width: width, cubit: cubit, name: name,profileUrl: profileUrl,destEmail: destEmail,status: status,),
+          body: WillPopScope(
+              onWillPop: ()async{
+                if(cubit.enableImagePreview){
+                  cubit.disableImagePreview();
+                  return false;
+                }
+                return true;
+              },
+              child: Stack(
+                children: [
+                  ChatOneToOneBody(height: height, width: width, cubit: cubit, name: name,profileUrl: profileUrl,destEmail: destEmail,status: status,),
+                  cubit.enableImagePreview? CustomImagePreview(imageModel:cubit.selectedImageModel,height: height, onDismissed: () {
+                    cubit.disableImagePreview();
+                  }, width: width,enableSendImage: cubit.enableSendImageInImagePreview,sendImage: (){
+                    cubit.addToChatModel('image');
+                  },):const SizedBox(),
+                ],
+              )),
         );
       }, listener: (context,state){
 

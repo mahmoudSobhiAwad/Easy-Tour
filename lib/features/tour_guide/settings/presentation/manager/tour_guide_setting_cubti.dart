@@ -3,12 +3,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/core/utilities/theme_style/theme_mode.dart';
+import 'package:prepare_project/features/tour_guide/settings/presentation/manager/tour_guide_setting_state.dart';
 import 'package:prepare_project/features/tourist/settings/data/model/put_notify_model.dart';
 import 'package:prepare_project/features/tourist/settings/data/repo/setting_repo_imp.dart';
-import 'package:prepare_project/features/tourist/settings/presentaion/manager/tourist_setting_state.dart';
 
-class TouristSettingCubit extends Cubit<TouristSettingState>{
-  TouristSettingCubit({required this.settingRepoImp}):super(InitialTouristSettingState());
+class TourGuideSettingCubit extends Cubit<TourGuideSettingState>{
+  TourGuideSettingCubit({required this.settingRepoImp}):super(InitialTourGuideSettingState());
   bool enableDarkMode=false;
   bool enableNotification=false;
   ThemeData appTheme=lightMode;
@@ -31,7 +31,6 @@ class TouristSettingCubit extends Cubit<TouristSettingState>{
     await AwesomeNotifications().isNotificationAllowed().then((allowed) async {
       if(allowed){
         enableNotification=true;
-        await getFcmToken('enable');
         emit(ChangeNotificationModeState());
       }
     });
@@ -44,11 +43,24 @@ class TouristSettingCubit extends Cubit<TouristSettingState>{
       emit(ChangeNotificationModeState());
     }
     else{
-    await AwesomeNotifications().requestPermissionToSendNotifications().then((value){
-      checkAllowingNotify();
-    });
+      await AwesomeNotifications().requestPermissionToSendNotifications().then((value){
+        checkAllowingNotify();
+      });
+    }
   }
-  }
+  // Future<bool>getTokenRefreshed()async{
+  //   FirebaseMessaging.instance.onTokenRefresh
+  //       .listen((fcmToken) {
+  //
+  //     // Note: This callback is fired at each app startup and whenever a new
+  //     // token is generated.
+  //   })
+  //       .onError((err) {
+  //     // Error getting token.
+  //   });
+  // }
+
+
   Future<void> getFcmToken(String enableType)async{
     final fcmToken = await FirebaseMessaging.instance.getToken();
     emit(LoadingSendFcmNotificationState());

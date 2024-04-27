@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:prepare_project/core/utilities/constant_var/constant.dart';
 import 'package:prepare_project/features/tourist/currency_converter/data/model/currency_converter_model.dart';
 import 'package:prepare_project/features/tourist/currency_converter/data/repos/currency_repo_imp.dart';
@@ -20,6 +21,7 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState>{
   bool isLoading=true;
   List<String>nameWithIcon=[];
   Timer?debounce;
+  Position? myLocation;
   TextEditingController inputAmountController=TextEditingController();
   TextEditingController outputAmountController=TextEditingController();
   TextEditingController radiusController=TextEditingController(text:'500');
@@ -92,17 +94,43 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState>{
 
   }
   Future<void>getNearbyPlaces()async{
-    placesList.clear();
-    emit(LoadingGetNearbyBanksState());
-    var response=await nearbyPlacesRepoImpl.getNearbyPlace(NearbyPlacesModel().toJson(type:['bank','atm'],lat:30.06133689905498,long:31.22212320379314 ,distance: num.parse(radiusController.text).toDouble(),maxResult: 3),fieldMask: fieldMaskForShortNearby);
-    return response.fold((failure){
-      log(failure.errMessage.toString());
-      emit(FailureGetNearbyBanksState(errMessage: failure.errMessage));
-    }, (places){
-      for(var item in places){
-        placesList.add(item);
+    await determinePosition();
+    if(myLocation!=null){
+      print(myLocation?.longitude);
+      placesList.clear();
+      emit(LoadingGetNearbyBanksState());
+      var response=await nearbyPlacesRepoImpl.getNearbyPlace(NearbyPlacesModel().toJson(type:['bank','atm'],lat:myLocation!.latitude,long:myLocation!.longitude,distance: num.parse(radiusController.text).toDouble(),maxResult: 3),fieldMask: fieldMaskForShortNearby);
+      return response.fold((failure){
+        log(failure.errMessage.toString());
+        emit(FailureGetNearbyBanksState(errMessage: failure.errMessage));
+      }, (places){
+        for(var item in places){
+          placesList.add(item);
+        }
+        emit(SuccessGetNearbyBanksState());
+      });
+    }
+  }
+  Future<Position> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      emit(AllowLocationFailedState(errMessage:'Location services are disabled.Please Enable it.' ));
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        emit(AllowLocationFailedState(errMessage:'You don\'t allow Location to app ' ));
       }
-      emit(SuccessGetNearbyBanksState());
-    });
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      emit(AllowLocationFailedState(errMessage:'Location services are disabled.Please Enable it.'));
+    }
+    myLocation=await Geolocator.getCurrentPosition();
+    return await Geolocator.getCurrentPosition();
   }
 }

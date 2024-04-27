@@ -14,7 +14,7 @@ import 'package:socket_io_client/socket_io_client.dart';
 import '../../../../../core/utilities/function/set_app_state.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
-import '../../../settings/data/model/put_notify_model.dart';
+
 
 class HomeTouristCubit extends Cubit<HomeTouristState>{
   HomeTouristCubit({required this.controller,required this.settingRepoImp,required this.homeTouristRepoImp}):super(InitialHomeTouristState());
@@ -115,32 +115,18 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
       }
       else{
         allowedNotification=true;
-        //getFcmToken('enable');
       }
     });
   }
-  Future<void> getFcmToken(String enableType)async{
-    final fcmToken = await FirebaseMessaging.instance.getToken();
-    emit(LoadingSendFcmNotificationState());
-    var result=await settingRepoImp.sendFcmDevice(SendFcmModel(enable:enableType,fcmDevice: fcmToken).toJson());
-    result.fold((failure){
-      debugPrint(failure.errMessage);
-      emit(FailureSendFcmNotificationState(errMessage: failure.errMessage));
-    }, (success){
-      emit(SuccessSendFcmNotificationState());
-    });
-  }
+
 
   Future<void>configurePushNotification()async{
-    checkAllowingNotify();
     await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
     );
-    FirebaseMessaging.onBackgroundMessage((message)async {
-      return await myBackGroundMessageHandler(message);
-    });
+    FirebaseMessaging.onBackgroundMessage(myBackGroundMessageHandler);
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async{
       if(message.notification !=null){
         NotificationSetup().createOrderNotification(message.notification?.title, message.notification?.body, requestNotificationChannel);

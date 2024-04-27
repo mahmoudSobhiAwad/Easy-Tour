@@ -5,6 +5,7 @@ import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 import 'package:prepare_project/features/tourist/nearby_places/data/models/nearby_places_model.dart';
 import 'package:prepare_project/features/tourist/settings/presentaion/views/widgets/payment_setting_item.dart';
+import 'package:url_launcher/url_launcher.dart';
 class RestOrHotelInfo extends StatelessWidget {
   const RestOrHotelInfo({
     super.key,
@@ -71,9 +72,24 @@ class RestOrHotelInfo extends StatelessWidget {
           // SizedBox(height: height*0.02,),
           ProfileSettingItem(
             rightWidget: Row(
-              children: [...List.generate(2,(index){
-                return const [IconButton(onPressed: null, icon:Icon(Icons.facebook,color: forthColor,size: 30,)),IconButton(onPressed: null, icon: FaIcon(FontAwesomeIcons.whatsapp,color: whatsAppColor,size: 30,),)][index];
-              })],
+              children: [
+                 model.nationalPhoneNum==null?IconButton(onPressed: ()async{
+                   final url = 'tel:${model.nationalPhoneNum}';
+                   if (await canLaunchUrl(Uri.parse(url))) {
+                   await launchUrl(Uri.parse(url));
+                   } else {
+                   throw 'Could not launch $url';
+                   }
+                 }, icon:const Icon(Icons.phone)):const SizedBox(),
+                 model.websiteUri==null?IconButton(onPressed: ()async{
+                   final url=model.websiteUri;
+                   if (await canLaunchUrl(Uri.parse(url!))) {
+                     await launchUrl(Uri.parse(url));
+                   } else {
+                     throw 'Could not launch $url';
+                   }
+                 }, icon:const FaIcon(FontAwesomeIcons.globe)):const SizedBox(),
+                ]
             ),),
         ],
       ),

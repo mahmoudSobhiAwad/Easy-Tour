@@ -104,6 +104,8 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
     emit(ChangeToggleForSelectedTypeState());
   }
   Future<void>requestGenerateTrip()async{
+     print(position?.latitude);
+    //   long: position?.longitude,)
     for(var item in typeOfTourismList){
       if(item.picked==true){
         pickedTypes.add(item.typeName);
@@ -135,6 +137,7 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
       });
     }
   }
+
   Future<void> requestAllowLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -158,5 +161,28 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
     }
 
     position=await Geolocator.getCurrentPosition();
+  }
+  Future<Position> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('location is denied');
+      //emit(AllowLocationFailedState(errMessage:'Location services are disabled.Please Enable it.' ));
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('location is denied');      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('location is denied');
+    }
+    position=await Geolocator.getCurrentPosition();
+    print(position?.latitude);
+    return await Geolocator.getCurrentPosition();
   }
 }

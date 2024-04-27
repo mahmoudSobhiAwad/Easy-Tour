@@ -59,7 +59,6 @@ class SendMessageFormField extends StatelessWidget {
               {
                 checkExistOfText();
               },
-
             ),
           ),
           GestureDetector(

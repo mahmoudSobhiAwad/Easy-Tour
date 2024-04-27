@@ -35,6 +35,7 @@ class RestaurantOrHotelDetailsBody extends StatelessWidget {
               DefaultTabController(length: 2,
                   child: TabBar(
                       onTap: (value){
+                        cubit.changeToReview(value);
                       },
                       indicatorColor: entertainmentColor,
                       tabs:const[
@@ -43,10 +44,10 @@ class RestaurantOrHotelDetailsBody extends StatelessWidget {
                       ]
                   )
               ),
-              0==0?
+             cubit.currIndex==0?
               RestOrHotelInfo(width: width, height: height,model: model,):
               Expanded(
-                  child: ReviewListForHotelsOrRestaurants(height: height, width: width)),
+                  child: ReviewListForHotelsOrRestaurants(height: height, width: width, model: model.reviewsList??[],)),
 
               Center(child: CustomLoginButton(altWidth: width*0.9,color: forthColor,label: 'Go Now',)),
             ],

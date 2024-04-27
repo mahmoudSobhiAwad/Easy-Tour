@@ -19,4 +19,8 @@ class FailureGetNearbyBanksState extends CurrencyConverterState {
   final String?errMessage;
   FailureGetNearbyBanksState({this.errMessage});
 }
+class AllowLocationFailedState extends CurrencyConverterState {
+  final String?errMessage;
+  AllowLocationFailedState({this.errMessage});
+}
 

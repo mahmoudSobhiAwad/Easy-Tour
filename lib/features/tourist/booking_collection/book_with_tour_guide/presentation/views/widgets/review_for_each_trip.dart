@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
-import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/one_review_for_one_trip.dart';
 class ShowReviewInTourGuideTrip extends StatelessWidget {
   const ShowReviewInTourGuideTrip({super.key,required this.height,required this.width});
   final double height;
@@ -26,7 +25,8 @@ class ShowReviewInTourGuideTrip extends StatelessWidget {
               padding: EdgeInsets.zero,
               itemCount: 5,
               itemBuilder: (context,index) {
-                return ItemReviewForOneTrip(width: width, height: height);
+                return const SizedBox();
+               // return ItemReviewForOneTrip(width: width, height: height);
               }
           ),
         ),

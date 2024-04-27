@@ -13,7 +13,7 @@ class SettingRepoImp implements SettingRepo {
   Future<Either<Failure, String>> sendFcmDevice(Map<String, dynamic> params)async {
     try {
       var response = await apiServices.putData(
-          data: params, endPoint: '${homeCommon}notifications/storePushToken');
+          data: params, endPoint:'${homeCommon}notifications/storePushToken');
       return right(response['message']);
     }
     catch(e){

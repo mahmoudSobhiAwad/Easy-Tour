@@ -8,6 +8,7 @@ class RestHotelDetailsCubit extends Cubit<RestHotelDetailsState>{
   final NearbyPlacesModel model;
   final PhotoOfPlaceRepoImp photoOfPlaceRepoImp;
   List<String>photoUrlList=[];
+  int currIndex=0;
   bool isLoadingPhotos=false;
   Future<void>getPhotoPlaceList()async{
     if(model.photosList!=null){
@@ -30,5 +31,9 @@ class RestHotelDetailsCubit extends Cubit<RestHotelDetailsState>{
     }
 
   }
+  }
+  void changeToReview(int index){
+    currIndex=index;
+    emit(ChangeToShowReviewState());
   }
 }

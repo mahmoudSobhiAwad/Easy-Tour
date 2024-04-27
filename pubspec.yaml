@@ -73,6 +73,7 @@ dependencies:
   awesome_notifications: ^0.8.2
   record: ^5.0.5
   just_audio: ^0.9.37
+  firebase_storage: ^11.6.0
 
 dev_dependencies:
   flutter_test:

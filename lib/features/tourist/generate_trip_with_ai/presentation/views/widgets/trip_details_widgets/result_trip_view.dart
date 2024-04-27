@@ -22,7 +22,7 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
   Widget build(BuildContext context) {
     final double height=BasicDimension.screenHeight(context);
     final double width=BasicDimension.screenWidth(context);
-    return BlocProvider(create: (context)=>ViewTripDetailsCubit(startDate: startDate,nearbySearchRepoImp: getIt.get<NearbyPlacesRepoImpl>(),generatedTripModel:model )..addDaysDates(),
+    return BlocProvider(create: (context)=>ViewTripDetailsCubit(startDate: startDate,nearbySearchRepoImp: getIt.get<NearbyPlacesRepoImpl>(),generatedTripModel:model )..addDaysDates()..fillLatLangList(),
       child: BlocConsumer<ViewTripDetailsCubit,ViewTripDetailsState>(builder:(context,state)
       {
         var cubit=BlocProvider.of<ViewTripDetailsCubit>(context);
@@ -58,7 +58,7 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
                             const SizedBox(height: 15,),
                             const Text('Trip In Map',style:CustomTextStyle.placesTitle,),
                             const SizedBox(height: 15,),
-                            TripInGoogleMapWithPolyLine(height: height,),
+                            TripInGoogleMapWithPolyLine(height: height,points: cubit.polyLinesList,),
                           ],
                         );
                       }),
@@ -73,21 +73,23 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
   }
 }
 class TripInGoogleMapWithPolyLine extends StatelessWidget {
-  const TripInGoogleMapWithPolyLine({super.key,required this.height});
+  const TripInGoogleMapWithPolyLine({super.key,required this.height,required this.points});
 final double height;
-
+final List<LatLng>points;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height*0.5,
-      child: GoogleMap(initialCameraPosition: const CameraPosition(target: LatLng(30.586499288653258, 32.2710130807726),zoom: 12),polylines:  {
-        const Polyline(color: closeColor,polylineId: PolylineId('0'),points: [
-          LatLng(30.594477759641745, 32.2727696919087),
-          LatLng(30.575501366767753, 32.276839193955446),
-          LatLng(30.560435278087038, 32.26609829819687),
-          LatLng(30.567257933215558, 32.25091154121451),
-        ])
-      },),
+      child:Stack(
+        alignment: Alignment.center,
+        children: [
+          GoogleMap(initialCameraPosition: const CameraPosition(target: LatLng(30.586499288653258, 32.2710130807726),zoom: 12),polylines:  {
+             Polyline(color: closeColor,polylineId:const PolylineId('generatedTripPolyLines'),points: points)
+          },),
+          points.isEmpty?const CircularProgressIndicator(color: basicColor,):const SizedBox(),
+        ],
+      )
+
     );
   }
 }

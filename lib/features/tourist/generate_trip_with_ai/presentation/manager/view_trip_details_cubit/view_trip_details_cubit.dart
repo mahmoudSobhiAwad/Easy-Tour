@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repos/generate_trip_repo_imp.dart';
@@ -18,9 +19,12 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
   final String? startDate;
   final String?endDate;
   final formatter = DateFormat('d MMM y');
+  Map<int,List<NearbyPlacesModel>>nearbyPlacesRestMap={};
+  Map<int,List<NearbyPlacesModel>>nearbyPlacesHotelsMap={};
   List<String>daysDatesName=[];
   PageController pageController=PageController();
   bool isLoading=false;
+  List<LatLng>polyLinesList=[];
   bool showActivity=false;
   bool showRestaurants=false;
   bool showHotels=false;
@@ -36,10 +40,12 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
     showRestaurants=false;
     showHotels=false;
     emit(MoveToNextDayState());
+    fillLatLangList();
   }
   void addDaysDates(){
+    int days=generatedTripModel?.days.length??0;
     DateTime firstDay=formatter.parse(startDate!);
-    for(int i=0;i<4;i++){
+    for(int i=0;i<days;i++){
       daysDatesName.add(formatter.format(firstDay.add(Duration(days: i+1))));
     }
   }
@@ -125,11 +131,20 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
       showRestaurants=false;
       emit(ChangeShowActivityState());
     }
-    else{
-      showRestaurants=true;
-      await getNearbyPlace('restaurant', restaurant,loadingRestaurants);
+    else {
+      showRestaurants = true;
+      if (nearbyPlacesRestMap[currentDay]?.isEmpty ?? false) {
+        restaurant.clear();
+        restaurant.addAll(nearbyPlacesRestMap[currentDay] ?? []);
+      }
+      else {
+        await getNearbyPlace('restaurant', restaurant, loadingRestaurants,
+            lat: generatedTripModel!.days[currentDay].places.first.latitude,
+            lang: generatedTripModel!.days[currentDay].places.first.longitude);
+      }
     }
   }
+
   void getNearbyHotels()async{
     if(showHotels){
       showHotels=false;
@@ -137,14 +152,21 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
     }
     else{
       showHotels=true;
-    await getNearbyPlace('hotel', hotels,loadingHotels);
+      if(nearbyPlacesHotelsMap[currentDay]?.isEmpty??false){
+        hotels.clear();
+        hotels.addAll(nearbyPlacesHotelsMap[currentDay]??[]);
+      }
+      else{
+        await getNearbyPlace('hotel', hotels,loadingHotels,lat:generatedTripModel!.days[currentDay].places.first.latitude ,lang:generatedTripModel!.days[currentDay].places.first.longitude );
+      }
     }
   }
 
-  Future<void> getNearbyPlace(String type,List<NearbyPlacesModel>list,bool loading)async{
+  Future<void> getNearbyPlace(String type,List<NearbyPlacesModel>list,bool loading,{required double lang,required double lat})async{
+
     emit(LoadingGetNearbyPlacesState());
     loading=true;
-    var response=await nearbySearchRepoImp.getNearbyPlace(NearbyPlacesModel().toJson(type:[type],long:31.227026858142505,lat:30.03414099707750,distance: 750,maxResult: 3));
+    var response=await nearbySearchRepoImp.getNearbyPlace(NearbyPlacesModel().toJson(type:[type],long:lang,lat:lat,distance: 2000,maxResult: 3));
     return response.fold((failure){
       loading=false;
       log(failure.errMessage.toString());
@@ -154,8 +176,22 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
       for(var item in places){
         list.add(item);
       }
+      if(type=='hotel'){
+        nearbyPlacesHotelsMap.addAll({currentDay:places});
+      }
+      else{
+        nearbyPlacesRestMap.addAll({currentDay:places});
+      }
       loading=false;
       emit(SuccessGetNearbyPlacesState());
     });
+  }
+
+  void fillLatLangList(){
+    polyLinesList.clear();
+    for(var item in generatedTripModel!.days[currentDay].places){
+      polyLinesList.add(LatLng(item.latitude, item.longitude));
+    }
+    emit(ChangeCoordinatesOfMap());
   }
 }

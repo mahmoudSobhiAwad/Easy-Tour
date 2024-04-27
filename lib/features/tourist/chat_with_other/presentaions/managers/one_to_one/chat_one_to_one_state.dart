@@ -16,4 +16,23 @@ class FailureSendMessageToOtherState extends ChatOneToOneStates{
   FailureSendMessageToOtherState({this.errMessage});
 }
 class SuccessSendMessageToOtherState extends ChatOneToOneStates{}
+class AddFileLocallySuccessState extends ChatOneToOneStates{}
+class UploadFileLoadingState extends ChatOneToOneStates{}
+class UploadFileSuccessState extends ChatOneToOneStates{}
+class UploadFileFailureState extends ChatOneToOneStates{
+  final String?errMessage;
+  UploadFileFailureState({this.errMessage});
+}
+class FailureToHavePermissionToRecord extends ChatOneToOneStates{
+  final String?errMessage;
+  FailureToHavePermissionToRecord({this.errMessage});
+}
+class SuccessToAllowPermissionToRecord extends ChatOneToOneStates{}
+class RecordingStartedState extends ChatOneToOneStates{}
+class RecordingStoppedState extends ChatOneToOneStates{}
+class UpdateVoiceButtonShape extends ChatOneToOneStates{}
+class UpdateCurrentPositionOfVoice extends ChatOneToOneStates{}
+class StopPlayingVoiceState extends ChatOneToOneStates{}
+class EnableImagePreviewState extends ChatOneToOneStates{}
+class DisableImagePreviewState extends ChatOneToOneStates{}
 

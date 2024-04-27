@@ -19,11 +19,11 @@ class TouristBubble extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color:isNormalChat?const Color(0xff5F92D9):null,
-                gradient:!isNormalChat? const LinearGradient(
+                gradient:isNormalChat? null:const LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomLeft,
                     colors: [Color(0xff5F92D9), Color(0xffB588DC),]
-                ):null,
+                ),
                 borderRadius:const BorderRadius.only(
                   topLeft: Radius.circular(25),
                   topRight: Radius.circular(25),

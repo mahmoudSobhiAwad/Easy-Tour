@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:prepare_project/features/tourist/chat_with_other/data/models/recent_chat_model.dart';
-import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/chat_bubble_oto.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/presentaions/managers/one_to_one/chat_one_to_one_cubit.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/one_message_item_with_diff_types.dart';
 class ListChatOneToOne extends StatelessWidget {
   const ListChatOneToOne({
     super.key,
-    required this.messages,
-    required this.controller,
-    required this.stream,
-    required this.sourceEmail,
+    required this.cubit,
+    required this.width,
+    required this.height,
   });
 
-  final List<OneMessageModel> messages;
-  final ScrollController controller;
-  final Stream stream;
-  final String sourceEmail;
+  final ChatOneToOneCubit cubit;
+  final double width;
+  final double height;
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child:messages.isNotEmpty?
-      StreamBuilder(stream: stream, builder: (BuildContext context, AsyncSnapshot snapshot){
+      child:cubit.completeChatOTOModelList.isNotEmpty?
+      StreamBuilder(stream: cubit.streamSocket.getResponse, builder: (BuildContext context, AsyncSnapshot snapshot){
         return ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            controller: controller,
+            controller: cubit.scrollController,
             reverse: true,
-            itemCount: messages.length,
+            itemCount: cubit.completeChatOTOModelList.length,
             itemBuilder: (context,index){
-              return ChatBubbleOfOTO(message: messages[index].message!, index: index,replacedWord: messages[index].type,);
+              return ChatItemWithDiffTypes(index: index, cubit: cubit, type: cubit.completeChatOTOModelList[index].type??"source", model: cubit.completeChatOTOModelList[index], width: width, height: height);
             });
       }):
       ListView(

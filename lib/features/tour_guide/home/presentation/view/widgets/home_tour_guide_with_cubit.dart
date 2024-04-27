@@ -13,6 +13,7 @@ import 'package:prepare_project/features/tourist/chat_with_other/data/repos/get_
 import '../../../../../../core/utilities/go_router/go_router.dart';
 import '../../../../../../core/widget/custom_alert_widget/alert_container.dart';
 import '../../../../../../core/widget/custom_alert_widget/alert_types.dart';
+import '../../../../../tourist/settings/data/repo/setting_repo_imp.dart';
 class TourGuideHomeWithProvider extends StatelessWidget {
   const TourGuideHomeWithProvider({
     super.key,
@@ -35,7 +36,7 @@ class TourGuideHomeWithProvider extends StatelessWidget {
       create: (context)=>TourGuideHomeCubit(
           controller: animationController,
           homeTourGuideRepoImp: getIt.get<HomeTourGuideRepoImp>(),
-          guideMetaDataRepoImp: getIt.get<GuideMetaDataAndChatRecentRepoImp>())..getRecentChats(),//..connect()..getRecentChats(),
+          guideMetaDataRepoImp: getIt.get<GuideMetaDataAndChatRecentRepoImp>(),settingRepoImp: getIt.get<SettingRepoImp>())..getRecentChats()..configurePushNotification(),//..connect()..getRecentChats(),
        child: BlocConsumer<TourGuideHomeCubit,TourGuideHomeStates>(
         builder: (context,state){
           var cubit=BlocProvider.of<TourGuideHomeCubit>(context);

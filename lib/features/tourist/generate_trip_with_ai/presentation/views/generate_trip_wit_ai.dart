@@ -20,7 +20,7 @@ class GenerateAiTrip extends StatelessWidget {
     final double height=BasicDimension.screenHeight(context);
     final double width=BasicDimension.screenWidth(context);
     return BlocProvider(
-      create: (context)=>GenerateAiTripCubit(generateTripRepoImp: getIt.get<GenerateTripRepoImp>())..requestAllowLocation(),
+      create: (context)=>GenerateAiTripCubit(generateTripRepoImp: getIt.get<GenerateTripRepoImp>())..determinePosition(),
       child:BlocConsumer<GenerateAiTripCubit,GenerateAiTripState>(
           builder: (context,state){
             var cubit=BlocProvider.of<GenerateAiTripCubit>(context);

@@ -20,3 +20,4 @@ class ChatBubbleOfOTO extends StatelessWidget {
         isLoading:true);
   }
 }
+//return ChatItemWithDiffTypes(message: messages[index].message!, index: index,replacedWord: messages[index].type, cubit: null, type: '', model: null, width: null, height: null,);

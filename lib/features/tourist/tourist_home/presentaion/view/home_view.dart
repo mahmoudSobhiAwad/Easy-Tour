@@ -42,7 +42,7 @@ class _HomeTouristViewState extends State<HomeTouristView> with SingleTickerProv
     double height=BasicDimension.screenHeight(context);
     double width=BasicDimension.screenWidth(context);
     return  BlocProvider(
-      create: (context)=>HomeTouristCubit(controller: animationController,homeTouristRepoImp: getIt.get<HomeTouristRepoImp>(),settingRepoImp: getIt.get<SettingRepoImp>())..checkAllowingNotify(),//..connect(),
+      create: (context)=>HomeTouristCubit(controller: animationController,homeTouristRepoImp: getIt.get<HomeTouristRepoImp>(),settingRepoImp: getIt.get<SettingRepoImp>())..checkAllowingNotify()..configurePushNotification(),//..connect(),
       child: BlocConsumer<HomeTouristCubit,HomeTouristState>(
         builder: (context,state){
           var cubit=BlocProvider.of<HomeTouristCubit>(context);

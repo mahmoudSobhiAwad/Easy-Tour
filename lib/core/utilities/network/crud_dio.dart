@@ -47,7 +47,7 @@ class ApiServices{
   ///put request
   Future<Map<String,dynamic>>putData({required Map<String,dynamic> data,required String endPoint})async {
     final String? token=SetAppState.prefs?.getString('token');
-    var response=await dio.put('$baseUrl$endPoint',data: data,options: Options(headers: {'Authorization':'token $token',},contentType:'multipart/form-data'));
+    var response=await dio.put('$baseUrl$endPoint',data: data,options: Options(headers: {'Authorization':'token $token',}));
     if(response.statusCode==204){
       return {'message':'success'};
     }

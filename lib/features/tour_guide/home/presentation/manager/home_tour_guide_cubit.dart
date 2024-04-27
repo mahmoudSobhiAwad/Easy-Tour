@@ -1,4 +1,7 @@
 import 'dart:developer';
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/core/utilities/constant_var/constant.dart';
@@ -7,21 +10,25 @@ import 'package:prepare_project/features/tour_guide/home/data/repo/tour_guide_ho
 import 'package:prepare_project/features/tour_guide/home/presentation/manager/home_tour_guide_state.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/models/recent_chat_model.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/repos/get_guide_meta_data/get_guide_meta_data_repo_imp.dart';
+import 'package:prepare_project/features/tourist/settings/data/repo/setting_repo_imp.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
+import '../../../../../core/utilities/notification_setup/notification_setup.dart';
 
 class TourGuideHomeCubit extends Cubit<TourGuideHomeStates>{
   bool isLoadingRecentChats=false;
-  TourGuideHomeCubit({required this.controller,required this.homeTourGuideRepoImp,required this.guideMetaDataRepoImp}):super(InitialTourGuideHomeState());
+  TourGuideHomeCubit({required this.controller,required this.homeTourGuideRepoImp,required this.guideMetaDataRepoImp,required this.settingRepoImp}):super(InitialTourGuideHomeState());
   int currIndex=0;
   bool isMenuActive=false;
   late io.Socket socket ;
+  bool allowedNotification=false;
   String touristName= SetAppState.prefs?.getString('name')??"";
   String profileUrl= SetAppState.prefs?.getString('profileUrl')??"";
   final String sourceEmail=SetAppState.prefs?.getString('email')??"";
   final HomeTourGuideRepoImp homeTourGuideRepoImp;
   final AnimationController? controller;
   final GuideMetaDataAndChatRecentRepoImp guideMetaDataRepoImp;
+  final SettingRepoImp settingRepoImp;
   List<RecentChatModel> chatsList=[];
   void changeMenuState(){
     isMenuActive=!isMenuActive;
@@ -105,4 +112,32 @@ class TourGuideHomeCubit extends Cubit<TourGuideHomeStates>{
         }
     );
   }
+  Future<void>checkAllowingNotify()async{
+    await AwesomeNotifications().isNotificationAllowed().then((allowed){
+      if(!allowed){
+        emit(ShowBoxToGoToSettingPage());
+      }
+      else{
+        allowedNotification=true;
+      }
+    });
+  }
+  Future<void>configurePushNotification()async{
+    await checkAllowingNotify();
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    FirebaseMessaging.onBackgroundMessage(myBackGroundMessageHandler);
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async{
+      if(message.notification !=null){
+        NotificationSetup().createOrderNotification(message.notification?.title, message.notification?.body, requestNotificationChannel);
+      }
+    });
+  }
 }
+@pragma("vm:entry-point")
+Future<dynamic>myBackGroundMessageHandler(RemoteMessage message)async{
+  await Firebase.initializeApp();}

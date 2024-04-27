@@ -5,7 +5,7 @@ class SendFcmModel{
   Map<String,dynamic>toJson(){
     return {
       'pushToken':fcmDevice,
-      'enable':enable,
+      'action':enable,
     };
   }
 }
