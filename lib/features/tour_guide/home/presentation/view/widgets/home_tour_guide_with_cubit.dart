@@ -36,7 +36,7 @@ class TourGuideHomeWithProvider extends StatelessWidget {
       create: (context)=>TourGuideHomeCubit(
           controller: animationController,
           homeTourGuideRepoImp: getIt.get<HomeTourGuideRepoImp>(),
-          guideMetaDataRepoImp: getIt.get<GuideMetaDataAndChatRecentRepoImp>(),settingRepoImp: getIt.get<SettingRepoImp>())..getRecentChats()..configurePushNotification(),//..connect()..getRecentChats(),
+          guideMetaDataRepoImp: getIt.get<GuideMetaDataAndChatRecentRepoImp>(),settingRepoImp: getIt.get<SettingRepoImp>())..getRecentChats()..configurePushNotification(),//..connect()
        child: BlocConsumer<TourGuideHomeCubit,TourGuideHomeStates>(
         builder: (context,state){
           var cubit=BlocProvider.of<TourGuideHomeCubit>(context);

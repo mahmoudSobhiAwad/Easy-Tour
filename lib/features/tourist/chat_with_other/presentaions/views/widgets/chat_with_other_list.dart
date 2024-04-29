@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
-import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/models/recent_chat_model.dart';
+import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/custom_dissmisable_chat.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/one_to_one_view.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/recent_chat_item_out_side.dart';
 
@@ -68,37 +68,5 @@ class RecentChatWithOther extends StatelessWidget {
   }
 }
 
-class CustomDismissible extends StatelessWidget {
-  const CustomDismissible({
-    super.key,
-    required this.child,
-  });
 
-  final Widget child;
-  @override
-  Widget build(BuildContext context) {
-    return Dismissible(
-      direction: DismissDirection.startToEnd,
-      background: Container(
-        decoration: BoxDecoration(
-          color: closeColor,
-          borderRadius: commonBorderRadius(),
-        ),
-        margin: const EdgeInsets.symmetric(horizontal: 15),
-        alignment: Alignment.centerLeft,
-        child:const Padding(
-          padding:  EdgeInsets.only(left: 10.0),
-          child:  Icon(
-            size:30,
-            Icons.delete,
-            color: Colors.white,
-          ),
-        ),
-      ),
-      // onDismissed:(_){} ,
-      key: UniqueKey(),
-      child: child,
-    );
-  }
-}
 

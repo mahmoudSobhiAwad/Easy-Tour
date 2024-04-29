@@ -15,7 +15,7 @@ class TourGuideHomeDrawerListTile extends StatelessWidget {
     return ListTile(
       onTap: [
             (){},
-            (){context.push(RouterApp.kTourGuideSettings);},
+            (){context.push(RouterApp.kCommonSettings);},
             (){},
       ][index],
       contentPadding: EdgeInsets.zero,

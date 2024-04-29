@@ -20,17 +20,15 @@ class TouristHomeDrawerListTile extends StatelessWidget {
           context.push(RouterApp.kUserInfo);
         },
             (){
-          context.push(RouterApp.kTouristSettings);
+          context.push(RouterApp.kCommonSettings);
         },
             (){
-          context.push(RouterApp.kTouristSettings);
+          context.push(RouterApp.kCommonSettings);
         },
             (){
-          context.push(RouterApp.kTouristSettings);
+          context.push(RouterApp.kCommonSettings);
         },
             (){
-        context.push(RouterApp.kTestAudio);
-
         },
       ][index],
       contentPadding: EdgeInsets.zero,

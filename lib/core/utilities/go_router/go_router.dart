@@ -1,11 +1,11 @@
 import 'package:go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
+import 'package:prepare_project/features/common_settings/presentation/views/common_setting_view.dart';
 import 'package:prepare_project/features/forget_pass/presentation/view/forget_password_view.dart';
 import 'package:prepare_project/features/login/presentation/view/login_view.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/sign_up_view.dart';
 import 'package:prepare_project/features/tour_guide/basic/presentation/view/home_basic_view.dart';
 import 'package:prepare_project/features/tour_guide/requested_trips/presentaions/view/requested_trip_for_guide_view.dart';
-import 'package:prepare_project/features/tour_guide/settings/presentation/view/tour_guide_settings_view.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/book_with_tour_guide_view.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/chat_bot_view.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/chat_with_other_view.dart';
@@ -14,8 +14,6 @@ import 'package:prepare_project/features/tourist/entertainment_places/presentati
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/generate_trip_wit_ai.dart';
 import 'package:prepare_project/features/tourist/historical_places/presentation/view/historical_places_view.dart';
 import 'package:prepare_project/features/tourist/image_classification/presentation/views/image_classificarion_view.dart';
-import 'package:prepare_project/features/tourist/settings/presentaion/views/settings_view.dart';
-import 'package:prepare_project/features/tourist/test_audio/test_auido_view.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/home_view.dart';
 import 'package:prepare_project/features/tourist/weather_forecast/presentation/views/weather_forecast_view.dart';
 import '../../../features/splash/presentation/views/splash_view.dart';
@@ -28,10 +26,9 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
   static const kHomeView='/HomeView';
   static const kUserInfo='/UserInfo';
   static const kResetPasswordView='/ResetPasswordView';
-  static const kTouristSettings='/TouristSettings';
+  static const kCommonSettings='/TouristSettings';
   static const kTourGuideNotifications='/TouristNotifications';
   static const kTestAudio='/TestAudio';
-  static const kTourGuideSettings='/TourGuideSettings';
   static const kChatBotView='/ChatBotView';
   static const kWeatherView='/WeatherView';
   static const kCurrencyConverter='/CurrencyConverter';
@@ -67,8 +64,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kHomeView,builder: (context,state)=>const HomeTouristView()),
    GoRoute(path: kUserInfo,builder: (context,state)=>const ProfileView()),
    GoRoute(path: kResetPasswordView,builder: (context,state)=>const ForgetPasswordView(),),
-   GoRoute(path: kTouristSettings,builder: (context,state)=>const SettingsView(),),
-   GoRoute(path: kTourGuideSettings,builder: (context,state)=>const TourGuideSettingView(),),
+   GoRoute(path: kCommonSettings,builder: (context,state)=>const CommonSettingView(),),
    GoRoute(path: kChatBotView,builder: (context,state){
      return const ChatBotView();
    }),
@@ -83,7 +79,6 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kTourGuideTripsBooking,builder: (context,state)=>const BookTripWithTourGuides(),),
    GoRoute(path: kTourGuideNotifications,builder: (context,state)=>const RequestedTripsTourGuideView(),),
    GoRoute(path: kCurrencyConverter,builder: (context,state)=>const CurrencyConverterView(),),
-   GoRoute(path: kTestAudio,builder: (context,state)=>const AudioPageView(),),
    GoRoute(path: kWeatherView,builder: (context,state)=>const WeatherForecastView(),),
   ]);
 }

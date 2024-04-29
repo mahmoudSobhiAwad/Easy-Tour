@@ -30,7 +30,6 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
   bool allowedToRecord=false;
   int playingIndex=0;
   final ImagePicker picker=ImagePicker();
-
   String? voicePath;
   String? imagePath;
   ImageModel selectedImageModel=ImageModel();
@@ -58,26 +57,6 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     }
     emit(EnableSendMessageInOTOState());
   }
-
-//  Stream socketMessage(){
-//    socket.on("receiveMessage", (data){
-//      log('receiving message is ON');
-//      if(data!=null)
-//      {
-//        String type=sourceEmail==data['from']?'source':'destination';
-//        if(type=='source'){
-//          messagesList.first.sent=true;
-//        }
-//        else{
-//          getFromOther(data['message']);
-//        }
-//      }
-//      else {
-//        emit(FailureAddToMessageOTOState());
-//      }
-//    });
-//    return streamSocket.getResponse;
-// }
   Future<void> sendMessage(String type,String content)async{
     emit(LoadingSendMessageToOtherState());
     var result=await chatOTORepoImp.sendMessageToOther(SendOTOMessageModel(desID: targetEmail, contentMessage: content,type:type).toJson());
@@ -218,17 +197,17 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
      addToChatModel('voice');
   }
   Future<void>playVoice(int index)async{
-    playingIndex=index;
-    if (completeChatOTOModelList[index].recordModel?.recordPath != null) {
-      completeChatOTOModelList[index].recordModel?.isPlaying=true;
+    RecordModel? model=completeChatOTOModelList[index].recordModel;
+    if (model?.recordPath != null) {
+      model?.isPlaying=true;
       emit(UpdateVoiceButtonShape());
-      await audioPlayer.setUrl(completeChatOTOModelList[index].recordModel!.recordPath!,initialPosition: Duration(seconds:completeChatOTOModelList[index].recordModel!.currentPosition!.toInt()));
-      completeChatOTOModelList[index].recordModel?.totalDuration=audioPlayer.duration?.inMilliseconds.toDouble();
+      await audioPlayer.setUrl(model!.recordPath!,initialPosition: Duration(seconds:model.currentPosition!.toInt()));
+      model.totalDuration=audioPlayer.duration?.inMilliseconds.toDouble();
       await audioPlayer.play();
       audioPlayer.positionStream.listen((position) {
-        completeChatOTOModelList[index].recordModel?.currentPosition= position.inMilliseconds.toDouble();
+        model.currentPosition= position.inMilliseconds.toDouble();
         emit(UpdateCurrentPositionOfVoice());
-        if(completeChatOTOModelList[index].recordModel?.currentPosition==completeChatOTOModelList[index].recordModel?.totalDuration){
+        if(model.currentPosition==model.totalDuration){
           onFinishedRecord(index);
         }
       },
@@ -236,15 +215,17 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     }
   }
   void onFinishedRecord(int index)async{
-    completeChatOTOModelList[index].recordModel?.isPlaying=false;
-    completeChatOTOModelList[index].recordModel?.currentPosition=0.0;
+    RecordModel? model=completeChatOTOModelList[index].recordModel;
+    model?.isPlaying=false;
+    model?.currentPosition=0.0;
     await audioPlayer.stop();
     emit(UpdateVoiceButtonShape());
   }
   Future<void>stopPlayingVoice(int index)async{
-    if (completeChatOTOModelList[index].recordModel?.recordPath != null) {
-      completeChatOTOModelList[index].recordModel?.isPlaying=false;
-      await audioPlayer.setUrl(completeChatOTOModelList[index].recordModel!.recordPath!);
+    RecordModel? model=completeChatOTOModelList[index].recordModel;
+    if (model?.recordPath != null) {
+      model?.isPlaying=false;
+      await audioPlayer.setUrl(model!.recordPath!);
       await audioPlayer.stop();
       emit(StopPlayingVoiceState());
     }
@@ -264,31 +245,48 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     }
 
   }
+  String sendTextFun(){
+    String letters=messageController.text;
+    messageController.clear();
+    completeChatOTOModelList.add(CompleteChatOTOModel(
+      messageType: 'text',
+      type: 'source',
+      messageDate: DateTime.now(),
+      message: letters,
+    ));
+    return letters;
+  }
+  void addImageLocallyToList(){
+    completeChatOTOModelList.add(CompleteChatOTOModel(
+      messageType: 'image',
+      type: 'source',
+      messageDate: DateTime.now(),
+      imageModel: ImageModel(filePath: imagePath),
+    ));
+    sortMessages();
+    enableImagePreview=false;
+    emit(AddFileLocallySuccessState());
+  }
+  void addVoiceLocallyToList(){
+    completeChatOTOModelList.add(CompleteChatOTOModel(
+      messageType: 'voice',
+      type: 'source',
+      recordModel:RecordModel(recordPath: voicePath),
+      messageDate: DateTime.now(),
+    ));
+    sortMessages();
+    emit(AddFileLocallySuccessState());
+  }
   void addToChatModel(String type)async{
     if(type=='text'){
-      String letters=messageController.text;
-      messageController.clear();
-      completeChatOTOModelList.add(CompleteChatOTOModel(
-        messageType: 'text',
-        type: 'source',
-        messageDate: DateTime.now(),
-        message: letters,
-      ));
-       emit(AddFileLocallySuccessState());
+      String letters=sendTextFun();
+      emit(AddFileLocallySuccessState());
       sortMessages();
-     await sendMessage('text', letters);
+      await sendMessage('text', letters);
     }
     else if(type=='image') {
       if(imagePath!=null){
-        completeChatOTOModelList.add(CompleteChatOTOModel(
-          messageType: 'image',
-          type: 'source',
-          messageDate: DateTime.now(),
-          imageModel: ImageModel(filePath: imagePath),
-        ));
-        sortMessages();
-        enableImagePreview=false;
-        emit(AddFileLocallySuccessState());
+        addImageLocallyToList();
         var imageRef=storageRef.child('image');
         String? imageUrl;
         imageUrl=await uploadFileToFireBase(imageRef,imagePath!);
@@ -300,17 +298,8 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
         }
       }
     }
-
     else if(type=='voice') {
       if(voicePath!=null){
-        completeChatOTOModelList.add(CompleteChatOTOModel(
-          messageType: 'voice',
-          type: 'source',
-          recordModel:RecordModel(recordPath: voicePath),
-          messageDate: DateTime.now(),
-        ));
-        sortMessages();
-        emit(AddFileLocallySuccessState());
         var recordRef=storageRef.child('records');
         String?recordUrl= await uploadFileToFireBase(recordRef,voicePath!);
         completeChatOTOModelList.first.recordModel?.recordPath=recordUrl;
@@ -347,7 +336,7 @@ Future<String?>imageFromCamera()async{
   }
   return null;
 }
-Future<String?> imageFromGallery( )async{
+Future<String?> imageFromGallery()async{
   ImagePicker picker=ImagePicker();
   XFile? imageGallery=await picker.pickImage(source:ImageSource.gallery);
   if(imageGallery!=null){

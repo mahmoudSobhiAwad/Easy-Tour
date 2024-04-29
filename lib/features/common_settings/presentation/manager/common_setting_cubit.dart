@@ -3,12 +3,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/core/utilities/theme_style/theme_mode.dart';
-import 'package:prepare_project/features/tour_guide/settings/presentation/manager/tour_guide_setting_state.dart';
+import 'package:prepare_project/features/common_settings/presentation/manager/common_setting_states.dart';
 import 'package:prepare_project/features/tourist/settings/data/model/put_notify_model.dart';
 import 'package:prepare_project/features/tourist/settings/data/repo/setting_repo_imp.dart';
 
-class TourGuideSettingCubit extends Cubit<TourGuideSettingState>{
-  TourGuideSettingCubit({required this.settingRepoImp}):super(InitialTourGuideSettingState());
+class CommonSettingCubit extends Cubit<CommonSettingState>{
+  CommonSettingCubit({required this.settingRepoImp}):super(InitialTourGuideSettingState());
   bool enableDarkMode=false;
   bool enableNotification=false;
   ThemeData appTheme=lightMode;
@@ -31,6 +31,7 @@ class TourGuideSettingCubit extends Cubit<TourGuideSettingState>{
     await AwesomeNotifications().isNotificationAllowed().then((allowed) async {
       if(allowed){
         enableNotification=true;
+        await getFcmToken('enable');
         emit(ChangeNotificationModeState());
       }
     });

@@ -5,7 +5,8 @@ import 'package:prepare_project/features/sign_up/presentation/views/widgets/cust
 import 'package:prepare_project/features/tour_guide/requested_trips/presentaions/manager/requested_trip_for_guide/requested_trip_for_guide_cubit.dart';
 import 'package:prepare_project/features/tour_guide/requested_trips/presentaions/view/widgets/request_details/request_details_view.dart';
 import 'package:prepare_project/features/tour_guide/requested_trips/presentaions/view/widgets/request_trip_item.dart';
-import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/widgets/chat_with_other_list.dart';
+
+import '../../../../../tourist/chat_with_other/presentaions/views/widgets/custom_dissmisable_chat.dart';
 class RequestedTripsTourGuideBody extends StatelessWidget {
   const RequestedTripsTourGuideBody({
     super.key,

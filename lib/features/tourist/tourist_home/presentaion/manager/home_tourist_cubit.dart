@@ -10,11 +10,8 @@ import 'package:prepare_project/features/tourist/settings/data/repo/setting_repo
 import 'package:prepare_project/features/tourist/tourist_home/data/repo/home_tourist_repo_impl.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/manager/home_tourist_state.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-
 import '../../../../../core/utilities/function/set_app_state.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
-
-
 
 class HomeTouristCubit extends Cubit<HomeTouristState>{
   HomeTouristCubit({required this.controller,required this.settingRepoImp,required this.homeTouristRepoImp}):super(InitialHomeTouristState());
@@ -118,8 +115,6 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
       }
     });
   }
-
-
   Future<void>configurePushNotification()async{
     await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true,

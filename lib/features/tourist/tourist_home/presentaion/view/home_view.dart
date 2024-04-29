@@ -110,7 +110,7 @@ class _HomeTouristViewState extends State<HomeTouristView> with SingleTickerProv
               content:'EGY TOUR wants to send notifications to you',
               onTapYes: (){
               context.pop();
-              context.push(RouterApp.kTouristSettings);
+              context.push(RouterApp.kCommonSettings);
               },
               onTapNo: (){
               context.pop();
