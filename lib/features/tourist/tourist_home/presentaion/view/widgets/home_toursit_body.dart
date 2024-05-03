@@ -31,7 +31,7 @@ class HomeTouristBody extends StatelessWidget {
             const SizedBox(height: 20,),
             BookingPart(height: height, width: width,isMenuActive: cubit.isMenuActive,),
             const SizedBox(height: 20,),
-            DiscoverPart(height: height, width: width,isMenuActive: cubit.isMenuActive),
+            DiscoverPart(height: height, width: width,isMenuActive: cubit.isMenuActive,places: cubit.bestDestinationPlaces, homeTouristRepoImp: cubit.homeTouristRepoImp,),
             const SizedBox(height: 20,),
             AiPart(height: height, width: width,isMenuActive: cubit.isMenuActive),
             const SizedBox(height: 20,),

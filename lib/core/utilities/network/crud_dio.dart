@@ -168,5 +168,9 @@ class ApiServices{
     }));
     return response.data;
   }
+  Future<dynamic>normalPost(String endPoint,{Map<String,dynamic>?data})async{
+    final response=await dio.post(endPoint);
+    return response.data;
+  }
 
 }

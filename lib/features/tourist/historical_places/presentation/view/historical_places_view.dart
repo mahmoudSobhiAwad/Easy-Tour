@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/features/tourist/historical_places/presentation/manager/historical_places_bloc.dart';
 import 'package:prepare_project/features/tourist/historical_places/presentation/manager/historical_places_states.dart';
 import 'package:prepare_project/features/tourist/historical_places/presentation/view/widgets/historical_places_body.dart';
+import 'package:prepare_project/features/tourist/tourist_home/data/repo/home_tourist_repo_impl.dart';
 
-class HistoricalPLacesView extends StatelessWidget {
-  const HistoricalPLacesView({super.key});
+class DiscoverPLacesView extends StatelessWidget {
+  const DiscoverPLacesView({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +16,12 @@ class HistoricalPLacesView extends StatelessWidget {
     double height=BasicDimension.screenHeight(context);
     return  BlocProvider(
       create: (context){
-        return HistoricalPlacesCubit();
+        return DiscoverPlacesCubit(homeTouristRepoImp: getIt.get<HomeTouristRepoImp>(),)..getPlaces();
         },
-      child: BlocConsumer<HistoricalPlacesCubit,HistoricalPlacesState>(
+      child: BlocConsumer<DiscoverPlacesCubit,DiscoverPlacesStates>(
         builder: (context,state){
-         var cubit=BlocProvider.of<HistoricalPlacesCubit>(context);
-          return HistoricalPlacesBody(height: height, width: width,cubit: cubit,);
+         var cubit=BlocProvider.of<DiscoverPlacesCubit>(context);
+          return DiscoverPlacesBody(height: height, width: width,cubit: cubit,);
         },
         listener: (context,state){},
       ),

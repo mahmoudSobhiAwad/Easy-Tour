@@ -95,6 +95,10 @@ List<String> prefs = const [
   "Educational and Study Tours",
   "Special Interest Tours",
 ];
+List<String>discoverPlacesCategories=const[
+  'Cultural Centers', 'Religious Sites', 'Natural Landmarks',
+  'Historical landmark', 'Bazaar', 'Entertainment Centers',
+  'Beaches And Water Bodies', 'Malls'];
 enum Role{tourist,tourGuide}
 const String authTourist='auth/tourist/';
 const String authTourGuide='auth/tourGuide/';
@@ -107,7 +111,7 @@ const String chatNotificationChannel='chat_notification_channel';
 const String forecastingWeatherKey='MW0BgPpZeo46MW13eHrMaXM9y2u2c1BJ';
 const baseUrl='http://107.21.23.77:8080/';
 const chatBotUrl='http://54.87.225.235:8000/chatbot';
-const generateTripUrl='http://44.204.169.105:8000/generate_trip';
+const generateTripUrl='$generateTripBaseUrl/generate_trip';
 const scanQrUrl='http://54.144.127.183:8000/decrypt/';
 const googleNewApiUrl='https://places.googleapis.com/v1/places:';
 const String routeApiUrl='https://routes.googleapis.com/directions/v2:computeRoutes';
@@ -120,3 +124,4 @@ const String fieldMaskForGetRoute='routes.duration,routes.distanceMeters,routes.
 const String fieldMaskForShortNearby='places.displayName,places.primaryTypeDisplayName,places.nationalPhoneNumber,places.internationalPhoneNumber,places.regularOpeningHours.openNow';
 const String currencyConverterBaseUrl='https://v6.exchangerate-api.com/v6/$currencyConverterApiKey/';
 const String currencyConverterApiKey='9a250bed3ba7c9c8dba370f1';
+const generateTripBaseUrl='http://44.204.169.105:8000';

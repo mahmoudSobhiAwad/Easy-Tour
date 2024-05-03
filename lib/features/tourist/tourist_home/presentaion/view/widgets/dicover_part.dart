@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
-import 'package:prepare_project/features/tourist/tourist_home/data/model/home_data.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
+import 'package:prepare_project/features/tourist/historical_places/presentation/view/historical_places_view.dart';
+import 'package:prepare_project/features/tourist/historical_places/presentation/view/widgets/best_destination_item.dart';
+import 'package:prepare_project/features/tourist/historical_places/presentation/view/widgets/best_destination_with_loading.dart';
+import 'package:prepare_project/features/tourist/tourist_home/data/repo/home_tourist_repo_impl.dart';
+import '../../../../generate_trip_with_ai/presentation/views/widgets/activity_deatils/activity_details_view.dart';
 
 
 class DiscoverPart extends StatelessWidget {
@@ -10,43 +14,59 @@ class DiscoverPart extends StatelessWidget {
     required this.height,
     required this.width,
     required this.isMenuActive,
+    required this.places,
+    required this.homeTouristRepoImp,
   });
 
   final double height;
   final double width;
   final bool isMenuActive;
-
+  final List<Place>places;
+  final HomeTouristRepoImp homeTouristRepoImp;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-       const Row(
+         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Best Destinations',style: CustomTextStyle.homePartTitle,),
-            Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: Text('See All',style: CustomTextStyle.commonFontThin,),
+            const Text('Best Destinations',style: CustomTextStyle.homePartTitle,),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context){
+                  return  const DiscoverPLacesView();
+                }));
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(right: 10.0),
+                child: Text('See All',style: CustomTextStyle.commonFontThin,),
+              ),
             ),
           ],
         ),
         SizedBox(
-            height: height*0.3,
-            width: width,
+            height:height*0.3,
+            width:width,
             child: ListView.separated(
               padding: EdgeInsets.zero,
               clipBehavior: Clip.none,
               scrollDirection: Axis.horizontal,
-              itemCount: placesItem.length,
+              itemCount:places.isEmpty?2:places.length,
               physics: isMenuActive?const NeverScrollableScrollPhysics():const BouncingScrollPhysics(),
               separatorBuilder: (context,index){
                 return const SizedBox(width: 20,);
                 },
               itemBuilder: (BuildContext context, int index)
               {
-                return BestDestinationItem(index: index, height: height, width: width);
+                return places.isEmpty? LoadingBestDestinationItem(height: height, width: width):GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return ActivityDetailsView(place:  places[index],);
+                      }));
+                    },
+                    child: BestDestinationItem(height: height, width: width,place: places[index],));
                 },
             )
         ),
@@ -54,45 +74,4 @@ class DiscoverPart extends StatelessWidget {
     );
   }
 }
-class BestDestinationItem extends StatelessWidget {
-  const BestDestinationItem({super.key,required this.index,required this.height,required this.width});
-final int index;
-final double height;
-final double width;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding:const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        border: Border.all(color: thirdColor,width: 3),
-       // color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-              child: Image.asset(placesItem[index].imagePath,height: height*0.2,width: width*0.4,fit: BoxFit.fill,)),
-          const Row(
-            children: [
-              Text('Niladri Reservoir',style: CustomTextStyle.commonFontThin,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(Icons.star,color: goldenColor,),
-                  Text('4.7',style: CustomTextStyle.commonFontThin,),
-                ],
-              ),
-            ],
-          ),
-          const Row(
-            children: [
-              Icon(Icons.location_on,color: entertainmentColor,),
-              Text('Tekergat, Sunamgnj',style: CustomTextStyle.commonFontThinLight,),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
+

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/core/utilities/constant_var/constant.dart';
 import 'package:prepare_project/core/utilities/notification_setup/notification_setup.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 import 'package:prepare_project/features/tourist/settings/data/repo/setting_repo_imp.dart';
 import 'package:prepare_project/features/tourist/tourist_home/data/repo/home_tourist_repo_impl.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/manager/home_tourist_state.dart';
@@ -23,6 +24,7 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
   final HomeTouristRepoImp homeTouristRepoImp;
   final SettingRepoImp settingRepoImp;
   int currIndex=0;
+  List<Place>bestDestinationPlaces=[];
   bool allowedNotification=false;
   late io.Socket socket ;
   Future<void>getProfilePicture()async{
@@ -126,6 +128,20 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
         NotificationSetup().createOrderNotification(message.notification?.title, message.notification?.body, requestNotificationChannel);
       }
     });
+  }
+  Future<void>getBestDestination()async{
+    emit(LoadingGetBestDestinationStata());
+    var result=await homeTouristRepoImp.getBestDestination();
+    result.fold(
+            (failure){
+              emit(FailureGetBestDestinationStata(errMessage: failure.errMessage));
+            },
+            (places){
+              for(var item in places){
+                bestDestinationPlaces.add(item);
+              }
+              emit(SuccessGetBestDestinationStata());
+            });
   }
 }
 @pragma("vm:entry-point")

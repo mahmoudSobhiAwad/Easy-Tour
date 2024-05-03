@@ -18,7 +18,7 @@ Future<void> main()async {
   await prepareFutureMainFun();
   runApp(MultiBlocProvider(
     providers: [
-      BlocProvider( create: (context)=>CommonSettingCubit(settingRepoImp: getIt.get<SettingRepoImp>())..checkAllowingNotify(),),
+      BlocProvider( create: (context)=>CommonSettingCubit(settingRepoImp: getIt.get<SettingRepoImp>())),//..checkAllowingNotify(),),
     ],
       child: const MyApp()));
 }

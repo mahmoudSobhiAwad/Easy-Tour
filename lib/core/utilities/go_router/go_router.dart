@@ -12,7 +12,6 @@ import 'package:prepare_project/features/tourist/chat_with_other/presentaions/vi
 import 'package:prepare_project/features/tourist/currency_converter/presentation/view/currency_converter_view.dart';
 import 'package:prepare_project/features/tourist/entertainment_places/presentation/views/entertainment_places_view.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/generate_trip_wit_ai.dart';
-import 'package:prepare_project/features/tourist/historical_places/presentation/view/historical_places_view.dart';
 import 'package:prepare_project/features/tourist/image_classification/presentation/views/image_classificarion_view.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/home_view.dart';
 import 'package:prepare_project/features/tourist/weather_forecast/presentation/views/weather_forecast_view.dart';
@@ -73,7 +72,6 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    }),
    GoRoute(path: kTourGuideHome,builder: (context,state)=>const BasicHome(),),
    GoRoute(path: kImageClassification,builder: (context,state)=>const ImageClassificationView(),),
-   GoRoute(path: kHistoricalPlace, builder: (context,state)=>const HistoricalPLacesView(),),
    GoRoute(path: kEntertainmentPlaces,builder: (context,state)=>const EntertainmentPlacesView(),),
    GoRoute(path: kChatTouristView,builder: (context,state)=>const TouristChatWithOtherView(),),
    GoRoute(path: kTourGuideTripsBooking,builder: (context,state)=>const BookTripWithTourGuides(),),

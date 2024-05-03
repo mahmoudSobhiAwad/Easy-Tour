@@ -22,3 +22,9 @@ class FailureSendFcmNotificationState extends HomeTouristState{
   final String?errMessage;
   FailureSendFcmNotificationState({this.errMessage});
 }
+class LoadingGetBestDestinationStata extends HomeTouristState{}
+class SuccessGetBestDestinationStata extends HomeTouristState{}
+class FailureGetBestDestinationStata extends HomeTouristState{
+  final String?errMessage;
+  FailureGetBestDestinationStata({this.errMessage});
+}

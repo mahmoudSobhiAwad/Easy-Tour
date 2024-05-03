@@ -70,6 +70,18 @@ class Place{
       time: json['time']??"",
     );
   }
+  factory Place.fromJsonSecond(Map<String, dynamic> json) {
+    return Place(
+      name: json['place']??"",
+      longitude: json['longitude']??0,
+      latitude: json['latitude']??0,
+      activity: json['activity']??"",
+      category: json['category']??"",
+      budget: json['budget']??0,
+      image: json['image_link']??"",
+      time: json['time']??"",
+    );
+  }
 
   Map<String, dynamic> toJson(int i) =>
       {
