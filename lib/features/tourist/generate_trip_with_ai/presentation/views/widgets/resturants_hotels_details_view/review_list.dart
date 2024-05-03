@@ -8,9 +8,9 @@ class ReviewListForHotelsOrRestaurants extends StatelessWidget {
   final List<ReviewModel> model;
   @override
   Widget build(BuildContext context) {
-    return model.isEmpty?ListView.builder(
+    return model.isEmpty?const Text('No Review For That Place') :ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-        itemCount: 4,itemBuilder: (context,index)=>ItemReviewForOneTrip(width: width, height: height, model: model[index],)) :
-    const Text('No Review For That Place');
+        itemCount: 4,itemBuilder: (context,index)=>ItemReviewForOneTrip(width: width, height: height, model: model[index],));
+
   }
 }

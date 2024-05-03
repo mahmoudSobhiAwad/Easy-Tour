@@ -3,6 +3,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/decode_poly_lines.dart';
+import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
+import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 import 'package:prepare_project/features/tourist/google_map/presentaion/manager/map_cubit/google_map_cubit.dart';
 import 'package:prepare_project/features/tourist/google_map/presentaion/view/text_search_with_result.dart';
 class GoogleMapBody extends StatefulWidget {
@@ -36,6 +38,7 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
     final double height=BasicDimension.screenHeight(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      bottomSheet: widget.cubit.showInitialBottomSheet?BottomSheetForInitial(height: height, width: width, cubit: widget.cubit,):null,
       body:
       widget.cubit.myLocation==null?
       const Column(
@@ -58,7 +61,7 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
               initialCameraPosition: CameraPosition(zoom: 14,target:LatLng(widget.cubit.myLocation!.latitude ,widget.cubit.myLocation!.longitude),)
           ),
           TextSearchWithResultList(width: width, height: height, cubit: widget.cubit, markers: markers,controller: googleMapController,),
-           Positioned(
+          Positioned(
             bottom: height*0.05,
               left: width*0.85,
               child: Container(
@@ -68,7 +71,7 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
                     updateMyLocation(enableLiveLocation: widget.cubit.enableLiveLocation);
                     setState(() {
                     });
-                  }, icon: const Icon(Icons.my_location_outlined,color: basicColor,size: 40,))))
+                  }, icon: const Icon(Icons.my_location_outlined,color: basicColor,size: 40,)))),
         ],
       ),
     );
@@ -102,5 +105,68 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
     }
 
 
+  }
+}
+
+class BottomSheetForInitial extends StatelessWidget {
+  const BottomSheetForInitial({
+    super.key,
+    required this.height,
+    required this.width,
+    required this.cubit,
+  });
+
+  final double height;
+  final double width;
+  final GoogleMapCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height*0.2,
+      width: width,
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(topLeft:Radius.circular(12) ,topRight: Radius.circular(12)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: IconButton(onPressed: (){
+              cubit.closeBottomSheet();
+            }, icon: const Icon(Icons.close)),
+          ),
+          Text("${cubit.initialLatLngInfo}"),
+          SizedBox(
+              width: width*0.6,
+              child: Row(
+                children: [
+                  const Icon(Icons.directions_run),
+                  Text("${cubit.initialDistance!/1000.toInt()} KM",style: CustomTextStyle.commonFontThin,),
+                ],
+              )),
+          GestureDetector(
+            onTap: (){
+              cubit.showPolyLineForInitial();
+            },
+            child: Container(
+              width: width*0.33,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(color: forthColor,borderRadius: commonBorderRadius()),
+              child: Row(
+                children: [
+                  Text('Direction',style: CustomTextStyle.commonSignThinDark.copyWith(color: Colors.white),),
+                  const Icon(Icons.directions,color: Colors.white,)
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

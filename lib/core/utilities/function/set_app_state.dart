@@ -11,6 +11,9 @@ class SetAppState{
   static Future<void> setToken({required String? token})async{
     await prefs?.setString('token',token??'');
   }
+  static Future<void> setFcmToken({required String? token})async{
+    await prefs?.setString('fcmToken',token??'');
+  }
   static Future<void> setName({required String? name})async{
     await prefs?.setString('name',name??'');
   }

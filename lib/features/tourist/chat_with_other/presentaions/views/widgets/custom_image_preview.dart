@@ -36,8 +36,12 @@ class CustomImagePreview extends StatelessWidget {
                   SizedBox(height: height*0.2,),
                   Center(
                       child:imageModel.imageNetworkPath!=null?
-                      Image.network(imageModel.imageNetworkPath!,fit: BoxFit.fill,height:height*0.4,width: double.infinity,) :
-                      Image.file(File(imageModel.filePath!),fit: BoxFit.fill,height:height*0.4,width: double.infinity,)),
+                      InteractiveViewer(
+                          maxScale: 4,
+                          child: Image.network(imageModel.imageNetworkPath!,fit: BoxFit.fill,height:height*0.4,width: double.infinity,)) :
+                      InteractiveViewer(
+                          maxScale: 4,
+                          child: Image.file(File(imageModel.filePath!),fit: BoxFit.fill,height:height*0.4,width: double.infinity,))),
                   SizedBox(height: height*0.2,),
                   enableSendImage?
                   Padding(

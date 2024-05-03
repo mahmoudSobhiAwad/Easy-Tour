@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
+import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/managers/one_to_one/chat_one_to_one_cubit.dart';
-class RecorderWithImagePickerWithCustomForm extends StatelessWidget {
+class RecorderWithImagePickerWithCustomForm extends StatefulWidget {
   const RecorderWithImagePickerWithCustomForm({super.key,required this.cubit,required this.height,required this.width});
   final double width;
   final double height;
   final ChatOneToOneCubit cubit;
+
+  @override
+  State<RecorderWithImagePickerWithCustomForm> createState() => _RecorderWithImagePickerWithCustomFormState();
+}
+
+class _RecorderWithImagePickerWithCustomFormState extends State<RecorderWithImagePickerWithCustomForm> with SingleTickerProviderStateMixin{
+  @override
+  void initState() {
+    super.initState();
+    widget.cubit.animationController= AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300), // Adjust animation duration as needed
+    );
+    widget.cubit.scaleAnimation = Tween<double>(begin: 1.0, end: 1.2) // Scale animation
+        .animate(widget.cubit.animationController);
+  }
+  @override
+  void dispose() {
+    widget.cubit.animationController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,19 +37,26 @@ class RecorderWithImagePickerWithCustomForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            width:width*0.75,
-            child:  CustomTextFormField(
+            width:widget.width*0.75,
+            child: widget.cubit.timerOn?Container(
+              decoration: BoxDecoration(
+                color: thirdColor,
+                borderRadius: commonBorderRadius(),
+              ),
+              padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+              child: Text('${widget.cubit.minutes}:${widget.cubit.seconds.toString().padLeft(2, '0')}'),
+            ):CustomTextFormField(
               onChanged: (value){
-                cubit.checkExistOfText(value);
+                widget.cubit.checkExistOfText(value);
               },
-              controller:cubit.messageController,
+              controller:widget.cubit.messageController,
               suffix:PopupMenuButton<SampleItem>(
                 padding: const EdgeInsets.all(10),
                 splashRadius: 15,
                 position: PopupMenuPosition.over,
                 constraints: BoxConstraints(
-                  maxWidth: width*0.4,
-                  maxHeight: height*0.2,
+                  maxWidth: widget.width*0.4,
+                  maxHeight: widget.height*0.2,
                 ),
                 icon:const Icon(Icons.attach_file,color: entertainmentColor,) ,
                 initialValue: SampleItem.camera,
@@ -37,7 +66,7 @@ class RecorderWithImagePickerWithCustomForm extends StatelessWidget {
                   PopupMenuItem<SampleItem>(
                     value: SampleItem.camera,
                     onTap: (){
-                      cubit.getImageFromCamera();
+                      widget.cubit.getImageFromCamera();
                     },
                     child: const Padding(
                       padding: EdgeInsets.only(bottom: 5.0),
@@ -50,7 +79,7 @@ class RecorderWithImagePickerWithCustomForm extends StatelessWidget {
                     ),
                   ),
                   PopupMenuItem<SampleItem>(
-                    onTap: (){cubit.getImageFromGallery();},
+                    onTap: (){widget.cubit.getImageFromGallery();},
                     value: SampleItem.gallery,
                     child:const Padding(
                       padding: EdgeInsets.only(bottom: 5.0),
@@ -81,27 +110,30 @@ class RecorderWithImagePickerWithCustomForm extends StatelessWidget {
               floatingLabelBehavior: FloatingLabelBehavior.never,
             ),
           ),
-          CircleAvatar(
-              radius: 30,
-              backgroundColor: cubit.isRecording?thirdColor:forthColor,
-              child:cubit.enableSend?
-              GestureDetector(
-                  onTap: (){
-                    cubit.addToChatModel('text');
-                  },
-                  child: const Icon(Icons.send,color: Colors.white,shadows: [
-                  ],)):
-              GestureDetector(
-                  onLongPress: (){
-                    cubit.startRecordingVoice();
-                  },
-                  onLongPressUp: (){
-                    cubit.stopRecording();
-                  },
-                  child: const Icon(Icons.mic,color: whiteColor,shadows: [
-                    Shadow(color: basicColor)
-                  ],)),
+          ScaleTransition(
+            scale: widget.cubit.scaleAnimation!,
+            child: CircleAvatar(
+                radius: 30,
+                backgroundColor: widget.cubit.isRecording?thirdColor:forthColor,
+                child:widget.cubit.enableSend?
+                GestureDetector(
+                    onTap: (){
+                      widget.cubit.addToChatModel('text');
+                    },
+                    child: const Icon(Icons.send,color: Colors.white,shadows: [
+                    ],)):
+                GestureDetector(
+                    onLongPress: (){
+                      widget.cubit.startRecordingVoice();
+                    },
+                    onLongPressUp: (){
+                      widget.cubit.stopRecording();
+                    },
+                    child: const Icon(Icons.mic,color: whiteColor,shadows: [
+                      Shadow(color: basicColor)
+                    ],)),
 
+            ),
           ),
         ],
       ),

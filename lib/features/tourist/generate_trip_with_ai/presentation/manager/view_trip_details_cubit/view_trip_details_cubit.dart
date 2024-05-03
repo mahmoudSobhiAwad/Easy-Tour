@@ -86,10 +86,11 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
   }
   void moveToSpecificDay(int pageNum)
   {
-   pageController.jumpToPage(pageNum);
-   showRestaurants=false;
-   showHotels=false;
-   emit(MoveToPrevDayState());
+    currentDay=pageNum;
+    pageController.jumpToPage(pageNum);
+    showRestaurants=false;
+    showHotels=false;
+    emit(MoveToPrevDayState());
   }
   Future<void> uploadTrip()async
   {
@@ -163,10 +164,9 @@ class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
   }
 
   Future<void> getNearbyPlace(String type,List<NearbyPlacesModel>list,bool loading,{required double lang,required double lat})async{
-
     emit(LoadingGetNearbyPlacesState());
     loading=true;
-    var response=await nearbySearchRepoImp.getNearbyPlace(NearbyPlacesModel().toJson(type:[type],long:lang,lat:lat,distance: 2000,maxResult: 3));
+    var response=await nearbySearchRepoImp.getNearbyPlace(NearbyPlacesModel().toJson(type:[type],long:lang,lat:lat,distance: 3000,maxResult: 3));
     return response.fold((failure){
       loading=false;
       log(failure.errMessage.toString());

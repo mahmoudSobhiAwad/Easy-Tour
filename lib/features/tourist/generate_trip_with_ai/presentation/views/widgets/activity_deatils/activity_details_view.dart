@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
+import 'package:prepare_project/features/tourist/google_map/presentaion/view/google_map_view.dart';
 import 'package:prepare_project/features/tourist/settings/presentaion/views/widgets/payment_setting_item.dart';
 class ActivityDetailsView extends StatelessWidget {
   const ActivityDetailsView({super.key,required this.place});
@@ -51,7 +53,11 @@ class ActivityDetailsView extends StatelessWidget {
                       child: SingleChildScrollView(child:  Text(place.activity,style: CustomTextStyle.commonFontThinLight,)),
                     ),
                     SizedBox(height: height*0.02,),
-                    Center(child: CustomLoginButton(altWidth: width*0.9,color: forthColor,label: 'Go Now',)),
+                    Center(child: CustomLoginButton(altWidth: width*0.9,color: forthColor,label: 'Go Now',onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return GoogleMapView(initialInfo: place.name,initialLatLng: LatLng(place.latitude, place.longitude));
+                      }));
+                    },)),
 
                   ],
                 ),

@@ -35,4 +35,5 @@ class UpdateCurrentPositionOfVoice extends ChatOneToOneStates{}
 class StopPlayingVoiceState extends ChatOneToOneStates{}
 class EnableImagePreviewState extends ChatOneToOneStates{}
 class DisableImagePreviewState extends ChatOneToOneStates{}
+class TimerChangingWhileRecordingState extends ChatOneToOneStates{}
 

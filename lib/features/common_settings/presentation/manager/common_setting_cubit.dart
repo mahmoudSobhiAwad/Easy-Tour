@@ -2,6 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/core/utilities/theme_style/theme_mode.dart';
 import 'package:prepare_project/features/common_settings/presentation/manager/common_setting_states.dart';
 import 'package:prepare_project/features/tourist/settings/data/model/put_notify_model.dart';
@@ -31,8 +32,15 @@ class CommonSettingCubit extends Cubit<CommonSettingState>{
     await AwesomeNotifications().isNotificationAllowed().then((allowed) async {
       if(allowed){
         enableNotification=true;
-        await getFcmToken('enable');
         emit(ChangeNotificationModeState());
+        final fcmToken = await FirebaseMessaging.instance.getToken();
+        if(fcmToken!=SetAppState.prefs?.getString('fcmToken')){
+          await getFcmToken('refresh');
+        }
+        else if(SetAppState.prefs?.getString('fcmToken')==''){
+          await SetAppState.setFcmToken(token: fcmToken);
+          await getFcmToken('enable');
+        }
       }
     });
   }
@@ -40,7 +48,8 @@ class CommonSettingCubit extends Cubit<CommonSettingState>{
     if(enableNotification){
       await AwesomeNotifications().dismissAllNotifications();
       enableNotification=false;
-      getFcmToken('disable');
+      await getFcmToken('disable');
+      await SetAppState.setFcmToken(token: '');
       emit(ChangeNotificationModeState());
     }
     else{
@@ -50,16 +59,22 @@ class CommonSettingCubit extends Cubit<CommonSettingState>{
     }
   }
 
-  Future<void> getFcmToken(String enableType)async{
-    final fcmToken = await FirebaseMessaging.instance.getToken();
-    emit(LoadingSendFcmNotificationState());
-    var result=await settingRepoImp.sendFcmDevice(SendFcmModel(enable:enableType,fcmDevice: fcmToken).toJson());
-    result.fold((failure){
-      debugPrint(failure.errMessage);
-      emit(FailureSendFcmNotificationState(errMessage: failure.errMessage));
-    }, (success){
-      emit(SuccessSendFcmNotificationState());
-    });
+  Future<void> getFcmToken(String enableType)async {
+    if (SetAppState.prefs?.getString('token') != '') {
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+      emit(LoadingSendFcmNotificationState());
+      var result=await settingRepoImp.sendFcmDevice(SendFcmModel(enable:enableType,fcmDevice: fcmToken).toJson());
+      result.fold((failure){
+        if(failure.statusCode==401){
+          getFcmToken(enableType);
+        }
+        else{
+          emit(FailureSendFcmNotificationState(errMessage: failure.errMessage));
+        }
+      }, (success){
+        emit(SuccessSendFcmNotificationState());
+      });
+    }
   }
 
 }

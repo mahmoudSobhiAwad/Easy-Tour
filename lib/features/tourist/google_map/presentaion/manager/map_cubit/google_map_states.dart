@@ -22,3 +22,5 @@ class FailureGetRoutePolyLinesList extends GoogleMapStates {
 }
 class UpdateLatLngBoundsAfterGetRoute extends GoogleMapStates {}
 class AddNewMarkersWhenPushOnMap extends GoogleMapStates {}
+class FinishPrepareForInitialLocation extends GoogleMapStates {}
+class ShowInitialBottomSheet extends GoogleMapStates {}

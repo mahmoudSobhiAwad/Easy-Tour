@@ -72,7 +72,6 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
     emit(ChangeHomeTouristNavBottomState());
   }
   Future<void> logOut()async{
-    await makeDataNull();
     emit(LoadingLogOutState());
     var result =await homeTouristRepoImp.logOut();
     result.fold(
@@ -96,7 +95,7 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
   }
 
   Future<void> makeDataNull() async {
-     await SetAppState.setToken(token: '');
+    await SetAppState.setToken(token: '');
     await SetAppState.setRole(role: '');
     await SetAppState.setEmail(email: '');
     await SetAppState.setProfilePic(profileUrl: '');
@@ -131,4 +130,5 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
 }
 @pragma("vm:entry-point")
 Future<dynamic>myBackGroundMessageHandler(RemoteMessage message)async{
-  await Firebase.initializeApp();}
+  await Firebase.initializeApp();
+}

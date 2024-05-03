@@ -19,7 +19,6 @@ class VoiceSliderMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RecordModel recordModel=model.recordModel!;
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Align(
@@ -29,29 +28,42 @@ class VoiceSliderMessage extends StatelessWidget {
               color:type=='source'?forthColor:thirdColor,
               borderRadius: BorderRadius.circular(25),
             ),
-            padding:const EdgeInsets.all(5),
+            padding:const EdgeInsets.only(left: 5,right: 5),
             child: SizedBox(
               width: width*0.62,
-              child: Row(
+              child: Column(
                 children: [
-                  recordModel.isLoading?const CircularProgressIndicator(color: Colors.white,):recordModel.isPlaying?
-                  IconButton(onPressed: (){
-                    cubit.stopPlayingVoice(index);
-                  }, icon: const Icon(Icons.pause,color: whiteColor,)) :
-                  IconButton(onPressed: (){
-                    cubit.playVoice(index);
-                  }, icon: const Icon(Icons.play_arrow,color: whiteColor,)),
-                  Slider(
-                    activeColor:type=='source'? whiteColor:basicColor,
-                    inactiveColor:type=='source'?thirdColor:secondaryColor,
-                    thumbColor:type=='source'? whiteColor:basicColor,
-                    min: 0,
-                    value:cubit.playingIndex==index?recordModel.currentPosition!.clamp(0,recordModel.totalDuration?.toDouble()??0).toDouble():0,
-                    max: recordModel.totalDuration??0,
-                    onChanged: (value) async{
-                      cubit.changeVoicePosition(value, index);
-                    },
+                  Row(
+                    children: [
+                      recordModel.isLoading?const CircularProgressIndicator(color: Colors.white,):recordModel.isPlaying?
+                      IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: (){
+                        cubit.stopPlayingVoice(index);
+                      }, icon: Icon(Icons.pause,color: type=='source'? whiteColor:basicColor,)) :
+                      IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: (){
+                        cubit.playVoice(index);
+                      }, icon: Icon(Icons.play_arrow,color: type=='source'? whiteColor:basicColor,)),
+                      Slider(
+                        activeColor:type=='source'? whiteColor:basicColor,
+                        inactiveColor:type=='source'?thirdColor:secondaryColor,
+                        thumbColor:type=='source'? whiteColor:basicColor,
+                        min: 0,
+                        value:cubit.playingIndex==index?recordModel.currentPosition!.clamp(0,recordModel.totalDuration?.toDouble()??0).toDouble():0,
+                        max: recordModel.totalDuration??0,
+                        onChanged: (value) async{
+                          cubit.changeVoicePosition(value, index);
+                        },
+                      ),
+                    ],
                   ),
+                  Align(
+                      alignment: model.type=='source'?Alignment.bottomRight:Alignment.bottomLeft,
+                      child: Text('${model.messageDate?.hour}:${model.messageDate?.minute} ${model.messageDate!.hour>12?'PM':'AM'}',style: TextStyle(
+                        color: type=='source'? whiteColor:basicColor,
+                      ),)),
                 ],
               ),
             )),

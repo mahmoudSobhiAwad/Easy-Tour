@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart'as firebase_core;
@@ -28,6 +29,7 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
   final storageRef = FirebaseStorage.instance.ref('chat');
   bool isRecording=false;
   bool allowedToRecord=false;
+  bool timerOn=false;
   int playingIndex=0;
   final ImagePicker picker=ImagePicker();
   String? voicePath;
@@ -42,9 +44,14 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
   String?targetEmail;
   String?targetProfile;
   StreamSocket streamSocket =StreamSocket();
+  late AnimationController animationController;
+  late Animation<double>? scaleAnimation;
   List<CompleteChatOTOModel>completeChatOTOModelList=[];
   late io.Socket socket;
   final String sourceEmail=SetAppState.prefs?.getString('email')??"";
+  Timer?timer;
+  int seconds=0;
+  int minutes=0;
   void sortMessages(){
     completeChatOTOModelList.sort((a, b) => b.messageDate!.compareTo(a.messageDate!));
   }
@@ -182,6 +189,17 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
   }
   Future<void> startRecordingVoice() async {
     if(allowedToRecord){
+      timerOn=true;
+      seconds=minutes=0;
+      animationController.forward();
+      timer=Timer.periodic(const Duration(milliseconds: 900), (timer) {
+        seconds++;
+        if (seconds >= 60) {
+          minutes++;
+          seconds = 0;
+        }
+        emit(TimerChangingWhileRecordingState());
+      });
       final directory = await getApplicationDocumentsDirectory();
       String fileName = 'recording_${DateTime.now().millisecondsSinceEpoch}.m4a';
       voicePath = '${directory.path}/$fileName';
@@ -191,10 +209,13 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     }
   }
   Future<void> stopRecording() async {
-    isRecording=false;
     await recorder.stop();
+    timerOn=false;
+    animationController.reverse();
+    isRecording=false;
+    timer?.cancel();
     emit(RecordingStoppedState());
-     addToChatModel('voice');
+    addToChatModel('voice');
   }
   Future<void>playVoice(int index)async{
     RecordModel? model=completeChatOTOModelList[index].recordModel;
@@ -300,6 +321,7 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     }
     else if(type=='voice') {
       if(voicePath!=null){
+        addVoiceLocallyToList();
         var recordRef=storageRef.child('records');
         String?recordUrl= await uploadFileToFireBase(recordRef,voicePath!);
         completeChatOTOModelList.first.recordModel?.recordPath=recordUrl;

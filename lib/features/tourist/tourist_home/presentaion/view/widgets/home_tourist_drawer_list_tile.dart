@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:prepare_project/features/tourist/test_mailer.dart';
 
 import '../../../../../../core/utilities/go_router/go_router.dart';
 
@@ -26,7 +27,9 @@ class TouristHomeDrawerListTile extends StatelessWidget {
           context.push(RouterApp.kCommonSettings);
         },
             (){
-          context.push(RouterApp.kCommonSettings);
+          Navigator.push(context, MaterialPageRoute(builder:(context){
+            return const TestSendEmailView();
+          }));
         },
             (){
         },

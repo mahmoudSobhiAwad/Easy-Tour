@@ -28,7 +28,7 @@ class ImageMessageInChat extends StatelessWidget {
           alignment: model.type=='source'?Alignment.centerRight:Alignment.centerLeft,
           child: Container(
             width: width*0.67,
-            height: height*0.31,
+            //height: height*0.31,
             decoration: BoxDecoration(
               image:model.imageModel!.filePath!=null? DecorationImage(image: FileImage(File(model.imageModel!.filePath!,),),opacity: 0.3, alignment: Alignment.centerRight, fit: BoxFit.fill,):null,
               color: model.type=='source'?forthColor.withOpacity(0.5):thirdColor,
@@ -39,18 +39,26 @@ class ImageMessageInChat extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                model.imageModel?.imageNetworkPath!=null?ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child:model.imageModel!.isLoading?null:Image.network(
-                    '${model.imageModel?.imageNetworkPath}',
-                    width: width*0.65,
-                    alignment: Alignment.centerRight,
-                    height: height*0.3,
-                    fit: BoxFit.fill, // Or BoxFit.contain or BoxFit.cover depending on your needs
-                  ),
+                model.imageModel?.imageNetworkPath!=null?Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child:model.imageModel!.isLoading?null:Image.network(
+                        '${model.imageModel?.imageNetworkPath}',
+                        width: width*0.65,
+                        alignment: Alignment.centerRight,
+                        height: height*0.3,
+                        fit: BoxFit.fill, // Or BoxFit.contain or BoxFit.cover depending on your needs
+                      ),
+                    ),
+                    Align(
+                        alignment: model.type=='source'?Alignment.bottomRight:Alignment.bottomLeft,
+                        child: Text('${model.messageDate?.hour}:${model.messageDate?.minute} ${model.messageDate!.hour>12?'PM':'AM'}')),
+                  ],
                 )
                     :const SizedBox(),
-                model.imageModel!.isLoading?const CircularProgressIndicator(color: Colors.white,):const SizedBox()
+                model.imageModel!.isLoading?const CircularProgressIndicator(color: Colors.white,):const SizedBox(),
+
               ],
             ),
           ),

@@ -12,8 +12,12 @@ import '../../../../../../core/utilities/basics.dart';
 import '../../../../../../core/utilities/function/decode_poly_lines.dart';
 
 class GoogleMapCubit extends Cubit<GoogleMapStates>{
-  GoogleMapCubit({required this.textSearchRepoImp}):super(InitialGoogleMapState());
+  GoogleMapCubit({required this.textSearchRepoImp,this.initialLatLng,this.initialLatLngInfo}):super(InitialGoogleMapState());
   Set<Marker>markers={};
+  final LatLng?initialLatLng;
+  final String?initialLatLngInfo;
+  int?initialDistance;
+  bool showInitialBottomSheet=false;
   List<TextSearchModel>textSearchList=[];
   List<RoutePolyLinesModel>routePolyLinesList=[];
   final GoogleSearchRepoImp textSearchRepoImp;
@@ -89,12 +93,12 @@ class GoogleMapCubit extends Cubit<GoogleMapStates>{
     return false;
     }
   }
-
-  Future<void> requestAllowLocation() async {
-    if(await askToEnableMyLocation()){
-      enableMyLocation=true;
-    }
-  }
+  //
+  // Future<void> requestAllowLocation() async {
+  //   if(await askToEnableMyLocation()){
+  //     enableMyLocation=true;
+  //   }
+  // }
 
   Future<void>getListOfTextSearch()async{
     textSearchList.clear();
@@ -146,12 +150,12 @@ class GoogleMapCubit extends Cubit<GoogleMapStates>{
               emit(SuccessGetRoutePolyLinesList());
         });
   }
-  void makeMarkerAndAnimateToNewPlace(int index,{Set<Marker>? markers,GoogleMapController?controller}){
+  void makeMarkerAndAnimateToNewPlace(int index,{Set<Marker>? markers,GoogleMapController?controller})async{
     textController.clear();
     emit(ClearAllPlacesSearchList());
     LatLng latLng=LatLng(textSearchList[index].locationModel!.lat!,textSearchList[index].locationModel!.long!);
     markers?.add(Marker(markerId: const MarkerId('markerRoute'),position:latLng));
-    controller?.animateCamera(CameraUpdate.newLatLngZoom(latLng, 12));
+    await controller?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(myLocation!.latitude, myLocation!.longitude),zoom: 8)));
     emit(UpdateLatLngBoundsAfterGetRoute());
   }
   /// while tap on direction
@@ -165,7 +169,56 @@ class GoogleMapCubit extends Cubit<GoogleMapStates>{
       emit(UpdateLatLngBoundsAfterGetRoute());
     }
   }
+  Future<void> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      emit(AllowLocationFailedState(errMessage:'Location services are disabled.Please Enable it.' ));
 
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        emit(AllowLocationFailedState(errMessage:'location is denied' ));
+
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      emit(AllowLocationFailedState(errMessage:'location is denied' ));
+    }
+    myLocation=await Geolocator.getCurrentPosition();
+    emit(AllowLocationSuccessState());
+    await prepareForInitialLatLng();
+  }
+  void closeBottomSheet(){
+    showInitialBottomSheet=false;
+    emit(ShowInitialBottomSheet());
+  }
+  Future<void>prepareForInitialLatLng()async{
+    if(initialLatLng!=null&&myLocation!=null){
+    initialDistance= Geolocator.distanceBetween(initialLatLng!.latitude, initialLatLng!.longitude, myLocation!.latitude, myLocation!.longitude).toInt();
+    markers.add(Marker(markerId: const MarkerId('initialLatLng'),position: initialLatLng!,infoWindow: InfoWindow(title:initialLatLngInfo)));
+    showInitialBottomSheet=true;
+    emit(FinishPrepareForInitialLocation());
+  }
+  }
+  void showPolyLineForInitial(){
+    closeBottomSheet();
+    polyLinesSets.add(Polyline(
+      width: 5,
+      jointType: JointType.bevel,
+      color: closeColor,
+      endCap: Cap.squareCap,
+      polylineId:const PolylineId('initialLatLng'),points:[
+    initialLatLng!,
+    LatLng(myLocation!.latitude, myLocation!.longitude),
+  ]));
+    emit(FinishPrepareForInitialLocation());
+  }
 }
 
 

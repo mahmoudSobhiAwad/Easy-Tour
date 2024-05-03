@@ -55,7 +55,7 @@ class RestOrHotelInfo extends StatelessWidget {
               const Icon(Icons.location_on_rounded,color: entertainmentColor,),
               SizedBox(
                   width: width*0.8,
-                  child: Text('${model.address}',style: CustomTextStyle.commonFontThinLight,overflow: TextOverflow.ellipsis,))
+                  child: Text('${model.address}',style: CustomTextStyle.commonFontThinLight,overflow: TextOverflow.ellipsis,maxLines: 2,))
             ],
           ),
           SizedBox(height: height*0.02,),
@@ -66,22 +66,23 @@ class RestOrHotelInfo extends StatelessWidget {
             ],
           ),
           SizedBox(height: height*0.02,),
-          ProfileSettingItem(text: 'Menu Price',child: Text('${model.priceLevel}',style: CustomTextStyle.commonSignThinDark,),),
+          ProfileSettingItem(text: 'Price',child: Text(model.priceLevel??"UnKnown",style: CustomTextStyle.commonSignThinDark,),),
           SizedBox(height: height*0.02,),
           const Text('Social Contact',style: CustomTextStyle.commonSignThinDark),
-          // SizedBox(height: height*0.02,),
           ProfileSettingItem(
             rightWidget: Row(
               children: [
-                 model.nationalPhoneNum==null?IconButton(onPressed: ()async{
+                 model.nationalPhoneNum!=null?
+                 IconButton(onPressed: ()async{
                    final url = 'tel:${model.nationalPhoneNum}';
                    if (await canLaunchUrl(Uri.parse(url))) {
                    await launchUrl(Uri.parse(url));
                    } else {
                    throw 'Could not launch $url';
                    }
-                 }, icon:const Icon(Icons.phone)):const SizedBox(),
-                 model.websiteUri==null?IconButton(onPressed: ()async{
+                 }, icon:const Icon(Icons.phone))
+                     :const SizedBox(),
+                 model.websiteUri!=null?IconButton(onPressed: ()async{
                    final url=model.websiteUri;
                    if (await canLaunchUrl(Uri.parse(url!))) {
                      await launchUrl(Uri.parse(url));
