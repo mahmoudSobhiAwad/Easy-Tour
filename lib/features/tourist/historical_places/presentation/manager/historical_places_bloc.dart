@@ -8,14 +8,15 @@ class DiscoverPlacesCubit extends Cubit<DiscoverPlacesStates>{
   DiscoverPlacesCubit({required this.homeTouristRepoImp}):super(InitialHistoricalPlacesState());
   bool isFav=false;
   List<Place>places=[];
-  String currCategory='Historical landmark';
+  String?currCategory;
   final HomeTouristRepoImp homeTouristRepoImp;
   int currIndex=0;
   List<int>paginationList=[1,2,3,4,5,6,7,8,9,10];
   ScrollController scrollController=ScrollController();
-  void changeIndex(int index){
+  void changeIndex(int index)async{
     currIndex=index;
     emit(ChangePaginationIndexState());
+    await getPlaces();
   }
   void scrollToNextItem({bool isPrevious = false,required double width}) async{
     if(currIndex<paginationList.length-1){

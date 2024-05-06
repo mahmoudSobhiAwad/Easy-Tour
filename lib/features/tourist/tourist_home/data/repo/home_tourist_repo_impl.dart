@@ -29,7 +29,7 @@ class HomeTouristRepoImp implements HomeTouristRepo{
   @override
   Future<Either<Failure, List<Place>>> getBestDestination({int?pageNum,String?category,int?maxLength}) async{
     try{
-      var result=await apiServices.normalPost('$generateTripBaseUrl/custom_trip?page_num=${pageNum??'1'}&max_length=${maxLength??'30'}&category_filtered=${category??'Historical landmark'}',);
+      var result=await apiServices.normalPost('$generateTripBaseUrl/custom_trip?page_num=${pageNum??'1'}&max_length=${maxLength??'30'}&category_filtered=${category??'all'}',);
       List<Place>places=[];
       for(var item in result){
        places.add(Place.fromJsonSecond(item));

@@ -1,117 +1,101 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
-import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
-import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
-class TestSendEmailView extends StatefulWidget {
-  const TestSendEmailView({super.key});
+import 'package:prepare_project/core/utilities/constant_var/constant.dart';
+import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
+import 'package:prepare_project/features/tourist/custom_trip/presentation/manager/custom_trip_cubit.dart';
+// import 'package:mailer/mailer.dart';
+// import 'package:mailer/smtp_server.dart';
+// import 'package:prepare_project/core/utilities/basics.dart';
+// class TestSendEmailView extends StatelessWidget {
+//   const TestSendEmailView({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     String username = 'sender_email@gmail.com';
+//     String password = 'qonjhdrkbipkeiwv';
+//     final message = Message()
+//       ..from = Address(username, 'Mahmoud Awad Mohamed')
+//       ..recipients.add('sobhimahmoud003@gmail.com')
+//       ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
+//       ..text = 'This is the plain text.\nThis is line 2 of the text part.';
+//
+//     final smtpServer = gmail(username, password);
+//     return  Scaffold(
+//       body: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           Center(
+//             child: CircleAvatar(
+//                 minRadius: 25,
+//                 maxRadius: 50,
+//                 backgroundColor: forthColor,
+//                 child: IconButton(onPressed: ()async{
+//                   await tryToSendEmail(message: message, smtpServer: smtpServer);
+//                 }, icon: const Icon(Icons.email,size: 50,))),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
+// Future<void> tryToSendEmail({required Message message,required SmtpServer smtpServer})async{
+//   try {
+//     final sendReport = await send(message, smtpServer);
+//     debugPrint('Message sent: $sendReport');
+//   } on MailerException catch (e) {
+//     print(e);
+//     debugPrint('Message not sent.');
+//     for (var p in e.problems) {
+//       debugPrint('Problem: ${p.code}: ${p.msg}');
+//     }
+//   }
+// }
+class TestSendEmailView extends StatelessWidget {
+  const TestSendEmailView({super.key,this.testList,this.cubit});
+final List<String>?testList;
 
-  @override
-  State<TestSendEmailView> createState() => _TestSendEmailViewState();
-}
-
-class _TestSendEmailViewState extends State<TestSendEmailView>with SingleTickerProviderStateMixin {
-  AnimationController? _animationController;
-  Animation<double>? _scaleAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300), // Adjust animation duration as needed
-    );
-
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.2) // Scale animation
-        .animate(_animationController!);
-  }
-  @override
-  void dispose() {
-    _animationController?.dispose();
-    super.dispose();
-  }
-
-
-  int _seconds = 0;
-  int _minutes = 0;
-  bool timerOn=false;
-  Timer? _timer;
+final CustomTripCubit?cubit;
   @override
   Widget build(BuildContext context) {
+    final double width=BasicDimension.screenWidth(context);
+    final double height=BasicDimension.screenHeight(context);
 
-    return  Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      body: SafeArea(child:Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10.0,right: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                    width: MediaQuery.of(context).size.width*0.75,
-                    child:timerOn?
-                    Container(
-                      decoration: BoxDecoration(
-                        color: thirdColor,
-                        borderRadius: commonBorderRadius(),
-                      ),
-                      padding: const EdgeInsets.all(10),
-                      child: Text('counter is: $_minutes:${_seconds.toString().padLeft(2, '0')}'),
-                    ) :
-                    const CustomTextFormField()),
-                ScaleTransition(
-                  scale: _scaleAnimation!,
-                  child: CircleAvatar(
-                      minRadius: 25,
-                      maxRadius: 30,
-                      backgroundColor: forthColor,
-                      child: GestureDetector(
-                          onLongPress: ()async{
-                            timerOn=true;
-                            setState(() {
+          CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Test',),
+          SizedBox(height: height*0.05,),
+          Expanded(
+            child: GridView.builder(
+                padding:const EdgeInsets.all(10),
+                itemCount: governments.length,gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 20,crossAxisSpacing: 20), itemBuilder: (context,index){
+              return GestureDetector(
+                onTap: (){
+                  if(testList!=null){
+                    if(testList!.contains(governments[index])){
+                      testList!.remove(governments[index]);
+                    }
+                    else{
+                      testList?.add(governments[index]);
+                      cubit?.refreshPage();
+                    }
+                  }
 
-                            });
-                            _animationController?.forward();
-                            _seconds = 0;
-                            _minutes=0;
-                            _timer = Timer.periodic(const Duration(milliseconds: 900), (timer){
-                              _incrementTimer();
-                            });
-                            },
-                          onLongPressUp: (){
-                            timerOn=false;
-                            setState(() {
-
-                            });
-                            _animationController?.reverse();
-                            _timer?.cancel();
-                          },
-                          child: const Icon(Icons.mic,size: 25,))),
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: forthColor,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  padding:const EdgeInsets.all(10),
+                  child: Center(child: Text(governments[index],style: const TextStyle(color: Colors.white),)),
                 ),
-              ],
-            ),
+              );
+            }),
           ),
-          const SizedBox(height: 10,),
-
+          SizedBox(height: height*0.05,),
         ],
-      ),
+      )),
     );
   }
-
-
-  void _incrementTimer() {
-    setState(() {
-      _seconds++;
-      if (_seconds >= 60) {
-        _minutes++;
-        _seconds = 0;
-      }
-    });
-  }
-}
-
-Future<void> tryToSendEmail()async {
-
 }

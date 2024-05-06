@@ -37,7 +37,7 @@ class HelperPart extends StatelessWidget {
                   return GestureDetector(
                       onTap:  [
                             (){
-                          //context.push(RouterApp.kChatBotView);
+                          context.push(RouterApp.kCustomTripView);
                         },
                             (){
                           context.push(RouterApp.kWeatherView);

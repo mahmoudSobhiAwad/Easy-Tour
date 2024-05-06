@@ -28,8 +28,8 @@ class CustomGeneratedAiTripAppBar extends StatelessWidget {
             borderColor: borderColor,
             containWidget: const Icon(Icons.arrow_back_sharp,),
             height: height, width: width,onTap: (){
+              Navigator.pop(context);
               extraOnBack;
-            Navigator.pop(context);
           },
           ):
           SizedBox(width: width*0.13,),

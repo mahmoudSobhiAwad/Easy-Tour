@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
+import 'package:prepare_project/features/tour_guide/private_tour/data/data_ui.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 class BestDestinationItem extends StatelessWidget {
   const BestDestinationItem({super.key,required this.height,required this.width,required this.place});
@@ -22,7 +23,10 @@ class BestDestinationItem extends StatelessWidget {
         children: [
           ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.network(place.image!,height: height*0.2,width: width*0.4,fit: BoxFit.fill,)),
+              child: Image.network(
+                place.image!,height: height*0.2,width: width*0.4,fit: BoxFit.fill,errorBuilder: (context,_,q){
+                  return Image.network(defaultImage,height: height*0.2,width: width*0.4,fit: BoxFit.fill,);
+              },)),
           SizedBox(
               width: width*0.4,
               child: Text(place.name,style: CustomTextStyle.commonSignDark.copyWith(overflow: TextOverflow.ellipsis),)),

@@ -31,7 +31,6 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
   void changeActivityIndex(int index)
   {
     currActivity=index;
-    print(activityNames.keys.elementAt(currActivity??0));
     emit(ChangePickedActivityIndexState());
   }
   void navToGenerateTripScreen()async{

@@ -10,6 +10,7 @@ import 'package:prepare_project/features/tourist/booking_collection/book_with_to
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/chat_bot_view.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/views/chat_with_other_view.dart';
 import 'package:prepare_project/features/tourist/currency_converter/presentation/view/currency_converter_view.dart';
+import 'package:prepare_project/features/tourist/custom_trip/presentation/views/custom_trip_view.dart';
 import 'package:prepare_project/features/tourist/entertainment_places/presentation/views/entertainment_places_view.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/generate_trip_wit_ai.dart';
 import 'package:prepare_project/features/tourist/image_classification/presentation/views/image_classificarion_view.dart';
@@ -30,6 +31,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
   static const kTestAudio='/TestAudio';
   static const kChatBotView='/ChatBotView';
   static const kWeatherView='/WeatherView';
+  static const kCustomTripView='/CustomTripView';
   static const kCurrencyConverter='/CurrencyConverter';
   static const kGenerateTripView='/GenerateTripView';
   static const kTourGuideHome='/TourGuideHomeView';
@@ -78,5 +80,6 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kTourGuideNotifications,builder: (context,state)=>const RequestedTripsTourGuideView(),),
    GoRoute(path: kCurrencyConverter,builder: (context,state)=>const CurrencyConverterView(),),
    GoRoute(path: kWeatherView,builder: (context,state)=>const WeatherForecastView(),),
+   GoRoute(path: kCustomTripView,builder: (context,state)=>const CustomTripView(),),
   ]);
 }

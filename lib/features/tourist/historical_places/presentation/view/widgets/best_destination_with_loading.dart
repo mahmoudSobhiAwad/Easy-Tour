@@ -3,10 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 class LoadingBestDestinationItem extends StatelessWidget {
-  const LoadingBestDestinationItem({super.key,required this.height,required this.width});
+  const LoadingBestDestinationItem({super.key,required this.height,required this.width,this.textTest});
 
   final double height;
   final double width;
+  final String?textTest;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,6 +47,7 @@ class LoadingBestDestinationItem extends StatelessWidget {
           Row(
             children: [
               const Icon(Icons.location_on,color: entertainmentColor,),
+              textTest==null?
               Container(
                 width: width*0.15,
                 decoration: BoxDecoration(
@@ -53,7 +55,8 @@ class LoadingBestDestinationItem extends StatelessWidget {
                   borderRadius: commonBorderRadius(),
                 ),
                 padding: const EdgeInsets.all(5),
-              ),
+              ) :
+              Text('$textTest'),
             ],
           ),
         ],
