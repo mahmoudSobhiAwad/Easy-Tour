@@ -13,6 +13,7 @@ class GenerateAiTripIntro extends StatelessWidget {
   final double height;
   final double width;
   final void Function() onTap;
+
   @override
   Widget build(BuildContext context) {
     return Stack(

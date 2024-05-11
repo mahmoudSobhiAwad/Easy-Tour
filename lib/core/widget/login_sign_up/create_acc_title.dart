@@ -11,7 +11,7 @@ final TextStyle secondaryStyle;
 final int?maxLines;
   @override
   Widget build(BuildContext context) {
-    return   Padding(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
        crossAxisAlignment:align??CrossAxisAlignment.center,

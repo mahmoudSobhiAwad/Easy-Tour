@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:prepare_project/features/tourist/custom_trip/presentation/manager/custom_trip_states.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 
 class CustomTripCubit extends Cubit<CustomTripState>{
   CustomTripCubit():super(InitialCustomTripState());
@@ -11,7 +12,7 @@ class CustomTripCubit extends Cubit<CustomTripState>{
   int numOfDays=0;
   int once=0;
   final formatter = DateFormat('d MMM y');
-  Map<String,List<String>>pickedCompleteTrip={};
+  Map<String,List<Place>>pickedCompleteTrip={};
   void changePickedDate(DateTimeRange? range)async{
     if(range!=null){
     DateTimeRange dateTimeRange= range;

@@ -5,9 +5,10 @@ import 'package:prepare_project/features/tourist/historical_places/presentation/
 import 'package:prepare_project/features/tourist/tourist_home/data/repo/home_tourist_repo_impl.dart';
 
 class DiscoverPlacesCubit extends Cubit<DiscoverPlacesStates>{
-  DiscoverPlacesCubit({required this.homeTouristRepoImp}):super(InitialHistoricalPlacesState());
+  DiscoverPlacesCubit({required this.homeTouristRepoImp,this.initialList}):super(InitialHistoricalPlacesState());
   bool isFav=false;
   List<Place>places=[];
+  List<Place>?initialList;
   String?currCategory;
   final HomeTouristRepoImp homeTouristRepoImp;
   int currIndex=0;
@@ -51,15 +52,35 @@ class DiscoverPlacesCubit extends Cubit<DiscoverPlacesStates>{
           emit(FailureGetPlacesState(errMessage: failure.errMessage));
         },
             (placesList){
-          for(var item in placesList){
-            places.add(item);
-          }
-          emit(SuccessGetPlacesState());
+              for(var item in placesList){
+                places.add(item);
+              }
+              emit(SuccessGetPlacesState());
+              initListToPickForCustom();
         });
   }
   void changeCategory(String? selectedCat)async{
     currCategory=selectedCat!;
     await getPlaces();
 
+  }
+  void initListToPickForCustom() {
+    if (initialList != null && initialList!.isNotEmpty) {
+      for (var place in places) {
+        place.picked = initialList!.any((item) => item.name == place.name);
+      }
+      emit(InitPickedPlacesListState());
+    }
+  }
+  void changePicking(int index){
+    if(places[index].picked){
+      places[index].picked=false;
+      initialList!.remove(places[index]);
+    }
+    else{
+      places[index].picked=true;
+      initialList!.add(places[index]);
+    }
+    emit(ChangePickingPlacesState());
   }
 }

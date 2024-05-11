@@ -4,14 +4,16 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/tourist/custom_trip/presentation/manager/custom_trip_cubit.dart';
 import 'package:prepare_project/features/tourist/custom_trip/presentation/views/widgets/empty_day_item.dart';
-import 'package:prepare_project/features/tourist/historical_places/presentation/view/widgets/best_destination_with_loading.dart';
-import 'package:prepare_project/features/tourist/test_mailer.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
+import 'package:prepare_project/features/tourist/historical_places/presentation/view/historical_places_view.dart';
+import 'package:prepare_project/features/tourist/historical_places/presentation/view/widgets/best_destination_item.dart';
+
 class DaysToAddList extends StatelessWidget {
-  const DaysToAddList({super.key,required this.width,required this.height,required this.placesMap,required this.test});
+  const DaysToAddList({super.key,required this.width,required this.height,required this.placesMap,required this.cubit});
   final double width;
   final double height;
-  final CustomTripCubit ?test;
-  final Map<String,List<String>>placesMap;
+  final CustomTripCubit ?cubit;
+  final Map<String,List<Place>>placesMap;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,12 +27,22 @@ class DaysToAddList extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(placesMap.keys.elementAt(bigIndex),style: CustomTextStyle.commonSignDark,),
+                  Row(
+                    mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Day${bigIndex+1}',style: CustomTextStyle.commonSignDark,),
+                      TextButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return DiscoverPLacesView(enablePicking: true,customTripCubit: cubit,initialList: placesMap['Day${bigIndex+1}'],);
+                        }));
+                      }, child: const Text('Add More')),
+                    ],
+                  ),
                   placesMap['Day${bigIndex+1}']!.isEmpty?
                   GestureDetector(
                       onTap:(){
                         Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return TestSendEmailView(testList:placesMap['Day${bigIndex+1}'],cubit: test,);
+                          return DiscoverPLacesView(enablePicking: true,customTripCubit: cubit,initialList: placesMap['Day${bigIndex+1}'],);
                         }));
                       },
                       child: EmptyDayToAddItem(width: width,)) :
@@ -45,17 +57,17 @@ class DaysToAddList extends StatelessWidget {
                           child: Stack(
                             alignment: Alignment.topRight,
                             children: [
-                              LoadingBestDestinationItem(height: height, width: width,textTest: placesMap.values.elementAt(bigIndex)[index],),
+                              BestDestinationItem(height: height, width: width, place: placesMap['Day${bigIndex+1}']![index],),
                               Padding(
                                 padding: const EdgeInsets.only(top: 16.0,right: 16),
                                 child: CircleAvatar(
                                     radius: 15,
                                     backgroundColor: Colors.white,
                                     child: IconButton(onPressed: (){
-                                      test?.removeSpecificPlace(bigIndex+1, index);
+                                      cubit?.removeSpecificPlace(bigIndex+1, index);
                                     }, icon: const FaIcon(FontAwesomeIcons.minus,color: closeColor,),)
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         );

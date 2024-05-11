@@ -6,13 +6,13 @@ class ProfilePicWidget extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.height,
-     this.width,
+
     this.profileFile,
   });
 
   final String? imageUrl;
   final double height;
-  final double? width;
+
   final File? profileFile;
 
   @override

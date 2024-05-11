@@ -8,3 +8,5 @@ class FailureGetPlacesState extends DiscoverPlacesStates{
   final String?errMessage;
   FailureGetPlacesState({this.errMessage});
 }
+class InitPickedPlacesListState extends DiscoverPlacesStates{}
+class ChangePickingPlacesState extends DiscoverPlacesStates{}

@@ -124,4 +124,4 @@ const String fieldMaskForGetRoute='routes.duration,routes.distanceMeters,routes.
 const String fieldMaskForShortNearby='places.displayName,places.primaryTypeDisplayName,places.nationalPhoneNumber,places.internationalPhoneNumber,places.regularOpeningHours.openNow';
 const String currencyConverterBaseUrl='https://v6.exchangerate-api.com/v6/$currencyConverterApiKey/';
 const String currencyConverterApiKey='9a250bed3ba7c9c8dba370f1';
-const generateTripBaseUrl='http://52.55.73.170:8000';
+const generateTripBaseUrl='http://54.205.19.231:8000';

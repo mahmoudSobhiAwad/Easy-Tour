@@ -40,7 +40,7 @@ class UserProfilePicAndCover extends StatelessWidget {
             child: Stack(
               alignment: Alignment.bottomRight,
               children: [
-                ProfilePicWidget(imageUrl: cubit.imageUrl,height:widgetHeight*0.15 ,width:widgetHeight*0.15,profileFile: cubit.profileFile,),
+                ProfilePicWidget(imageUrl: cubit.imageUrl,height:widgetHeight*0.15,profileFile: cubit.profileFile,),
                 CircleAvatar(
                   radius: 15,
                   backgroundColor: basicColor,

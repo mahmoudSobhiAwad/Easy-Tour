@@ -46,8 +46,9 @@ class Place{
   final num?budget;
   final String?time;
   final String?image;
+  bool picked;
 
-  const Place({
+   Place({
     required this.name,
     required this.longitude,
     required this.latitude,
@@ -56,6 +57,7 @@ class Place{
     required this.image,
     required this.time,
     required this.budget,
+    this.picked=false,
   });
 
   factory Place.fromJson(Map<String, dynamic> json, int i) {

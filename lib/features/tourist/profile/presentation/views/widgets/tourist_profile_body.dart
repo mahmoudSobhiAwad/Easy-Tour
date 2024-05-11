@@ -56,7 +56,7 @@ class TouristProfileBody extends StatelessWidget {
                       top: screenHeight*0.15,
                       left: screenWidth*0.05,
                       child: ProfilePicWidget(
-                        imageUrl: cubit.touristModel?.profileUrl, height: screenHeight*0.09, width: screenHeight*0.09,
+                        imageUrl: cubit.touristModel?.profileUrl, height: screenHeight*0.09,
                       ))
                 ],
               ),

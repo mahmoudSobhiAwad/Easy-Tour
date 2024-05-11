@@ -27,9 +27,10 @@ class GenerateAiTrip extends StatelessWidget {
             return Scaffold(
                 body:
                 [
-                  GenerateAiTripIntro(onTap: (){
-                  cubit.navToGenerateTripScreen();
-                },height: height, width: width),
+                  GenerateAiTripIntro(
+                      onTap: (){
+                        cubit.navToGenerateTripScreen();},
+                      height: height, width: width),
                   GenerateTripBody(cubit: cubit,height: height,width: width,)
                 ][cubit.pageCurrIndex]
         );
@@ -52,8 +53,8 @@ class GenerateAiTrip extends StatelessWidget {
                 onTap: (){
                   context.pop();
                 },
-                content: '${state.errMessage}',));
-
+                content: '${state.errMessage}',)
+              );
             }
       } ) ,
     );

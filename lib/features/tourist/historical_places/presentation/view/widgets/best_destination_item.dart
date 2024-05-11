@@ -6,7 +6,6 @@ import 'package:prepare_project/features/tour_guide/private_tour/data/data_ui.da
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 class BestDestinationItem extends StatelessWidget {
   const BestDestinationItem({super.key,required this.height,required this.width,required this.place});
-
   final double height;
   final double width;
   final Place place;
@@ -15,8 +14,7 @@ class BestDestinationItem extends StatelessWidget {
     return Container(
       padding:const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        border: Border.all(color: thirdColor,width: 3),
-        // color: Colors.white,
+        border: Border.all(color:place.picked?whatsAppColor:thirdColor,width: 3),
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
