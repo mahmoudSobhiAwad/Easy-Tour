@@ -15,6 +15,7 @@ ThemeData lightMode=ThemeData(
 
 
   ),
+  iconButtonTheme: const IconButtonThemeData(style: ButtonStyle(iconColor:MaterialStatePropertyAll(basicColor)))
 );
 ThemeData darkMode=ThemeData(
   scaffoldBackgroundColor:basicColor ,
