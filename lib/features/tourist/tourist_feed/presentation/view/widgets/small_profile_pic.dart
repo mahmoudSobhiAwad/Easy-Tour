@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 
 class SmallProfilePic extends StatelessWidget {
   const SmallProfilePic({
@@ -14,6 +15,10 @@ class SmallProfilePic extends StatelessWidget {
     return CircleAvatar(
         backgroundColor: thirdColor,
         radius: width*0.06,
-        child:Center(child: Image.asset('assets/login/default_profile.png',fit: BoxFit.fill,)));
+        child:Center(child: Image.network(
+          errorBuilder:(context,_,m){
+            return const Icon(Icons.warning,color: closeColor,);
+          },
+          SetAppState.prefs?.getString('profileUrl')??"",fit: BoxFit.fill,)));
   }
 }

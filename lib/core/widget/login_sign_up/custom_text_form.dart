@@ -8,7 +8,6 @@ class CustomTextFormField extends StatelessWidget {
      this.maxLength,this.inputFormatters,this.expand=false,this.minLine,this.onFiledSubmitted,this.borderColor,this.focusNode,this.style,this.initialValue,this.enable=true,this.align,this.autoFocus,this.maxLines,this.fillColor,this.filled});
    final String?label;
    final Widget?suffix ;
-
    final Widget?prefix;
    final double?border;
    final double?borderWidth;

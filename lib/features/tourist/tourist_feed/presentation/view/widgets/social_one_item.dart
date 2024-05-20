@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
+import 'package:prepare_project/features/tourist/tourist_feed/data/model/post_model.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/images_of_post_list.dart';
+import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/list_of_images_preview.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/poster_info.dart';
 
 class SocialItemPost extends StatelessWidget {
   final double width;
   final double height;
-  const SocialItemPost({super.key,required this.height,required this.width});
+  final PostModel model;
+  const SocialItemPost({super.key,required this.height,required this.width,required this.model});
   @override
   Widget build(BuildContext context) {
-    int imagesLength=1;
     return Container(
       decoration: BoxDecoration(
         borderRadius: commonBorderRadius(),
@@ -19,13 +22,21 @@ class SocialItemPost extends StatelessWidget {
       ),
       padding:const EdgeInsets.all(12),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          PosterInfo(width: width),
+          PosterInfo(width: width,model: model,),
           SizedBox(height: height*0.02,),
-          const Text('it was a long day in pyramids with wonderful people, we talk about how the ancient Egyptian build that great pyramids.',),
+          Text('${model.postText}',),
           SizedBox(height: height*0.02,),
-          ImagesOfPostList(imagesLength: imagesLength, height: height, width: width),
-          const Row(
+          GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return ListOfImagesPreview(imagesLinks: model.postImages??[], height: height, width: width);
+                }));
+              },
+              child: ImagesOfPostList(imagesLinks: model.postImages??[], height: height, width: width)),
+          model.sourceEmail==SetAppState.prefs?.getString('email')?
+          const SizedBox() : const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
@@ -42,3 +53,4 @@ class SocialItemPost extends StatelessWidget {
     );
   }
 }
+

@@ -14,6 +14,7 @@ import 'package:prepare_project/features/tourist/custom_trip/presentation/views/
 import 'package:prepare_project/features/tourist/entertainment_places/presentation/views/entertainment_places_view.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/generate_trip_wit_ai.dart';
 import 'package:prepare_project/features/tourist/image_classification/presentation/views/image_classificarion_view.dart';
+import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/create_post_view.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/home_view.dart';
 import 'package:prepare_project/features/tourist/weather_forecast/presentation/views/weather_forecast_view.dart';
 import '../../../features/splash/presentation/views/splash_view.dart';
@@ -40,6 +41,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
   static const kEntertainmentPlaces='/EntertainmentPlaces';
   static const kChatTouristView='/ChatTouristView';
   static const kTourGuideTripsBooking='/TourGuideBookingTrips';
+  static const kTouristCreatePost='/TouristCreatePost';
   static final router=GoRouter(routes:[
    GoRoute(path: '/',builder: (context,state){
    // return const OnBoardingView();
@@ -81,5 +83,6 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kCurrencyConverter,builder: (context,state)=>const CurrencyConverterView(),),
    GoRoute(path: kWeatherView,builder: (context,state)=>const WeatherForecastView(),),
    GoRoute(path: kCustomTripView,builder: (context,state)=>const CustomTripView(),),
+   GoRoute(path: kTouristCreatePost,builder: (context,state)=>const CreatePostView(),),
   ]);
 }

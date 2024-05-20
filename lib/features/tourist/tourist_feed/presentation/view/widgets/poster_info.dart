@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
+import 'package:prepare_project/features/tourist/tourist_feed/data/model/post_model.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/small_profile_pic.dart';
 
 class PosterInfo extends StatelessWidget {
   const PosterInfo({
     super.key,
     required this.width,
+    required this.model
   });
 
   final double width;
+  final PostModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +20,16 @@ class PosterInfo extends StatelessWidget {
       children: [
         SmallProfilePic(width: width),
         const SizedBox(width: 10,),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Sara Ahmed'),
-            SizedBox(height: 7,),
-            Text('5 May 2024'),
+            Text(model.publisherName),
+            const SizedBox(height: 7,),
+            Text(model.postDate),
           ],
         ),
         const SizedBox(width: 10,),
-        Container(
+        model.role=='tourist'?const SizedBox():Container(
           padding: const EdgeInsets.all(4),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(5),topRight: Radius.circular(5),bottomRight: Radius.circular(5),bottomLeft: Radius.circular(5)),
