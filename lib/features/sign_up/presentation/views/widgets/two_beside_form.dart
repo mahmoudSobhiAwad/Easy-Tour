@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:prepare_project/core/widget/sign_up_edit/custom_column_with_text_form.dart';
 
 class CustomTwoFieldForm extends StatelessWidget {
-  const CustomTwoFieldForm({super.key,this.firstText,this.textHeight,this.textWidth,this.secondText,this.firstCustomFormField,this.maxLine,this.secondCustomFormField});
+  const CustomTwoFieldForm({super.key,this.mainAlignment,this.firstText,this.textHeight,this.textWidth,this.secondText,this.firstCustomFormField,this.maxLine,this.secondCustomFormField});
   final String?firstText;
   final String?secondText;
   final Widget?firstCustomFormField;
@@ -11,10 +11,11 @@ class CustomTwoFieldForm extends StatelessWidget {
   final int?maxLine;
   final double? textWidth;
   final double? textHeight;
+  final MainAxisAlignment? mainAlignment;
   @override
   Widget build(BuildContext context) {
     return  Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: mainAlignment??MainAxisAlignment.spaceBetween,
       children: [
         CustomColumnWithTextForm(
           textHeight: textHeight,

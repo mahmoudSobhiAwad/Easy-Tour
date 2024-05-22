@@ -119,6 +119,7 @@ flutter:
      - assets/type_of_trip/
      - assets/google_map_assets/
      - assets/weather_status/
+     - assets/hotel_booking/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

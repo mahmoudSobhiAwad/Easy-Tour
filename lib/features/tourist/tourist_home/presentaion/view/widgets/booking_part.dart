@@ -4,6 +4,7 @@ import 'package:prepare_project/core/utilities/go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/tourist/tourist_home/data/model/home_data.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/card_element.dart';
+import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/intro_trip_history.dart';
 class BookingPart extends StatelessWidget {
   const BookingPart({
     super.key,
@@ -34,11 +35,19 @@ class BookingPart extends StatelessWidget {
                 itemBuilder:(context,index){
                   return GestureDetector(
                       onTap:  [
-                            (){},
-                            (){},
                             (){
-                        context.push(RouterApp.kTourGuideTripsBooking);
+                          context.push(RouterApp.kTourGuideTripsBooking);
+                        },
+                            (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return CustomIntroScreen(mainTitle: 'Let’s Find Your Sweet & Dream Place ', imagePath: 'assets/hotel_booking/hotel_intro.png',
+                              secondaryTitle: 'Get the opportunity to stay that you dream of at an affordable price',
+                              screenToGo: (){
+                            context.push(RouterApp.kTouristHotelBooking);
+                              });
+                        }));
                             },
+                            (){},
                             (){},
                       ][index],
                       child: CardElement(height: height,width: width,cardModel: bookingItems[index],));

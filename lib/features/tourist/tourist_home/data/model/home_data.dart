@@ -1,9 +1,9 @@
 import 'package:prepare_project/features/tourist/tourist_home/data/model/card_model.dart';
 
 List<CardModel>bookingItems=[
+  CardModel(imagePath: 'assets/login/tour_guide.png', labelName: 'Tour Guides'),
   CardModel(imagePath: 'assets/tourist_home/hotels.png', labelName: 'Hotel '),
   CardModel(imagePath: 'assets/tourist_home/plane_ticket.png', labelName: 'Plane Tickets'),
-  CardModel(imagePath: 'assets/login/tour_guide.png', labelName: 'Tour Guides'),
   CardModel(imagePath: 'assets/tourist_home/book_cars.png', labelName: 'Book A Car'),
 ];
 List<CardModel>placesItem=[

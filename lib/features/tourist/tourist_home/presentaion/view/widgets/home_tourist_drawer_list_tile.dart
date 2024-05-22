@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/intro_trip_history.dart';
 
 import '../../../../../../core/utilities/go_router/go_router.dart';
+import '../../../../trip_history/presentation/view/trip_history_view.dart';
 
 class TouristHomeDrawerListTile extends StatelessWidget {
   const TouristHomeDrawerListTile({
@@ -27,7 +28,9 @@ class TouristHomeDrawerListTile extends StatelessWidget {
         },
             (){
           Navigator.push(context, MaterialPageRoute(builder:(context){
-            return const TripHistoryIntroView();
+            return CustomIntroScreen(imagePath: 'assets/tourist_home/trip_intro.png',mainTitle: 'Manage Your Trips', secondaryTitle: 'You can organize your trips by adding your tasks into separate categories', screenToGo: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const TripHistoryView()));
+            },);
           }));
         },
             (){
