@@ -5,7 +5,7 @@ class CustomTextFormField extends StatelessWidget {
    const CustomTextFormField({super.key,this.label,this.suffix,this.prefix,this.controller,
      this.border,this.borderWidth,this.type,this.enablePassword,this.enableOutLine=true,this.labelFontSize,
      this.floatingLabelBehavior,this.onSaved,this.onChanged,this.validator,
-     this.maxLength,this.inputFormatters,this.expand=false,this.minLine,this.onFiledSubmitted,this.borderColor,this.focusNode,this.style,this.initialValue,this.enable=true,this.align,this.autoFocus,this.maxLines,this.fillColor,this.filled});
+     this.maxLength,this.inputFormatters,this.autoFillList,this.expand=false,this.minLine,this.onFiledSubmitted,this.borderColor,this.focusNode,this.style,this.initialValue,this.enable=true,this.align,this.autoFocus,this.maxLines,this.fillColor,this.filled});
    final String?label;
    final Widget?suffix ;
    final Widget?prefix;
@@ -35,10 +35,12 @@ class CustomTextFormField extends StatelessWidget {
    final String?initialValue;
    final FocusNode?focusNode;
    final int?minLine;
+   final Iterable<String>?autoFillList;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       minLines: minLine,
+      autofillHints: autoFillList,
       expands: expand,
       onFieldSubmitted: onFiledSubmitted,
       focusNode:focusNode ,

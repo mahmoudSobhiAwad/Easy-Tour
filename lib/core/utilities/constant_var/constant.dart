@@ -125,3 +125,4 @@ const String fieldMaskForShortNearby='places.displayName,places.primaryTypeDispl
 const String currencyConverterBaseUrl='https://v6.exchangerate-api.com/v6/$currencyConverterApiKey/';
 const String currencyConverterApiKey='9a250bed3ba7c9c8dba370f1';
 const generateTripBaseUrl='http://54.205.19.231:8000';
+const hotelBookingUrl='https://api.test.hotelbeds.com';

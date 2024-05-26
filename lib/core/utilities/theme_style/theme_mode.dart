@@ -12,8 +12,6 @@ ThemeData lightMode=ThemeData(
     primary: basicColor,
     secondary: secondaryColor,
     tertiary: thirdColor,
-
-
   ),
   iconButtonTheme: const IconButtonThemeData(style: ButtonStyle(iconColor:MaterialStatePropertyAll(basicColor)))
 );

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
-import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/available_rooms/availabile_room_view.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/data/models/get_hotel_model.dart';
 
 class TextDetailsOfOneHotel extends StatelessWidget {
   const TextDetailsOfOneHotel({
     super.key,
     required this.width,
     required this.height,
+    required this.model,
+    required this.onTap,
   });
 
   final double width;
   final double height;
-
+final HotelsModel model;
+final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,11 +23,11 @@ class TextDetailsOfOneHotel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-            width: width*0.4,
-            child: const Text('Davinci Beach Hotel',style: CustomTextStyle.privateTourTitle,maxLines: 2,)),
+            width: width*0.5,
+            child: Text(model.name??"",style: CustomTextStyle.privateTourTitle,maxLines: 2,)),
         Row(
           children: [
-            ...List.generate(5, (index) {
+            ...List.generate(model.categoryCode??3, (index) {
               return const Padding(
                 padding:  EdgeInsets.only(left: 5.0),
                 child:  Icon(Icons.star,color: goldenColor,),
@@ -33,32 +36,34 @@ class TextDetailsOfOneHotel extends StatelessWidget {
           ],
         ),
         SizedBox(height: height*0.01,),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(Icons.location_on_rounded),
-            Text('Luxor, Kasr El Montazah',style: CustomTextStyle.commonFontThin,),
+            const Icon(Icons.location_on_rounded),
+            SizedBox(
+                width: width*0.5,
+                child: Text('${model.cityName},${model.address}',style: CustomTextStyle.commonFontThin,maxLines: 3,)),
           ],),
         SizedBox(height: height*0.01,),
         const Text('Business Hotel, Family Hotel',style: CustomTextStyle.commonFontThin,),
         SizedBox(height: height*0.01,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Column(
           children: [
-            const Icon(Icons.check,color: whatsAppColor,),
-            Text('BED AND BREAKFAST',style: CustomTextStyle.tripDetailsInTourGuide.copyWith(color: whatsAppColor),),
-          ],),
+            ...List.generate(model.segment?.length??0, (index) =>Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(Icons.check,color: whatsAppColor,),
+                Text(model.segment?[index].content??"",style: CustomTextStyle.tripDetailsInTourGuide.copyWith(color: whatsAppColor),),
+              ],), ),
+          ],
+        ),
         SizedBox(height: height*0.01,),
         const Text('2 adult, 3 nights',style: CustomTextStyle.commonFontThinLight,),
         SizedBox(height: height*0.01,),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: GestureDetector(
-            onTap: (){
-              Navigator.push(context,MaterialPageRoute(builder:(context){
-                return const RoomAvailabilityView();
-              }));
-            },
+            onTap: onTap,
             child: const ColoredBox(
               color: forthColor,
               child: Padding(

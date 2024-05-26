@@ -1,0 +1,115 @@
+class DestinationModel{
+  String destName;
+  String destCode;
+  String imageUrl;
+  DestinationModel({required this.destName,required this.destCode,required this.imageUrl});
+}
+List<DestinationModel>destList=[
+  DestinationModel(destName: 'Hurghada', destCode: 'HRG', imageUrl: 'https://th.bing.com/th/id/R.00778b1fa1abbaf4b159135050af8e90?rik=njYE11A9EK4%2brw&pid=ImgRaw&r=0'),
+  DestinationModel(destName: 'Aswan', destCode: 'ASW', imageUrl: 'https://planetofhotels.com/guide/sites/default/files/styles/paragraph__live_banner__lb_image__1880bp/public/live_banner/aswan_0.jpg'),
+  DestinationModel(destName: 'Marsa Alam- Qusseir', destCode: 'RMF', imageUrl: 'https://korastsherot.com/wp-content/uploads/2021/07/%D9%85%D8%AF%D9%8A%D9%86%D8%A9-%D9%85%D8%B1%D8%B3%D9%89-%D8%B9%D9%84%D9%85_InPixio-1-1024x576.png'),
+  DestinationModel(destName: 'Abu Simbel', destCode: 'ABS', imageUrl: 'https://th.bing.com/th/id/OIP.VkCWb6DmR7L7uyI7Wvs4LwHaE8?rs=1&pid=ImgDetMain'),
+  DestinationModel(destName: 'Alexandrie-Mediterranean Coast', destCode: 'ALY', imageUrl: 'https://th.bing.com/th/id/R.eeedd96a77dd3d0175c38d008d33d9a8?rik=rOd5lFHNpNhoXg&pid=ImgRaw&r=0'),
+  DestinationModel(destName: 'Cairo', destCode: 'CAI', imageUrl: 'https://wanderingwheatleys.com/wp-content/uploads/2022/05/the-top-things-to-do-in-cairo-egypt-header.jpg'),
+  DestinationModel(destName: 'Al Kharga Valley', destCode: 'HKA', imageUrl: 'https://th.bing.com/th/id/OIP._g2TYbtenPQlvjDSuYQo5wHaE8?rs=1&pid=ImgDetMain'),
+  DestinationModel(destName: 'Luxor', destCode: 'LXR', imageUrl: 'https://th.bing.com/th/id/OIP.JSJuUQILL-0SUJsx0o-vkAHaE8?rs=1&pid=ImgDetMain'),
+  DestinationModel(destName: 'Marsa Matruh', destCode: 'MHU', imageUrl: 'https://images.memphistours.com/large/370387722_marsa%20matrouh.jpg'),
+  DestinationModel(destName: 'Nile cruises', destCode: 'NCR', imageUrl: 'https://th.bing.com/th/id/R.a0bab06ccfe15899ef3907bdda47ff25?rik=%2f2fOEWxshoJkXQ&pid=ImgRaw&r=0'),
+  DestinationModel(destName: 'Ismailia-Port Said', destCode: 'PSD', imageUrl: 'https://th.bing.com/th/id/R.5612cd68cadb269b354b135609d72d36?rik=i7eeuvk7%2fPG%2bKw&pid=ImgRaw&r=0'),
+  DestinationModel(destName: 'Sharm el Sheikh -Dahab', destCode: 'SSH', imageUrl: 'https://th.bing.com/th/id/R.0f633ee8b73a94ec570be1f5d62623ee?rik=OHzZJuhJVLMOqA&pid=ImgRaw&r=0'),
+  DestinationModel(destName: 'Taba', destCode: 'TAB', imageUrl: 'https://blog.fts-travels.com/wp-content/uploads/2022/09/best-things-to-do-in-taba.jpg'),
+  DestinationModel(destName: 'Ain Sokhna', destCode: 'UEZ', imageUrl: 'https://egyptpyramidstours.com/wp-content/uploads/2020/10/Ain-El-Sokhna.jpg'),
+];
+
+class SegmentModel{
+  int code;
+  String content;
+  SegmentModel({required this.content,required this.code});}
+List<SegmentModel>segmentList=[
+  SegmentModel(content: 'Hotels with charm', code: 100),
+  SegmentModel(content: 'Sustainable Hotel', code: 102),
+  SegmentModel(content: 'Only adults', code: 103),
+  SegmentModel(content: 'Pet friendly Hotels', code: 104),
+  SegmentModel(content: 'Gay Friendly', code: 116),
+  SegmentModel(content: 'Design', code: 31),
+  SegmentModel(content: 'Business hotels', code: 34),
+  SegmentModel(content: 'Golf hotels', code: 36),
+  SegmentModel(content: 'Beach hotels', code: 37),
+  SegmentModel(content: 'Hotels with spa', code: 39),
+  SegmentModel(content: 'Historical', code: 42),
+  SegmentModel(content: "Ski hotels", code: 43),
+  SegmentModel(content: "Rural hotels", code: 44),
+  SegmentModel(content: "Sport hotels", code: 45),
+  SegmentModel(content: "Family hotels", code: 81),
+];
+class CategoryModel{
+  int?simpleCode;
+  String?code;
+  CategoryModel({this.code,this.simpleCode});
+}
+List<CategoryModel>categoryList=[
+  CategoryModel(simpleCode: 0, code: '0'),
+  CategoryModel(simpleCode: 1, code: '1EST'),
+  CategoryModel(simpleCode: 1, code: '1LL'),
+  CategoryModel(simpleCode: 2, code: '2EST'),
+  CategoryModel(simpleCode: 2, code: '2LL'),
+  CategoryModel(simpleCode: 0, code: '3'),
+  CategoryModel(simpleCode: 3, code: '3EST'),
+  CategoryModel(simpleCode: 3, code: '3LL'),
+  CategoryModel(simpleCode: 4, code: '4EST'),
+  CategoryModel(simpleCode: 4, code: '4LL'),
+  CategoryModel(simpleCode: 4, code: '4LUX'),
+  CategoryModel(simpleCode: 5, code: '5EST'),
+  CategoryModel(simpleCode: 5, code: '5LL'),
+  CategoryModel(simpleCode: 5, code: '5LUX'),
+  CategoryModel(simpleCode: 4, code: 'AG'),
+  CategoryModel(simpleCode: 1, code: 'ALBER'),
+  CategoryModel(simpleCode: 1, code: 'APTH'),
+  CategoryModel(simpleCode: 2, code: 'APTH2'),
+  CategoryModel(simpleCode: 3, code: 'APTH3'),
+  CategoryModel(simpleCode: 4, code: 'APTH4'),
+  CategoryModel(simpleCode: 5, code: 'APTH5'),
+  CategoryModel(simpleCode: 4, code: 'AT1'),
+  CategoryModel(simpleCode: 3, code: 'AT2'),
+  CategoryModel(simpleCode: 2, code: 'AT3'),
+  CategoryModel(simpleCode: 3, code: 'BB'),
+  CategoryModel(simpleCode: 3, code: 'BB3'),
+  CategoryModel(simpleCode: 4, code: 'BB4'),
+  CategoryModel(simpleCode: 5, code: 'BB5'),
+  CategoryModel(simpleCode: 4, code: 'BOU'),
+  CategoryModel(simpleCode: 1, code: 'CAMP1'),
+  CategoryModel(simpleCode: 2, code: 'CAMP2'),
+  CategoryModel(simpleCode: 2, code: 'CHUES'),
+  CategoryModel(simpleCode: 1, code: 'H1_5'),
+  CategoryModel(simpleCode: 2, code: 'H2S'),
+  CategoryModel(simpleCode: 2, code: 'H2_5'),
+  CategoryModel(simpleCode: 3, code: 'H3S'),
+  CategoryModel(simpleCode: 3, code: 'H3_5'),
+  CategoryModel(simpleCode: 4, code: 'H4_5'),
+  CategoryModel(simpleCode: 5, code: 'H5_5'),
+  CategoryModel(simpleCode: 5, code: 'HIST'),
+  CategoryModel(simpleCode: 3, code: 'HR'),
+  CategoryModel(simpleCode: 2, code: 'HR2'),
+  CategoryModel(simpleCode: 3, code: 'HR3'),
+  CategoryModel(simpleCode: 4, code: 'HR4'),
+  CategoryModel(simpleCode: 5, code: 'HR5'),
+  CategoryModel(simpleCode: 4, code: 'HRS'),
+  CategoryModel(simpleCode: 1, code: 'HS'),
+  CategoryModel(simpleCode: 2, code: 'HS2'),
+  CategoryModel(simpleCode: 3, code: 'HS3'),
+  CategoryModel(simpleCode: 4, code: 'HS4'),
+  CategoryModel(simpleCode: 5, code: 'HS5'),
+  CategoryModel(simpleCode: 1, code: 'HSR1'),
+  CategoryModel(simpleCode: 2, code: 'HSR2'),
+  CategoryModel(simpleCode: 2, code: 'LODGE'),
+  CategoryModel(simpleCode: 0, code: 'PENDI'),
+  CategoryModel(simpleCode: 1, code: 'PENSI'),
+  CategoryModel(simpleCode: 4, code: 'POUSA'),
+  CategoryModel(simpleCode: 3, code: 'RESID'),
+  CategoryModel(simpleCode: 4, code: 'RSORT'),
+  CategoryModel(simpleCode: 3, code: 'SPC'),
+  CategoryModel(simpleCode: 2, code: 'STD'),
+  CategoryModel(simpleCode: 4, code: 'SUP'),
+  CategoryModel(simpleCode: 4, code: 'VILLA'),
+  CategoryModel(simpleCode: 4, code: 'VTV'),
+];

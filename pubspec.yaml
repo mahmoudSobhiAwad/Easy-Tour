@@ -75,7 +75,9 @@ dependencies:
   just_audio: ^0.9.37
   firebase_storage: ^11.6.0
   mailer: ^6.1.0
+  crypto: any
   cloud_firestore: ^4.14.0
+  cached_network_image: ^3.3.1
 
 dev_dependencies:
   flutter_test:

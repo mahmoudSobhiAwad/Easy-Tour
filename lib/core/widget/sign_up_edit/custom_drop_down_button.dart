@@ -29,7 +29,6 @@ class CustomDropDownButton extends StatelessWidget {
       ),
       onSelected: (String selectedGovernorate){
         onChanged(selectedGovernorate);
-        //print("Selected governorate: $selectedGovernorate");
       },
       itemBuilder: (BuildContext context) {
         return list.map((String value) =>

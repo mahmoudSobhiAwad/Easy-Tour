@@ -162,14 +162,12 @@ class ApiServices{
     final response=await dio.get('https://places.googleapis.com/v1/$data/media?key=$androidApiGoogleMapKey&maxHeightPx=${500}&skipHttpRedirect=${true}');
     return response.data;
   }
-  Future<Map<String,dynamic>>normalGet(String endPoint,{Map<String,dynamic>?data})async{
-    final response=await dio.get(endPoint,data:data,options: Options(headers: {
-
-    }));
+  Future<Map<String,dynamic>>normalGet(String endPoint,{Map<String,dynamic>?data,Map<String,dynamic>?header})async{
+    final response=await dio.get(endPoint,options: Options(headers:header), );
     return response.data;
   }
-  Future<dynamic>normalPost(String endPoint,{Map<String,dynamic>?data})async{
-    final response=await dio.post(endPoint);
+  Future<dynamic>normalPost(String endPoint,{Map<String,dynamic>?data,Map<String,dynamic>?header})async{
+    final response=await dio.post(endPoint,options: Options(headers: header),data: data);
     return response.data;
   }
 
