@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/data/models/get_hotel_model.dart';
 class ListOfImagesPreview extends StatelessWidget {
-  const ListOfImagesPreview({super.key,required this.imagesLinks,required this.height,required this.width});
+  const ListOfImagesPreview({super.key,required this.imagesLinks,required this.height,required this.width,this.imagesPathList});
   final List<String>imagesLinks;
   final double height;
   final double width;
+  final List<ImagesPathModel>?imagesPathList;
   @override
   Widget build(BuildContext context) {
     return  SafeArea(

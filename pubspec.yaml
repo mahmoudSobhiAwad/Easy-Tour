@@ -122,6 +122,7 @@ flutter:
      - assets/google_map_assets/
      - assets/weather_status/
      - assets/hotel_booking/
+     - assets/hotels/facilities.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -143,12 +144,12 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_native_splash:
-    color_dark: "#1B2445"
-    image: assets/on_boarding_images/native_splash.png
+    color_dark: "#000000"
+    image: assets/on_boarding_images/final.png
     color: "#ffffff"
     fullscreen: true
     android_12:
-      image: assets/on_boarding_images/native_splash.png
+      image: assets/on_boarding_images/final.png
       # Splash screen background color.
       color: "#ffffff"
       # App icon background color.

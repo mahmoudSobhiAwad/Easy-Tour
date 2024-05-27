@@ -11,11 +11,12 @@ class GetAvailableRoomsModel{
   int?childNum;
   int?hotelCode;
   List<RateOfRoom>?rateOfRoom;
-  GetAvailableRoomsModel({this.roomName,this.rateOfRoom,this.currency,this.adultNum,this.childNum,this.checkOut,this.checkIn,this.roomNum,this.hotelCode});
+  List<PaxModel>?paxList;
+  GetAvailableRoomsModel({this.roomName,this.rateOfRoom,this.paxList,this.currency,this.adultNum,this.childNum,this.checkOut,this.checkIn,this.roomNum,this.hotelCode});
   factory GetAvailableRoomsModel.fromJson(Map<String,dynamic>json){
     return GetAvailableRoomsModel(
       roomName:json['name'],
-      //currency: json['currency'],
+      currency: json['currency'],
       rateOfRoom: List<RateOfRoom>.from(json['rates'].map((x) => RateOfRoom.fromJson(x))),
     );
   }
@@ -30,6 +31,14 @@ class GetAvailableRoomsModel{
           "rooms": roomNum,
           "adults": adultNum,
           "children": childNum,
+          "paxes":paxList!=null?[
+            ...List.generate(paxList?.length??0, (index) {
+              return {
+                'type':paxList?[index].type,
+                'age':paxList?[index].age,
+              };
+            })
+          ]:null,
         }
       ],
       "hotels": {
@@ -40,6 +49,16 @@ class GetAvailableRoomsModel{
     };
   }
 }
+Map<String,dynamic>?getPax(List<PaxModel>?paxList){
+  if(paxList!=null){
+    Map<String,dynamic>paxMap={};
+    for(var item in paxList){
+      paxMap.addAll({'age':item.age,'type':'CH'});
+    }
+    return paxMap;
+  }
+  return null;
+}
 class CancelPolicies{
   String?amount;
   String?deadTime;
@@ -47,7 +66,7 @@ class CancelPolicies{
   factory CancelPolicies.fromJson(Map<String,dynamic>json){
     return CancelPolicies(
       amount: json['amount'],
-      deadTime:DateFormat('d MMM y').format(DateTime.parse(json['from'])),
+      deadTime:DateFormat('dd MMM HH:mm').format(DateTime.parse(json['from'])),
     );
   }
 }

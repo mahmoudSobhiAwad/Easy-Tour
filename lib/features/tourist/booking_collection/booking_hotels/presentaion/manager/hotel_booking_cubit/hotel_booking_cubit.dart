@@ -9,19 +9,22 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_hote
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/manager/hotel_booking_cubit/hotel_booking_state.dart';
 
 class HotelBookingCubit extends Cubit<HotelBookingStates>{
-  HotelBookingCubit({required this.hotelsRepoImpl,this.hotelList,this.checkIn='checkIn',this.checkOut='CheckOut',this.childNum=0,this.roomNum=0,this.adultNum=0,}):super(InitialHotelBookingState());
+  HotelBookingCubit({required this.hotelsRepoImpl,this.hotelList,this.destName=''}):super(InitialHotelBookingState());
   TextEditingController searchText=TextEditingController();
   List<String> searchResults = [];
   Timer?debounce;
   final formatter = DateFormat('yyyy-MM-dd');
-  String checkIn;
-  String checkOut;
-  int adultNum;
-  int childNum;
-  int roomNum;
+  String checkIn='Check In';
+  String checkOut='Check Out';
+  int adultNum=0;
+  int childNum=0;
+  int roomNum=0;
+  bool showOccupancies=false;
   List<HotelsModel>?hotelList=[];
   DestinationModel?destModel;
   String destName='';
+  List<String>facilityStringList=[];
+  List<PaxModel>paxList=[];
   final GetHotelsRepoImpl hotelsRepoImpl;
   late HotelModelWithRoomModel hotelModelWithRoomModel;
   bool showList=false;
@@ -65,7 +68,6 @@ class HotelBookingCubit extends Cubit<HotelBookingStates>{
       checkOut=formatter.format(dateTimeRange.end);
     }
     emit(ChangeCheckInCheckOutDate());
-
   }
   void changeAdultOrChildOrRoomNum({required int index, required bool add}){
     if(index==0){
@@ -124,10 +126,10 @@ class HotelBookingCubit extends Cubit<HotelBookingStates>{
       checkIn: checkIn,
       checkOut: checkOut,
       hotelCode: hotelCode,
+      paxList: paxList,
     ).toJson());
     result.fold((failure) {
       emit(FailureGetAvailableRooms(errMessage: failure.errMessage));
-      print(failure.errMessage);
     }, (availableRooms) {
       if(availableRooms.isEmpty){
         emit(FailureGetAvailableRooms(errMessage: 'there is no available rooms'));
@@ -138,5 +140,22 @@ class HotelBookingCubit extends Cubit<HotelBookingStates>{
       }
     } );
   }
+  void showOrClosePickOccupancies(){
+    showOccupancies?showOccupancies=false:showOccupancies=true;
+    emit(ShowOccupanciesState());
+  }
+  void fillPaxList(int index,String val){
+    int age=int.parse(val);
+    if(paxList.length<=index){
+      paxList.add(PaxModel(age: age, type: 'CH'));
+    }
+    else{
+      paxList[index]=PaxModel(age: age, type: 'CH');
+    }
+    for(var item in paxList){
+      print('age is ${item.age}');
+    }
+  }
+
 }
 

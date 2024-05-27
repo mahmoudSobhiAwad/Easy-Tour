@@ -25,3 +25,4 @@ class FailureGetAvailableRooms extends HotelBookingStates {
   final String?errMessage;
   FailureGetAvailableRooms({this.errMessage});
 }
+class ShowOccupanciesState extends HotelBookingStates {}

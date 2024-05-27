@@ -1,0 +1,904 @@
+{
+"facilities": [
+        {
+            "code": 1,
+            "facilityGroupCode": 61,
+            "facilityTypologyCode": 20,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Single bed 80-130 width"
+            }
+        },
+        {
+            "code": 1,
+            "facilityGroupCode": 62,
+            "facilityTypologyCode": 20,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Single bed 80-130 width"
+            }
+        },
+        {
+            "code": 1,
+            "facilityGroupCode": 85,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "LGTBIQ friendly"
+            }
+        },
+        {
+            "code": 1,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Barcelo - We care about you"
+            }
+        },
+        {
+            "code": 10,
+            "facilityGroupCode": 100,
+            "facilityTypologyCode": 14,
+            "description": {
+                "languageCode": "ENG",
+                "content": "1"
+            }
+        },
+        {
+            "code": 10,
+            "facilityGroupCode": 20,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "hotel"
+            }
+        },
+        {
+            "code": 10,
+            "facilityGroupCode": 30,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "American Express"
+            }
+        },
+        {
+            "code": 10,
+            "facilityGroupCode": 40,
+            "facilityTypologyCode": 18,
+            "description": {
+                "languageCode": "ENG",
+                "content": "City centre"
+            }
+        },
+        {
+            "code": 10,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 8,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Bathroom"
+            }
+        },
+        {
+            "code": 10,
+            "facilityGroupCode": 70,
+            "facilityTypologyCode": 23,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Air conditioning in public areas"
+            }
+        },
+        {
+            "code": 10,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "RIU - Covid-19 Health Protocol"
+            }
+        },
+        {
+            "code": 100,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Suites"
+            }
+        },
+        {
+            "code": 100,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 26,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Internet access"
+            }
+        },
+        {
+            "code": 100,
+            "facilityGroupCode": 70,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Supermarket"
+            }
+        },
+        {
+            "code": 100,
+            "facilityGroupCode": 80,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Set menu dinner"
+            }
+        },
+        {
+            "code": 100,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Morocco - Tourisme au Maroc post Covid-19"
+            }
+        },
+        {
+            "code": 101,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Mauritius - Sanitary Measures in the Tourism Sector"
+            }
+        },
+        {
+            "code": 102,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Qatar - Clean Program"
+            }
+        },
+        {
+            "code": 103,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "South Africa - Tourism Industry Standard Protocols"
+            }
+        },
+        {
+            "code": 104,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Fiji - Covid Safe Guideline for Tourism Industry"
+            }
+        },
+        {
+            "code": 105,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Australia - We're Covid Safe"
+            }
+        },
+        {
+            "code": 106,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "B&B Ireland - Care Policy"
+            }
+        },
+        {
+            "code": 107,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Uruguay - Protocolo Nacional para la Reactivación de la Actividad Turística"
+            }
+        },
+        {
+            "code": 108,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Ireland - Guidelines for re-opening Hotels and Guesthouses"
+            }
+        },
+        {
+            "code": 109,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Dubai- Dubai Assured"
+            }
+        },
+        {
+            "code": 11,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 8,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Private external bathroom"
+            }
+        },
+        {
+            "code": 11,
+            "facilityGroupCode": 70,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Fireplace"
+            }
+        },
+        {
+            "code": 11,
+            "facilityGroupCode": 80,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Breakfast and dinner"
+            }
+        },
+        {
+            "code": 11,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "NH - Feel safe at NH"
+            }
+        },
+        {
+            "code": 110,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Apartments"
+            }
+        },
+        {
+            "code": 110,
+            "facilityGroupCode": 30,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "EuroCard"
+            }
+        },
+        {
+            "code": 110,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Kitchenette"
+            }
+        },
+        {
+            "code": 110,
+            "facilityGroupCode": 70,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Shop"
+            }
+        },
+        {
+            "code": 110,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "WTTC - Safe Travels Stamp"
+            }
+        },
+        {
+            "code": 111,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 12,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Kitchen utensils, plates & cups"
+            }
+        },
+        {
+            "code": 111,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "United Kingdom - We're good to go"
+            }
+        },
+        {
+            "code": 112,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Tunisia - Protocole Sanitaire por le Tourismo Tunisien Anti Covid-19"
+            }
+        },
+        {
+            "code": 113,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Jamaica - Jamaica Tourism Covid-19 Protocols"
+            }
+        },
+        {
+            "code": 114,
+            "facilityGroupCode": 80,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Snacks"
+            }
+        },
+        {
+            "code": 114,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Marriott - Commitment to Clean"
+            }
+        },
+        {
+            "code": 115,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Studios"
+            }
+        },
+        {
+            "code": 115,
+            "facilityGroupCode": 30,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Euro 6000"
+            }
+        },
+        {
+            "code": 115,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Kitchen"
+            }
+        },
+        {
+            "code": 115,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Disneyland Paris - Enhanced health and safety measures"
+            }
+        },
+        {
+            "code": 116,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Sandals - Platinum Protocol Of Cleanliness During COVID-19"
+            }
+        },
+        {
+            "code": 12,
+            "facilityGroupCode": 70,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Smoke detector"
+            }
+        },
+        {
+            "code": 12,
+            "facilityGroupCode": 80,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Breakfast and lunch"
+            }
+        },
+        {
+            "code": 12,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Louvre - Charte of Commitment"
+            }
+        },
+        {
+            "code": 120,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Bungalows"
+            }
+        },
+        {
+            "code": 120,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 12,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Minibar"
+            }
+        },
+        {
+            "code": 120,
+            "facilityGroupCode": 74,
+            "facilityTypologyCode": 12,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Hairdressing salon"
+            }
+        },
+        {
+            "code": 123,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Villas"
+            }
+        },
+        {
+            "code": 124,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Disability-friendly rooms"
+            }
+        },
+        {
+            "code": 125,
+            "facilityGroupCode": 40,
+            "facilityTypologyCode": 18,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Entertainment Area"
+            }
+        },
+        {
+            "code": 125,
+            "facilityGroupCode": 70,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Garden"
+            }
+        },
+        {
+            "code": 126,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Triple rooms"
+            }
+        },
+        {
+            "code": 127,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Quadruple rooms"
+            }
+        },
+        {
+            "code": 128,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Executive rooms"
+            }
+        },
+        {
+            "code": 129,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Superior rooms"
+            }
+        },
+        {
+            "code": 13,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Eurostars- Clean & Safe"
+            }
+        },
+        {
+            "code": 130,
+            "facilityGroupCode": 40,
+            "facilityTypologyCode": 18,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Golf course"
+            }
+        },
+        {
+            "code": 130,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Fridge"
+            }
+        },
+        {
+            "code": 130,
+            "facilityGroupCode": 71,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Bar"
+            }
+        },
+        {
+            "code": 130,
+            "facilityGroupCode": 80,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Special dietary options"
+            }
+        },
+        {
+            "code": 130,
+            "facilityGroupCode": 85,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Flight information required"
+            }
+        },
+        {
+            "code": 131,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Family rooms"
+            }
+        },
+        {
+            "code": 132,
+            "facilityGroupCode": 10,
+            "facilityTypologyCode": 2,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Twin rooms"
+            }
+        },
+        {
+            "code": 135,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Mini fridge"
+            }
+        },
+        {
+            "code": 135,
+            "facilityGroupCode": 70,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Terrace"
+            }
+        },
+        {
+            "code": 137,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Cooker"
+            }
+        },
+        {
+            "code": 14,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "MGM - Seven-Points Safety plan"
+            }
+        },
+        {
+            "code": 140,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Microwave"
+            }
+        },
+        {
+            "code": 140,
+            "facilityGroupCode": 73,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Pub"
+            }
+        },
+        {
+            "code": 143,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Tea and coffee making facilities "
+            }
+        },
+        {
+            "code": 145,
+            "facilityGroupCode": 40,
+            "facilityTypologyCode": 18,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Bus/Train station"
+            }
+        },
+        {
+            "code": 145,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Washing machine"
+            }
+        },
+        {
+            "code": 147,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Ironing set"
+            }
+        },
+        {
+            "code": 15,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Meliá - Stay Safe with Meliá"
+            }
+        },
+        {
+            "code": 150,
+            "facilityGroupCode": 61,
+            "facilityTypologyCode": 20,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Double bed 131-150 width"
+            }
+        },
+        {
+            "code": 150,
+            "facilityGroupCode": 62,
+            "facilityTypologyCode": 20,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Double bed 131-150 width"
+            }
+        },
+        {
+            "code": 150,
+            "facilityGroupCode": 73,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Nightclub"
+            }
+        },
+        {
+            "code": 155,
+            "facilityGroupCode": 61,
+            "facilityTypologyCode": 20,
+            "description": {
+                "languageCode": "ENG",
+                "content": "King-size bed 150-183 width"
+            }
+        },
+        {
+            "code": 155,
+            "facilityGroupCode": 62,
+            "facilityTypologyCode": 20,
+            "description": {
+                "languageCode": "ENG",
+                "content": "King-size bed 150-183 width"
+            }
+        },
+        {
+            "code": 16,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Blue Sea - Safety and Hygiene Measures"
+            }
+        },
+        {
+            "code": 160,
+            "facilityGroupCode": 20,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "hostel"
+            }
+        },
+        {
+            "code": 160,
+            "facilityGroupCode": 40,
+            "facilityTypologyCode": 18,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Ski slopes"
+            }
+        },
+        {
+            "code": 160,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Carpeted floors"
+            }
+        },
+        {
+            "code": 160,
+            "facilityGroupCode": 73,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Theatre / auditorium"
+            }
+        },
+        {
+            "code": 160,
+            "facilityGroupCode": 80,
+            "facilityTypologyCode": 31,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Early bird breakfast"
+            }
+        },
+        {
+            "code": 160,
+            "facilityGroupCode": 90,
+            "facilityTypologyCode": 12,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Banana boating"
+            }
+        },
+        {
+            "code": 17,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Ascott - Ascott Cares"
+            }
+        },
+        {
+            "code": 170,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 23,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Centrally regulated air conditioning"
+            }
+        },
+        {
+            "code": 170,
+            "facilityGroupCode": 72,
+            "facilityTypologyCode": 8,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Conference room"
+            }
+        },
+        {
+            "code": 170,
+            "facilityGroupCode": 80,
+            "facilityTypologyCode": 31,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Late riser breakfast"
+            }
+        },
+        {
+            "code": 170,
+            "facilityGroupCode": 90,
+            "facilityTypologyCode": 12,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Waterskiing"
+            }
+        },
+        {
+            "code": 18,
+            "facilityGroupCode": 91,
+            "facilityTypologyCode": 15,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Scandic -  StaySafe at Scandic"
+            }
+        },
+        {
+            "code": 180,
+            "facilityGroupCode": 60,
+            "facilityTypologyCode": 24,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Individually adjustable air conditioning"
+            }
+        },
+        {
+            "code": 180,
+            "facilityGroupCode": 73,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Casino"
+            }
+        },
+        {
+            "code": 180,
+            "facilityGroupCode": 80,
+            "facilityTypologyCode": 3,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Hot breakfast"
+            }
+        },
+        {
+            "code": 180,
+            "facilityGroupCode": 90,
+            "facilityTypologyCode": 12,
+            "description": {
+                "languageCode": "ENG",
+                "content": "Jet ski"
+            }
+        }
+    ]
+}

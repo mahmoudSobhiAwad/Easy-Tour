@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
+import 'package:prepare_project/core/widget/custom_alert_widget/alert_container.dart';
+import 'package:prepare_project/core/widget/custom_alert_widget/alert_types.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/data/repos/get_hotels_repo/get_hotels_repo_impl.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/manager/hotel_booking_cubit/hotel_booking_cubit.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/manager/hotel_booking_cubit/hotel_booking_state.dart';
@@ -26,8 +28,16 @@ class HotelBookingView extends StatelessWidget {
             var cubit=BlocProvider.of<HotelBookingCubit>(context);
             if(state is SuccessGetHotelsState){
               Navigator.push(context, MaterialPageRoute(builder: (context){
-                return  HotelResultView(hotelList: cubit.hotelList!,destName:cubit.destName,roomNum: cubit.roomNum,checkIn: cubit.checkIn,checkOut: cubit.checkOut,childNum: cubit.childNum,adultNum: cubit.adultNum,);
+                return  HotelResultView(hotelList: cubit.hotelList!,destName:cubit.destName,);
               }));
+            }
+            else if(state is FailureGetHotelsState){
+              showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+                types: AlertTypes.failed,
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                content: '${state.errMessage}',));
             }
           }) ,
     );

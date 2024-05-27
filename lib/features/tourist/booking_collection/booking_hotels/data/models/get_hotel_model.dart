@@ -1,4 +1,5 @@
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/data/models/destinations_model.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/data/models/facilities_model.dart';
 
 class HotelsModel{
   int? code;
@@ -8,11 +9,12 @@ class HotelsModel{
   String?accommodationType;
   List<SegmentModel>?segment;
   String?address;
+  List<FacilityModel>?facilitiesList;
   String?cityName;
   List<PhoneModel>?phoneList;
   String?webUrl;
   List<ImagesPathModel>?imagesList;
-  HotelsModel({required this.name,required this.code,this.address,this.accommodationType,this.categoryCode,this.cityName,this.describe,this.imagesList,this.phoneList,this.segment,this.webUrl});
+  HotelsModel({required this.name,required this.code,this.address,this.facilitiesList,this.accommodationType,this.categoryCode,this.cityName,this.describe,this.imagesList,this.phoneList,this.segment,this.webUrl});
   factory HotelsModel.fromJson(Map<String,dynamic>json){
     return HotelsModel(
       name: json['name']['content'],
@@ -24,8 +26,9 @@ class HotelsModel{
       address: json['address']['content'],
       imagesList:json['images']!=null?(json['images']as List).map((imagePath) => ImagesPathModel.fromJson(imagePath)).toList():null,
       phoneList:json['phones']!=null?(json['phones'] as  List).map((phoneModel) => PhoneModel.fromJson(phoneModel)).toList():null,
-      webUrl:json['web'] ,
-      cityName:json['city']['content'] ,
+      facilitiesList:json['facilities']!=null?(json['facilities'] as  List).map((facilityModel) => FacilityModel.fromJson(facilityModel)).toList():null,
+      webUrl:json['web'],
+      cityName:json['city']['content'],
     );
   }
 }
@@ -57,6 +60,11 @@ class ImagesPathModel{
       imagePath: json['path'],
     );
   }
+}
+class PaxModel{
+  int age;
+  String type;
+  PaxModel({required this.age,required this.type});
 }
 int getHotelRate(String code){
   int index=categoryList.indexWhere((element) => element.code==code);

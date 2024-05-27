@@ -33,7 +33,7 @@ class TableDetailsOfAvailableRooms extends StatelessWidget {
         ...List.generate(model.length, (index) => buildTableWithWidget(
           [
             Text(model[index].roomName??""),
-            Text('${model[index].rateOfRoom?[0].net} Euro'),
+            Text('${model[index].rateOfRoom?[0].net}'),
              Column(
               children: [
                 Row(

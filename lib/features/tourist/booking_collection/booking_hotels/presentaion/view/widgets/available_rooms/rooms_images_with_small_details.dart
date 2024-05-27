@@ -59,20 +59,55 @@ class ImagesOfRoomWithSmallDetails extends StatelessWidget {
         imagesPath?.length!=null?Positioned(
           bottom: height*0.02,
           right: width*0.05,
-          child: Column(
-            children: [
-              ...List.generate(imagesPath!.length>3?3:imagesPath!.length, (index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 5.0),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network('http://photos.hotelbeds.com/giata/small/${imagesPath?[index].imagePath}',height: height*0.06,width: width*0.12,fit: BoxFit.cover,)),
-                );
-              }),
-            ],
-          ),
+          child: CircleAvatar(
+            radius: width*0.1,
+            backgroundColor: thirdColor,
+            child: TextButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return ListOfImagesInHotel(imagesPathList: imagesPath??[], height: height, width: width);
+              }));
+            },child: Column(
+              children: [
+                Text('+${imagesPath?.length??1 -1} images',textAlign: TextAlign.center,),
+                const Icon(Icons.arrow_forward_ios),
+              ],
+            ),),
+          )
         ):const SizedBox(),
       ],
+    );
+  }
+}
+class ListOfImagesInHotel extends StatelessWidget {
+  const ListOfImagesInHotel({super.key,required this.height,required this.width,required this.imagesPathList});
+  final double height;
+  final double width;
+  final List<ImagesPathModel> imagesPathList;
+  @override
+  Widget build(BuildContext context) {
+    return  SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          IconButton(onPressed: (){
+            Navigator.pop(context);
+          }, icon: const Icon(Icons.close,color: Colors.white,)),
+          SizedBox(
+            height: height*0.8,
+            child: PageView.builder(
+                itemCount: imagesPathList.length,
+                itemBuilder: (context,index){
+                  return InteractiveViewer(
+                    child: Center(
+                      child: Image.network('http://photos.hotelbeds.com/giata/xl/${imagesPathList[index].imagePath}',
+                        height: height*0.7,fit: BoxFit.fitWidth,width: width,
+                        filterQuality: FilterQuality.high,),
+                    ),
+                  );
+                }),
+          ),
+        ],
+      ),
     );
   }
 }
