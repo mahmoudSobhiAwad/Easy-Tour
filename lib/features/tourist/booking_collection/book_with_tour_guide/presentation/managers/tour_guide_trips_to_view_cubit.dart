@@ -47,6 +47,10 @@ class TripsToViewCubit extends Cubit<TripsToViewStates>{
     }
 
   }
+  void goToSelectedDay(int index){
+    currDay=index;
+    emit(MoveToSelectedDayInTrips());
+  }
 
   Future<void>getAllTripsLength()async{
     isLoading=true;
@@ -94,10 +98,7 @@ class TripsToViewCubit extends Cubit<TripsToViewStates>{
       isLoading=false;
     });
   }
-  void goToSelectedDay(int index){
-    currDay=index;
-    emit(MoveToSelectedDayInTrips());
-  }
+
   Future<void> editTrips()async{
     for(int i=0;i<tripList.length;i++)
     {

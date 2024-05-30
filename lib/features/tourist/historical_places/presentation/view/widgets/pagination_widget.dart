@@ -28,7 +28,7 @@ class PaginationInHistoricalPlaces extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(12.0),
       child: Container(
         width: width,
         height: height*0.07,

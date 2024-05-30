@@ -28,7 +28,7 @@ class HotelBookingView extends StatelessWidget {
             var cubit=BlocProvider.of<HotelBookingCubit>(context);
             if(state is SuccessGetHotelsState){
               Navigator.push(context, MaterialPageRoute(builder: (context){
-                return  HotelResultView(hotelList: cubit.hotelList!,destName:cubit.destName,);
+                return  HotelResultView(hotelList: cubit.hotelList!,destModel:cubit.destModel!,totalNum: cubit.totalNum,);
               }));
             }
             else if(state is FailureGetHotelsState){

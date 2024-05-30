@@ -13,12 +13,11 @@ class GetHotelsRepoImpl implements GetHotelRepo{
   final ApiServices apiServices;
   GetHotelsRepoImpl({required this.apiServices});
   @override
-  Future<Either<Failure, List<HotelsModel>>> getAllHotelsInDestination({required String destCode}) async{
+  Future<Either<Failure,CompleteHotelModel>> getAllHotelsInDestination({required String destCode,int? from,int?to}) async{
     try{
-      var response=await apiServices.normalGet('$hotelBookingUrl/hotel-content-api/1.0/hotels?destinationCode=$destCode&countryCode=EG&language=ENG&from=1&to=10&useSecondaryLanguage=false', header: toJson());
-      List<HotelsModel>hotels= List<HotelsModel>.from(
-          response['hotels'].map((x) => HotelsModel.fromJson(x)));
-      return Right(hotels);
+      var response=await apiServices.normalGet('$hotelBookingUrl/hotel-content-api/1.0/hotels?destinationCode=$destCode&countryCode=EG&language=ENG&from=${from??0}&to=${to??10}&useSecondaryLanguage=false', header: toJson());
+      CompleteHotelModel hotelModel=CompleteHotelModel.fromJson(response);
+      return Right(hotelModel);
     }
     catch (e) {
       if (e is DioException) {
@@ -39,8 +38,6 @@ class GetHotelsRepoImpl implements GetHotelRepo{
         for(var item in response['hotels']['hotels'][0]['rooms']){
           hotels.add(GetAvailableRoomsModel.fromJson(item));
         }
-        // hotels = List<GetAvailableRoomsModel>.from(
-        //     response['hotels']['hotels'][0]['rooms'].map((x) => GetAvailableRoomsModel.fromJson(x)));
         return  Right(hotels);
       }
       return Right(hotels);

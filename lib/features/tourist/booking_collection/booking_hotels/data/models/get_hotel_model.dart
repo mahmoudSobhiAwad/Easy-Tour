@@ -4,6 +4,7 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_hote
 class HotelsModel{
   int? code;
   String? name;
+  int?total;
   String?describe;
   int?categoryCode;
   String?accommodationType;
@@ -14,17 +15,18 @@ class HotelsModel{
   List<PhoneModel>?phoneList;
   String?webUrl;
   List<ImagesPathModel>?imagesList;
-  HotelsModel({required this.name,required this.code,this.address,this.facilitiesList,this.accommodationType,this.categoryCode,this.cityName,this.describe,this.imagesList,this.phoneList,this.segment,this.webUrl});
+  HotelsModel({required this.name,required this.code,this.total,this.address,this.facilitiesList,this.accommodationType,this.categoryCode,this.cityName,this.describe,this.imagesList,this.phoneList,this.segment,this.webUrl});
   factory HotelsModel.fromJson(Map<String,dynamic>json){
     return HotelsModel(
       name: json['name']['content'],
       code: json['code'],
+      total: json['total'],
       describe: json['description']['content'],
       categoryCode: getHotelRate(json['categoryCode']),
       accommodationType: json['accommodationTypeCode'],
       segment:getSegmentList(json['segmentCodes']??[],),
       address: json['address']['content'],
-      imagesList:json['images']!=null?(json['images']as List).map((imagePath) => ImagesPathModel.fromJson(imagePath)).toList():null,
+      imagesList:json['images']!=null?(json['images']as List).map((imagePath) => ImagesPathModel.fromJson(imagePath)).toSet().toList():null,
       phoneList:json['phones']!=null?(json['phones'] as  List).map((phoneModel) => PhoneModel.fromJson(phoneModel)).toList():null,
       facilitiesList:json['facilities']!=null?(json['facilities'] as  List).map((facilityModel) => FacilityModel.fromJson(facilityModel)).toList():null,
       webUrl:json['web'],
@@ -32,6 +34,7 @@ class HotelsModel{
     );
   }
 }
+
 List<SegmentModel>getSegmentList(List<dynamic>segment){
   if(segment.isNotEmpty){
     List<SegmentModel>resultedSegment=[];
@@ -69,4 +72,15 @@ class PaxModel{
 int getHotelRate(String code){
   int index=categoryList.indexWhere((element) => element.code==code);
   return categoryList[index].simpleCode??3;
+}
+class CompleteHotelModel{
+  int total;
+  List<HotelsModel>?hotelsList;
+  CompleteHotelModel({required this.total,this.hotelsList});
+  factory CompleteHotelModel.fromJson(Map<String,dynamic>json){
+    return CompleteHotelModel(
+      total: json['total'],
+      hotelsList: json['hotels']!=null?(json['hotels']as List).map((hotelModel) => HotelsModel.fromJson(hotelModel)).toList():null,
+    );
+  }
 }

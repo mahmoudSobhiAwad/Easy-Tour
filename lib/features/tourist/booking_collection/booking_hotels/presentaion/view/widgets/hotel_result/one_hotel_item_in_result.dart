@@ -29,6 +29,9 @@ class OneHotelItemInBooking extends StatelessWidget {
             CachedNetworkImage(
               height: height*0.3,
               width:width*0.33,
+              errorWidget: (context,str,_){
+                return const Icon(Icons.warning,color: closeColor,);
+            },
               fit: BoxFit.fill, imageUrl:'http://photos.hotelbeds.com/giata/bigger/${model.imagesList?.first.imagePath}',
             ):
             const Icon(Icons.warning,color: closeColor,),

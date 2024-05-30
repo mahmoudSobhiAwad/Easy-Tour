@@ -17,6 +17,7 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentat
 import 'package:prepare_project/features/tourist/image_classification/presentation/views/image_classificarion_view.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/create_post_view.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/home_view.dart';
+import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/intro_trip_history.dart';
 import 'package:prepare_project/features/tourist/weather_forecast/presentation/views/weather_forecast_view.dart';
 import '../../../features/splash/presentation/views/splash_view.dart';
 import '../../../features/tourist/profile/presentation/views/profile_view.dart';
@@ -86,6 +87,20 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kWeatherView,builder: (context,state)=>const WeatherForecastView(),),
    GoRoute(path: kCustomTripView,builder: (context,state)=>const CustomTripView(),),
    GoRoute(path: kTouristCreatePost,builder: (context,state)=>const CreatePostView(),),
-   GoRoute(path: kTouristHotelBooking,builder: (context,state)=>const HotelBookingView(),),
+   GoRoute(path: kTouristHotelBooking,builder: (context,state){
+    if(SetAppState.prefs?.getInt('hotelIndex')==0){
+     return CustomIntroScreen(
+         mainTitle: 'Let’s Find Your Sweet & Dream Place ',
+         imagePath: 'assets/hotel_booking/hotel_intro.png',
+         secondaryTitle: 'Get the opportunity to stay that you dream of at an affordable price',
+         screenToGo: ()async{
+          await SetAppState.prefs?.setInt('hotelIndex', 1);
+          if(context.mounted){
+           context.push(RouterApp.kTouristHotelBooking);
+          }
+         });
+    }
+    return const HotelBookingView();
+   },),
   ]);
 }

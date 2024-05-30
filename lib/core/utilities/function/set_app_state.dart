@@ -29,6 +29,9 @@ class SetAppState{
   static Future<void> chatBotCurrentPage(int? index)async{
     await prefs?.setInt('pageIndex',index??0);
   }
+  static Future<void> hotelBookingCurrentPage(int? index)async{
+    await prefs?.setInt('hotelIndex',index??0);
+  }
   static Future<void> generateTripCurrentPage(int? index)async{
     await prefs?.setInt('tripIndex',index??0);
   }

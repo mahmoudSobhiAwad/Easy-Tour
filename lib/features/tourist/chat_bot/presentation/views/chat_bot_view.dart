@@ -20,11 +20,13 @@ class ChatBotView extends StatelessWidget {
         builder:(context,state)
         {
           var cubit=BlocProvider.of<ChatBotCubit>(context);
-          return [ ChatBotIntro(
-            changePageIndex: (){
-              cubit.changePageIndex();
-            },
-          ),ChatBotBody(cubit: cubit)][cubit.chatBotCurrentPage];
+          return [
+            ChatBotIntro(
+              changePageIndex: (){
+                cubit.changePageIndex();
+                },
+            ),
+            ChatBotBody(cubit: cubit)][cubit.chatBotCurrentPage];
           } ,
         listener: (context,state)
         {

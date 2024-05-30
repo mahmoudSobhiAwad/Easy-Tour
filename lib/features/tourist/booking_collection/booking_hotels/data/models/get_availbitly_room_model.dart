@@ -75,10 +75,15 @@ class RateOfRoom{
   String?net;
   String?paymentType;
   bool packaging;
+  String rateKey;
+  int? allotment;
+  int bookedNum;
   List<CancelPolicies>?cancelPolicies;
-  RateOfRoom({this.cancelPolicies,this.paymentType,this.packaging=false,this.net,this.rateCommentId});
+  RateOfRoom({this.cancelPolicies,this.bookedNum=0,this.paymentType,this.allotment,this.packaging=false,this.net,this.rateCommentId,required this.rateKey});
   factory RateOfRoom.fromJson(Map<String,dynamic>json){
     return RateOfRoom(
+      allotment: json['allotment'],
+      rateKey: json['rateKey'],
       rateCommentId: json['rateCommentsId'],
       net: json['net'],
       paymentType: json['paymentType'],

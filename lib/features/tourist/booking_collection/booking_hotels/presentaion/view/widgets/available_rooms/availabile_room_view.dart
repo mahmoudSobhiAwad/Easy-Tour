@@ -18,7 +18,7 @@ final HotelModelWithRoomModel model;
     final double width=BasicDimension.screenWidth(context);
     final double height=BasicDimension.screenHeight(context);
     return BlocProvider(
-      create: (context)=>RoomsViewCubit()..loadFacilityFromLocal(context, model.hotelsModel),
+      create: (context)=>RoomsViewCubit(availableRoomsList: model.availableRoomsModel)..loadFacilityFromLocal(context, model.hotelsModel),
       child:BlocConsumer<RoomsViewCubit,RoomsViewState>(
           builder: (context,state){
             var cubit=BlocProvider.of<RoomsViewCubit>(context);
@@ -70,7 +70,6 @@ class RoomAvailabilityBody extends StatelessWidget {
               SizedBox(
                 height: height*0.2,
                 child: GridView.builder(
-                  //physics: const NeverScrollableScrollPhysics(),
                     itemCount: cubit.facilityStringList.length,
                     gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 4,crossAxisSpacing: width*0.2,mainAxisSpacing: height*0.015), itemBuilder: (context,index){
                   return ServicesFacilitiesItem(facilityItem: cubit.facilityStringList[index],width: width,height: height,);
@@ -80,16 +79,22 @@ class RoomAvailabilityBody extends StatelessWidget {
               SizedBox(height: height*0.01,),
               const Text('Available Rooms',style: CustomTextStyle.privateTourTitle,),
               SizedBox(height: height*0.01,),
-              TableDetailsOfAvailableRooms(width: width,model: model.availableRoomsModel,),
+              TableDetailsOfAvailableRooms(width: width,model: model.availableRoomsModel,changeBookedRoomsNum: (
+                  {required int index,required bool increase}){
+                cubit.changeRoomBookedNumbers(index: index, increase: increase);
+                },
+              ),
               SizedBox(height: height*0.02,),
-              Text('Note that Currency in ${model.availableRoomsModel.first.currency??"Dollar"}'),
+              //Text('Note that Currency in ${model.availableRoomsModel.first.currency??"Dollar"}'),
               SizedBox(height: height*0.02,),
-              Center(child: CustomLoginButton(label: 'Book',altWidth: width*0.33,)),
+              Center(child: CustomLoginButton(onTap: (){
+                cubit.getListOfPickedRoom();
+              },label: 'Book',altWidth: width*0.33,color: cubit.totalRoomNum>0? basicColor:basicColor.withOpacity(0.5),)),
             ],
           ),
         ),
         SizedBox(height: height*0.025,),
-        ContactInfoWithSocialInfo(height: height, width: width),
+        ContactInfoWithSocialInfo(height: height, width: width,phonesList: model.hotelsModel.phoneList,webUrl: model.hotelsModel.webUrl,),
         SizedBox(height: height*0.01,),
       ],
     );

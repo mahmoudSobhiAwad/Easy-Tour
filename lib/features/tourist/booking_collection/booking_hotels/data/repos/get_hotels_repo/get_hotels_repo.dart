@@ -4,6 +4,6 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_hote
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/data/models/get_hotel_model.dart';
 
 abstract class GetHotelRepo{
-  Future<Either<Failure,List<HotelsModel>>>getAllHotelsInDestination({required String destCode});
+  Future<Either<Failure,CompleteHotelModel>>getAllHotelsInDestination({required String destCode,int?from,int?to});
   Future<Either<Failure,List<GetAvailableRoomsModel>>>getAvailableRooms({required Map<String,dynamic>toJsonModel});
 }

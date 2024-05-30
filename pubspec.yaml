@@ -145,11 +145,11 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_native_splash:
     color_dark: "#000000"
-    image: assets/on_boarding_images/final.png
+    image: assets/on_boarding_images/splash_screen.png
     color: "#ffffff"
     fullscreen: true
     android_12:
-      image: assets/on_boarding_images/final.png
+      image: assets/on_boarding_images/splash_screen.png
       # Splash screen background color.
       color: "#ffffff"
       # App icon background color.

@@ -3,7 +3,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/two_beside_form.dart';
-import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/manager/hotel_booking_cubit/hotel_booking_cubit.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/manager/hotel_result_cubit/hotel_result_cubit.dart';
 class DatePickerWithDestination extends StatelessWidget {
   const DatePickerWithDestination({
     super.key,
@@ -14,7 +14,7 @@ class DatePickerWithDestination extends StatelessWidget {
 
   final double width;
   final double height;
-  final HotelBookingCubit cubit;
+  final HotelResultCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +26,10 @@ class DatePickerWithDestination extends StatelessWidget {
           width: width*0.45,
           height: height*0.08,
           child: CustomTextFormField(
+            initialValue: cubit.destModel.destName,
+            enable: false,
             label: 'Destination',
             floatingLabelBehavior: FloatingLabelBehavior.never,
-            controller: cubit.searchText,
-            onChanged: (String?value){
-              cubit.searchForSpecificDest();
-            },
             border: 10,
             maxLines: 1,
             filled: true,

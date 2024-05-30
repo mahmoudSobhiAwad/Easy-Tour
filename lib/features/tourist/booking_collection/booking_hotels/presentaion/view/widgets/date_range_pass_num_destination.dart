@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/sign_up_edit/custom_drop_down.dart';
-import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/manager/hotel_booking_cubit/hotel_booking_cubit.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/manager/hotel_result_cubit/hotel_result_cubit.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/date_picker_destination.dart';
 
 class DateWithPassengerNumbersWithPlace extends StatelessWidget {
@@ -11,7 +11,7 @@ class DateWithPassengerNumbersWithPlace extends StatelessWidget {
   final double width;
   final double height;
   final void Function() onSearch;
-  final HotelBookingCubit cubit;
+  final HotelResultCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class OccupanciesWidget extends StatelessWidget {
     required this.height,
   });
 
-  final HotelBookingCubit cubit;
+  final HotelResultCubit cubit;
   final double width;
   final double height;
 
@@ -115,7 +115,7 @@ class OccupanciesWidget extends StatelessWidget {
                         padding:const EdgeInsets.symmetric(horizontal: 10),
                         child: CustomDropDownMenu(onSelected: (String?value){
                           cubit.fillPaxList(index, value??'5');
-                        },list: const ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'],label: 'Age',labelStyle: CustomTextStyle.commonFontThin,)),)
+                        },list: List.generate(15, (index) =>(index+1).toString()),label: 'Age',labelStyle: CustomTextStyle.commonFontThin,)),)
                   ],
                 ),
               ):const SizedBox(),

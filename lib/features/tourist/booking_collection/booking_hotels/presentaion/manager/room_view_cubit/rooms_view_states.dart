@@ -6,3 +6,4 @@ class FailureFacilityDataState extends RoomsViewState {
   final String?errMessage;
   FailureFacilityDataState({this.errMessage});
 }
+class ChangeNumOfBookedRoom extends RoomsViewState {}
