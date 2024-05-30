@@ -10,6 +10,7 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_hote
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/available_rooms/rooms_images_with_small_details.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/available_rooms/services_facilites_in_hotel.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/available_rooms/table_available_rooms.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/personal_payment/personal_data_payment_for_booking_view.dart';
 class RoomAvailabilityView extends StatelessWidget {
   const RoomAvailabilityView({super.key,required this.model});
 final HotelModelWithRoomModel model;
@@ -26,7 +27,13 @@ final HotelModelWithRoomModel model;
               body: RoomAvailabilityBody(height: height, width: width, model: model,cubit: cubit,),
             );
       },
-          listener: (context,stata){}) ,
+          listener: (context,stata){
+            if(stata is InitNeededRoomsList){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return  PersonalDataPaymentForHotelBookingView(needRooms: stata.rooms,);
+              }));
+            }
+          }) ,
     );
   }
 }

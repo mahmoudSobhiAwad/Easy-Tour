@@ -78,10 +78,12 @@ class RateOfRoom{
   String rateKey;
   int? allotment;
   int bookedNum;
+  String?boardName;
   List<CancelPolicies>?cancelPolicies;
-  RateOfRoom({this.cancelPolicies,this.bookedNum=0,this.paymentType,this.allotment,this.packaging=false,this.net,this.rateCommentId,required this.rateKey});
+  RateOfRoom({this.cancelPolicies,this.bookedNum=0,this.boardName,this.paymentType,this.allotment,this.packaging=false,this.net,this.rateCommentId,required this.rateKey});
   factory RateOfRoom.fromJson(Map<String,dynamic>json){
     return RateOfRoom(
+      boardName: json['boardName'],
       allotment: json['allotment'],
       rateKey: json['rateKey'],
       rateCommentId: json['rateCommentsId'],

@@ -1,4 +1,3 @@
-//first widget that contain first name and last name
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/widget/sign_up_edit/custom_column_with_text_form.dart';
 

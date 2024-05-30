@@ -46,6 +46,19 @@ class RoomsViewCubit extends Cubit<RoomsViewState>{
     emit(ChangeNumOfBookedRoom());
   }
   void getListOfPickedRoom(){
-    bookedRoomList=availableRoomsList.where((element) => element.rateOfRoom!.first.bookedNum>0).toList();
+    bookedRoomList.clear();
+    for(var item in availableRoomsList){
+      if(item.rateOfRoom!.first.bookedNum>0){
+        int counter=item.rateOfRoom!.first.bookedNum;
+        for(int i=0;i<counter;i++){
+          bookedRoomList.add(item);
+        }
+      }
+    }
+    for(var item in bookedRoomList){
+      print(item.roomName);
+    }
+    emit(InitNeededRoomsList(rooms: bookedRoomList));
+
   }
 }
