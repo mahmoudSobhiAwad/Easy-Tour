@@ -22,6 +22,8 @@ class ShowOccupanciesState extends HotelResultStates {}
 
 class ChangeAdultOrChildrenOrRoomNumber extends HotelResultStates {}
 
+class ChangeRoomNumberState extends HotelResultStates {}
+
 class LoadingGetMoreHotels extends HotelResultStates {}
 
 class SuccessGetMoreHotels extends HotelResultStates {}

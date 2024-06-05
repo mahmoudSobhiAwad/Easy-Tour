@@ -6,13 +6,12 @@ class GetAvailableRoomsModel{
   String?currency;
   String?checkIn;
   String?checkOut;
-  int?roomNum;
-  int?adultNum;
-  int?childNum;
   int?hotelCode;
+  List<OccupanciesModel>?occupanciesList=[];
   List<RateOfRoom>?rateOfRoom;
-  List<PaxModel>?paxList;
-  GetAvailableRoomsModel({this.roomName,this.rateOfRoom,this.paxList,this.currency,this.adultNum,this.childNum,this.checkOut,this.checkIn,this.roomNum,this.hotelCode});
+  // List<PaxModel>?paxList;
+
+  GetAvailableRoomsModel({this.roomName,this.rateOfRoom,this.occupanciesList,this.currency,this.checkOut,this.checkIn,this.hotelCode});
   factory GetAvailableRoomsModel.fromJson(Map<String,dynamic>json){
     return GetAvailableRoomsModel(
       roomName:json['name'],
@@ -27,19 +26,14 @@ class GetAvailableRoomsModel{
         "checkOut": checkOut
       },
       "occupancies": [
-        {
-          "rooms": roomNum,
-          "adults": adultNum,
-          "children": childNum,
-          "paxes":paxList!=null?[
-            ...List.generate(paxList?.length??0, (index) {
-              return {
-                'type':paxList?[index].type,
-                'age':paxList?[index].age,
-              };
-            })
-          ]:null,
-        }
+        ...List.generate(occupanciesList?.length??0, (index) {
+          return OccupanciesModel(
+            childNum: occupanciesList?[index].childNum??0,
+            adultNum: occupanciesList?[index].adultNum??0,
+            paxList: occupanciesList?[index].childNum==0?[]:occupanciesList?[index].paxList??[],
+          ).toJson();
+        }),
+
       ],
       "hotels": {
         "hotel": [
@@ -49,16 +43,7 @@ class GetAvailableRoomsModel{
     };
   }
 }
-Map<String,dynamic>?getPax(List<PaxModel>?paxList){
-  if(paxList!=null){
-    Map<String,dynamic>paxMap={};
-    for(var item in paxList){
-      paxMap.addAll({'age':item.age,'type':'CH'});
-    }
-    return paxMap;
-  }
-  return null;
-}
+
 class CancelPolicies{
   String?amount;
   String?deadTime;
@@ -98,4 +83,26 @@ class HotelModelWithRoomModel{
   HotelsModel hotelsModel;
   List<GetAvailableRoomsModel> availableRoomsModel;
   HotelModelWithRoomModel({required this.availableRoomsModel,required this.hotelsModel});
+}
+
+class OccupanciesModel{
+  int childNum;
+  int adultNum;
+  List<PaxModel>?paxList;
+  OccupanciesModel({this.adultNum=0,this.childNum=0,this.paxList});
+  Map<String,dynamic>toJson(){
+    return {
+      "rooms": 1,
+      "adults": adultNum,
+      "children": childNum,
+      "paxes":childNum!=0?[
+        ...List.generate(childNum, (index) {
+          return {
+            'type':'CH',
+            'age':paxList?[index].age,
+          };
+        })
+      ]:null,
+    };
+  }
 }

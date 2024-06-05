@@ -53,6 +53,13 @@ class TableDetailsOfAvailableRooms extends StatelessWidget {
                     Text('${model[index].rateOfRoom?[0].paymentType}',style: CustomTextStyle.commonFontThin.copyWith(fontSize: 12),maxLines: 5,),
                   ],
                 ),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    const Icon(Icons.dashboard,),
+                    Text('${model[index].rateOfRoom?[0].boardName}',style: CustomTextStyle.commonFontThin.copyWith(fontSize: 12),maxLines: 5,),
+                  ],
+                ),
               ],
             ),
             Column(

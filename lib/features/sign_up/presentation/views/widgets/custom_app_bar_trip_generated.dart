@@ -3,7 +3,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 class CustomGeneratedAiTripAppBar extends StatelessWidget {
-  const CustomGeneratedAiTripAppBar({super.key,this.extraOnBack,this.borderColor,this.bgColor,this.appBarStyle,this.showBackIcon=true,required this.height,this.appBarTitle,required this.width,this.menuToSaveTrip,this.appBarWidth});
+  const CustomGeneratedAiTripAppBar({super.key,this.backDirect=true,this.extraOnBack,this.borderColor,this.bgColor,this.appBarStyle,this.showBackIcon=true,required this.height,this.appBarTitle,required this.width,this.menuToSaveTrip,this.appBarWidth});
   final double height;
   final double width;
   final double? appBarWidth;
@@ -14,6 +14,7 @@ class CustomGeneratedAiTripAppBar extends StatelessWidget {
   final Color? bgColor;
   final Color? borderColor;
   final void Function()?extraOnBack;
+  final bool backDirect;
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
@@ -27,10 +28,9 @@ class CustomGeneratedAiTripAppBar extends StatelessWidget {
             bgColor: bgColor,
             borderColor: borderColor,
             containWidget: const Icon(Icons.arrow_back_sharp,),
-            height: height, width: width,onTap: (){
-              Navigator.pop(context);
-              extraOnBack;
-          },
+            height: height, width: width,
+            onTap: backDirect?(){
+              Navigator.pop(context);}:extraOnBack,
           ):
           SizedBox(width: width*0.13,),
           const Expanded(child: SizedBox(width: 5,)),

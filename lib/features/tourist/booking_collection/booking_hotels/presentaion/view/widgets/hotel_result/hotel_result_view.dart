@@ -37,9 +37,10 @@ final int totalNum;
               );
             },
             listener: (context,state){
+              var cubit=BlocProvider.of<HotelResultCubit>(context);
               if(state is SuccessGetAvailableRooms){
                 Navigator.push(context,MaterialPageRoute(builder: (context){
-                  return RoomAvailabilityView(model: state.model!,);
+                  return RoomAvailabilityView(model: state.model!,paxList: cubit.occupanciesList, roomNum: cubit.roomNum,);
                 }));
               }
               else if(state is FailureGetAvailableRooms){

@@ -9,6 +9,10 @@ class FailureFacilityDataState extends RoomsViewState {
   FailureFacilityDataState({this.errMessage});
 }
 class ChangeNumOfBookedRoom extends RoomsViewState {}
+class FailureIncreaseRoomNumState extends RoomsViewState {
+  final String?errMessage;
+  FailureIncreaseRoomNumState({this.errMessage});
+}
 class InitNeededRoomsList extends RoomsViewState {
   final List<GetAvailableRoomsModel>rooms;
   InitNeededRoomsList({required this.rooms});

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'dart:developer';
 
 abstract class Failure {
@@ -38,11 +37,11 @@ class ServerFailure extends Failure {
     log(data.toString());
     if (statusCode == 400 || statusCode == 403)
     {
-      return ServerFailure(data['message']??"Error due to Server",statusCode: 400);
+      return ServerFailure(data['message']??data['internal']['message']??"Error due to Server",statusCode: 400);
     }
    else if(statusCode ==401)
    {
-     SetAppState.setToken(token: data['newToken']).then((value){});
+
      return ServerFailure('error due to refresh token',statusCode: 401);
     }
     else if (statusCode == 404) {

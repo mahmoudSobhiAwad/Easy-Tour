@@ -6,11 +6,14 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_hote
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/manager/room_view_cubit/rooms_view_states.dart';
 
 class RoomsViewCubit extends Cubit<RoomsViewState>{
-  RoomsViewCubit({required this.availableRoomsList}):super(InitialRoomsViewState());
+  RoomsViewCubit({required this.availableRoomsList,required this.paxList,required this.totalRoomNum}):super(InitialRoomsViewState());
   List<String>facilityStringList=[];
   List<GetAvailableRoomsModel> availableRoomsList;
   List<GetAvailableRoomsModel> bookedRoomList=[];
-  int totalRoomNum=0;
+  int totalRoomNum;
+  List<OccupanciesModel>paxList;
+  double totalNet=0;
+  int totalPickedRoom=0;
   Future<void> loadFacilityFromLocal(BuildContext context,HotelsModel model)async{
     emit(LoadingFacilityDataState());
     DefaultAssetBundle.of(context).loadString('assets/hotels/facilities.json').then((value){
@@ -30,17 +33,28 @@ class RoomsViewCubit extends Cubit<RoomsViewState>{
   }
   void changeRoomBookedNumbers({required int index,required bool increase}){
     if(increase){
-      int allotment=availableRoomsList[index].rateOfRoom![0].allotment??5;
-
-      if(availableRoomsList[index].rateOfRoom![0].bookedNum < allotment){
-        availableRoomsList[index].rateOfRoom![0].bookedNum ++;
-        totalRoomNum++;
+      if(totalRoomNum!=totalPickedRoom)
+      {
+        int allotment = availableRoomsList[index].rateOfRoom![0].allotment ?? 5;
+        if (availableRoomsList[index].rateOfRoom![0].bookedNum < allotment) {
+          availableRoomsList[index].rateOfRoom![0].bookedNum++;
+          totalNet+=double.parse(availableRoomsList[index].rateOfRoom?[0].net??"0").roundToDouble();
+          totalPickedRoom++;
+        } else {
+          emit(FailureIncreaseRoomNumState(
+              errMessage: "The Allotment Rooms is full"));
+        }
+      }
+      else{
+        emit(FailureIncreaseRoomNumState(
+            errMessage: "The Allotment Rooms is full"));
       }
     }
     else{
       if(availableRoomsList[index].rateOfRoom![0].bookedNum >0){
         availableRoomsList[index].rateOfRoom![0].bookedNum --;
-        totalRoomNum--;
+        totalNet-=double.parse(availableRoomsList[index].rateOfRoom?[0].net??"0").roundToDouble();
+        totalPickedRoom--;
       }
     }
     emit(ChangeNumOfBookedRoom());
@@ -55,8 +69,9 @@ class RoomsViewCubit extends Cubit<RoomsViewState>{
         }
       }
     }
-    for(var item in bookedRoomList){
-      print(item.roomName);
+    for(int i=0;i<totalRoomNum;i++){
+      bookedRoomList[i].occupanciesList=[];
+      bookedRoomList[i].occupanciesList?.add(paxList[i]);
     }
     emit(InitNeededRoomsList(rooms: bookedRoomList));
 

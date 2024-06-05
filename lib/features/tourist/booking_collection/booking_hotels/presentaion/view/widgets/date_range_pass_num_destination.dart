@@ -29,7 +29,7 @@ class DateWithPassengerNumbersWithPlace extends StatelessWidget {
           child:  Row(
             children: [
               const IconButton(icon: Icon(Icons.person), onPressed:null,),
-              Text('${cubit.adultNum} adult. ${cubit.childNum} children .${cubit.roomNum} room'),
+              Text('${cubit.totalAdultNum} adult. ${cubit.totalChildNum} children .${cubit.roomNum} room'),
               IconButton(onPressed: (){
                 cubit.showOrClosePickOccupancies();
               }, icon:const Icon(Icons.add_circle)),
@@ -67,62 +67,125 @@ class OccupanciesWidget extends StatelessWidget {
         border: Border.all(color: secondaryColor,width: 2),
       ),
       padding: const EdgeInsets.all(8),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children:  [
-          Align(
-            alignment: Alignment.centerRight,
-            child: IconButton(onPressed: (){
-              cubit.showOrClosePickOccupancies();
-            }, icon:const Icon(Icons.close)),
-          ),
-          ...List.generate(3, (index) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(['Adult','Children','Rooms'][index]),
-                  Row(children: [
-                    GestureDetector(
-                      onTap:(){
-                        cubit.changeAdultOrChildOrRoomNum(index: index, add: true);
-                      },
-                      child: const CircleAvatar(
-                        child: Icon(Icons.add,),
-                      ),
-                    ),
-                    const SizedBox(width: 2.5,),
-                    Text('${[cubit.adultNum,cubit.childNum,cubit.roomNum][index]}'),
-                    const SizedBox(width: 2.5,),
-                    GestureDetector(
-                      onTap:(){
-                        cubit.changeAdultOrChildOrRoomNum(index: index, add: false);
-                      },
-                      child: const CircleAvatar(
-                        child: FaIcon(FontAwesomeIcons.minus,),
-                      ),
-                    ),
-                  ],),
-                ],
-              ),
-              index==1?SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                scrollDirection: Axis.horizontal,
-                child: Row(
+      child: SingleChildScrollView(
+
+        child: Column(
+          children:  [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(onPressed: (){
+                cubit.showOrClosePickOccupancies();
+              }, icon:const Icon(Icons.close)),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Number Of Rooms'),
+                IncreaseOrDecreaseNumber(
+                  changedIndex: cubit.roomNum,
+                  changeRoomNum: ({required bool increase}){
+                  cubit.changeRoomNum(increase: increase);
+                },),
+              ],
+            ),
+
+            ...List.generate(cubit.roomNum, (buildIndex) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(child: Text('Room ${buildIndex+1}',style: CustomTextStyle.commonSignDark,)),
+                const SizedBox(height: 5,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ...List.generate(cubit.childNum, (index) => Padding(
-                        padding:const EdgeInsets.symmetric(horizontal: 10),
-                        child: CustomDropDownMenu(onSelected: (String?value){
-                          cubit.fillPaxList(index, value??'5');
-                        },list: List.generate(15, (index) =>(index+1).toString()),label: 'Age',labelStyle: CustomTextStyle.commonFontThin,)),)
+                    const Text('Adult Numbers'),
+                    IncreaseOrDecreaseNumber(
+                      changedIndex: cubit.occupanciesList[buildIndex].adultNum,
+
+                      changeOccupancy: ({required bool increase,required int index,required int occIndex }){
+                        cubit.changeAdultOrChildOrRoomNum(index:0 ,occupancyIndex: buildIndex,add:increase );
+                      },),
                   ],
                 ),
-              ):const SizedBox(),
-            ],
-          ),),
-        ],
+                SizedBox(height: height*0.025),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Child Num'),
+                    IncreaseOrDecreaseNumber(
+                      changedIndex: cubit.occupanciesList[buildIndex].childNum,
+                      changeOccupancy: ({required bool increase,required int index,required int occIndex }){
+                        cubit.changeAdultOrChildOrRoomNum(index:1 ,occupancyIndex: buildIndex,add:increase );
+                      },),
+                  ],
+                ),
+                cubit.occupanciesList[buildIndex].childNum>0?SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      ...List.generate(cubit.occupanciesList[buildIndex].childNum, (index) => Padding(
+                          padding:const EdgeInsets.symmetric(horizontal: 10),
+                          child: CustomDropDownMenu(
+                            initialValue: cubit.occupanciesList[buildIndex].paxList?[index].age.toString(),
+                            onSelected: (String?value){
+                            cubit.fillPaxList(index: index, val: value??'0', occupancyIndex: buildIndex);
+                          },list: List.generate(15, (index) =>(index+1).toString()),label: 'Age',labelStyle: CustomTextStyle.commonFontThin,)),)
+                    ],
+                  ),
+                ):const SizedBox(),
+              ],
+            ),),
+          ],
+        ),
       ),
     );
+  }
+}
+
+class IncreaseOrDecreaseNumber extends StatelessWidget {
+  const IncreaseOrDecreaseNumber({
+    super.key,
+
+    this.changeRoomNum,
+    this.changeOccupancy,
+    this.roleIndex,
+    required this.changedIndex,
+    this.occIndex,
+  });
+
+  final int? occIndex;
+  final int? roleIndex;
+  final int changedIndex;
+  final void Function({required bool increase})?changeRoomNum;
+  final void Function({required bool increase,required int index,required int occIndex})?changeOccupancy;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        GestureDetector(
+          onTap:(){
+            changeRoomNum!=null?
+            changeRoomNum!(increase: true):
+            changeOccupancy!(increase:true,index:roleIndex??0,occIndex:occIndex??0);
+          },
+          child: const CircleAvatar(
+            child: Icon(Icons.add,),
+          ),
+        ),
+        const SizedBox(width: 2.5,),
+        Text('$changedIndex'),
+        const SizedBox(width: 2.5,),
+        GestureDetector(
+          onTap:(){
+            changeRoomNum!=null?
+            changeRoomNum!(increase: false):
+            changeOccupancy!(increase:false,index:roleIndex??0,occIndex:occIndex??0);
+          },
+          child: const CircleAvatar(
+            child: FaIcon(FontAwesomeIcons.minus,),
+          ),
+        ),
+      ],);
   }
 }

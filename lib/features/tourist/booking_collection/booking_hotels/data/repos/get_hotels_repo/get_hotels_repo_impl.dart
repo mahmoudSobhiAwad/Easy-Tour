@@ -52,6 +52,38 @@ class GetHotelsRepoImpl implements GetHotelRepo{
     }
   }
 
+  @override
+  Future<Either<Failure, String>> bookRooms({required Map<String, dynamic> toJsonModel}) async{
+    try{
+      await apiServices.normalPost('$hotelBookingUrl/hotel-api/1.0/bookings',header: toJson(),data: toJsonModel);
+      return right("Success");
+    }
+    catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      else {
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> bookAndPay({required Map<String, dynamic> toJsonModel}) async{
+    try{
+      await apiServices.normalPost('https://api-secure.test.hotelbeds.com/hotel-api/1.0/bookings',header: toJson(),data: toJsonModel);
+      return right("Success");
+    }
+    catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      else {
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
+
 }
 const apiKey='879188c2f050deef0110f78087920685';
 const secret='fa2f9bd32a';

@@ -13,22 +13,21 @@ class HotelResultCubit extends Cubit<HotelResultStates>{
   final formatter = DateFormat('yyyy-MM-dd');
   String checkIn='Check In';
   String checkOut='Check Out';
-  int adultNum=0;
-  int childNum=0;
-  int roomNum=0;
+   int totalAdultNum=0;
+   int totalChildNum=0;
+  // int childNum=0;
+   int roomNum=0;
   bool showOccupancies=false;
   List<HotelsModel>?hotelList=[];
   DestinationModel destModel;
-  List<PaxModel>paxList=[];
   int totalNum;
   ScrollController scrollController=ScrollController();
   int currIndex=0;
   int fromIndex=0;
   int toIndex=10;
   final GetHotelsRepoImpl hotelsRepoImpl;
-
+  List<OccupanciesModel>occupanciesList=[];
   late HotelModelWithRoomModel hotelModelWithRoomModel;
-
 
   void getRangeDate(BuildContext context)async{
     DateTimeRange? dateTimeRange= await showDateRangePicker(
@@ -46,34 +45,32 @@ class HotelResultCubit extends Cubit<HotelResultStates>{
     emit(ChangeCheckInCheckOutDate());
   }
 
-  void changeAdultOrChildOrRoomNum({required int index, required bool add}){
+  void changeAdultOrChildOrRoomNum({required int index, required bool add,required int occupancyIndex}){
     if(index==0){
       if(add){
-        adultNum++;
+        occupanciesList[occupancyIndex].adultNum++;
+        totalAdultNum++;
       }
       else{
-        if(adultNum>0){
-          adultNum--;
+        if(occupanciesList[occupancyIndex].adultNum>0){
+          occupanciesList[occupancyIndex].adultNum--;
+          totalAdultNum--;
         }
       }
     }
     else if(index==1){
       if(add){
-        childNum++;
+        List<PaxModel>paxEmpty=[];
+        occupanciesList[occupancyIndex].childNum++;
+        totalChildNum++;
+        occupanciesList[occupancyIndex].paxList=paxEmpty;
+        occupanciesList[occupancyIndex].paxList?.add(PaxModel(age: 7, type: 'CH'));
       }
       else{
-        if(childNum>0){
-          childNum--;
-        }
-      }
-    }
-    else if(index==2){
-      if(add){
-        roomNum++;
-      }
-      else{
-        if(roomNum>0){
-          roomNum--;
+        if(occupanciesList[occupancyIndex].childNum>0){
+          occupanciesList[occupancyIndex].childNum--;
+          totalChildNum--;
+          occupanciesList[occupancyIndex].paxList?.removeLast();
         }
       }
     }
@@ -83,13 +80,11 @@ class HotelResultCubit extends Cubit<HotelResultStates>{
   void searchForAvailableRooms({required int hotelCode,required int hotelIndex})async{
     emit(LoadingGetAvailableRooms());
     var result=await hotelsRepoImpl.getAvailableRooms(toJsonModel: GetAvailableRoomsModel(
-      adultNum: adultNum,
-      childNum: childNum,
-      roomNum: roomNum,
+      occupanciesList: occupanciesList,
       checkIn: checkIn,
       checkOut: checkOut,
       hotelCode: hotelCode,
-      paxList: paxList,
+      // paxList: occupanciesList,
     ).toJson());
     result.fold((failure) {
       emit(FailureGetAvailableRooms(errMessage: failure.errMessage));
@@ -105,19 +100,29 @@ class HotelResultCubit extends Cubit<HotelResultStates>{
     } );
   }
 
+  void changeRoomNum({required bool increase}){
+    if(increase){
+      roomNum++;
+      occupanciesList.add(OccupanciesModel());
+    }
+    else {
+      if(roomNum>0){
+        roomNum --;
+        occupanciesList.removeLast();
+      }
+    }
+    emit(ChangeRoomNumberState());
+
+  }
+
   void showOrClosePickOccupancies(){
     showOccupancies?showOccupancies=false:showOccupancies=true;
     emit(ShowOccupanciesState());
   }
 
-  void fillPaxList(int index,String val){
+  void fillPaxList({required int index,required String val,required int occupancyIndex}){
     int age=int.parse(val);
-    if(paxList.length<=index){
-      paxList.add(PaxModel(age: age, type: 'CH'));
-    }
-    else{
-      paxList[index]=PaxModel(age: age, type: 'CH');
-    }
+    occupanciesList[occupancyIndex].paxList?.insert(index, PaxModel(age: age, type: 'CH'));
   }
 
   void loadMoreHotels()async{

@@ -12,14 +12,19 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_hote
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/available_rooms/table_available_rooms.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/personal_payment/personal_data_payment_for_booking_view.dart';
 class RoomAvailabilityView extends StatelessWidget {
-  const RoomAvailabilityView({super.key,required this.model});
+  const RoomAvailabilityView({super.key,required this.model,required this.paxList,required this.roomNum});
 final HotelModelWithRoomModel model;
+final int roomNum;
+final List<OccupanciesModel> paxList;
   @override
   Widget build(BuildContext context) {
     final double width=BasicDimension.screenWidth(context);
     final double height=BasicDimension.screenHeight(context);
     return BlocProvider(
-      create: (context)=>RoomsViewCubit(availableRoomsList: model.availableRoomsModel)..loadFacilityFromLocal(context, model.hotelsModel),
+      create: (context)=>RoomsViewCubit(
+        paxList: paxList,
+          totalRoomNum: roomNum,
+          availableRoomsList: model.availableRoomsModel)..loadFacilityFromLocal(context, model.hotelsModel),
       child:BlocConsumer<RoomsViewCubit,RoomsViewState>(
           builder: (context,state){
             var cubit=BlocProvider.of<RoomsViewCubit>(context);
@@ -92,7 +97,7 @@ class RoomAvailabilityBody extends StatelessWidget {
                 },
               ),
               SizedBox(height: height*0.02,),
-              //Text('Note that Currency in ${model.availableRoomsModel.first.currency??"Dollar"}'),
+              Text('total Net is ${cubit.totalNet}  Euro'),
               SizedBox(height: height*0.02,),
               Center(child: CustomLoginButton(onTap: (){
                 cubit.getListOfPickedRoom();

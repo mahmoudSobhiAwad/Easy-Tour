@@ -6,4 +6,6 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_hote
 abstract class GetHotelRepo{
   Future<Either<Failure,CompleteHotelModel>>getAllHotelsInDestination({required String destCode,int?from,int?to});
   Future<Either<Failure,List<GetAvailableRoomsModel>>>getAvailableRooms({required Map<String,dynamic>toJsonModel});
+  Future<Either<Failure,String>>bookRooms({required Map<String,dynamic>toJsonModel});
+  Future<Either<Failure,String>>bookAndPay({required Map<String,dynamic>toJsonModel});
 }
