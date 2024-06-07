@@ -1,10 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:dio_http2_adapter/dio_http2_adapter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:prepare_project/core/utilities/network/crud_dio.dart';
-import 'package:prepare_project/core/utilities/network/dio_consumer.dart';
-import 'package:prepare_project/core/utilities/network/end_points.dart';
-import 'package:prepare_project/core/utilities/network/interceptor.dart';
 import 'package:prepare_project/core/widget/change_passowrd/data/repos/change_password_repo_impl.dart';
 import 'package:prepare_project/core/widget/delete_account/data/repos/delete_acc_repo_imp.dart';
 import 'package:prepare_project/features/forget_pass/data/repo/forget_pass_repo_imp.dart';
@@ -65,14 +61,4 @@ getIt.registerSingleton<EntertainmentPlaceRepoImp>(EntertainmentPlaceRepoImp(api
 getIt.registerSingleton<GetHotelsRepoImpl>(GetHotelsRepoImpl(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<QrScannedRepoImp>(QrScannedRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<LogInterceptor>(LogInterceptor());
-
-getIt.registerSingleton<DioConsumer>(DioConsumer(
-    client: Dio()..
-    options.baseUrl = EndPoints.baseUrl
-     ..interceptors.add(LogInterceptor())
-      ..httpClientAdapter = Http2Adapter(
-        ConnectionManager(idleTimeout:const Duration(seconds: 10)),)..interceptors.add(CustomInterceptors(client: Dio()),)
-));
-
-
 }

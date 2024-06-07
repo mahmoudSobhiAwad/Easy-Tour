@@ -5,6 +5,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/manager/chat_bot_cubit.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/widgets/bot_circle_avatar.dart';
+import 'package:prepare_project/features/tourist/chat_bot/presentation/views/widgets/change_local_lang.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/widgets/menu_bar_item.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/widgets/message_list_view.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/views/widgets/text_form_send_button.dart';
@@ -14,6 +15,7 @@ final ChatBotCubit cubit;
   @override
   Widget build(BuildContext context) {
     double width=BasicDimension.screenWidth(context);
+    double height=BasicDimension.screenHeight(context);
     return  Scaffold(
       appBar: AppBar(
         surfaceTintColor: thirdColor,
@@ -39,6 +41,16 @@ final ChatBotCubit cubit;
                   cubit.deleteChat();
                 },
                 child: const MenuItemAppBarButton(text: 'Delete Chat', icon: Icon(Icons.delete_rounded,color: closeColor,)),
+              ),
+              MenuItemButton(
+                onPressed: (){
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                      context: context, builder:(context){
+                        return ChangeLocalLanguage(width: width, height: height, cubit: cubit);
+                  });
+                },
+                child: const MenuItemAppBarButton(text: 'Change Language', icon: Icon(Icons.language_sharp,)),
               ),
             ],
             child: const Icon(Icons.more_vert_rounded,color: basicColor,),

@@ -40,7 +40,8 @@ class BookingPart extends StatelessWidget {
                             (){
                         context.push(RouterApp.kTouristHotelBooking);
                             },
-                            (){},
+                            (){
+                            },
                             (){},
                       ][index],
                       child: CardElement(height: height,width: width,cardModel: bookingItems[index],));

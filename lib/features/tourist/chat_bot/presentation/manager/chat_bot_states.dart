@@ -16,3 +16,5 @@ class StartListeningToVoiceState extends ChatBotState {}
 class StopListeningToVoiceState extends ChatBotState {}
 class ChangeVoiceToTextState extends ChatBotState {}
 class ClearMessagesOfChatBotState extends ChatBotState {}
+class ChangeLocalIdOfChatState extends ChatBotState {}
+class ChangeShowLanguageOfChatState extends ChatBotState {}

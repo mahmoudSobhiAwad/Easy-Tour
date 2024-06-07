@@ -20,8 +20,18 @@ class ChatBotCubit extends Cubit<ChatBotState>{
   SpeechToText speechToText = SpeechToText();
   bool enableSpeech=false;
   bool enableMic=false;
-
+  List<LocaleName>localsExist=[];
+  String?localId;
+  bool showChangeLang=false;
+  TextEditingController langController=TextEditingController();
+  List<LocaleName>searchedList=[];
   int chatBotCurrentPage=SetAppState.prefs?.getInt('pageIndex')??0;
+
+  void changeShowListOfLang(){
+    showChangeLang=!showChangeLang;
+    emit(ChangeShowLanguageOfChatState());
+  }
+
   void getFromBot(String response){
     ChatBotModel model=ChatBotModel(message: '');
     response='$response<bot>';
@@ -33,6 +43,12 @@ class ChatBotCubit extends Cubit<ChatBotState>{
       sortMessages();
     });
   }
+  void setLocalId(LocaleName localeName){
+    langController.text=localeName.name;
+    localId=localeName.localeId;
+    emit(ChangeLocalIdOfChatState());
+  }
+
   void changePageIndex()async{
     chatBotCurrentPage=1;
     await SetAppState.prefs?.setInt('pageIndex', 1);
@@ -63,6 +79,10 @@ class ChatBotCubit extends Cubit<ChatBotState>{
       );
     }
 }
+void searchForLocalId(String value){
+    searchedList=localsExist.where((element) => element.name.toLowerCase().contains(value.toLowerCase())).toList();
+    emit(ChangeLocalIdOfChatState());
+}
    void addToMessageModel(){
      ChatBotModel model=ChatBotModel(message: '');
      model.message=messageController.text;
@@ -90,7 +110,10 @@ class ChatBotCubit extends Cubit<ChatBotState>{
     emit(EnableSendRequestState());
    }
   void initSpeech() async {
-    enableSpeech = await speechToText.initialize();
+    enableSpeech = await speechToText.initialize(
+    );
+    localsExist=await speechToText.locales();
+    searchedList=localsExist;
     if(enableSpeech){
       emit(InitializeSpeechToTextRecognition());
     }
@@ -99,13 +122,14 @@ class ChatBotCubit extends Cubit<ChatBotState>{
     }
 
   }
+
   void startListening() async {
     enableMic=true;
     if(!enableSpeech){
       emit(FailureSendRequestChatBotState(errMessage: 'You don\'t Allow The Mic Permissions'));
     }
     else{
-      await speechToText.listen(onResult: onSpeechResult);
+      await speechToText.listen(onResult: onSpeechResult,localeId: localId);
       emit(StartListeningToVoiceState());
     }
   }
@@ -115,6 +139,7 @@ class ChatBotCubit extends Cubit<ChatBotState>{
     await speechToText.stop();
     emit(StopListeningToVoiceState());
   }
+
   void onSpeechResult(SpeechRecognitionResult result) {
     messageController.text=result.recognizedWords;
     checkExistOfText();
