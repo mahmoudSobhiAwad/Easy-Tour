@@ -12,6 +12,7 @@ const Color faceBookColor=Color(0xff1877F2);
 const Color whatsAppColor=Color(0xff4BD37B);
 const Color forthColor=Color(0xff5F92D9);
 const Color goldenColor=Color(0xffF4900C);
+const Color ticketBasicColor=Color(0xff4641A7);
 class BasicDimension{
   static double screenHeight(BuildContext context){
     final size = MediaQuery.of(context).size;
