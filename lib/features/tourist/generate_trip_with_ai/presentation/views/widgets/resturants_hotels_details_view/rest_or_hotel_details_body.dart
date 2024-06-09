@@ -39,8 +39,8 @@ class RestaurantOrHotelDetailsBody extends StatelessWidget {
                       },
                       indicatorColor: entertainmentColor,
                       tabs:const[
-                        Tab(child: Text('Details',style:CustomTextStyle.commonFontThin,),),
-                        Tab(child: Text('Reviews',style:CustomTextStyle.commonFontThin,),),
+                        Tab(child: Text('Details',style:CustomTextStyle.fontNormal14WithEllipsis,),),
+                        Tab(child: Text('Reviews',style:CustomTextStyle.fontNormal14WithEllipsis,),),
                       ]
                   )
               ),

@@ -27,13 +27,13 @@ class BestDestinationItem extends StatelessWidget {
               },)),
           SizedBox(
               width: width*0.4,
-              child: Text(place.name,style: CustomTextStyle.commonSignDark.copyWith(overflow: TextOverflow.ellipsis),)),
+              child: Text(place.name,style: CustomTextStyle.fontBold16.copyWith(overflow: TextOverflow.ellipsis),)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const FaIcon(FontAwesomeIcons.ticket,color: entertainmentColor,),
               const SizedBox(width: 10,),
-              Text('${place.budget}',style: CustomTextStyle.commonFontThin,),
+              Text('${place.budget}',style: CustomTextStyle.fontNormal14WithEllipsis,),
             ],
           ),
         ],

@@ -20,18 +20,18 @@ class PersonalInfoOfTourToViewTourist extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          const Text('Personal Info',style: CustomTextStyle.commonSignThinDark),
+          const Text('Personal Info',style: CustomTextStyle.fontNormal16),
           const Expanded(child:  SizedBox(height: 10,)),
           ProfileSettingItem(
             text: 'Languages',
             height: height*0.07,
             child: Text(
               '${model?.lang?.join(',')}',
-              style:CustomTextStyle.commonFontThin,),
+              style:CustomTextStyle.fontNormal14WithEllipsis,),
           ),
-          ProfileSettingItem(text: 'Phone Number',height: height*0.07,child:  Text('${model?.phoneNumber}',style:CustomTextStyle.commonFontThin,),),
-          ProfileSettingItem(text: 'Address',height: height*0.07,child:  Text('${model?.address}',style:CustomTextStyle.commonFontThin ,)),
-          ProfileSettingItem(text: 'Date Of Birth',height: height*0.07,child: Text('${model?.date}',style:CustomTextStyle.commonFontThin ,)),
+          ProfileSettingItem(text: 'Phone Number',height: height*0.07,child:  Text('${model?.phoneNumber}',style:CustomTextStyle.fontNormal14WithEllipsis,),),
+          ProfileSettingItem(text: 'Address',height: height*0.07,child:  Text('${model?.address}',style:CustomTextStyle.fontNormal14WithEllipsis ,)),
+          ProfileSettingItem(text: 'Date Of Birth',height: height*0.07,child: Text('${model?.date}',style:CustomTextStyle.fontNormal14WithEllipsis ,)),
         ],
       ),
     );

@@ -22,14 +22,14 @@ class PrivateToursListBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        cubit.tripsList.isEmpty?const Center(child:Text('You Don\'t Add Any Trip, Let\'s Add Some',style: CustomTextStyle.placesTitle,textAlign: TextAlign.center,),):
+        cubit.tripsList.isEmpty?const Center(child:Text('You Don\'t Add Any Trip, Let\'s Add Some',style: CustomTextStyle.fontSecondaryBold22,textAlign: TextAlign.center,),):
         Column(
           children: [
             Container(
               padding:const EdgeInsets.only(top:20 ),
               color: thirdColor,
               height: height*0.1,
-              child:const Center(child:  Text('My Trips',style: CustomTextStyle.commonSignDark,)),
+              child:const Center(child:  Text('My Trips',style: CustomTextStyle.fontBold16,)),
             ),
             Expanded(
               child: RefreshIndicator(

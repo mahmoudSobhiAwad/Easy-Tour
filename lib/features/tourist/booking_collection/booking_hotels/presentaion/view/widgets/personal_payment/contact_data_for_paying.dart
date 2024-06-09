@@ -16,7 +16,7 @@ class ContactDataInHotelBooking extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Contact Data',style: CustomTextStyle.resetPassTitle.copyWith(fontSize: 26),),
+        Text('Contact Data',style: CustomTextStyle.fontBold30.copyWith(fontSize: 26),),
         CustomTextFormField(
           floatingLabelBehavior: FloatingLabelBehavior.never,
           controller: cubit.emailController,

@@ -50,7 +50,7 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
                             ListOfDaysOfTrip(onTap: (index) {
                               cubit.moveToSpecificDay(index);
                             },height: height, currentDay: pageIndex,controller: cubit.controller, width: width,listOfDaysLength:cubit.generatedTripModel?.days.length??0,),
-                            Text('${cubit.daysDatesName[pageIndex]},${cubit.generatedTripModel?.placesNames[pageIndex]}',style: CustomTextStyle.placesTitle,),
+                            Text('${cubit.daysDatesName[pageIndex]},${cubit.generatedTripModel?.placesNames[pageIndex]}',style: CustomTextStyle.fontSecondaryBold22,),
                             const SizedBox(height: 15,),
                             ActivityListWithBar(height: height, width: width, cubit:cubit,pageIndex:pageIndex),
                             const SizedBox(height: 15,),
@@ -58,7 +58,7 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
                             const SizedBox(height: 15,),
                             HotelsListWithBar(height: height, width: width, cubit: cubit),
                             const SizedBox(height: 15,),
-                            const Text('Trip In Map',style:CustomTextStyle.placesTitle,),
+                            const Text('Trip In Map',style:CustomTextStyle.fontSecondaryBold22,),
                             const SizedBox(height: 15,),
                             TripInGoogleMapWithPolyLine(height: height,points: cubit.polyLinesList,),
                           ],

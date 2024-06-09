@@ -54,7 +54,7 @@ class OtherPeoplePicWithName extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: height*0.01,),
-                  SizedBox(width:width*0.2,height: height*0.05,child: Text(listOfGuide?[index].fName??"",style: CustomTextStyle.commonFontThin,maxLines: 2,overflow: TextOverflow.ellipsis,textAlign: TextAlign.center,))
+                  SizedBox(width:width*0.2,height: height*0.05,child: Text(listOfGuide?[index].fName??"",style: CustomTextStyle.fontNormal14WithEllipsis,maxLines: 2,overflow: TextOverflow.ellipsis,textAlign: TextAlign.center,))
                 ],
               ),
             ),

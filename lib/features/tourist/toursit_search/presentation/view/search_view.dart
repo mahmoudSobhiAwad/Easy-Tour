@@ -44,7 +44,7 @@ class SearchView extends StatelessWidget {
                             children: [
                               Icon(Icons.history,size: 30,),
                               SizedBox(width: 5,),
-                              Text('Pyramids',style: CustomTextStyle.commonSignLight,),
+                              Text('Pyramids',style: CustomTextStyle.font16Light,),
                               Spacer(),
                               Icon(Icons.close),
                             ],

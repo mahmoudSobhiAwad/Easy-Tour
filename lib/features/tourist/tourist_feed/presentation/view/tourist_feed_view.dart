@@ -27,7 +27,7 @@ class TouristFeedView extends StatelessWidget {
                 forceMaterialTransparency: true,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 automaticallyImplyLeading: false,
-                title: Text("Easy Tour",style: CustomTextStyle.resetPassTitle.copyWith(fontSize: 40),),
+                title: Text("Easy Tour",style: CustomTextStyle.fontBold30.copyWith(fontSize: 40),),
                 actions: [
                   CircleAvatar(
                       backgroundColor: thirdColor,

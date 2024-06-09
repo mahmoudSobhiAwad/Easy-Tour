@@ -19,7 +19,7 @@ final double height;
         const SizedBox(width: 5,),
         SizedBox(
             width: width*0.25,
-            child: Text(facilityItem,style: CustomTextStyle.commonFontThinLight.copyWith(fontSize: 12),maxLines: 2,)),
+            child: Text(facilityItem,style: CustomTextStyle.font14Light.copyWith(fontSize: 12),maxLines: 2,)),
       ],
     );
   }

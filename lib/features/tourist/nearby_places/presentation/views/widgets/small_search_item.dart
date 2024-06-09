@@ -32,9 +32,9 @@ class OneSearchSmallItem extends StatelessWidget {
           Image.asset(model.displayType=='Bank'?'assets/payment_images/bank.png':'assets/payment_images/atm.png',height: height*0.1,),
           SizedBox(
               width: width*0.5,
-              child: Text(model.displayName??"",style: CustomTextStyle.commonFontThin,overflow: TextOverflow.ellipsis,maxLines: 2,textAlign: TextAlign.center,)),
-          Text(model.displayType??"",style: CustomTextStyle.commonFontThin,overflow: TextOverflow.ellipsis,maxLines: 1,),
-          Text(model.openNow! ?'Open Now':'Closed',style: CustomTextStyle.commonFontThin.copyWith(color: model.openNow!?whatsAppColor:closeColor)),
+              child: Text(model.displayName??"",style: CustomTextStyle.fontNormal14WithEllipsis,overflow: TextOverflow.ellipsis,maxLines: 2,textAlign: TextAlign.center,)),
+          Text(model.displayType??"",style: CustomTextStyle.fontNormal14WithEllipsis,overflow: TextOverflow.ellipsis,maxLines: 1,),
+          Text(model.openNow! ?'Open Now':'Closed',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: model.openNow!?whatsAppColor:closeColor)),
           model.internationalPhoneNum!=null?
           GestureDetector(
             onTap: ()async{

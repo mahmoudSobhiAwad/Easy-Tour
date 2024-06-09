@@ -26,7 +26,7 @@ class ShowGuideLicenceForTourist extends StatelessWidget {
               ...List.generate(licences.length, (index) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(['Ministry ID','Syndicate ID'][index],style: CustomTextStyle.placesTitle,),
+                  Text(['Ministry ID','Syndicate ID'][index],style: CustomTextStyle.fontSecondaryBold22,),
                   Padding(
                     padding:const EdgeInsets.only(bottom: 20),
                     child: Container(
@@ -46,7 +46,7 @@ class ShowGuideLicenceForTourist extends StatelessWidget {
               ),
               ),
               const SizedBox(height: 10,),
-              const Text('CV',style: CustomTextStyle.placesTitle,),
+              const Text('CV',style: CustomTextStyle.fontSecondaryBold22,),
               cvUrl==null?
               Container(
                 padding: const EdgeInsets.all(5),
@@ -54,7 +54,7 @@ class ShowGuideLicenceForTourist extends StatelessWidget {
                   color: basicColor,
                   borderRadius: commonBorderRadius(),
                 ),
-                child: Text('Cv File',style: CustomTextStyle.commonFontThin.copyWith(color: Colors.white),),
+                child: Text('Cv File',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: Colors.white),),
               ):
               const SizedBox(),
               const SizedBox(height: 10,),

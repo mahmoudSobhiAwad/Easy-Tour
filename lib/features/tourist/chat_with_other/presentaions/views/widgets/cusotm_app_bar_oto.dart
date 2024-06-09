@@ -42,7 +42,7 @@ class CustomChatOneToOneAppBar extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Row(
                   children: [
-                    Text(name??"",style: CustomTextStyle.commonFontThin,),
+                    Text(name??"",style: CustomTextStyle.fontNormal14WithEllipsis,),
                     Icon(Icons.circle,color: status=='Online'?whatsAppColor:closeColor,size: 15,),
                   ],
                 ),

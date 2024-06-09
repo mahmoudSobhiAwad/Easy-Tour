@@ -37,7 +37,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('title of the trip',style:CustomTextStyle.commonSignDark,),
+                const Text('title of the trip',style:CustomTextStyle.fontBold16,),
                 const SizedBox(height: 5,),
                 CustomTextFormField(
                   maxLines: 1,
@@ -54,7 +54,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('brief of the trip',style:CustomTextStyle.commonSignDark,),
+                const Text('brief of the trip',style:CustomTextStyle.fontBold16,),
                 const SizedBox(height: 5,),
                 CustomTextFormField(
                   controller: cubit.briefTextController,
@@ -78,7 +78,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
                     color: thirdColor,
                     child: Padding(
                       padding: EdgeInsets.all(10.0),
-                      child: Center(child: Text('Try To Add Days Of Trips In Egypt',style: CustomTextStyle.commonSignThinDark,)),
+                      child: Center(child: Text('Try To Add Days Of Trips In Egypt',style: CustomTextStyle.fontNormal16,)),
                     ),
                   ),
                 ):
@@ -93,7 +93,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
                         cubit.changeShowAddDays();
                       },
                       child: Text("Add a Trip",
-                        style: CustomTextStyle.commonProfileDark.copyWith(color: Colors.white))),
+                        style: CustomTextStyle.fontBold14.copyWith(color: Colors.white))),
                 ),
               ],
             ),

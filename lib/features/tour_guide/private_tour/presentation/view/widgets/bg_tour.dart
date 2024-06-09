@@ -56,7 +56,7 @@ class BGPrivateTourOption extends StatelessWidget {
           children: [
             Icon(Icons.photo_outlined,color: basicColor,size: 40,),
             SizedBox(height: 10,),
-            Text('pick image as back ground for the trip',style: CustomTextStyle.commonSignDark,textAlign: TextAlign.center,)
+            Text('pick image as back ground for the trip',style: CustomTextStyle.fontBold16,textAlign: TextAlign.center,)
           ],
         ):
         ClipRRect(

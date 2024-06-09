@@ -46,7 +46,7 @@ class HistoricalPlaceItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Center(child:  Text('Pyramids',style: CustomTextStyle.commonFontThin,overflow: TextOverflow.ellipsis,)),
+                  child: const Center(child:  Text('Pyramids',style: CustomTextStyle.fontNormal14WithEllipsis,overflow: TextOverflow.ellipsis,)),
                 ),
                 FavouritePlaceIcon(width: width),
               ],

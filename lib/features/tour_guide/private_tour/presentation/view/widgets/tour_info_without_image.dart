@@ -27,9 +27,9 @@ class PrivateTourWithoutImage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: height*0.03,child: Text('Egypt| ${model?.tripDetails?.length??0} days',style: CustomTextStyle.commonFontThin,)),
-          SizedBox(height: height*0.08,child: Text('${model?.title}',maxLines: 2,style: CustomTextStyle.privateTourTitle,)),
-          SizedBox(height: height*0.05,child: Text('${model?.brief}',maxLines: 2,style: CustomTextStyle.commonFontThin,)),
+          SizedBox(height: height*0.03,child: Text('Egypt| ${model?.tripDetails?.length??0} days',style: CustomTextStyle.fontNormal14WithEllipsis,)),
+          SizedBox(height: height*0.08,child: Text('${model?.title}',maxLines: 2,style: CustomTextStyle.fontBold21,)),
+          SizedBox(height: height*0.05,child: Text('${model?.brief}',maxLines: 2,style: CustomTextStyle.fontNormal14WithEllipsis,)),
           const SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,7 +38,7 @@ class PrivateTourWithoutImage extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(borderRadius: commonBorderRadius(),color: secondaryColor),
-                  child: Center(child: Text('$text ${model?.tripTicket?['standard']??'20'} \$ per person',style: CustomTextStyle.commonFontThin,maxLines: 2,textAlign: TextAlign.center,),),
+                  child: Center(child: Text('$text ${model?.tripTicket?['standard']??'20'} \$ per person',style: CustomTextStyle.fontNormal14WithEllipsis,maxLines: 2,textAlign: TextAlign.center,),),
                 ),
               ),
               const SizedBox(width: 5,),
@@ -46,7 +46,7 @@ class PrivateTourWithoutImage extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(borderRadius: commonBorderRadius(),color: secondaryColor),
-                  child: Center(child: Text('Maximum :${model?.maximumNumber} persons',style: CustomTextStyle.commonFontThin,),),
+                  child: Center(child: Text('Maximum :${model?.maximumNumber} persons',style: CustomTextStyle.fontNormal14WithEllipsis,),),
                 ),
               ),
             ],

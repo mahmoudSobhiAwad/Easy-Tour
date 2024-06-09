@@ -32,7 +32,7 @@ class CreatedCustomTripItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     padding:const EdgeInsets.all(5),
-                    child: Center(child: Text("Pyramids",style: CustomTextStyle.commonFontThin.copyWith(color: Colors.white),)),
+                    child: Center(child: Text("Pyramids",style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: Colors.white),)),
                   ),
                 );
               },
@@ -55,7 +55,7 @@ class CreatedCustomTripItem extends StatelessWidget {
             ],
           ),
           SizedBox(height: height*0.015,),
-          const Text('Discovering Spiritual Egypt in 3 days',style: CustomTextStyle.privateTourTitle,maxLines: 2,),
+          const Text('Discovering Spiritual Egypt in 3 days',style: CustomTextStyle.fontBold21,maxLines: 2,),
           const Text('Pyramids Meditation, Luxor Banks, 3-night Dahabiya Nile Cruise,Pyramids Meditation, Luxor Banks, 3-night Dahabiya ',maxLines: 2,overflow: TextOverflow.ellipsis,),
           SizedBox(height: height*0.02,),
           CustomLoginButton(

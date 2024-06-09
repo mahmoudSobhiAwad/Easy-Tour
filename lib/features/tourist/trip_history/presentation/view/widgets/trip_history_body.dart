@@ -15,7 +15,7 @@ class TripHistoryBody extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Current Trip',style: CustomTextStyle.commonSignDark,),
+              const Text('Current Trip',style: CustomTextStyle.fontBold16,),
               const SizedBox(height: 10,),
               SizedBox(
                 height: height*0.25,
@@ -32,7 +32,7 @@ class TripHistoryBody extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('UpComing Trips',style: CustomTextStyle.commonSignDark,),
+              const Text('UpComing Trips',style: CustomTextStyle.fontBold16,),
               const SizedBox(height: 10,),
               SizedBox(
                 height: height*0.25,
@@ -50,7 +50,7 @@ class TripHistoryBody extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Completed Trips',style: CustomTextStyle.commonSignDark,),
+              const Text('Completed Trips',style: CustomTextStyle.fontBold16,),
               const SizedBox(height: 10,),
               SizedBox(
                 height: height*0.25,

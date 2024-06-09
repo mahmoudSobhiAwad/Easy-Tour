@@ -20,7 +20,7 @@ class BioAndEditButton extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${cubit.name}',style:CustomTextStyle.commonProfileDark,),
+              Text('${cubit.name}',style:CustomTextStyle.fontBold14,),
               const SizedBox(height: 5,),
               Text('${cubit.touristModel?.flagName??""}  ${cubit.touristModel?.nationality??""}'),
             ],
@@ -39,7 +39,7 @@ class BioAndEditButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: formFillColor,
               ),
-              child: const Center(child: Text('Edit Profile',style: CustomTextStyle.commonProfileDark,)),
+              child: const Center(child: Text('Edit Profile',style: CustomTextStyle.fontBold14,)),
 
             ),
           ),

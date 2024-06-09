@@ -11,8 +11,8 @@ Widget build(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-       Text(content??'',style:CustomTextStyle.commonSignLight),
-      TextButton(onPressed: onPressed, child: Text(buttonText??'',style:CustomTextStyle.commonSignDark),),
+       Text(content??'',style:CustomTextStyle.font16Light),
+      TextButton(onPressed: onPressed, child: Text(buttonText??'',style:CustomTextStyle.fontBold16),),
     ],
   );
 }

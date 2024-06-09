@@ -35,9 +35,9 @@ class CreatePostBody extends StatelessWidget {
                       onTap: ()async{
                         cubit.uploadFullPost();
                       },
-                      child: const  Text("Post",style: CustomTextStyle.commonSignThinAlwaysWhite,)),
+                      child: const  Text("Post",style: CustomTextStyle.font16NormalWhite,)),
                 ),
-                appBarTitle: 'Create new Post',appBarStyle: CustomTextStyle.commonSignDark.copyWith(fontSize: 20),),
+                appBarTitle: 'Create new Post',appBarStyle: CustomTextStyle.fontBold16.copyWith(fontSize: 20),),
               SizedBox(height: height*0.02,),
               CreatePostContainer(width: width, cubit: cubit, height: height)
             ],

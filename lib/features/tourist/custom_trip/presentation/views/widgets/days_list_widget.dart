@@ -18,7 +18,7 @@ class DaysToAddList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Add Trip Days',style: CustomTextStyle.privateTourTitle,),
+        const Text('Add Trip Days',style: CustomTextStyle.fontBold21,),
         SizedBox(
           height: height*0.5,
           child: ListView.separated(
@@ -30,7 +30,7 @@ class DaysToAddList extends StatelessWidget {
                   Row(
                     mainAxisAlignment:MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Day${bigIndex+1}',style: CustomTextStyle.commonSignDark,),
+                      Text('Day${bigIndex+1}',style: CustomTextStyle.fontBold16,),
                       TextButton(onPressed: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context){
                           return DiscoverPLacesView(enablePicking: true,customTripCubit: cubit,initialList: placesMap['Day${bigIndex+1}'],);

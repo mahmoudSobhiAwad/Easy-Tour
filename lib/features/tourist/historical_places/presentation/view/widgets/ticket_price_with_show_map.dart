@@ -22,12 +22,12 @@ class TicketWithShowInMap extends StatelessWidget {
         children: [
           Column(
             children: [
-              const Text('Ticket Price',style: CustomTextStyle.commonFontThin,),
+              const Text('Ticket Price',style: CustomTextStyle.fontNormal14WithEllipsis,),
               Container(
                 width: width*0.2,
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(color: basicColor,borderRadius: commonBorderRadius(),),
-                child:const Center(child:  Text('5 \$',style: CustomTextStyle.commonSignLight,)),
+                child:const Center(child:  Text('5 \$',style: CustomTextStyle.font16Light,)),
               )
             ],
           ),
@@ -38,7 +38,7 @@ class TicketWithShowInMap extends StatelessWidget {
               color: basicColor,
               borderRadius: commonBorderRadius(),
             ),
-            child:const Center(child: Text('Show in Map',style: CustomTextStyle.commonSignLight,),
+            child:const Center(child: Text('Show in Map',style: CustomTextStyle.font16Light,),
             ),),
         ],
       ),

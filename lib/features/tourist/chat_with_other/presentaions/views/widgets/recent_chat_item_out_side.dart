@@ -37,7 +37,7 @@ class RecentChatItemOutSideListTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('$name',style:CustomTextStyle.commonSignDark,),
+              Text('$name',style:CustomTextStyle.fontBold16,),
                getMessageType(model),
             ],
           ),
@@ -45,8 +45,8 @@ class RecentChatItemOutSideListTile extends StatelessWidget {
           trailing: Column(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(model?.oneMessage?.messageDate?.toString().substring(0,10)??"",style: CustomTextStyle.commonSignLight,),
-              CircleAvatar(backgroundColor: basicColor,radius: 15,child: Center( child: Text('3',style: CustomTextStyle.commonFontThinLight.copyWith(color: Colors.white,fontSize: 12),)),)
+              Text(model?.oneMessage?.messageDate?.toString().substring(0,10)??"",style: CustomTextStyle.font16Light,),
+              CircleAvatar(backgroundColor: basicColor,radius: 15,child: Center( child: Text('3',style: CustomTextStyle.font14Light.copyWith(color: Colors.white,fontSize: 12),)),)
             ],
           ),
         ),
@@ -57,7 +57,7 @@ class RecentChatItemOutSideListTile extends StatelessWidget {
 Widget getMessageType(RecentChatModel? model){
   switch(model?.oneMessage?.messageType){
     case 'text':
-      return Text(model?.oneMessage?.message??"",style: CustomTextStyle.commonFontThin,);
+      return Text(model?.oneMessage?.message??"",style: CustomTextStyle.fontNormal14WithEllipsis,);
     case 'voice':
       return const Icon(Icons.mic);
     case 'image':

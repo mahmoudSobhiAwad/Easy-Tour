@@ -27,11 +27,11 @@ class RequestedTripsTourGuideBody extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: width*0.05),
-              child: CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Notification',appBarStyle: CustomTextStyle.commonSignDark.copyWith(fontSize: 18),
-                menuToSaveTrip: TextButton(onPressed: null, child: Text('Clear All',style: CustomTextStyle.commonSignDark.copyWith(color: forthColor),)),),
+              child: CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Notification',appBarStyle: CustomTextStyle.fontBold16.copyWith(fontSize: 18),
+                menuToSaveTrip: TextButton(onPressed: null, child: Text('Clear All',style: CustomTextStyle.fontBold16.copyWith(color: forthColor),)),),
             ),
             cubit.requestedList.isEmpty?
-            const Text('You Dont\'t Have Any Request Yet',style: CustomTextStyle.privateTourTitle,):
+            const Text('You Dont\'t Have Any Request Yet',style: CustomTextStyle.fontBold21,):
             Expanded(
               child: SizedBox(
                 height: height*0.8,

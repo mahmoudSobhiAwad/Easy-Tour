@@ -38,7 +38,7 @@ class PosterInfo extends StatelessWidget {
               Color(0xff324D73),
             ]),
           ),
-          child: Text("Tour Guide",style: CustomTextStyle.commonSignThinAlwaysWhite.copyWith(fontSize: 14),),
+          child: Text("Tour Guide",style: CustomTextStyle.font16NormalWhite.copyWith(fontSize: 14),),
         ),
       ],
     );

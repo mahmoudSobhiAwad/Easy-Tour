@@ -45,8 +45,8 @@ class ShowTourGuideTripsDetailsForTouristBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(tripItem.title??"",style: CustomTextStyle.privateTourTitle,maxLines: 3,),
-                Text(tripItem.brief??"",style: CustomTextStyle.commonFontThinLight,maxLines: 3,),
+                Text(tripItem.title??"",style: CustomTextStyle.fontBold21,maxLines: 3,),
+                Text(tripItem.brief??"",style: CustomTextStyle.font14Light,maxLines: 3,),
                 const SizedBox(height: 10,),
                 StepperTripDay(height: height, width: width, tripDays: tripItem.tripDetails,currDay:cubit.currDay, goToSelectedDay: (int index) {
                   cubit.goToSelectedDay(index);

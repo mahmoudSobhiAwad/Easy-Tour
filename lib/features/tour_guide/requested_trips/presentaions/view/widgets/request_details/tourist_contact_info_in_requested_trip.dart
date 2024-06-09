@@ -20,7 +20,7 @@ class TouristContactInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Contact Info',style: CustomTextStyle.commonSignDark,),
+        const Text('Contact Info',style: CustomTextStyle.fontBold16,),
         SizedBox(height: height*0.015,),
         Column(
           children: [
@@ -32,7 +32,7 @@ class TouristContactInfo extends StatelessWidget {
                   Text('Email')
                 ],
               ),
-              child: Text(model.email??"",style: CustomTextStyle.commonFontThin,),
+              child: Text(model.email??"",style: CustomTextStyle.fontNormal14WithEllipsis,),
             ),
             const SizedBox(height: 10,),
             ProfileSettingItem(
@@ -40,7 +40,7 @@ class TouristContactInfo extends StatelessWidget {
               rightWidget: const Row(
                 children: [
                   Icon(Icons.phone,color: entertainmentColor,),
-                  Text('Phone Number',style: CustomTextStyle.commonFontThin,)
+                  Text('Phone Number',style: CustomTextStyle.fontNormal14WithEllipsis,)
                 ],
               ),
               child: Text('+20 ${model.phoneNum}'),

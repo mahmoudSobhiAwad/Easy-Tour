@@ -35,7 +35,7 @@ class AddNewDestination extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Icon(Icons.add,color: Colors.white,),
-                  Text('Add New Destination',style: CustomTextStyle.tripDetailsInTourGuide.copyWith(color: Colors.white),)
+                  Text('Add New Destination',style: CustomTextStyle.font12WithEllipsis.copyWith(color: Colors.white),)
                 ],
               ),
             )

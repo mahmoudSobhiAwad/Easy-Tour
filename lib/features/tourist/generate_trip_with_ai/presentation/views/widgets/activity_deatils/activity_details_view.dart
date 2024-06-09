@@ -29,28 +29,28 @@ class ActivityDetailsView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(place.name,style: CustomTextStyle.privateTourTitle,),
+                    Text(place.name,style: CustomTextStyle.fontBold21,),
                     ProfileSettingItem(
                       enableDivider: false,
-                      rightWidget: const Text('Time Visiting',style:CustomTextStyle.commonFontThin,),
+                      rightWidget: const Text('Time Visiting',style:CustomTextStyle.fontNormal14WithEllipsis,),
                       child: Container(
                         padding:const EdgeInsets.all(5),
                         decoration: BoxDecoration(color: thirdColor,borderRadius: BorderRadius.circular(10)),
-                        child:  Text(place.time??"",style: CustomTextStyle.commonFontThin,),
+                        child:  Text(place.time??"",style: CustomTextStyle.fontNormal14WithEllipsis,),
                       ),),
                     Row(
                       children: [
                       const FaIcon(FontAwesomeIcons.ticket,color: entertainmentColor,),
                       SizedBox(width: width*0.025,),
-                        Text('${place.budget} \$',style: CustomTextStyle.commonFontThinLight)
+                        Text('${place.budget} \$',style: CustomTextStyle.font14Light)
                       ],
                     ),
                     SizedBox(height: height*0.02,),
-                    const Text('About Destination',style: CustomTextStyle.privateTourTitle,),
+                    const Text('About Destination',style: CustomTextStyle.fontBold21,),
                     SizedBox(height: height*0.02,),
                     SizedBox(
                       height: height*0.2,
-                      child: SingleChildScrollView(child:  Text(place.activity,style: CustomTextStyle.commonFontThinLight,)),
+                      child: SingleChildScrollView(child:  Text(place.activity,style: CustomTextStyle.font14Light,)),
                     ),
                     SizedBox(height: height*0.02,),
                     Center(child: CustomLoginButton(altWidth: width*0.9,color: forthColor,label: 'Go Now',onTap: (){

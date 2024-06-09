@@ -20,8 +20,9 @@ class FlightTicketItem extends StatelessWidget {
       child: Container(
         width: width*0.8,
         decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(width: 2,color: basicColor),
+          border: Border.all(width: 2,color: thirdColor),
         ),
         padding:const EdgeInsets.all(10),
         child: Column(
@@ -35,8 +36,8 @@ class FlightTicketItem extends StatelessWidget {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Total Price',style: CustomTextStyle.commonSignDark,),
-                Text('1100.32 \$',style: CustomTextStyle.commonSignDark,),
+                Text('Total Price',style: CustomTextStyle.fontBold16,),
+                Text('1100.32 \$',style: CustomTextStyle.fontBold16,),
               ],
             )
           ],

@@ -21,7 +21,7 @@ class CustomColumnWithTextForm extends StatelessWidget {
           child: SizedBox(
               width: textWidth,
               height: textHeight,
-              child: Text(text??"",style:style??CustomTextStyle.commonSignDark,maxLines: maxLine,textAlign: align,)),
+              child: Text(text??"",style:style??CustomTextStyle.fontBold16,maxLines: maxLine,textAlign: align,)),
         ):
         const SizedBox(),
         const SizedBox(height: 5,),

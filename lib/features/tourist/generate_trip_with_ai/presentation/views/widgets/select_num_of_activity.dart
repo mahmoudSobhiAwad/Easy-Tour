@@ -15,7 +15,7 @@ class SelectNumOfActivityInDay extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Activity In One Day ',style: CustomTextStyle.commonSignDark,),
+          const Text('Activity In One Day ',style: CustomTextStyle.fontBold16,),
           const SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,7 +34,7 @@ class SelectNumOfActivityInDay extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: secondaryColor,width: 2),
                     ),
-                    child:Center(child:  Text(activityNames.values.elementAt(index),style: CustomTextStyle.commonFontThin.copyWith(color: currActivity==index?Colors.white:basicColor),maxLines: 2,textAlign: TextAlign.center,)),
+                    child:Center(child:  Text(activityNames.values.elementAt(index),style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: currActivity==index?Colors.white:basicColor),maxLines: 2,textAlign: TextAlign.center,)),
                   ),
                 );
               })

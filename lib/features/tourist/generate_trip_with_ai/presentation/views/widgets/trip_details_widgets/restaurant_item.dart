@@ -34,18 +34,18 @@ class RestaurantItemInGeneratedTrip extends StatelessWidget {
                 children: [
                   SizedBox(
                       width: width*0.38,
-                      child: Text(model.displayName??"",style: CustomTextStyle.commonSignDark,overflow: TextOverflow.ellipsis,)),
-                  Text('Open Now ',style: CustomTextStyle.tripDetailsInTourGuide.copyWith(color: whatsAppColor),),
+                      child: Text(model.displayName??"",style: CustomTextStyle.fontBold16,overflow: TextOverflow.ellipsis,)),
+                  Text('Open Now ',style: CustomTextStyle.font12WithEllipsis.copyWith(color: whatsAppColor),),
                 ],
               ),
-              Text(model.displayType??"",style: CustomTextStyle.commonFontThinLight,),
+              Text(model.displayType??"",style: CustomTextStyle.font14Light,),
                Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const Icon(Icons.location_on_rounded,color: basicColor,),
                   SizedBox(
                       width: width*0.5,
-                      child: Text(model.address??"",style: CustomTextStyle.commonFontThin,overflow: TextOverflow.ellipsis,)),
+                      child: Text(model.address??"",style: CustomTextStyle.fontNormal14WithEllipsis,overflow: TextOverflow.ellipsis,)),
                 ],
               ),
               const Divider(height: 3,color: thirdColor,),

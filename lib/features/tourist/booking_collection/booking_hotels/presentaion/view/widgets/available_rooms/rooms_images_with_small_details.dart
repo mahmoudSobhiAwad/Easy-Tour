@@ -48,10 +48,10 @@ class ImagesOfRoomWithSmallDetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name,style: CustomTextStyle.privateTourTitle.copyWith(fontWeight: FontWeight.normal,color: Colors.white),),
+                Text(name,style: CustomTextStyle.fontBold21.copyWith(fontWeight: FontWeight.normal,color: Colors.white),),
                 SizedBox(
                     height: height*0.075,
-                    child: SingleChildScrollView(child: Text(addressWithCity??"",style: CustomTextStyle.commonProfileDark.copyWith(color: Colors.white),)))
+                    child: SingleChildScrollView(child: Text(addressWithCity??"",style: CustomTextStyle.fontBold14.copyWith(color: Colors.white),)))
               ],
             ),
           ),

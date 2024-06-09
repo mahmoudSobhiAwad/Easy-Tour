@@ -31,7 +31,7 @@ class TripHistoryItem extends StatelessWidget {
               children: [
                 SizedBox(
                     width: width*0.6,
-                    child: Text(tripTitle,style: CustomTextStyle.commonSignThinDark,overflow: TextOverflow.ellipsis,)),
+                    child: Text(tripTitle,style: CustomTextStyle.fontNormal16,overflow: TextOverflow.ellipsis,)),
                 behindTitle??const SizedBox(),
               ],
             ),

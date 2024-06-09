@@ -48,7 +48,7 @@ class _AnimatedSwitchImagesState extends State<AnimatedSwitchImages> with Single
               children: [
                 const Icon( Icons.photo_outlined,color: basicColor,size: 60,),
                 const SizedBox(height: 10,),
-                Text('Upload${widget.imageTitle}, please make it so clear with no blur.',style: CustomTextStyle.commonSignDark,textAlign: TextAlign.center,)
+                Text('Upload${widget.imageTitle}, please make it so clear with no blur.',style: CustomTextStyle.fontBold16,textAlign: TextAlign.center,)
               ],
             ),
           ),

@@ -4,7 +4,7 @@ TableRow buildTableRow (List<String>cells){
   return TableRow(children: [
     ...List.generate(cells.length, (index) => Padding(
       padding: const EdgeInsets.all(5.0),
-      child: Text(cells[index],style: CustomTextStyle.commonFontThinLight,textAlign: TextAlign.center,),
+      child: Text(cells[index],style: CustomTextStyle.font14Light,textAlign: TextAlign.center,),
     )),
   ]);
 }

@@ -43,7 +43,7 @@ class CurrencyConverterBody extends StatelessWidget {
                       angle: -0.784,
                       child:const Icon(Icons.swap_vert_outlined,color: Colors.white,size: 40,))),
               SizedBox(height: height*0.03,),
-              Center(child: Text('Currency Converter',style: CustomTextStyle.privateTourTitle.copyWith(color: Colors.white),)),
+              Center(child: Text('Currency Converter',style: CustomTextStyle.fontBold21.copyWith(color: Colors.white),)),
               SizedBox(height: height*0.03,),
               ConversionWidget(height: height, width: width, cubit: cubit),
               SizedBox(height: height*0.05,),
@@ -64,7 +64,7 @@ class CurrencyConverterBody extends StatelessWidget {
                               fillColor: thirdColor,
                               suffix: SizedBox(
                                 width: width*0.1,
-                                child: const Center(child:Text('meter',style: CustomTextStyle.commonFontThin,)),
+                                child: const Center(child:Text('meter',style: CustomTextStyle.fontNormal14WithEllipsis,)),
                               ),)),
                         SizedBox(width: width*0.1,),
                         ClipRRect(

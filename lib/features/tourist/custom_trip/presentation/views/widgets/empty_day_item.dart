@@ -20,7 +20,7 @@ class EmptyDayToAddItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: const ColoredBox(color: secondaryColor,child: Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('Push To Pick Places To You Trip',style: CustomTextStyle.commonSignThinDark,textAlign: TextAlign.center,),
+              child: Text('Push To Pick Places To You Trip',style: CustomTextStyle.fontNormal16,textAlign: TextAlign.center,),
             ),)),
       ),
     );

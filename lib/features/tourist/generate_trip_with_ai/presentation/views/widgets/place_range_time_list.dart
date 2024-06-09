@@ -43,7 +43,7 @@ class PlaceWithRangeTimeList extends StatelessWidget {
                 list: placesForGeneratedTrip,
                 label: 'Pick Place',
                 enableSearch: true,
-                labelStyle: CustomTextStyle.commonFontThinLight.copyWith(color: Colors.white),
+                labelStyle: CustomTextStyle.font14Light.copyWith(color: Colors.white),
                 onSelected:(String?value){
                   onSelect(value,index);
                 },
@@ -60,7 +60,7 @@ class PlaceWithRangeTimeList extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    destinationList[index].numOfDay==null? const Text('Pick Range Of Date',style: CustomTextStyle.tripDetailsInTourGuide):Text('From: ${destinationList[index].startDate}\nTo : ${destinationList[index].lastDate}',style: CustomTextStyle.tripDetailsInTourGuide,),
+                    destinationList[index].numOfDay==null? const Text('Pick Range Of Date',style: CustomTextStyle.font12WithEllipsis):Text('From: ${destinationList[index].startDate}\nTo : ${destinationList[index].lastDate}',style: CustomTextStyle.font12WithEllipsis,),
                     IconButton(onPressed:(){
                       pickDate(index);
                     },icon:const Icon(Icons.calendar_month_rounded,color: basicColor,)),

@@ -21,7 +21,7 @@ class CardElement extends StatelessWidget {
         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image(image: AssetImage(cardModel!.imagePath,),fit: BoxFit.fitHeight,height: height*0.14,),
-          Text(cardModel!.labelName,style: CustomTextStyle.commonSignDark,maxLines: 2,textAlign: TextAlign.center,),
+          Text(cardModel!.labelName,style: CustomTextStyle.fontBold16,maxLines: 2,textAlign: TextAlign.center,),
         ],
       ),
     );

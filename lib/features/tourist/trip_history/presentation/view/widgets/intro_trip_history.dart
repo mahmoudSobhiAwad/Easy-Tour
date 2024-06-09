@@ -22,11 +22,11 @@ final Color?colorButton;
             Image.asset(imagePath,fit: BoxFit.fill,height: height*0.4,),
             SizedBox(
                 width: width*0.6,
-                child: Text(mainTitle,style: CustomTextStyle.resetPassTitle.copyWith(fontSize: 40),maxLines: 3,textAlign: TextAlign.center,)),
+                child: Text(mainTitle,style: CustomTextStyle.fontBold30.copyWith(fontSize: 40),maxLines: 3,textAlign: TextAlign.center,)),
              SizedBox(height: height*0.05,),
             SizedBox(
                 width: width*0.6,
-                child: Text(secondaryTitle,style: CustomTextStyle.commonFontThinLight.copyWith(fontSize: 16),maxLines: 3,textAlign: TextAlign.center,)),
+                child: Text(secondaryTitle,style: CustomTextStyle.font14Light.copyWith(fontSize: 16),maxLines: 3,textAlign: TextAlign.center,)),
             const Expanded(child: SizedBox(height: 20,)),
             CustomLoginButton(altWidth: width*0.5,label: 'Let\'s Go',enable: true,onTap: screenToGo,color: colorButton,),
           ],

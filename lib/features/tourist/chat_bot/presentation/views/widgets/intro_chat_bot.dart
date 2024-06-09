@@ -18,7 +18,7 @@ class ChatBotIntro extends StatelessWidget {
           children: [
             const Text('Tourism Chat Bot',style: CustomTextStyle.homePartTitle,),
             const SizedBox(height: 20,),
-            const Text('You can ask what you want about the tourism in Egypt in different Fields',style: CustomTextStyle.commonSignLight,textAlign: TextAlign.center,),
+            const Text('You can ask what you want about the tourism in Egypt in different Fields',style: CustomTextStyle.font16Light,textAlign: TextAlign.center,),
             const SizedBox(height: 20,),
             Image.asset('assets/tourist_home/Vector_Robot_3.webp',fit: BoxFit.fill,height: height*0.5,),
             const Expanded(child: SizedBox(height: 20,)),

@@ -29,7 +29,7 @@ class PickCategoryForSearch extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title??'Pick Category or More',style: CustomTextStyle.commonSignDark,),
+        Text(title??'Pick Category or More',style: CustomTextStyle.fontBold16,),
         SizedBox(
           height:heightPercent?? height*0.17,
           child: ListView.separated(
@@ -52,8 +52,8 @@ class PickCategoryForSearch extends StatelessWidget {
                   heightPercent!=null?SizedBox(
                       width: width*0.25,
                       height: height*0.08,
-                      child: Text(typeOfCategory[index].typeName,textAlign: TextAlign.center,style: CustomTextStyle.commonFontThin,maxLines: 3,)):
-                  Text(typeOfCategory[index].typeName,style: CustomTextStyle.commonSignDark,overflow: TextOverflow.ellipsis,),
+                      child: Text(typeOfCategory[index].typeName,textAlign: TextAlign.center,style: CustomTextStyle.fontNormal14WithEllipsis,maxLines: 3,)):
+                  Text(typeOfCategory[index].typeName,style: CustomTextStyle.fontBold16,overflow: TextOverflow.ellipsis,),
                 ],
               );
             },

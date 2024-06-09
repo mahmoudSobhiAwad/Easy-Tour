@@ -41,7 +41,7 @@ class DiscoverPart extends StatelessWidget {
               },
               child: const Padding(
                 padding: EdgeInsets.only(right: 10.0),
-                child: Text('See All',style: CustomTextStyle.commonFontThin,),
+                child: Text('See All',style: CustomTextStyle.fontNormal14WithEllipsis,),
               ),
             ),
           ],

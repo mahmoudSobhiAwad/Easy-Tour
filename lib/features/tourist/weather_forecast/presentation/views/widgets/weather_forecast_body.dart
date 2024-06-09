@@ -30,18 +30,18 @@ class WeatherForecastBody extends StatelessWidget {
           child: CircularProgressIndicator(color: Colors.white,),):Column(children: [
             CustomGeneratedAiTripAppBar(appBarWidth: width*0.4,height: height, width: width,menuToSaveTrip:  Row(children: [
               const Icon(Icons.location_on_rounded,color: Colors.white,),
-              Text('${cubit.city}',style: CustomTextStyle.commonSignThinAlwaysWhite,),
+              Text('${cubit.city}',style: CustomTextStyle.font16NormalWhite,),
               const SizedBox(width: 3,),
               CustomDropDownButton(list: governments, onChanged: (selectedGovernorate){
                 cubit.changeCityFromList(selectedGovernorate);
               }, maxHeight: height*0.2,)
             ],),),
             Image.asset('${cubit.weatherForecastModel[cubit.currDay].weatherModelValue?.iconOfDay}',height: height*0.22,width: width*0.5,fit: BoxFit.fitHeight,),
-            Text('${cubit.weatherForecastModel[cubit.currDay].weatherModelValue?.avgTemp} °C',style: CustomTextStyle.resetPassTitle.copyWith(fontSize: 40,color: Colors.white),),
+            Text('${cubit.weatherForecastModel[cubit.currDay].weatherModelValue?.avgTemp} °C',style: CustomTextStyle.fontBold30.copyWith(fontSize: 40,color: Colors.white),),
             SizedBox(height: height*0.02,),
-            Text('${cubit.weatherForecastModel[cubit.currDay].weatherModelValue?.statusOfDay}',style: CustomTextStyle.commonSignAlwaysWhite,),
+            Text('${cubit.weatherForecastModel[cubit.currDay].weatherModelValue?.statusOfDay}',style: CustomTextStyle.font16BoldWhite,),
             SizedBox(height: height*0.02,),
-            Text('Max.: ${cubit.weatherForecastModel[cubit.currDay].weatherModelValue?.maxTemp} °C   Min.: ${cubit.weatherForecastModel[cubit.currDay].weatherModelValue?.minTemp} °C',style: CustomTextStyle.commonSignThinAlwaysWhite,),
+            Text('Max.: ${cubit.weatherForecastModel[cubit.currDay].weatherModelValue?.maxTemp} °C   Min.: ${cubit.weatherForecastModel[cubit.currDay].weatherModelValue?.minTemp} °C',style: CustomTextStyle.font16NormalWhite,),
             SizedBox(height: height*0.05,),
             DetailsWeatherOfDay(modelValue:cubit.weatherForecastModel[cubit.currDay].weatherModelValue,),
             SizedBox(height: height*0.05,),

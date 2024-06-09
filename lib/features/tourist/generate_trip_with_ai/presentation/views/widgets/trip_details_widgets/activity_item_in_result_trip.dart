@@ -35,32 +35,32 @@ class OneActivityInGeneratedTrip extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(place.name,style: CustomTextStyle.commonSignDark,),
+                Text(place.name,style: CustomTextStyle.fontBold16,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       width: width*0.5,
                       child: Text(place.activity,
-                        style: CustomTextStyle.commonFontThinLight,maxLines: 3,softWrap: true,),),
+                        style: CustomTextStyle.font14Light,maxLines: 3,softWrap: true,),),
                     GestureDetector(onTap: null, child:const Text('See More',style: TextStyle(decoration: TextDecoration.underline),)),
                   ],
                 ),
                  ProfileSettingItem(
                   enableDivider: false,
-                  rightWidget: const Text('Place Price',style:CustomTextStyle.commonFontThin,),
+                  rightWidget: const Text('Place Price',style:CustomTextStyle.fontNormal14WithEllipsis,),
                   child: Row(children: [
-                    Text('${place.budget} \$',style: CustomTextStyle.commonFontThin,),
+                    Text('${place.budget} \$',style: CustomTextStyle.fontNormal14WithEllipsis,),
                     const FaIcon(FontAwesomeIcons.ticket,color: basicColor,)
                   ],),),
                 ProfileSettingItem(
                   enableDivider: false,
-                  rightWidget: const Text('Time Visiting',style:CustomTextStyle.commonFontThin,),
+                  rightWidget: const Text('Time Visiting',style:CustomTextStyle.fontNormal14WithEllipsis,),
                   child: Container(
                     width: width*0.35,
                     padding:const EdgeInsets.all(5),
                     decoration: BoxDecoration(color: thirdColor,borderRadius: BorderRadius.circular(10)),
-                    child:  Text(place.time??"",style: CustomTextStyle.tripDetailsInTourGuide,),
+                    child:  Text(place.time??"",style: CustomTextStyle.font12WithEllipsis,),
                   ),),
               ],
             ),

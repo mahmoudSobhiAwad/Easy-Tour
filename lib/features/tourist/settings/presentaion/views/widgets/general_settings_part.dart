@@ -16,7 +16,7 @@ class GeneralSettings extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('General Settings',style: CustomTextStyle.commonSignThinDark,),
+          const Text('General Settings',style: CustomTextStyle.fontNormal16,),
           const Expanded(child:  SizedBox(height: 10,)),
           ...List.generate(4, (index) => GestureDetector(
             onTap: [

@@ -43,7 +43,7 @@ class DeleteOrEditPhoto extends StatelessWidget {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Edit",style:CustomTextStyle.commonSignDark,),
+                    Text("Edit",style:CustomTextStyle.fontBold16,),
                     SizedBox(width: 30,),
                     Icon(Icons.edit,color: secondaryColor,),
                   ],

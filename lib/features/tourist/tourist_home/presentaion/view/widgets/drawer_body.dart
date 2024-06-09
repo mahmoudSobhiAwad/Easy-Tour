@@ -38,7 +38,7 @@ class CustomDrawerBody extends StatelessWidget {
               child: IconButton(onPressed: onClose, icon: const Icon(Icons.close,size: 30,))),
           ProfilePicWidget(imageUrl:profileUrl, height: height*0.15,),
           const SizedBox(height: 10,),
-           Text('$name',overflow: TextOverflow.ellipsis,style: CustomTextStyle.commonSignDark,),
+           Text('$name',overflow: TextOverflow.ellipsis,style: CustomTextStyle.fontBold16,),
           const SizedBox(height: 20,),
           SizedBox(
             height: height*0.55,

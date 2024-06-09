@@ -39,7 +39,7 @@ class IncludedOrExcludedFeatures extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title,style: CustomTextStyle.commonSignDark,),
+              Text(title,style: CustomTextStyle.fontBold16,),
               const SizedBox(height: 5,),
               Container(
                 height: height*0.18,
@@ -61,7 +61,7 @@ class IncludedOrExcludedFeatures extends StatelessWidget {
                         children: [
                           Icon(icon,color: iconColor,),
                           const SizedBox(width: 10,),
-                          SizedBox(width: width*0.65,child:Text(incOrExc[index],style: CustomTextStyle.commonSignThinDark,)),
+                          SizedBox(width: width*0.65,child:Text(incOrExc[index],style: CustomTextStyle.fontNormal16,)),
                           showAddInc?
                           IconButton(padding: EdgeInsets.zero,onPressed:(){
                             showAddInc?removeIncOrExc!(index):();

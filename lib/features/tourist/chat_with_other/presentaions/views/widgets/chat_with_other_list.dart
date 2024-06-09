@@ -50,7 +50,7 @@ class RecentChatWithOther extends StatelessWidget {
               Icon(Icons.messenger_outlined,color: thirdColor,size: height*0.1,),
               SizedBox(
                   width: width*0.7,
-                  child: Text('$emptyMessages',style: CustomTextStyle.commonSignLight,)),
+                  child: Text('$emptyMessages',style: CustomTextStyle.font16Light,)),
             ],
           ),
         ),

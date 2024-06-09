@@ -22,19 +22,19 @@ final WeatherDayModelValue? modelValue;
           Row(
             children: [
               const Icon(Icons.cloudy_snowing,color: Colors.white,),
-              Text('${modelValue?.rainAvg??"0"} %',style: CustomTextStyle.commonSignThinAlwaysWhite,),
+              Text('${modelValue?.rainAvg??"0"} %',style: CustomTextStyle.font16NormalWhite,),
             ],
           ),
           Row(
             children: [
               const Icon(Icons.thermostat_outlined,color: Colors.white,),
-              Text('${modelValue?.humidityAvg??'0'} %',style: CustomTextStyle.commonSignThinAlwaysWhite,),
+              Text('${modelValue?.humidityAvg??'0'} %',style: CustomTextStyle.font16NormalWhite,),
             ],
           ),
           Row(
             children: [
               const Icon(Icons.wind_power_rounded,color: Colors.white,),
-              Text('${modelValue?.windSpeed??"0"} Km/h ',style: CustomTextStyle.commonSignThinAlwaysWhite,),
+              Text('${modelValue?.windSpeed??"0"} Km/h ',style: CustomTextStyle.font16NormalWhite,),
             ],
           )
         ],

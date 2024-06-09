@@ -25,7 +25,7 @@ class CategoryOfTripHistoryTypes extends StatelessWidget {
                 borderRadius: BorderRadius.circular(14),
               ),
               padding:const EdgeInsets.all(8),
-              child: Center(child: Text(tripTypes[index],style: CustomTextStyle.commonSignThinDark.copyWith(color: index==0?whiteColor:basicColor, ),)),
+              child: Center(child: Text(tripTypes[index],style: CustomTextStyle.fontNormal16.copyWith(color: index==0?whiteColor:basicColor, ),)),
             ),
           );
         },

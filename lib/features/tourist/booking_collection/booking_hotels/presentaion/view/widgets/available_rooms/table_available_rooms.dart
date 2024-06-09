@@ -36,13 +36,13 @@ class TableDetailsOfAvailableRooms extends StatelessWidget {
         buildTableRow(['Room Type','Price','Properties','Cancel Cost','Room Num']),
         ...List.generate(model.length, (index) => buildTableWithWidget(
           [
-            Text(model[index].roomName??"",style: CustomTextStyle.commonFontThin.copyWith(fontSize: 12),maxLines: 5,),
-            Text('${model[index].rateOfRoom?[0].net}',style: CustomTextStyle.commonFontThin.copyWith(fontSize: 12),maxLines: 5,),
+            Text(model[index].roomName??"",style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(fontSize: 12),maxLines: 5,),
+            Text('${model[index].rateOfRoom?[0].net}',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(fontSize: 12),maxLines: 5,),
              Column(
               children: [
                 Row(
                   children: [
-                    Text('Packaging',style: CustomTextStyle.commonFontThin.copyWith(fontSize: 12),maxLines: 5,),
+                    Text('Packaging',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(fontSize: 12),maxLines: 5,),
                     model[index].rateOfRoom![0].packaging?const Icon(Icons.check,color: whatsAppColor,):const Icon(Icons.close,color: closeColor,),
                   ],
                 ),
@@ -50,14 +50,14 @@ class TableDetailsOfAvailableRooms extends StatelessWidget {
                 Row(
                   children: [
                     const Icon(Icons.payment,),
-                    Text('${model[index].rateOfRoom?[0].paymentType}',style: CustomTextStyle.commonFontThin.copyWith(fontSize: 12),maxLines: 5,),
+                    Text('${model[index].rateOfRoom?[0].paymentType}',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(fontSize: 12),maxLines: 5,),
                   ],
                 ),
                 const SizedBox(height: 5,),
                 Row(
                   children: [
                     const Icon(Icons.dashboard,),
-                    Text('${model[index].rateOfRoom?[0].boardName}',style: CustomTextStyle.commonFontThin.copyWith(fontSize: 12),maxLines: 5,),
+                    Text('${model[index].rateOfRoom?[0].boardName}',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(fontSize: 12),maxLines: 5,),
                   ],
                 ),
               ],
@@ -67,7 +67,7 @@ class TableDetailsOfAvailableRooms extends StatelessWidget {
                 Row(
                   children: [
                     const Icon(Icons.monetization_on_rounded,color: closeColor,),
-                    Text(model[index].rateOfRoom?[0].cancelPolicies?[0].amount??"0",style: CustomTextStyle.commonFontThin.copyWith(fontSize: 12),maxLines: 5,),
+                    Text(model[index].rateOfRoom?[0].cancelPolicies?[0].amount??"0",style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(fontSize: 12),maxLines: 5,),
                   ],
                 ),
                 const SizedBox(height: 5,),
@@ -77,7 +77,7 @@ class TableDetailsOfAvailableRooms extends StatelessWidget {
                     const Icon(Icons.timer,),
                     SizedBox(
                         width: width*0.13,
-                        child: Text(model[index].rateOfRoom?[0].cancelPolicies?[0].deadTime??"",style: CustomTextStyle.commonFontThin.copyWith(fontSize: 12),maxLines: 5,)),
+                        child: Text(model[index].rateOfRoom?[0].cancelPolicies?[0].deadTime??"",style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(fontSize: 12),maxLines: 5,)),
                   ],
                 ),
               ],

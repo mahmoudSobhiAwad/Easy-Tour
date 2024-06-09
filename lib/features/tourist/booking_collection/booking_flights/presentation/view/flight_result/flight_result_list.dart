@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_details/flight_details.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_result/flight_booking_ticket_item.dart';
 class FlightResultList extends StatelessWidget {
   const FlightResultList({
@@ -17,8 +18,14 @@ class FlightResultList extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         itemBuilder:(context,index)
         {
-            return FlightTicketItem(width: width, height: height);
-            },
+          return GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return const FlightDetailsView();
+                }));
+              },
+              child: FlightTicketItem(width: width, height: height));
+          },
         separatorBuilder: (context,index){
           return SizedBox(height: height*0.015,);
           },

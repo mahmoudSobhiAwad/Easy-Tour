@@ -21,11 +21,11 @@ class PayInBookingView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Payment',appBarStyle:CustomTextStyle.resetPassTitle,extraOnBack:(){
+          CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Payment',appBarStyle:CustomTextStyle.fontBold30,extraOnBack:(){
             cubit.toggleBetweenPages(0);
           },backDirect: false,),
           SizedBox(height: height*0.05,),
-          const Text('Pay Safely',style: CustomTextStyle.privateTourTitle,),
+          const Text('Pay Safely',style: CustomTextStyle.fontBold21,),
           SizedBox(height: height*0.02,),
           CustomColumnWithTextForm(
             text: 'Name on Card ',
@@ -97,7 +97,7 @@ class PayInBookingView extends StatelessWidget {
               children: [
                 IconButton(onPressed: null,icon:Icon(Icons.document_scanner_outlined)),
                 SizedBox(width: 5,),
-                Text('Scan Card',style: CustomTextStyle.commonSignDark,),
+                Text('Scan Card',style: CustomTextStyle.fontBold16,),
               ],
             ),
           ),

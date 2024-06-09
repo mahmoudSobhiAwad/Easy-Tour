@@ -32,7 +32,7 @@ class DepartureAndReturnDate extends StatelessWidget {
               ),),
             Column(
               children: [
-                const Text('Return Date',style: CustomTextStyle.commonSignDark,),
+                const Text('Return Date',style: CustomTextStyle.fontBold16,),
                 const SizedBox(height: 5,),
                 CustomSwitch(active: true, height: height, width: width),
               ],

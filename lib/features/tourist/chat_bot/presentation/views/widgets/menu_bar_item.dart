@@ -11,7 +11,7 @@ class MenuItemAppBarButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(text,style: CustomTextStyle.commonFontThin,),
+        Text(text,style: CustomTextStyle.fontNormal14WithEllipsis,),
         icon,
       ],
     );

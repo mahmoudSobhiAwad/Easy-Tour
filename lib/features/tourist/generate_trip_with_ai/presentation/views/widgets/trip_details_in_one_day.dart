@@ -41,8 +41,8 @@ class OneTripPerDayItem extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 children:[
-                  Text(placeItem?.placeName??"",style: CustomTextStyle.commonSignDark,),
-                  Text(placeItem?.activity??"",style: CustomTextStyle.commonFontThinLight,maxLines: 5,),
+                  Text(placeItem?.placeName??"",style: CustomTextStyle.fontBold16,),
+                  Text(placeItem?.activity??"",style: CustomTextStyle.font14Light,maxLines: 5,),
                 ],
               ),
             ),

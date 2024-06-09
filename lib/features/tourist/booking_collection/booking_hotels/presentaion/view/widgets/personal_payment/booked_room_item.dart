@@ -23,7 +23,7 @@ class BookedRoomItem extends StatelessWidget {
       child:  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('${paxPayModel.roomName}',style: CustomTextStyle.privateTourTitle,),
+          Text('${paxPayModel.roomName}',style: CustomTextStyle.fontBold21,),
           const SizedBox(height: 10,),
           Row(
             children: [

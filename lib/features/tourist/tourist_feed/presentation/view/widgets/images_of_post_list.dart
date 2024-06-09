@@ -29,7 +29,7 @@ class ImagesOfPostList extends StatelessWidget {
                     color:index>0 && imagesLinks.length-2!=0?basicColor.withOpacity(0.35):null,
                     colorBlendMode:index>0 && imagesLinks.length-2!=0? BlendMode.srcOver:null,
                     filterQuality: FilterQuality.high,),
-                  index>0 && imagesLinks.length-2!=0?Text('${imagesLinks.length-2}',style: CustomTextStyle.commonSignThinAlwaysWhite,):const SizedBox(),
+                  index>0 && imagesLinks.length-2!=0?Text('${imagesLinks.length-2}',style: CustomTextStyle.font16NormalWhite,):const SizedBox(),
                 ],
               ));
         })

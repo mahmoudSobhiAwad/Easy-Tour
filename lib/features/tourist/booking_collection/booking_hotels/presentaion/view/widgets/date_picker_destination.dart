@@ -54,7 +54,7 @@ class DatePickerWithDestination extends StatelessWidget {
                 }, icon: const Icon(Icons.date_range_rounded)),
                 SizedBox(
                     width: width*0.3,
-                    child:Text('${cubit.checkIn}\n${cubit.checkOut}',style: CustomTextStyle.commonFontThin,)),
+                    child:Text('${cubit.checkIn}\n${cubit.checkOut}',style: CustomTextStyle.fontNormal14WithEllipsis,)),
               ],
             ),
           ),

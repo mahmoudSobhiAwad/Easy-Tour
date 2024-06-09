@@ -28,7 +28,7 @@ class TourGuideProfileInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                const Text('Personal Info',style: CustomTextStyle.commonSignThinDark),
+                const Text('Personal Info',style: CustomTextStyle.fontNormal16),
                 const Expanded(child:  SizedBox(height: 10,)),
                 ProfileSettingItem(text: 'Edit Profile', onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=> EditTourGuideProfileView(model: cubit.tourGuidePersonalInfoModel,profileViewCubit: cubit,)));
@@ -37,9 +37,9 @@ class TourGuideProfileInfo extends StatelessWidget {
                     text: 'Languages',
                     height: height*0.07,
                     child:  Text(cubit.getLang(),
-                      style:CustomTextStyle.commonFontThin,)),
-                ProfileSettingItem(text: 'Phone Number',height: height*0.07,child: Text(cubit.phoneNum,style:CustomTextStyle.commonFontThin,),),
-                ProfileSettingItem(text: 'Address',height: height*0.07,child: Text(cubit.address,style:CustomTextStyle.commonFontThin ,)),
+                      style:CustomTextStyle.fontNormal14WithEllipsis,)),
+                ProfileSettingItem(text: 'Phone Number',height: height*0.07,child: Text(cubit.phoneNum,style:CustomTextStyle.fontNormal14WithEllipsis,),),
+                ProfileSettingItem(text: 'Address',height: height*0.07,child: Text(cubit.address,style:CustomTextStyle.fontNormal14WithEllipsis ,)),
               ],
             ),
           ),
@@ -49,7 +49,7 @@ class TourGuideProfileInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                const Text('Contact Info',style: CustomTextStyle.commonSignThinDark),
+                const Text('Contact Info',style: CustomTextStyle.fontNormal16),
                 const Expanded(child:  SizedBox(height: 10,)),
                 ProfileSettingItem (
                   rightWidget:  Row(

@@ -39,12 +39,12 @@ class ItemReviewForOneTrip extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(model.reviewerInfo?.name??"",style: CustomTextStyle.commonSignDark.copyWith(overflow: TextOverflow.ellipsis),),
-                    Text(model.reviewerInfo?.publishTime??"",style: CustomTextStyle.commonFontThinLight,),
+                    Text(model.reviewerInfo?.name??"",style: CustomTextStyle.fontBold16.copyWith(overflow: TextOverflow.ellipsis),),
+                    Text(model.reviewerInfo?.publishTime??"",style: CustomTextStyle.font14Light,),
                   ],),
                 SizedBox(
                     width: width*0.6,
-                    child: Text(model.reviewText??"",style: CustomTextStyle.commonFontThinNoOverFlow,)),
+                    child: Text(model.reviewText??"",style: CustomTextStyle.fontNormal14,)),
                 Row(
                   children: [
                     ...List.generate(5, (index) {

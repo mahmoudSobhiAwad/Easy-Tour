@@ -32,7 +32,7 @@ class PlaceDestinationInHotelBooking extends StatelessWidget {
               padding:const EdgeInsets.all(8.0),
               child: SizedBox(
                   width: width*0.4,
-                  child: Text(destinationModel.destName,style: CustomTextStyle.commonSignAlwaysWhite,maxLines: 2,)),
+                  child: Text(destinationModel.destName,style: CustomTextStyle.font16BoldWhite,maxLines: 2,)),
             )
           ],
         ),

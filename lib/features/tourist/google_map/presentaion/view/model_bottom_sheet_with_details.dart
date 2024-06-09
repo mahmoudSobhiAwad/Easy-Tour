@@ -48,8 +48,8 @@ class PlaceDetailsWithSearchText extends StatelessWidget {
             children: [
               SizedBox(
                   width: width*0.6,
-                  child: Text(model.address??"",style: CustomTextStyle.commonFontThin,)),
-              model.openNow! ?Text('open now',style: CustomTextStyle.commonSignLight.copyWith(color: whatsAppColor),):Text('Closed',style: CustomTextStyle.commonSignLight.copyWith(color: closeColor),),
+                  child: Text(model.address??"",style: CustomTextStyle.fontNormal14WithEllipsis,)),
+              model.openNow! ?Text('open now',style: CustomTextStyle.font16Light.copyWith(color: whatsAppColor),):Text('Closed',style: CustomTextStyle.font16Light.copyWith(color: closeColor),),
             ],
           ),
           GestureDetector(
@@ -60,7 +60,7 @@ class PlaceDetailsWithSearchText extends StatelessWidget {
               decoration: BoxDecoration(color: forthColor,borderRadius: commonBorderRadius()),
               child: Row(
                 children: [
-                  Text('Direction',style: CustomTextStyle.commonSignThinDark.copyWith(color: Colors.white),),
+                  Text('Direction',style: CustomTextStyle.fontNormal16.copyWith(color: Colors.white),),
                   const Icon(Icons.directions,color: Colors.white,)
                 ],
               ),

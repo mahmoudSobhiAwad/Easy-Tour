@@ -45,7 +45,7 @@ class TravelersDateAndTripType extends StatelessWidget {
           children: [
             SizedBox(
                 width:width*0.2,
-                child:const Text('sadsadsa',style: CustomTextStyle.commonFontThin,)),
+                child:const Text('sadsadsa',style: CustomTextStyle.fontNormal14WithEllipsis,)),
             GestureDetector(
               onTap: (){
                 showMenu(context: context,

@@ -16,7 +16,7 @@ class PersonalDataInBookingView extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 10).copyWith(bottom: 10),
       children: [
-        CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Personal-Details',appBarStyle: CustomTextStyle.resetPassTitle,),
+        CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Personal-Details',appBarStyle: CustomTextStyle.fontBold30,),
         SizedBox(height: height*0.02,),
         CustomTwoFieldForm(
           firstCustomFormField: SizedBox(
@@ -30,7 +30,7 @@ class PersonalDataInBookingView extends StatelessWidget {
           ),
         ),
         SizedBox(height: height*0.01,),
-        Text('Rooms',style: CustomTextStyle.resetPassTitle.copyWith(fontSize: 26),),
+        Text('Rooms',style: CustomTextStyle.fontBold30.copyWith(fontSize: 26),),
         SizedBox(
           height: cubit.payPaxList.length>1?height*0.5:height*0.3,
           child: ListView.separated(

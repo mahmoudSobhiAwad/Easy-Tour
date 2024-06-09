@@ -17,8 +17,8 @@ class ThirdColumnResetPass extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height*0.2,
           child: const TitleOfCreateAcc(
-            mainStyle:CustomTextStyle.resetPassTitle ,
-            secondaryStyle: CustomTextStyle.commonSignLight,
+            mainStyle:CustomTextStyle.fontBold30 ,
+            secondaryStyle: CustomTextStyle.font16Light,
             textAlign: TextAlign.start,
             mainText: 'Reset Password ? ',
             secondaryText: 'Please make it easy to remember and contains symbols, capital, small  characters and numbers',

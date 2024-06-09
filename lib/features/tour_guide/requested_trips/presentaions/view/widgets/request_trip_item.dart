@@ -17,12 +17,12 @@ class RequestedTripForGuideItemWidget extends StatelessWidget {
         height: height*0.1,
         child: ListTile(
           leading: ProfilePicWidget(imageUrl:model.requestedBy?.image??"", height: height*0.07),
-          title:  Text(model.requestedBy?.userName??"unKnown",style:CustomTextStyle.commonSignDark,),
-          subtitle: SizedBox(width: width*0.5,child: const Text('Send You request to book a trip',style: CustomTextStyle.commonFontThinLight,)),
+          title:  Text(model.requestedBy?.userName??"unKnown",style:CustomTextStyle.fontBold16,),
+          subtitle: SizedBox(width: width*0.5,child: const Text('Send You request to book a trip',style: CustomTextStyle.font14Light,)),
           trailing: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Sun 12:40 PM',style: CustomTextStyle.commonSignLight.copyWith(fontSize: 12),),
+              Text('Sun 12:40 PM',style: CustomTextStyle.font16Light.copyWith(fontSize: 12),),
               getRequestStatusWidget(context, model.requestStatus??"notHandled"),
             ],
           ),

@@ -22,9 +22,9 @@ class NextDayWeatherItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('${value?.avgTemp??"0"} °C',style: CustomTextStyle.commonSignAlwaysWhite),
+          Text('${value?.avgTemp??"0"} °C',style: CustomTextStyle.font16BoldWhite),
           Image.asset('${value?.iconOfDay}',height: height*0.07,width: width*0.1,fit: BoxFit.fitHeight,),
-          Text(value?.nameOfDay??"",style: CustomTextStyle.commonSignAlwaysWhite,)
+          Text(value?.nameOfDay??"",style: CustomTextStyle.font16BoldWhite,)
         ],
       ),
     );

@@ -18,8 +18,8 @@ class FirstColumnResetPass extends StatelessWidget {
         SizedBox(
           height: height*0.2,
           child:const  TitleOfCreateAcc(
-            mainStyle:CustomTextStyle.resetPassTitle ,
-            secondaryStyle: CustomTextStyle.commonSignDark,
+            mainStyle:CustomTextStyle.fontBold30 ,
+            secondaryStyle: CustomTextStyle.fontBold16,
             textAlign: TextAlign.start,
             mainText: 'Forget password ? ',
             secondaryText: 'don’t worry it happens.\nplease enter your email associated to that account',
@@ -31,10 +31,10 @@ class FirstColumnResetPass extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Remembered Password?',style: CustomTextStyle.commonSignLight,),
+            const Text('Remembered Password?',style: CustomTextStyle.font16Light,),
             TextButton(onPressed: (){
               context.go(RouterApp.kLoginView);
-            }, child: const Text('Sign In',style: CustomTextStyle.commonSignDark)),
+            }, child: const Text('Sign In',style: CustomTextStyle.fontBold16)),
           ],)
       ],);
   }

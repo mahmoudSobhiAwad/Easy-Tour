@@ -35,7 +35,7 @@ class AmountConverterWidget extends StatelessWidget {
         Row(
           children: [
             Text(currencyIcon??"",style: const TextStyle(fontSize: 40),),
-            Text(currencyCode??"",style:CustomTextStyle.commonSignDark),
+            Text(currencyCode??"",style:CustomTextStyle.fontBold16),
             const SizedBox(width: 5,),
             CustomDropDownButton(list: list, onChanged: (value){
               onChanged(value!.substring(6));
@@ -50,7 +50,7 @@ class AmountConverterWidget extends StatelessWidget {
                   onChangeInValue!();
                 }
               },
-              style: CustomTextStyle.commonSignDark,
+              style: CustomTextStyle.fontBold16,
               controller:controller ,
               enable: enable,
               filled: true,

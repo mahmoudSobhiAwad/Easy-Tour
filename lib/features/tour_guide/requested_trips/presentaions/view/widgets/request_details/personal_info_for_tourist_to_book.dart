@@ -19,22 +19,22 @@ class PersonalInfoForTourist extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Personal Info',style: CustomTextStyle.commonSignDark,),
+        const Text('Personal Info',style: CustomTextStyle.fontBold16,),
         ListTile(
           contentPadding: EdgeInsets.zero,
           leading: ProfilePicWidget(imageUrl:model.image??"", height: height*0.08,),
-          title: Text(model.userName??"",style: CustomTextStyle.commonSignDark),
+          title: Text(model.userName??"",style: CustomTextStyle.fontBold16),
           subtitle:Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  Text(model.countryName??"",style: CustomTextStyle.commonSignDark),
+                  Text(model.countryName??"",style: CustomTextStyle.fontBold16),
                   const SizedBox(width: 5,),
-                  Text(model.countryFlag??"",style: CustomTextStyle.commonSignDark,),
+                  Text(model.countryFlag??"",style: CustomTextStyle.fontBold16,),
                 ],
               ),
-              Text('${model.age} YO',style: CustomTextStyle.commonSignDark),
+              Text('${model.age} YO',style: CustomTextStyle.fontBold16),
             ],
           ) ,
 

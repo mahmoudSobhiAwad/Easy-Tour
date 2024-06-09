@@ -14,7 +14,7 @@ final String?status;
     return  Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(userName??"Name",style: CustomTextStyle.commonSignDark,),
+        Text(userName??"Name",style: CustomTextStyle.fontBold16,),
        const  SizedBox(width: 10,),
         Icon(Icons.circle,color: status=='Online'? const Color(0xff4BD37B):closeColor,size: 16,)
       ],);

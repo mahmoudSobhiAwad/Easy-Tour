@@ -41,7 +41,7 @@ class BottomSheetForInitial extends StatelessWidget {
               child: Row(
                 children: [
                   const Icon(Icons.directions_run),
-                  Text("${cubit.initialDistance!/1000.toInt()} KM",style: CustomTextStyle.commonFontThin,),
+                  Text("${cubit.initialDistance!/1000.toInt()} KM",style: CustomTextStyle.fontNormal14WithEllipsis,),
                 ],
               )),
           GestureDetector(
@@ -54,7 +54,7 @@ class BottomSheetForInitial extends StatelessWidget {
               decoration: BoxDecoration(color: forthColor,borderRadius: commonBorderRadius()),
               child: Row(
                 children: [
-                  Text('Direction',style: CustomTextStyle.commonSignThinDark.copyWith(color: Colors.white),),
+                  Text('Direction',style: CustomTextStyle.fontNormal16.copyWith(color: Colors.white),),
                   const Icon(Icons.directions,color: Colors.white,)
                 ],
               ),

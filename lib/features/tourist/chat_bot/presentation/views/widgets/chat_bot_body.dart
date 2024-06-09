@@ -29,7 +29,7 @@ final ChatBotCubit cubit;
           children: [
             BotCircle(height: 40, blurRadius: 4, icon:Icon(FontAwesomeIcons.robot,color: basicColor,)),
             SizedBox(width: 10,),
-            Text('Tourism-Bot',style: CustomTextStyle.commonSignDark,),
+            Text('Tourism-Bot',style: CustomTextStyle.fontBold16,),
           ],
         ),
         actions: [

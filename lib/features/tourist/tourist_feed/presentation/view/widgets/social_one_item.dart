@@ -41,7 +41,7 @@ class SocialItemPost extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text('Send Message',style: CustomTextStyle.commonProfileDark,),
+                  Text('Send Message',style: CustomTextStyle.fontBold14,),
                   IconButton(onPressed: null, icon: Icon(Icons.send_rounded),),
                 ],
               ),

@@ -23,7 +23,7 @@ class SignUpAsTourism extends StatelessWidget {
       children: [
         TitleOfCreateAcc(mainText: 'Create Account',
           mainStyle:CustomTextStyle.signINTitle ,
-          secondaryStyle: CustomTextStyle.commonSignLight.apply(fontFamily: 'grover',),
+          secondaryStyle: CustomTextStyle.font16Light.apply(fontFamily: 'grover',),
           secondaryText: 'Fill your information below or register with your social account',),
         const SizedBox(height: 10,),
         Expanded(

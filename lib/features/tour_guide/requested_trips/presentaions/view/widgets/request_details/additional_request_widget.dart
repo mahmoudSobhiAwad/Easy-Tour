@@ -17,7 +17,7 @@ class AdditionalRequest extends StatelessWidget {
     const SizedBox(height: 0,):
     Column(
       children: [
-        const Text('Additional Request',style: CustomTextStyle.commonSignDark,),
+        const Text('Additional Request',style: CustomTextStyle.fontBold16,),
         SizedBox(height: height*0.015,),
         Container(
           height: height*0.15,
@@ -28,7 +28,7 @@ class AdditionalRequest extends StatelessWidget {
             border: Border.all(color: secondaryColor,width: 3),
           ),
           child:SingleChildScrollView(
-              child:  Text(comment??"",style: CustomTextStyle.commonFontThin,overflow: TextOverflow.visible,)),
+              child:  Text(comment??"",style: CustomTextStyle.fontNormal14WithEllipsis,overflow: TextOverflow.visible,)),
         ),
       ],
     );

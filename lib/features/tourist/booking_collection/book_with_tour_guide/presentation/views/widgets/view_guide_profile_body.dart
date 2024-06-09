@@ -37,8 +37,8 @@ class ViewGuideProfileForTouristBody extends StatelessWidget {
         child: ListView(
           children: [
             ProfilePicWithClipper(height: height, width: width,profileUrl: model?.profileUrl??'',),
-            Center(child: Text('${model?.firstName} ${model?.lastName}',style: CustomTextStyle.commonSignDark,)),
-            Center(child: Text('${model?.describeText}',style: CustomTextStyle.commonFontThinLight,maxLines: 2,textAlign: TextAlign.center,)),
+            Center(child: Text('${model?.firstName} ${model?.lastName}',style: CustomTextStyle.fontBold16,)),
+            Center(child: Text('${model?.describeText}',style: CustomTextStyle.font14Light,maxLines: 2,textAlign: TextAlign.center,)),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: width*0.025),
               child: Column(

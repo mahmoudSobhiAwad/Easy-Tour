@@ -38,7 +38,7 @@ class FlightResultAppBar extends StatelessWidget {
                   const RotatedBox(
                       quarterTurns: 1,
                       child: Icon(Icons.airplanemode_on,color: Colors.white,)),
-                  Text('1 hr 40 M',style: CustomTextStyle.commonSignDark.copyWith(color: Colors.white),),
+                  Text('1 hr 40 M',style: CustomTextStyle.fontBold16.copyWith(color: Colors.white),),
                 ],
               )
             ],
@@ -48,8 +48,8 @@ class FlightResultAppBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('NYC\nNew York City',style: CustomTextStyle.commonSignDark.copyWith(color: Colors.white),textAlign: TextAlign.center,),
-                Text('CAI\nCairo',style: CustomTextStyle.commonSignDark.copyWith(color: Colors.white,),textAlign: TextAlign.center,),
+                Text('NYC\nNew York City',style: CustomTextStyle.fontBold16.copyWith(color: Colors.white),textAlign: TextAlign.center,),
+                Text('CAI\nCairo',style: CustomTextStyle.fontBold16.copyWith(color: Colors.white,),textAlign: TextAlign.center,),
               ],
             ),
           ),
@@ -82,7 +82,7 @@ class CustomFlightTicketingAppBar extends StatelessWidget {
             ),
           ),
         ),
-        Text(title??'Flight Result',style: CustomTextStyle.commonSignDark.copyWith(color: Colors.white),)
+        Text(title??'Flight Result',style: CustomTextStyle.fontBold16.copyWith(color: Colors.white),)
         ,SizedBox(width:width*0.1 ,),
       ],
     );

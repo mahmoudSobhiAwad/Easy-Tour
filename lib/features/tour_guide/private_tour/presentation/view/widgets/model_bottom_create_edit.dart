@@ -67,7 +67,7 @@ class AddOrEditTripModelBottom extends StatelessWidget {
                     child: TextButton(
                         onPressed: addAnotherPlaceInDay,
                         child: const Text("Add Another Place",
-                          style: CustomTextStyle.commonProfileDark,)),
+                          style: CustomTextStyle.fontBold14,)),
                   ),
                 ),
               ],

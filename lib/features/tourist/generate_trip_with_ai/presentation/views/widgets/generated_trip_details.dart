@@ -55,7 +55,7 @@ final String?endDate;
                                 });
                               },),
                             ],
-                            title: const Text('Trip Title',style: CustomTextStyle.commonSignDark,),content: CustomTextFormField(
+                            title: const Text('Trip Title',style: CustomTextStyle.fontBold16,),content: CustomTextFormField(
                             focusNode: cubit.focusNode,
                             controller: cubit.titleController,),);
 

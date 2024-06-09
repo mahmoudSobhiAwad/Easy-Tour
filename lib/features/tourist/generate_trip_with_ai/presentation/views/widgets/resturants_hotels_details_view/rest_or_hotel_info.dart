@@ -30,7 +30,7 @@ class RestOrHotelInfo extends StatelessWidget {
             children: [
               SizedBox(
                   width: width*0.6,
-                  child: Text('${model.displayName}',style: CustomTextStyle.privateTourTitle,)),
+                  child: Text('${model.displayName}',style: CustomTextStyle.fontBold21,)),
               Container(
                 width: width*0.25,
                 padding:const EdgeInsets.all(5),
@@ -43,7 +43,7 @@ class RestOrHotelInfo extends StatelessWidget {
                   children:[
                     const Icon(Icons.star,color: goldenColor,),
                     const SizedBox(width: 5,),
-                    Text('${model.rating}',style: CustomTextStyle.commonSignDark,)
+                    Text('${model.rating}',style: CustomTextStyle.fontBold16,)
 
                   ],),
               )
@@ -55,20 +55,20 @@ class RestOrHotelInfo extends StatelessWidget {
               const Icon(Icons.location_on_rounded,color: entertainmentColor,),
               SizedBox(
                   width: width*0.8,
-                  child: Text('${model.address}',style: CustomTextStyle.commonFontThinLight,overflow: TextOverflow.ellipsis,maxLines: 2,))
+                  child: Text('${model.address}',style: CustomTextStyle.font14Light,overflow: TextOverflow.ellipsis,maxLines: 2,))
             ],
           ),
           SizedBox(height: height*0.02,),
            Row(
             children: [
               const Icon(Icons.restaurant_menu_outlined,color: entertainmentColor,),
-              Text('${model.displayType}',style: CustomTextStyle.commonFontThinLight)
+              Text('${model.displayType}',style: CustomTextStyle.font14Light)
             ],
           ),
           SizedBox(height: height*0.02,),
-          ProfileSettingItem(text: 'Price',child: Text(model.priceLevel??"UnKnown",style: CustomTextStyle.commonSignThinDark,),),
+          ProfileSettingItem(text: 'Price',child: Text(model.priceLevel??"UnKnown",style: CustomTextStyle.fontNormal16,),),
           SizedBox(height: height*0.02,),
-          const Text('Social Contact',style: CustomTextStyle.commonSignThinDark),
+          const Text('Social Contact',style: CustomTextStyle.fontNormal16),
           ProfileSettingItem(
             rightWidget: Row(
               children: [

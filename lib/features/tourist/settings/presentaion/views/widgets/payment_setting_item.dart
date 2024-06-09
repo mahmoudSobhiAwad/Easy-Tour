@@ -24,7 +24,7 @@ class ProfileSettingItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  rightWidget??Text(text??"",style: CustomTextStyle.commonSignThinDark,),
+                  rightWidget??Text(text??"",style: CustomTextStyle.fontNormal16,),
                   child??const SizedBox(),
                 ],
 

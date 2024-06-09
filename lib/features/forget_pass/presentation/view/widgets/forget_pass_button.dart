@@ -15,6 +15,6 @@ class ForgetPasswordButton extends StatelessWidget {
         autofocus: true,
         onPressed: (){
           context.push(RouterApp.kResetPasswordView);
-        },child: Text('I’ve forgotten my password ',style: CustomTextStyle.commonSignLight.apply(decoration: TextDecoration.underline,decorationColor: secondaryColor)));
+        },child: Text('I’ve forgotten my password ',style: CustomTextStyle.font16Light.apply(decoration: TextDecoration.underline,decorationColor: secondaryColor)));
   }
 }

@@ -17,7 +17,7 @@ class QrScannerWidget extends StatelessWidget {
     return Column(
       children: [
         const TitleOfCreateAcc(mainStyle: CustomTextStyle.homePartTitle,
-            secondaryStyle: CustomTextStyle.privateTourTitle,
+            secondaryStyle: CustomTextStyle.fontBold21,
             maxLines: 2,
             mainText: 'Optical Scanner ',
             secondaryText: 'Scan Qr Code To Discover the monument With Details'),

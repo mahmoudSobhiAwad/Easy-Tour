@@ -23,7 +23,7 @@ class CustomCardInEmptyTripHistory extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(imagePath,width: width*0.3,height: height*0.15,fit: BoxFit.fitWidth,),
-          Text(text,style: CustomTextStyle.commonSignThinDark.copyWith(color: whiteColor),textAlign: TextAlign.center,)
+          Text(text,style: CustomTextStyle.fontNormal16.copyWith(color: whiteColor),textAlign: TextAlign.center,)
         ],
       ),
     );

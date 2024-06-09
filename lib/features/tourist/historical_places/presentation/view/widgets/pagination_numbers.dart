@@ -32,7 +32,7 @@ class PaginationNumbers extends StatelessWidget {
                 },
                 child: CircleAvatar(
                   backgroundColor: index==pagIndex?basicColor:thirdColor,
-                  child:Center(child: Text('${pagNumbers[index]}',style: CustomTextStyle.commonSignThinDark.copyWith(color: index==pagIndex?Colors.white:basicColor),)) ,),
+                  child:Center(child: Text('${pagNumbers[index]}',style: CustomTextStyle.fontNormal16.copyWith(color: index==pagIndex?Colors.white:basicColor),)) ,),
               );
             },
             separatorBuilder: (context,index)

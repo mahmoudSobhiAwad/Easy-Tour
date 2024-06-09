@@ -29,7 +29,7 @@ class CameraOrGallery extends StatelessWidget {
                 borderRadius: commonBorderRadius(),
                 border: Border.all(color: basicColor,width: 3),
               ),
-              child:const Center(child: Text('Pick With Camera',style: CustomTextStyle.commonFontThin,)),
+              child:const Center(child: Text('Pick With Camera',style: CustomTextStyle.fontNormal14WithEllipsis,)),
             ),
             GestureDetector(
               onTap: getImageFromGallery,
@@ -43,7 +43,7 @@ class CameraOrGallery extends StatelessWidget {
                   color: thirdColor,
                   borderRadius: commonBorderRadius(),
                 ),
-                child:const Center(child: Text('Open Gallery',style: CustomTextStyle.commonFontThin,)),
+                child:const Center(child: Text('Open Gallery',style: CustomTextStyle.fontNormal14WithEllipsis,)),
               ),
             ),
           ],

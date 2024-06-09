@@ -23,7 +23,7 @@ class SettingsView extends StatelessWidget {
         leading:IconButton(onPressed: ()
         {context.pop();},
             icon: const Icon(Icons.arrow_back_ios_new,)),
-        title: Text('Settings',style: CustomTextStyle.commonSignDark.copyWith(fontSize: 18),),
+        title: Text('Settings',style: CustomTextStyle.fontBold16.copyWith(fontSize: 18),),
         centerTitle: true,
       ),
       body: BlocBuilder<TouristSettingCubit,TouristSettingState>(builder: (context,state) {

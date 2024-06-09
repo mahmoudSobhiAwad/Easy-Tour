@@ -40,7 +40,7 @@ class LicencesView extends StatelessWidget {
                       ...List.generate(licences.length, (index) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(['Ministry ID','Syndicate ID'][index],style: CustomTextStyle.placesTitle,),
+                          Text(['Ministry ID','Syndicate ID'][index],style: CustomTextStyle.fontSecondaryBold22,),
                           Padding(
                             padding:const EdgeInsets.only(bottom: 20),
                             child: Container(
@@ -60,7 +60,7 @@ class LicencesView extends StatelessWidget {
                       ),
                       ),
                       const SizedBox(height: 10,),
-                      const Text('CV',style: CustomTextStyle.placesTitle,),
+                      const Text('CV',style: CustomTextStyle.fontSecondaryBold22,),
                       const SizedBox(height: 10,),
                       cubit.cvFile==null? CvFileExist(pickFile: (){
                         cubit.pickFile();
@@ -78,7 +78,7 @@ class LicencesView extends StatelessWidget {
                                     onTap: (){},
                                     child: SizedBox(
                                         width: width*0.7,
-                                        child: Text('${cubit.name}${cubit.extension}',style: CustomTextStyle.commonSignLight.copyWith(color: Colors.white),)),
+                                        child: Text('${cubit.name}${cubit.extension}',style: CustomTextStyle.font16Light.copyWith(color: Colors.white),)),
                                   ),
                                   IconButton(
                                       padding:const EdgeInsets.only(left:10),
@@ -146,7 +146,7 @@ final String? cvUrl;
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Upload your resume',style: CustomTextStyle.commonSignLight.copyWith(color: Colors.white),),
+                Text('Upload your resume',style: CustomTextStyle.font16Light.copyWith(color: Colors.white),),
                 const SizedBox(width: 5,),
                 const Icon(Icons.cloud_upload_rounded,color: thirdColor,)
               ],
@@ -155,7 +155,7 @@ final String? cvUrl;
         ),
         const Align(
             alignment: Alignment.bottomRight,
-            child: Text('Doc ,Docx, Pdf (1 MB)',style: CustomTextStyle.tripDetailsInTourGuide,)),
+            child: Text('Doc ,Docx, Pdf (1 MB)',style: CustomTextStyle.font12WithEllipsis,)),
       ],
     ) :
     Row(children: [
@@ -163,7 +163,7 @@ final String? cvUrl;
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(color: basicColor,borderRadius: commonBorderRadius()),child: GestureDetector(
             onTap: openFile,
-            child: const Text('Your CV File',style: CustomTextStyle.commonSignLight,))),
+            child: const Text('Your CV File',style: CustomTextStyle.font16Light,))),
         IconButton(onPressed: pickFile, icon:const Icon(Icons.upload,color: basicColor,))
     ],
     );

@@ -30,7 +30,7 @@ class ChangeShowForWidgetInGeneratedTrip extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(barName,style: CustomTextStyle.placesTitle,),
+            Text(barName,style: CustomTextStyle.fontSecondaryBold22,),
             RotatedBox(
                 quarterTurns:showDetails? 1:-1,
                 child: const Icon(Icons.arrow_back_ios,)),

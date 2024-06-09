@@ -28,7 +28,7 @@ class ConversionWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Amount',style: CustomTextStyle.commonFontThinLight,),
+          const Text('Amount',style: CustomTextStyle.font14Light,),
           AmountConverterWidget(
             onChangeInValue: (){
               cubit.getConvertedCurrency();
@@ -53,7 +53,7 @@ class ConversionWidget extends StatelessWidget {
             ),
           ),
           SizedBox(height: height*0.0125,),
-          const Text('Converted Amount',style: CustomTextStyle.commonFontThinLight,),
+          const Text('Converted Amount',style: CustomTextStyle.font14Light,),
           AmountConverterWidget(
             controller: cubit.outputAmountController,
             height: height, width: width,list: cubit.nameWithIcon, currencyIcon: cubit.initialCurrency?.target.currencyIcon, currencyCode: cubit.initialCurrency?.target.currencyCode,enable: false, onChanged: (String value) {

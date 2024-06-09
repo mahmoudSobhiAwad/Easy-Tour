@@ -31,7 +31,7 @@ class HotelResultBody extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
-                  child: CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: '${cubit.destModel.destName}:Hotels',appBarStyle: CustomTextStyle.privateTourTitle,appBarWidth: width*0.8,),
+                  child: CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: '${cubit.destModel.destName}:Hotels',appBarStyle: CustomTextStyle.fontBold21,appBarWidth: width*0.8,),
                 ),
                 SizedBox(height: height*0.025,),
                 DateWithPassengerNumbersWithPlace(height: height, width: width,onSearch: (){}, cubit: cubit,),

@@ -44,7 +44,7 @@ class OptionPickImage extends StatelessWidget {
                     },
                     child:const Row(
                       children: [
-                         Text("Upload From Gallery",style:CustomTextStyle.commonSignDark,),
+                         Text("Upload From Gallery",style:CustomTextStyle.fontBold16,),
                         SizedBox(width: 30,),
                         Icon(Icons.photo_library_rounded,color: basicColor,size: 35,),
                       ],
@@ -61,7 +61,7 @@ class OptionPickImage extends StatelessWidget {
                     },
                     child:const Row(
                       children: [
-                        Text("Take A Picture",style: CustomTextStyle.commonSignDark),
+                        Text("Take A Picture",style: CustomTextStyle.fontBold16),
                         SizedBox(width: 20,),
                         Icon(Icons.camera_alt_rounded,color: basicColor,size: 35,),
                       ],

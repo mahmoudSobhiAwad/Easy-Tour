@@ -31,14 +31,14 @@ class HotelItemInGeneratedTrip extends StatelessWidget {
                   child: Image.network(imageUrl,width: width*0.58,fit: BoxFit.fill,height: height*0.15,)),
               SizedBox(
                   height: height*0.04,
-                  child: Text(model.displayName??"",style: CustomTextStyle.commonSignDark,overflow: TextOverflow.ellipsis,)),
+                  child: Text(model.displayName??"",style: CustomTextStyle.fontBold16,overflow: TextOverflow.ellipsis,)),
                Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const Icon(Icons.location_on_rounded,color: basicColor,),
                   SizedBox(
                       width: width*0.5,
-                      child: Text(model.address??"",style: CustomTextStyle.commonFontThin,)),
+                      child: Text(model.address??"",style: CustomTextStyle.fontNormal14WithEllipsis,)),
                 ],
               ),
               const Divider(height: 3,color: thirdColor,),
@@ -57,7 +57,7 @@ class HotelItemInGeneratedTrip extends StatelessWidget {
                     child: Row(
                       children: [
                         const Icon(Icons.star,color: Colors.orangeAccent,),
-                        Text('${model.rating??""}',style: CustomTextStyle.commonFontThin,),
+                        Text('${model.rating??""}',style: CustomTextStyle.fontNormal14WithEllipsis,),
                       ],
                     ),
                   )

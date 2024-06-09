@@ -40,7 +40,7 @@ class NextPrevDay extends StatelessWidget {
                     children: [
                       const Icon(Icons.arrow_back_rounded,color: Colors.white,),
                       const SizedBox(width: 10,),
-                      Text('Prev\n Day',style: CustomTextStyle.privateTourTitle.copyWith(color: Colors.white,fontSize: 20),)
+                      Text('Prev\n Day',style: CustomTextStyle.fontBold21.copyWith(color: Colors.white,fontSize: 20),)
                     ],),
                 )),
           ),
@@ -64,7 +64,7 @@ class NextPrevDay extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text('Next\n Day',style: CustomTextStyle.privateTourTitle.copyWith(color: Colors.white,fontSize: 20),),
+                        Text('Next\n Day',style: CustomTextStyle.fontBold21.copyWith(color: Colors.white,fontSize: 20),),
                         const SizedBox(width: 10,),
                         const Icon(Icons.arrow_forward_rounded,color: Colors.white,),
                       ],),

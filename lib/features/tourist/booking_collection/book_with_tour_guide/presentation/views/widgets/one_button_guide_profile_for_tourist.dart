@@ -33,7 +33,7 @@ class ButtonInTourProfile extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(text,style: CustomTextStyle.commonFontThin.copyWith(color: Colors.white,fontSize: 15),),
+            Text(text,style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: Colors.white,fontSize: 15),),
             Transform.rotate(
               angle: -45,
               child: Icon(icon,color: Colors.white,),

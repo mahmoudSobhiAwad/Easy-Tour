@@ -62,7 +62,7 @@ class PlacesListOfOneDay extends StatelessWidget {
                             const Text('type'),
                             CustomTextFormField(
                               maxLines: 1,
-                              style: CustomTextStyle.commonFontThin,
+                              style: CustomTextStyle.fontNormal14WithEllipsis,
                               suffix:PopupMenuButton(
                                 constraints: BoxConstraints(
                                   maxHeight: height*0.15,

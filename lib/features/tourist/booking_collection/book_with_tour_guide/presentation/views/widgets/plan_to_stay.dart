@@ -35,11 +35,11 @@ class TypeOfStay extends StatelessWidget {
                         onTap != null?onTap!(index):();
                       },
                       child: PickedCategoryItem(height: height, width: width, typeImage: getPlanType(plan?.keys.elementAt(index)??""), picked:pickedIndex==null?true:pickedIndex==index)),
-                  Text(plan?.keys.elementAt(index)??"",style: CustomTextStyle.commonFontThin,),
+                  Text(plan?.keys.elementAt(index)??"",style: CustomTextStyle.fontNormal14WithEllipsis,),
                   Column(
                     children: [
-                      Text('${plan?.values.elementAt(index)??""} \$',style: CustomTextStyle.commonSignDark,),
-                      const Text('per person',style: CustomTextStyle.commonFontThinLight,),
+                      Text('${plan?.values.elementAt(index)??""} \$',style: CustomTextStyle.fontBold16,),
+                      const Text('per person',style: CustomTextStyle.font14Light,),
                     ],)
                 ],
               ),

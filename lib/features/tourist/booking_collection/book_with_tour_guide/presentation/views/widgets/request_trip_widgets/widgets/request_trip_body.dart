@@ -112,7 +112,7 @@ class RequestTripToBookBody extends StatelessWidget {
             const SizedBox(height: 20,),
             CustomTwoFieldForm(
                 firstText: 'Total Price',
-                firstCustomFormField: CircleAvatar(radius: width*0.1,backgroundColor: thirdColor,child:Center(child: Text('${cubit.totalPrice}\$',style: CustomTextStyle.commonSignThinDark.copyWith(color: basicColor),),),),
+                firstCustomFormField: CircleAvatar(radius: width*0.1,backgroundColor: thirdColor,child:Center(child: Text('${cubit.totalPrice}\$',style: CustomTextStyle.fontNormal16.copyWith(color: basicColor),),),),
                 secondCustomFormField: SizedBox(
                     width: width*0.65,
                     height: height*0.12,

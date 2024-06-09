@@ -20,7 +20,7 @@ class RequestedTripInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Requested Trip',style: CustomTextStyle.commonSignDark,),
+        const Text('Requested Trip',style: CustomTextStyle.fontBold16,),
         SizedBox(height: height*0.015,),
         Container(
           padding:const EdgeInsets.all(7),
@@ -37,8 +37,8 @@ class RequestedTripInfo extends StatelessWidget {
                   child: Image.network(model.image??historicalPlace,errorBuilder: (context,_,s){
                     return const Icon(Icons.warning,color: goldenColor,size: 50,);
                   },height: height*0.12,fit: BoxFit.cover,width: width,)),
-              Text(model.title??"",style: CustomTextStyle.commonSignDark,),
-              Text(model.brief??"",style: CustomTextStyle.privateTourTitle,overflow:TextOverflow.visible,),
+              Text(model.title??"",style: CustomTextStyle.fontBold16,),
+              Text(model.brief??"",style: CustomTextStyle.fontBold21,overflow:TextOverflow.visible,),
             ],
           ),
         ),

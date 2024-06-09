@@ -80,7 +80,7 @@ class LoginBody extends StatelessWidget {
                     color: whatsAppColor,
                   ),
                       padding:const EdgeInsets.all(5),
-                      child: Text('Success Login',style: CustomTextStyle.commonFontThin.copyWith(color: Colors.white),))));
+                      child: Text('Success Login',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: Colors.white),))));
           context.go(RouterApp.kHomeView);
         }
         else if(state is SuccessTourGuideLoginState){

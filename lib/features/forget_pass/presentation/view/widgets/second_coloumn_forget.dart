@@ -19,13 +19,13 @@ class SecondColumnResetPass extends StatelessWidget {
         GestureDetector(
           onTap: (){
           otpController.clear();
-        },child: const Text('clear ',style: CustomTextStyle.commonSignThinDark,),),
+        },child: const Text('clear ',style: CustomTextStyle.fontNormal16,),),
         const SizedBox(height: 10,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Don\'t receive Code?',style: CustomTextStyle.commonSignLight),
-            TextButton(onPressed: onPressed, child:  const Text('Resend It',style: CustomTextStyle.commonSignDark)),
+            const Text('Don\'t receive Code?',style: CustomTextStyle.font16Light),
+            TextButton(onPressed: onPressed, child:  const Text('Resend It',style: CustomTextStyle.fontBold16)),
           ],),
       ],
     );

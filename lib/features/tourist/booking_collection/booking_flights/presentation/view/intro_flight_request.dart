@@ -22,11 +22,11 @@ class IntroInFlightBooking extends StatelessWidget {
               children: [
                 ProfilePicWidget(imageUrl: 'https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_0.jpg', height: height*0.07),
                 const SizedBox(width: 5,),
-                Text('Good Morning,sara',style: CustomTextStyle.commonFontThin.copyWith(color: Colors.white),),
+                Text('Good Morning,sara',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: Colors.white),),
               ],
             ),
             SizedBox(height: height*.02,),
-            Text('So where is your holiday destination ?',style: CustomTextStyle.resetPassTitle.copyWith(color: Colors.white),)
+            Text('So where is your holiday destination ?',style: CustomTextStyle.fontBold30.copyWith(color: Colors.white),)
           ],
         ),
       ),);

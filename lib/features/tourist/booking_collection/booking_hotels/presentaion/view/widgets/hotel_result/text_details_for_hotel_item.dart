@@ -24,7 +24,7 @@ final void Function() onTap;
       children: [
         SizedBox(
             width: width*0.5,
-            child: Text(model.name??"",style: CustomTextStyle.privateTourTitle,maxLines: 2,)),
+            child: Text(model.name??"",style: CustomTextStyle.fontBold21,maxLines: 2,)),
         Row(
           children: [
             ...List.generate(model.categoryCode??3, (index) {
@@ -42,10 +42,10 @@ final void Function() onTap;
             const Icon(Icons.location_on_rounded),
             SizedBox(
                 width: width*0.5,
-                child: Text('${model.cityName},${model.address}',style: CustomTextStyle.commonFontThin,maxLines: 3,)),
+                child: Text('${model.cityName},${model.address}',style: CustomTextStyle.fontNormal14WithEllipsis,maxLines: 3,)),
           ],),
         SizedBox(height: height*0.01,),
-        const Text('Business Hotel, Family Hotel',style: CustomTextStyle.commonFontThin,),
+        const Text('Business Hotel, Family Hotel',style: CustomTextStyle.fontNormal14WithEllipsis,),
         SizedBox(height: height*0.01,),
         Column(
           children: [
@@ -53,12 +53,12 @@ final void Function() onTap;
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Icon(Icons.check,color: whatsAppColor,),
-                Text(model.segment?[index].content??"",style: CustomTextStyle.tripDetailsInTourGuide.copyWith(color: whatsAppColor),),
+                Text(model.segment?[index].content??"",style: CustomTextStyle.font12WithEllipsis.copyWith(color: whatsAppColor),),
               ],), ),
           ],
         ),
         SizedBox(height: height*0.01,),
-        const Text('2 adult, 3 nights',style: CustomTextStyle.commonFontThinLight,),
+        const Text('2 adult, 3 nights',style: CustomTextStyle.font14Light,),
         SizedBox(height: height*0.01,),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -70,7 +70,7 @@ final void Function() onTap;
                 padding: EdgeInsets.all(5.0),
                 child: Row(
                   children: [
-                    Text('See Availability Rooms',style: CustomTextStyle.commonSignThinAlwaysWhite,),
+                    Text('See Availability Rooms',style: CustomTextStyle.font16NormalWhite,),
                     Icon(Icons.arrow_forward,color: Colors.white,),
                   ],
                 ),

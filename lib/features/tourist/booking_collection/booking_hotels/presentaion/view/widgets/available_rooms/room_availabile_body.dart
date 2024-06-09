@@ -33,15 +33,15 @@ class RoomAvailabilityBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('About Us',style: CustomTextStyle.privateTourTitle,),
+              const Text('About Us',style: CustomTextStyle.fontBold21,),
               SizedBox(height: height*0.01,),
               SizedBox(
                   height: height*0.1,
                   child: SingleChildScrollView(
                       padding: EdgeInsets.zero,
-                      child: Text(model.hotelsModel.describe??"",style: CustomTextStyle.commonFontThinLight))),
+                      child: Text(model.hotelsModel.describe??"",style: CustomTextStyle.font14Light))),
               SizedBox(height: height*0.01,),
-              const Text('Services & Facilities',style: CustomTextStyle.privateTourTitle,),
+              const Text('Services & Facilities',style: CustomTextStyle.fontBold21,),
               SizedBox(height: height*0.01,),
               cubit.facilityStringList.isNotEmpty?
               SizedBox(
@@ -54,7 +54,7 @@ class RoomAvailabilityBody extends StatelessWidget {
               ) :
               const SizedBox(),
               SizedBox(height: height*0.01,),
-              const Text('Available Rooms',style: CustomTextStyle.privateTourTitle,),
+              const Text('Available Rooms',style: CustomTextStyle.fontBold21,),
               SizedBox(height: height*0.01,),
               TableDetailsOfAvailableRooms(width: width,model: model.availableRoomsModel,changeBookedRoomsNum: (
                   {required int index,required bool increase}){

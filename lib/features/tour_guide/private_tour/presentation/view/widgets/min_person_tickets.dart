@@ -25,7 +25,7 @@ class MaxPersonPlanPrice extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Select Type Of The Trip',style: CustomTextStyle.commonSignDark,),
+        const Text('Select Type Of The Trip',style: CustomTextStyle.fontBold16,),
         SizedBox(
           height:height*0.23,
           child: ListView.separated(
@@ -45,7 +45,7 @@ class MaxPersonPlanPrice extends StatelessWidget {
                     },
                     child: PickedCategoryItem(height: height, width: width, picked: cubit.planType[index].picked,typeImage: cubit.planType[index].typeImage,),
                   ),
-                  Text(cubit.planType[index].typeName,style: CustomTextStyle.commonSignDark,overflow: TextOverflow.ellipsis,),
+                  Text(cubit.planType[index].typeName,style: CustomTextStyle.fontBold16,overflow: TextOverflow.ellipsis,),
                   SizedBox(
                     width:width*0.25,
                     child: CustomTextFormField(
@@ -65,7 +65,7 @@ class MaxPersonPlanPrice extends StatelessWidget {
             },
           ),
         ),
-        const Text('This Price is Per Person',style: CustomTextStyle.commonFontThinLight,),
+        const Text('This Price is Per Person',style: CustomTextStyle.font14Light,),
         const SizedBox(height: 15,),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -94,7 +94,7 @@ class MaxPersonPlanPrice extends StatelessWidget {
             ),
             SizedBox(
                 width: width*0.45,
-                child: Text('(Please Make the Number Reasonable)',style: CustomTextStyle.commonFontThin.copyWith(color: entertainmentColor,fontSize: 12),)),
+                child: Text('(Please Make the Number Reasonable)',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: entertainmentColor,fontSize: 12),)),
           ],
         ),
       ],

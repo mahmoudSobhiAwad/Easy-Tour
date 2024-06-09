@@ -14,7 +14,7 @@ class PaymentSettingsPart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Payment Settings',style: CustomTextStyle.commonSignThinDark,),
+          const Text('Payment Settings',style: CustomTextStyle.fontNormal16,),
           const Expanded(child:  SizedBox(height: 10,)),
           SizedBox(
               height: height*0.15,

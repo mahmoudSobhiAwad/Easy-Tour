@@ -116,7 +116,7 @@ class HeaderOption{
     backgroundColor: Color(0xff4BD37B),
     child:  FaIcon(FontAwesomeIcons.check,color: Colors.white,),
   );
-  static Widget textWidgetTitle=const DefaultTextStyle(style: CustomTextStyle.commonSignDark,child: Text('Trip Title'),);
+  static Widget textWidgetTitle=const DefaultTextStyle(style: CustomTextStyle.fontBold16,child: Text('Trip Title'),);
 
 
 }

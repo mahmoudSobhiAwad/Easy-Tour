@@ -40,7 +40,7 @@ class TouristProfileBody extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       icon:const Icon(Icons.arrow_back_ios_new,)
                   ),
-                  Text('${cubit.name}',style: CustomTextStyle.commonProfileDark,),
+                  Text('${cubit.name}',style: CustomTextStyle.fontBold14,),
                 ],
               ),
             ):

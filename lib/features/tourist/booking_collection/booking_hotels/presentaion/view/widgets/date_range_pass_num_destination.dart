@@ -92,7 +92,7 @@ class OccupanciesWidget extends StatelessWidget {
             ...List.generate(cubit.roomNum, (buildIndex) => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Text('Room ${buildIndex+1}',style: CustomTextStyle.commonSignDark,)),
+                Center(child: Text('Room ${buildIndex+1}',style: CustomTextStyle.fontBold16,)),
                 const SizedBox(height: 5,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,7 +129,7 @@ class OccupanciesWidget extends StatelessWidget {
                             initialValue: cubit.occupanciesList[buildIndex].paxList?[index].age.toString(),
                             onSelected: (String?value){
                             cubit.fillPaxList(index: index, val: value??'0', occupancyIndex: buildIndex);
-                          },list: List.generate(15, (index) =>(index+1).toString()),label: 'Age',labelStyle: CustomTextStyle.commonFontThin,)),)
+                          },list: List.generate(15, (index) =>(index+1).toString()),label: 'Age',labelStyle: CustomTextStyle.fontNormal14WithEllipsis,)),)
                     ],
                   ),
                 ):const SizedBox(),

@@ -31,7 +31,7 @@ class CreateOrEditPrivateTourView extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: thirdColor,
-              title:Text(appBarTitle,style: CustomTextStyle.commonSignDark,),
+              title:Text(appBarTitle,style: CustomTextStyle.fontBold16,),
               centerTitle: true,
               leading: IconButton(onPressed: (){
                 if(cubit.checkIsThereChanges()){
