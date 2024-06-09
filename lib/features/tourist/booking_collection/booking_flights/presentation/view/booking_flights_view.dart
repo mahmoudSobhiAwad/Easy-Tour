@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
-import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/FlightRequestBody.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_request_body.dart';
 import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/intro_trip_history.dart';
 
 class BookingFlightView extends StatelessWidget {

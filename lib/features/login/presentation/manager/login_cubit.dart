@@ -37,38 +37,37 @@ class LoginCubit extends Cubit<LoginState>{
 
   /// login as tourism functions
   Future<void> loginAsTourism()async{
-    emit(SuccessLoginState());
-    // showLoading=true;
-    // if(emailController.text.isEmpty&&passController.text.isEmpty){
-    //   emit(FailureLoginState(errorLogin: 'Email Or Password Can\'t be Empty'));
-    //   showLoading=false;
-    // }
-    // else{
-    // emit(LoadingLoginState());
-    // var result=await loginRepo.loginAsTourism(
-    //   TourismSignInModel(
-    //     email: emailController.text,
-    //     password: passController.text).toJson(),
-    // );
-    //  result.fold((failure){
-    //   showLoading=false;
-    //   emit(FailureLoginState(errorLogin: failure.errMessage));
-    // }, (tourismInfo)async
-    //  {
-    //    if(tourismInfo.confirm==true){
-    //     await SetAppState.setToken(token:tourismInfo.token);
-    //     await SetAppState.setRole(role:'tourist');
-    //     await SetAppState.setName(name:tourismInfo.name);
-    //     await SetAppState.setEmail(email:tourismInfo.email);
-    //     showLoading=false;
-    //     emit(SuccessLoginState());
-    //   }
-    //   else{
-    //     showLoading=false;
-    //     emit(FailureLoginState(errorLogin: 'Please Confirm Your Account First'));
-    //   }
-    // });
-    // }
+    showLoading=true;
+    if(emailController.text.isEmpty&&passController.text.isEmpty){
+      emit(FailureLoginState(errorLogin: 'Email Or Password Can\'t be Empty'));
+      showLoading=false;
+    }
+    else{
+    emit(LoadingLoginState());
+    var result=await loginRepo.loginAsTourism(
+      TourismSignInModel(
+        email: emailController.text,
+        password: passController.text).toJson(),
+    );
+     result.fold((failure){
+      showLoading=false;
+      emit(FailureLoginState(errorLogin: failure.errMessage));
+    }, (tourismInfo)async
+     {
+       if(tourismInfo.confirm==true){
+        await SetAppState.setToken(token:tourismInfo.token);
+        await SetAppState.setRole(role:'tourist');
+        await SetAppState.setName(name:tourismInfo.name);
+        await SetAppState.setEmail(email:tourismInfo.email);
+        showLoading=false;
+        emit(SuccessLoginState());
+      }
+      else{
+        showLoading=false;
+        emit(FailureLoginState(errorLogin: 'Please Confirm Your Account First'));
+      }
+    });
+    }
   }
   ///login as tour guide
   Future<void> loginAsTourGuide()async{

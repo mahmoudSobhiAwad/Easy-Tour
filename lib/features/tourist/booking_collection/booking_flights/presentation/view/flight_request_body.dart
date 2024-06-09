@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/departure_return_date.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_result/flight_result_view.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/intro_flight_request.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/origin_departure_place.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/traveler_num_trip_type.dart';
@@ -39,6 +40,9 @@ class FlightRequestView extends StatelessWidget {
                     SizedBox(height: height*0.033,),
                     Center(
                       child: CustomLoginButton(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const FlightResultView()));
+                        },
                         color: ticketBasicColor,
                         altWidth: width*0.7,
                         borderRadius: 12,

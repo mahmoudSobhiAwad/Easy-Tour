@@ -13,6 +13,11 @@ class CustomTripCubit extends Cubit<CustomTripState>{
   int once=0;
   final formatter = DateFormat('d MMM y');
   Map<String,List<Place>>pickedCompleteTrip={};
+  int toggleIndex=0;
+  void moveToNextPage(int index){
+    toggleIndex=index;
+    emit(ToggleBetweenPagesState());
+  }
   void changePickedDate(DateTimeRange? range)async{
     if(range!=null){
     DateTimeRange dateTimeRange= range;

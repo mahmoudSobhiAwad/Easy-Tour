@@ -13,12 +13,15 @@ class SmallProfilePic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
+      backgroundImage: NetworkImage(SetAppState.prefs?.getString('profileUrl')??"",),
         backgroundColor: thirdColor,
         radius: width*0.06,
-        child:Center(child: Image.network(
-          errorBuilder:(context,_,m){
-            return const Icon(Icons.warning,color: closeColor,);
-          },
-          SetAppState.prefs?.getString('profileUrl')??"",fit: BoxFit.fill,)));
+        // child:Center(
+        //     child: Image.network(
+        //       errorBuilder:(context,_,m){
+        //         return const Icon(Icons.warning,color: closeColor,);
+        //         },
+        //   SetAppState.prefs?.getString('profileUrl')??"",fit: BoxFit.fill,width: width*0.06,height: width*0.06,))
+    );
   }
 }

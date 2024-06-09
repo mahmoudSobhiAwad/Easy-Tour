@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/go_router/go_router.dart';
+import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/login/presentation/manager/login_cubit.dart';
 import 'package:prepare_project/features/login/presentation/manager/login_state.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/button_swap_role_signed_in.dart';
@@ -72,12 +73,15 @@ class LoginBody extends StatelessWidget {
             content: '${state.errorLogin}',));
         }
         else if(state is SuccessLoginState||state is SuccessLoginWithGoogleState){
-          showDialog(context: context, builder: (context)=> const ContainerAlertWidget(
-            types: AlertTypes.success,
-            content: 'Success Login',)).then((value){
-              context.go(RouterApp.kHomeView);
-          }
-          );
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  duration: const Duration(milliseconds: 200),
+                  content: Container(
+                  decoration: const BoxDecoration(
+                    color: whatsAppColor,
+                  ),
+                      padding:const EdgeInsets.all(5),
+                      child: Text('Success Login',style: CustomTextStyle.commonFontThin.copyWith(color: Colors.white),))));
+          context.go(RouterApp.kHomeView);
         }
         else if(state is SuccessTourGuideLoginState){
           showDialog(context: context, builder: (context)=> const ContainerAlertWidget(

@@ -44,44 +44,6 @@ class OneTourGuideTripForTourist extends StatelessWidget {
               ],
             ),
           ),
-          // Positioned(
-          //   top: height*0.04,
-          //   child: SizedBox(
-          //     width: width*0.7,
-          //     child: Wrap(
-          //       runSpacing: 5,
-          //       spacing: 5,
-          //       children: [
-          //         ...List.generate(5, (index) {
-          //           if(index==4){
-          //             return Container(
-          //               width: width*0.25,
-          //               padding: const EdgeInsets.all(5),
-          //               decoration: BoxDecoration(color: forthColor,borderRadius: commonBorderRadius()),
-          //               child: Row(
-          //                 children: [
-          //                   Text('show less',style: CustomTextStyle.commonFontThin.copyWith(color: Colors.white,fontSize: 10),),
-          //                   const Icon(Icons.keyboard_arrow_up_rounded,color: Colors.white,),
-          //                 ],
-          //               ),
-          //             );
-          //           }
-          //           else{
-          //             return Container(
-          //               width: width*0.2,
-          //               height: height*0.05,
-          //               padding:const EdgeInsets.all(5),
-          //               decoration: BoxDecoration(
-          //                   color: forthColor,borderRadius: commonBorderRadius()),
-          //               child: Text('Cultural',style: CustomTextStyle.commonSignLight.copyWith(color: Colors.white),),
-          //             );
-          //           }
-          //         },
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
           viewProfile?
           Positioned(
               left: width*0.68,
