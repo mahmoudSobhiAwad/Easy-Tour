@@ -45,7 +45,7 @@ class ApiServices{
     return response.data;
   }
   ///put request
-  Future<Map<String,dynamic>>putData({required Map<String,dynamic> data,required String endPoint})async {
+  Future<Map<String,dynamic>>putData({Map<String,dynamic>? data,required String endPoint})async {
     final String? token=SetAppState.prefs?.getString('token');
     var response=await dio.put('$baseUrl$endPoint',data: data,options: Options(headers: {'Authorization':'token $token',}));
     if(response.statusCode==204){
@@ -53,6 +53,9 @@ class ApiServices{
     }
     return response.data;
   }
+
+  ///put with optionData
+
   /// get request
   Future<Map<String,dynamic>>get({required String endPoint,Map<String,dynamic>?data,Map<String,dynamic>?queryParam,String?chatID})async {
     final String? tokenId=SetAppState.prefs?.getString('token');

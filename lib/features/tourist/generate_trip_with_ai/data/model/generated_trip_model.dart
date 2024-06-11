@@ -72,6 +72,7 @@ class Place{
       time: json['time']??"",
     );
   }
+
   factory Place.fromJsonSecond(Map<String, dynamic> json) {
     return Place(
       name: json['place']??"",
@@ -85,6 +86,19 @@ class Place{
     );
   }
 
+  factory Place.fromCustomTripJson(Map<String,dynamic>json){
+    return Place(
+      name: json['placeName'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+      category: json['category'],
+      image: json['image'],
+      activity: json['activity'],
+      time: '',
+      budget:json['priceRange'],
+    );
+  }
+
   Map<String, dynamic> toJson(int i) =>
       {
         "place${i + 1}": name,
@@ -93,5 +107,16 @@ class Place{
         "activity": activity,
         "category": category,
       };
+  Map<String,dynamic>toCustomTripJson(){
+    return {
+      "placeName": name,
+      "latitude": latitude,
+      "longitude": longitude,
+      "category": category,
+      "image": image,
+      "activity": activity,
+      "priceRange": budget,
+    };
+  }
 
 }

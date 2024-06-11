@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
-import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
+import 'package:prepare_project/features/tourist/custom_trip/data/model/custom_trip_model.dart';
 class CreatedCustomTripItem extends StatelessWidget {
-  const CreatedCustomTripItem({super.key,required this.width,required this.height});
+  const CreatedCustomTripItem({super.key,required this.width,required this.height,required this.customTripModel,this.categoryList});
   final double width;
   final double height;
+  final CustomTripModel customTripModel;
+  final List<String>?categoryList;
   @override
   Widget build(BuildContext context) {
+
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -18,11 +21,12 @@ class CreatedCustomTripItem extends StatelessWidget {
         children: [
           ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.network('https://th.bing.com/th/id/OIP.qa3Wfem8AKuNkz6Eq1kvVAHaH9?rs=1&pid=ImgDetMain',width: width,height: height*0.15,fit: BoxFit.cover,)),
+              child: Image.network('${customTripModel.tripDetailsList?.first.daysDetailsList?.first.image}',width: width,height: height*0.15,fit: BoxFit.cover,)),
           SizedBox(height: height*0.02,),
           SizedBox(
             height: height*0.05,
             child: ListView.builder(
+              itemCount: categoryList?.length??0,
               itemBuilder: (context,index){
                 return Padding(
                   padding: const EdgeInsets.only(right: 8.0),
@@ -32,38 +36,31 @@ class CreatedCustomTripItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     padding:const EdgeInsets.all(5),
-                    child: Center(child: Text("Pyramids",style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: Colors.white),)),
+                    child: Center(child: Text(categoryList?[index]??"",style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: Colors.white),)),
                   ),
                 );
               },
               scrollDirection: Axis.horizontal,
-
             ),
           ),
           SizedBox(height: height*0.015,),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Egypt 3 Days'),
+              Text('Egypt ${customTripModel.tripDetailsList?.length??0} Days'),
               Row(
                 children: [
-                  Text('28 May 2024'),
-                  Icon(Icons.arrow_forward),
-                  Text('30 May 2024'),
+                  Text(customTripModel.startDate??""),
+                  const Icon(Icons.arrow_forward),
+                  Text(customTripModel.endDate??""),
                 ],
               ),
             ],
           ),
           SizedBox(height: height*0.015,),
-          const Text('Discovering Spiritual Egypt in 3 days',style: CustomTextStyle.fontBold21,maxLines: 2,),
-          const Text('Pyramids Meditation, Luxor Banks, 3-night Dahabiya Nile Cruise,Pyramids Meditation, Luxor Banks, 3-night Dahabiya ',maxLines: 2,overflow: TextOverflow.ellipsis,),
+          Text('${customTripModel.title}',style: CustomTextStyle.fontBold21,maxLines: 2,),
+          Text(customTripModel.tripDetailsList?.first.daysDetailsList?[0].activity??"",maxLines: 2,overflow: TextOverflow.ellipsis,),
           SizedBox(height: height*0.02,),
-          CustomLoginButton(
-            altWidth: width*0.4,
-            borderRadius: 10,
-            label: 'See Details',
-            enable: true,
-          ),
         ],
       ),
     );

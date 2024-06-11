@@ -49,7 +49,7 @@ class CustomTripBody extends StatelessWidget {
               ],
             ),
             SizedBox(height: height*0.02,),
-            DaysToAddList(width: width, height: height,placesMap: cubit.pickedCompleteTrip,cubit: cubit,),
+            DaysToAddList(width: width, height: height,tripsDetailsList: cubit.pickedCompleteTrip?.tripDetailsList??[],cubit: cubit,),
             SizedBox(height: height*0.02,),
             Center(child: CustomLoginButton(label: 'Create Trip',altWidth: width*0.4)),
           ],

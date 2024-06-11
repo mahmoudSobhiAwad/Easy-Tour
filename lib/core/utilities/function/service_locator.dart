@@ -16,6 +16,7 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_hote
 import 'package:prepare_project/features/tourist/chat_bot/data/repo/chat_bot_repo_impl.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/repos/chat_oto/chat_oto_repo_imp.dart';
 import 'package:prepare_project/features/tourist/currency_converter/data/repos/currency_repo_imp.dart';
+import 'package:prepare_project/features/tourist/custom_trip/data/repos/custom_trip_repo_impl.dart';
 import 'package:prepare_project/features/tourist/entertainment_places/data/repos/entertainment_repo_imp.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repos/generate_trip_repo_imp.dart';
 import 'package:prepare_project/features/tourist/google_map/data/repo/text_search_repo/text_search_repo_imp.dart';
@@ -58,6 +59,7 @@ getIt.registerSingleton<GuideMetaDataAndChatRecentRepoImp>(GuideMetaDataAndChatR
 getIt.registerSingleton<GenerateTripRepoImp>(GenerateTripRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<SettingRepoImp>(SettingRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<EntertainmentPlaceRepoImp>(EntertainmentPlaceRepoImp(apiServices:getIt.get<ApiServices>()));
+getIt.registerSingleton<CustomTripRepoImpl>(CustomTripRepoImpl(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<GetHotelsRepoImpl>(GetHotelsRepoImpl(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<QrScannedRepoImp>(QrScannedRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<LogInterceptor>(LogInterceptor());
