@@ -13,10 +13,10 @@ class CommonSettingCubit extends Cubit<CommonSettingState>{
   bool enableDarkMode=false;
   bool enableNotification=false;
   ThemeData appTheme=lightMode;
-  ThemeMode appMode=ThemeMode.light;
+  ThemeMode appMode=ThemeMode.system;
   final SettingRepoImp settingRepoImp;
   void changeMode(){
-    if(appTheme ==lightMode){
+    if(appTheme == lightMode){
       appTheme=darkMode;
       enableDarkMode=true;
       appMode=ThemeMode.dark;

@@ -18,7 +18,6 @@ class CardElement extends StatelessWidget {
       ),
       child:  Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image(image: AssetImage(cardModel!.imagePath,),fit: BoxFit.fitHeight,height: height*0.14,),
           Text(cardModel!.labelName,style: CustomTextStyle.fontBold16,maxLines: 2,textAlign: TextAlign.center,),

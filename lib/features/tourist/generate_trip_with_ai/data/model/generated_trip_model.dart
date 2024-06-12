@@ -1,8 +1,11 @@
 class GeneratedTripModel {
   final List<Day> days;
   final List<String>placesNames;
+  final String? startDate;
+  final String? endDate;
+  final String? title;
 
-  const GeneratedTripModel({required this.days,required this.placesNames});
+  const GeneratedTripModel({required this.days,required this.placesNames,this.title,this.endDate,this.startDate});
 
   factory GeneratedTripModel.fromJson(Map<String,dynamic> json) {
     List<Day>day=[];
@@ -18,6 +21,26 @@ class GeneratedTripModel {
       placesNames: placesNames,
     );
   }
+
+  factory GeneratedTripModel.fromHistory(Map<String,dynamic> json) {
+    List<Day>day=[];
+    List<String>placesNames=[];
+    for(int i=0;i<json.length;i++)
+    {
+      String jsonKey='Day${i+1}';
+      placesNames.add(json[jsonKey]['governorate']??"");
+      day.add(Day.fromJson(json[jsonKey]['places']));
+    }
+    return GeneratedTripModel(
+      days:day,
+      placesNames: placesNames,
+      startDate: json['from'],
+      endDate: json['to'],
+      title: json['title'],
+    );
+  }
+
+
 }
 
 class Day {

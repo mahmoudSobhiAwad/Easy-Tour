@@ -11,10 +11,12 @@ class HomeTouristTourGuideAppBar extends StatelessWidget {
     this.openSidePar,
     required this.rightIcon,
     this.searchFun,
+    this.enableSearch=false,
   });
 
   final double height;
   final double width;
+  final bool enableSearch;
   final void Function()?openSidePar;
   final Widget rightIcon;
   final void Function()? searchFun;
@@ -28,8 +30,8 @@ class HomeTouristTourGuideAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(onPressed: openSidePar, icon: const Icon(Icons.table_rows_rounded,),),
-            SizedBox(width: width*0.5,child: const Align(alignment: Alignment.centerLeft,child: Text('EGY Tour',style: CustomTextStyle.homePartTitle,))),
-            GestureDetector(
+            SizedBox(width: width*0.5,child: const Align(alignment: Alignment.centerLeft,child: Text('Easy Tour',style: CustomTextStyle.homePartTitle,))),
+            enableSearch? GestureDetector(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder:(context)=>const SearchView()));
               },
@@ -43,7 +45,8 @@ class HomeTouristTourGuideAppBar extends StatelessWidget {
                   ),
                     child: const Icon( Icons.search_rounded,size: 33,)),
               ),
-            ),
+            ) :
+            const Spacer(),
             rightIcon,
           ],
         )

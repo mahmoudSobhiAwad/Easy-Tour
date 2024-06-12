@@ -3,11 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/go_router/go_router.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/manager/home_tourist_cubit.dart';
-import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/ai_part.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/app_bar.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/booking_part.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/dicover_part.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/helper_part.dart';
+
 
 class HomeTouristBody extends StatelessWidget {
   const HomeTouristBody({super.key, required this.height, required this.width,required this.cubit});
@@ -24,21 +24,23 @@ class HomeTouristBody extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 40),
           children: [
             HomeTouristTourGuideAppBar(
-              rightIcon: IconButton(onPressed: (){
-                context.push(RouterApp.kChatTouristView,);
-              },icon: const FaIcon(FontAwesomeIcons.facebookMessenger,),),
+              enableSearch: false,
+              rightIcon: IconButton(onPressed: (){context.push(RouterApp.kChatTouristView,);},
+                icon: const FaIcon(FontAwesomeIcons.facebookMessenger,),),
               height: height, width: width, openSidePar:(){cubit.openSideBar();},),
             const SizedBox(height: 20,),
-            BookingPart(height: height, width: width,isMenuActive: cubit.isMenuActive,),
+            GetTrip(height: height, width: width,isMenuActive: cubit.isMenuActive,),
+            const SizedBox(height: 20,),
+            HelperToolsPart(height: height, width: width,),
             const SizedBox(height: 20,),
             DiscoverPart(height: height, width: width,isMenuActive: cubit.isMenuActive,places: cubit.bestDestinationPlaces, homeTouristRepoImp: cubit.homeTouristRepoImp,),
-            const SizedBox(height: 20,),
-            AiPart(height: height, width: width,isMenuActive: cubit.isMenuActive),
-            const SizedBox(height: 20,),
-            HelperPart(height: height, width: width,isMenuActive: cubit.isMenuActive),
           ],
         ),
       ),
     );
   }
 }
+
+
+
+

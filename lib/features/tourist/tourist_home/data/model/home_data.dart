@@ -6,6 +6,23 @@ List<CardModel>bookingItems=[
   CardModel(imagePath: 'assets/tourist_home/plane_ticket.png', labelName: 'Plane Tickets'),
   CardModel(imagePath: 'assets/tourist_home/book_cars.png', labelName: 'Book A Car'),
 ];
+
+List<CardModel>getATripItems= [
+  CardModel(imagePath: 'assets/tourist_home/travel_company.png', labelName: 'Generate A Trip'),
+  CardModel(imagePath: 'assets/login/tour_guide.png', labelName: 'Tour Guides'),
+  CardModel(imagePath: 'assets/tourist_home/custom_trip.png', labelName: 'Make Custom Trip'),
+];
+
+List<CardModel>getHelperItems= [
+  CardModel(imagePath: 'assets/tourist_home/hotels.png', labelName: 'Hotel '),
+  CardModel(imagePath: 'assets/tourist_home/plane_ticket.png', labelName: 'Plane Tickets'),
+  CardModel(imagePath: 'assets/tourist_home/Vector_Robot_3.webp', labelName: 'Chat Bot'),
+  CardModel(imagePath: 'assets/tourist_home/detect_camera.png', labelName: 'Image Identifier'),
+  CardModel(imagePath: 'assets/tourist_home/book_cars.png', labelName: 'Book A Car'),
+  CardModel(imagePath: 'assets/tourist_home/weather_forecast.png', labelName: 'Weather Forecasting'),
+  CardModel(imagePath: 'assets/tourist_home/currency_exchage.png', labelName: 'Currency Converter'),
+];
+
 List<CardModel>placesItem=[
   CardModel(imagePath:'assets/on_boarding_images/on_boarding_1.jpg', labelName: 'Historical Places'),
   CardModel(imagePath:'assets/on_boarding_images/on_boarding_2.jpg' , labelName: 'Entertainment Places '),
