@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
 
 class CustomTripModel{
@@ -5,8 +6,9 @@ class CustomTripModel{
   String ? tripId;
   String ? startDate;
   String ? endDate;
+  int ?durationNum;
   List<CustomTripDetailsModel>?tripDetailsList;
-  CustomTripModel({this.title,this.endDate,this.startDate,this.tripDetailsList,this.tripId});
+  CustomTripModel({this.title,this.endDate,this.startDate,this.tripDetailsList,this.tripId,this.durationNum});
 
   factory CustomTripModel.fromJson(Map<String,dynamic>json){
     return CustomTripModel(
@@ -14,6 +16,7 @@ class CustomTripModel{
       startDate: json['startDate'],
       endDate: json['endDate'],
       tripId: json['_id'],
+      durationNum:(json['startDate']!=null||json['endDate']!=null)?DateFormat('d MMM y').parse(json['endDate']).difference(DateFormat('d MMM y').parse(json['startDate'])).inDays:null,
       tripDetailsList: json['tripDetails']!=null?(json['tripDetails']as List).map((tripDetails) => CustomTripDetailsModel.fromJson(tripDetails)).toList():null,
     );
   }
@@ -43,7 +46,9 @@ class CustomTripDetailsModel{
   Map<String,dynamic>toJson(){
     return {
       "dayName": dayName,
-      "dayPlaces":[...List.generate(daysDetailsList?.length??0, (index) =>daysDetailsList?[index].toCustomTripJson()),],
+      "dayPlaces":[
+        ...List.generate(daysDetailsList?.length??0, (index) =>daysDetailsList?[index].toCustomTripJson()),
+      ],
     };
   }
 

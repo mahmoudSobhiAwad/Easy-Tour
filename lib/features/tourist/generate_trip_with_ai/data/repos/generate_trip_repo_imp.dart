@@ -13,7 +13,6 @@ class GenerateTripRepoImp implements GenerateTripRepo{
   Future<Either<Failure, GeneratedTripModel>> requestToGenerateDate({required String data}) async{
     try{
       var result=await apiServices.requestGenerateTrip(data: data);
-      print(result);
       tripUploaded=result;
       GeneratedTripModel model=GeneratedTripModel.fromJson(result);
       return Right(model);

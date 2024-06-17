@@ -48,7 +48,7 @@ class CustomTripRepoImpl implements CustomTripRepo{
   Future<Either<Failure, String>> editCustomTrip({required String tripId,required Map<String,dynamic>data})async {
     try {
       var result =await apiServices.putData(
-        endPoint: '${homeEndPointTourist}book/custom/updateTrip?tripId=$tripId',data: data);
+        endPoint:'${homeEndPointTourist}book/custom/updateTrip?tripId=$tripId',data: data);
       return Right(result['message']);
     }
     catch (e) {
@@ -66,7 +66,10 @@ class CustomTripRepoImpl implements CustomTripRepo{
     try {
       List<CustomTripModel>tripList=[];
       var result =await apiServices.get(endPoint: '${homeEndPointTourist}book/custom/getTrips',);
+      if(result.isNotEmpty)
+      {
       tripList=List<CustomTripModel>.from(result['trips'].map((x) => CustomTripModel.fromJson(x)));
+      }
       return Right(tripList);
     }
     catch (e) {

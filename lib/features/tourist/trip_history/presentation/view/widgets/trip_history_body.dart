@@ -1,70 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:prepare_project/core/utilities/basics.dart';
-import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
-import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/trip_history_item.dart';
-class TripHistoryBody extends StatelessWidget {
-  const TripHistoryBody({super.key,required this.height,required this.width});
-  final double width ;
-  final double height ;
+import 'package:intl/intl.dart';
+import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
+import 'package:prepare_project/features/tourist/profile/presentation/views/widgets/pic_profile_widget.dart';
+import 'package:prepare_project/features/tourist/settings/presentaion/views/widgets/custom_switch.dart';
+import 'package:prepare_project/features/tourist/trip_history/presentation/manager/trip_history_cubit.dart';
+import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/categories_trip_history.dart';
+import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/custom_trip_history.dart';
+import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/empty_history_view.dart';
+import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/generated_trip_history.dart';
+import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/history_tour_guide_trips.dart';
+
+class TripHistoryManagerBody extends StatelessWidget {
+  const TripHistoryManagerBody({super.key,required this.cubit,required this.height,required this.width});
+  final double width;
+  final double height;
+  final TripManagerCubit cubit;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Current Trip',style: CustomTextStyle.fontBold16,),
-              const SizedBox(height: 10,),
-              SizedBox(
-                height: height*0.25,
-                child: ListView.builder(
-                    padding: const EdgeInsets.all(10),
-                    itemCount: 3,
-                    itemBuilder: (context,index){
-                      return TripHistoryItem(height: height, width: width, tripType: 'Custom Trip', tripTitle: 'Trip To Egypt in 10 Day', leftIcon: const Icon(Icons.circle,color: whatsAppColor,size: 15,));
-                    }),
-              )
-            ],
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: CustomGeneratedAiTripAppBar(
+            height: height, width: width, appBarTitle: 'Trip History',),
+        ),
+        ListTile(
+          leading: ProfilePicWidget(imageUrl: '', height: height * 0.07,),
+          title: const Text('Good Morning,john',),
+          subtitle: Text(DateFormat('d MMMM y').format(DateTime.now()).toString()),
+          trailing: CustomSwitch(
+              active: false, height: height, width: width),
+        ),
+        const SizedBox(height: 15,),
+        CategoryOfTripHistoryTypes(height: height,changeIndex: (int index){
+          cubit.changeTripTypeIndex(index);
+        },currIndex: cubit.currIndex,),
+        const SizedBox(height: 15,),
+        cubit.isEmpty?EmptyHistory(width: width, height: height):
+        [
+          TripHistoryOfGeneratedTrips(
+            height: height, width: width,
+            currentTrip: cubit.tripHistory.generatedTripsList.where((element) => DateTime.parse(element.endDate??"2024-03-05").isAtSameMomentAs(DateTime.now())).toList(),
+            upComing: cubit.tripHistory.generatedTripsList.where((element) => DateTime.parse(element.startDate??"2024-03-05").isAfter(DateTime.now())).toList(),
+            finished: cubit.tripHistory.generatedTripsList.where((element) => DateTime.parse(element.endDate??"2024-03-05").isBefore(DateTime.now())).toList(),
           ),
-          SizedBox(height: height*0.02,),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('UpComing Trips',style: CustomTextStyle.fontBold16,),
-              const SizedBox(height: 10,),
-              SizedBox(
-                height: height*0.25,
-                child: ListView.builder(
-
-                    padding: const EdgeInsets.all(10),
-                    itemCount: 3,
-                    itemBuilder: (context,index){
-                      return TripHistoryItem(behindTitle: const IconButton(onPressed: null, icon: Icon(Icons.delete,color: closeColor,)),height: height, width: width, tripType: 'Tour Guide Trip', tripTitle: 'Trip To Egypt in 10 Day', leftIcon: const Icon(Icons.access_time_rounded,color: entertainmentColor,));
-                    }),
-              )
-            ],
+          TripHistoryOfCustomTrips(
+            height: height, width: width,
+            currentTrip: cubit.tripHistory.customTripsList.where((element) => DateFormat('d MMM y').parse(element.endDate??"2024-03-05").isAtSameMomentAs(DateTime.now())).toList(),
+            upComing: cubit.tripHistory.customTripsList.where((element) => DateFormat('d MMM y').parse(element.startDate??"2024-03-05").isAfter(DateTime.now())).toList(),
+            finished: cubit.tripHistory.customTripsList.where((element) => DateFormat('d MMM y').parse(element.endDate??"2024-03-05").isBefore(DateTime.now())).toList(),
           ),
-          SizedBox(height: height*0.02,),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Completed Trips',style: CustomTextStyle.fontBold16,),
-              const SizedBox(height: 10,),
-              SizedBox(
-                height: height*0.25,
-                child: ListView.builder(
-                    itemCount: 3,
-                    padding: const EdgeInsets.all(10),
-                    itemBuilder: (context,index){
-                      return TripHistoryItem(behindTitle: const IconButton(onPressed: null, icon: Icon(Icons.repeat,color: basicColor,)),height: height, width: width, tripType: 'Tour Guide Trip', tripTitle: 'Trip To Egypt in 10 Day', leftIcon: const Icon(Icons.check,color: whatsAppColor,));
-                    }),
-              )
-            ],
-          ),
-        ],
-      ),
+          TripHistoryOfTripsWithTourGuide(
+            height: height, width: width,
+            currentTrip: cubit.tripHistory.tripsWithTourGuideList,
+            upComing: const [],
+            finished: const [],
+          ),][cubit.currIndex]
+      ],
     );
   }
 }

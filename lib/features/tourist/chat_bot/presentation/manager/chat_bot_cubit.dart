@@ -22,14 +22,25 @@ class ChatBotCubit extends Cubit<ChatBotState>{
   bool enableMic=false;
   List<LocaleName>localsExist=[];
   String?localId;
-  bool showChangeLang=false;
+  bool showListLang=true;
+  bool showChangeLangWidget=false;
   TextEditingController langController=TextEditingController();
   List<LocaleName>searchedList=[];
   int chatBotCurrentPage=SetAppState.prefs?.getInt('pageIndex')??0;
 
   void changeShowListOfLang(){
-    showChangeLang=!showChangeLang;
+    showListLang=!showListLang;
     emit(ChangeShowLanguageOfChatState());
+  }
+
+  void openOrCloseChangeWidget(bool open){
+    if(open){
+      showChangeLangWidget=true;
+    }
+    else{
+      showChangeLangWidget=false;
+    }
+    emit(OpenOrCloseChangeLangState());
   }
 
   void getFromBot(String response){
@@ -114,6 +125,7 @@ void searchForLocalId(String value){
     );
     localsExist=await speechToText.locales();
     searchedList=localsExist;
+    langController.text='${searchedList[0].name}-${searchedList[0].localeId}';
     if(enableSpeech){
       emit(InitializeSpeechToTextRecognition());
     }

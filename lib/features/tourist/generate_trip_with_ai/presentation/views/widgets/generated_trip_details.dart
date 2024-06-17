@@ -13,7 +13,6 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repo
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_cubit.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_state.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/list_of_days_of_trip.dart';
-import 'package:prepare_project/features/tourist/nearby_places/data/repos/nearby_places_repo_imp.dart';
 import '../../../../../tour_guide/private_tour/presentation/view/widgets/edit_delete_trip_menu_options.dart';
 
 class GeneratedTripDetailsView extends StatelessWidget {
@@ -26,7 +25,7 @@ final String?endDate;
 
     final double height=BasicDimension.screenHeight(context);
     final double width=BasicDimension.screenWidth(context);
-    return BlocProvider(create: (context)=>ViewTripDetailsCubit(startDate: startDate,endDate: endDate,generatedTripModel: model,generateTripRepoImp:getIt.get<GenerateTripRepoImp>(),nearbySearchRepoImp: getIt.get<NearbyPlacesRepoImpl>()),
+    return BlocProvider(create: (context)=>ViewTripDetailsCubit(startDate: startDate,endDate: endDate,generatedTripModel: model,generateTripRepoImp:getIt.get<GenerateTripRepoImp>()),
       child: BlocConsumer<ViewTripDetailsCubit,ViewTripDetailsState>(builder: (context,state){
         var cubit=BlocProvider.of<ViewTripDetailsCubit>(context);
         return Scaffold(

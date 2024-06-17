@@ -18,6 +18,7 @@ class CreatedCustomTripItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
               borderRadius: BorderRadius.circular(12),
@@ -47,20 +48,21 @@ class CreatedCustomTripItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Egypt ${customTripModel.tripDetailsList?.length??0} Days'),
+              Text('Egypt ${customTripModel.tripDetailsList?.length??0} Days',style: CustomTextStyle.fontBold14,),
               Row(
                 children: [
-                  Text(customTripModel.startDate??""),
+                  Text(customTripModel.startDate??"",style:CustomTextStyle.fontBold14,),
                   const Icon(Icons.arrow_forward),
-                  Text(customTripModel.endDate??""),
+                  Text(customTripModel.endDate??"",style:CustomTextStyle.fontBold14,),
                 ],
               ),
             ],
           ),
           SizedBox(height: height*0.015,),
-          Text('${customTripModel.title}',style: CustomTextStyle.fontBold21,maxLines: 2,),
-          Text(customTripModel.tripDetailsList?.first.daysDetailsList?[0].activity??"",maxLines: 2,overflow: TextOverflow.ellipsis,),
-          SizedBox(height: height*0.02,),
+          Text('${customTripModel.title}',style: CustomTextStyle.fontBold21,maxLines: 2,textAlign: TextAlign.start,),
+          SizedBox(height: height*0.015,),
+          Text(customTripModel.tripDetailsList?.first.daysDetailsList?[0].activity??"",maxLines: 3,overflow: TextOverflow.ellipsis,style: CustomTextStyle.fontBold14,),
+          SizedBox(height: height*0.01,),
         ],
       ),
     );

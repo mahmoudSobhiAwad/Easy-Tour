@@ -19,6 +19,7 @@ class CustomTripBody extends StatelessWidget {
   final double height;
   final double width;
   final CustomTripCubit cubit;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,13 +28,13 @@ class CustomTripBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Create A Trip',),
+            CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: cubit.editOrCreate?"Edit Trip":'Create A Trip',),
             SizedBox(height: height*0.02,),
             CustomColumnWithTextForm(text: 'Trip Title',maxLine: 1,
               customTextFormField: SizedBox(
                   width: width*0.6,
                   height: height*0.08,
-                  child: const CustomTextFormField(filled: true,border: 12,fillColor: thirdColor,maxLines: 1,)),),
+                  child: CustomTextFormField(filled: true,border: 12,fillColor: thirdColor,maxLines: 1,controller: cubit.titleController,)),),
             SizedBox(height: height*0.02,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,9 +50,11 @@ class CustomTripBody extends StatelessWidget {
               ],
             ),
             SizedBox(height: height*0.02,),
-            DaysToAddList(width: width, height: height,tripsDetailsList: cubit.pickedCompleteTrip?.tripDetailsList??[],cubit: cubit,),
+            DaysToAddList(width: width, height: height,tripsDetailsList: cubit.pickedCompleteTrip.tripDetailsList??[],cubit: cubit,),
             SizedBox(height: height*0.02,),
-            Center(child: CustomLoginButton(label: 'Create Trip',altWidth: width*0.4)),
+            Center(child: CustomLoginButton(label: cubit.editOrCreate?"Edit Trip":'Create Trip',altWidth: width*0.4,onTap: (){
+             cubit.editOrCreate?cubit.editCustomTrip(): cubit.createCustomTrip();
+            },),),
           ],
         ),
       ),

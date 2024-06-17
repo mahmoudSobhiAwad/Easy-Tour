@@ -5,33 +5,68 @@ class CategoryOfTripHistoryTypes extends StatelessWidget {
   const CategoryOfTripHistoryTypes({
     super.key,
     required this.height,
+    required this.currIndex,
+    required this.changeIndex,
   });
 
   final double height;
+  final int currIndex;
+  final void Function(int index) changeIndex;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height*0.05,
-      child: ListView.builder(
-        padding: const EdgeInsets.only(left: 15),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context,index){
-          return Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: index==0?basicColor:thirdColor,
-                borderRadius: BorderRadius.circular(14),
-              ),
-              padding:const EdgeInsets.all(8),
-              child: Center(child: Text(tripTypes[index],style: CustomTextStyle.fontNormal16.copyWith(color: index==0?whiteColor:basicColor, ),)),
-            ),
-          );
-        },
-        itemCount: tripTypes.length,),
+      child: SingleChildScrollView(
+        scrollDirection:Axis.horizontal,
+        child: Row(
+          children: [
+            GestureDetector(
+                onTap: (){
+                  changeIndex(0);
+                },
+                child: OneBarItemInTripManager(currIndex: currIndex, index: 0, text: 'Generated Trips With Ai',)),
+            GestureDetector(
+                onTap: (){
+                  changeIndex(1);
+                },
+                child: OneBarItemInTripManager(currIndex: currIndex, index: 1, text: 'Trips With Tour Guide',)),
+            GestureDetector(
+                onTap: (){
+                  changeIndex(2);
+                },
+                child: OneBarItemInTripManager(currIndex: currIndex, index: 2, text: 'Custom Trips',)),
+          ],
+        ),
+      ),
     );
   }
 }
 
-const List<String>tripTypes=['All','Custom Trips','Generated Trips With Ai','Trips With Tour Guide'];
+class OneBarItemInTripManager extends StatelessWidget {
+  const OneBarItemInTripManager({
+    super.key,
+    required this.currIndex,
+    required this.index,
+    required this.text,
+  });
+
+  final int currIndex;
+  final int index;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: index==currIndex?basicColor:thirdColor,
+          borderRadius: BorderRadius.circular(14),
+        ),
+        padding:const EdgeInsets.all(8),
+        child: Center(child: Text(text,style: CustomTextStyle.fontNormal16.copyWith(color: index==currIndex?whiteColor:basicColor,),)),
+              ),
+    );
+  }
+}

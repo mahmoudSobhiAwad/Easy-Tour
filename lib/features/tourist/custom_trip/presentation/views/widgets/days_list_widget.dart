@@ -38,7 +38,7 @@ class DaysToAddList extends StatelessWidget {
                       }, child: const Text('Add More')),
                     ],
                   ),
-                  tripsDetailsList.isEmpty?
+                  tripsDetailsList[bigIndex].daysDetailsList!.isEmpty?
                   GestureDetector(
                       onTap:(){
                         Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -64,7 +64,7 @@ class DaysToAddList extends StatelessWidget {
                                     radius: 15,
                                     backgroundColor: Colors.white,
                                     child: IconButton(onPressed: (){
-                                      cubit?.removeSpecificPlace(bigIndex+1, index);
+                                      cubit?.removeSpecificPlace(bigIndex:bigIndex, smallIndex: index);
                                     }, icon: const FaIcon(FontAwesomeIcons.minus,color: closeColor,),)
                                 ),
                               ),

@@ -9,9 +9,9 @@ class TripManagerModel{
   TripManagerModel({required this.customTripsList,required this.generatedTripsList,required this.tripsWithTourGuideList});
   factory TripManagerModel.fromJson(Map<String,dynamic>json){
     return TripManagerModel(
-      customTripsList: List<CustomTripModel>.from(json['trips'].map((x) => Trip.fromJson(x))),
-      generatedTripsList: List<GeneratedTripModel>.from(json['trips'].map((x) => Trip.fromJson(x))),
-      tripsWithTourGuideList: List<Trip>.from(json['trips'].map((x) => Trip.fromJson(x))),
+      customTripsList:json['customTrips']!=null? List<CustomTripModel>.from(json['customTrips'].map((x) => CustomTripModel.fromJson(x))):[],
+      generatedTripsList:json['AITrips']!=null? List<GeneratedTripModel>.from(json['AITrips'].map((x) => GeneratedTripModel.fromHistory(x))):[],
+      tripsWithTourGuideList:json['tourGuideTrips']!=null? List<Trip>.from(json['tourGuideTrips'].map((x) => Trip.fromJson(x))):[],
     );
   }
 }

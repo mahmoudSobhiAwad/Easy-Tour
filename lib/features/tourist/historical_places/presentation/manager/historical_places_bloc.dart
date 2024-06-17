@@ -81,6 +81,7 @@ class DiscoverPlacesCubit extends Cubit<DiscoverPlacesStates>{
       places[index].picked=true;
       initialList!.add(places[index]);
     }
+    initialList?.toSet().toList();
     emit(ChangePickingPlacesState());
   }
 }

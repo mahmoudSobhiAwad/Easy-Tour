@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
-import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
@@ -12,9 +11,8 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentat
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_state.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/list_of_days_of_trip.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_widgets/activity_list.dart';
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_widgets/hote_list.dart';
-import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/trip_details_widgets/restaurants_list.dart';
-import 'package:prepare_project/features/tourist/nearby_places/data/repos/nearby_places_repo_imp.dart';
+import 'package:prepare_project/features/tourist/google_map/presentaion/view/google_map_view.dart';
+
 
 class GeneratedTripDetailsWithAiView extends StatelessWidget {
   const GeneratedTripDetailsWithAiView({super.key,required this.startDate,required this.model});
@@ -24,13 +22,13 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
   Widget build(BuildContext context) {
     final double height=BasicDimension.screenHeight(context);
     final double width=BasicDimension.screenWidth(context);
-    return BlocProvider(create: (context)=>ViewTripDetailsCubit(startDate: startDate,nearbySearchRepoImp: getIt.get<NearbyPlacesRepoImpl>(),generatedTripModel:model )..addDaysDates()..fillLatLangList(),
+    return BlocProvider(create: (context)=>ViewTripDetailsCubit(startDate: startDate,generatedTripModel:model )..addDaysDates()..fillLatLangList(),
       child: BlocConsumer<ViewTripDetailsCubit,ViewTripDetailsState>(builder:(context,state)
       {
         var cubit=BlocProvider.of<ViewTripDetailsCubit>(context);
         return Scaffold(
           body:  Padding(
-            padding: EdgeInsets.only(right: 20,left: 20,top: height*0.05,bottom: 10),
+            padding: EdgeInsets.only(right: 10,left: 10,top: height*0.05,bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -54,10 +52,6 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
                             const SizedBox(height: 15,),
                             ActivityListWithBar(height: height, width: width, cubit:cubit,pageIndex:pageIndex),
                             const SizedBox(height: 15,),
-                            RestaurantsListWithBar(height: height, width: width, cubit:cubit),
-                            const SizedBox(height: 15,),
-                            HotelsListWithBar(height: height, width: width, cubit: cubit),
-                            const SizedBox(height: 15,),
                             const Text('Trip In Map',style:CustomTextStyle.fontSecondaryBold22,),
                             const SizedBox(height: 15,),
                             TripInGoogleMapWithPolyLine(height: height,points: cubit.polyLinesList,),
@@ -74,6 +68,7 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
     );
   }
 }
+
 
 class SaveGeneratedTripButton extends StatelessWidget {
   const SaveGeneratedTripButton({
@@ -118,6 +113,7 @@ class SaveGeneratedTripButton extends StatelessWidget {
         child: const Icon(Icons.bookmark_border,color: entertainmentColor,size: 30,));
   }
 }
+
 class TripInGoogleMapWithPolyLine extends StatelessWidget {
   const TripInGoogleMapWithPolyLine({super.key,required this.height,required this.points});
 final double height;
@@ -135,6 +131,19 @@ final List<LatLng>points;
              Polyline(color: closeColor,polylineId:const PolylineId('generatedTripPolyLines'),points: points)
           },),
           points.isEmpty?const CircularProgressIndicator(color: basicColor,):const SizedBox(),
+          Align(
+            alignment: Alignment.topRight,
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              child:IconButton(onPressed: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context){
+                  return GoogleMapView(markers: getMarkers(points),initialLatLng: points[0],polyLines:{
+                  Polyline(color: closeColor,polylineId:const PolylineId('generatedTripPolyLines'),points: points)
+                  },);
+                }));
+              }, icon: const Icon(Icons.close_fullscreen_rounded,color: basicColor)),
+            ),
+          )
         ],
       )
 
@@ -149,6 +158,7 @@ Set<Marker>getMarkers(List<LatLng>points){
   }
   return markers;
 }
+
 
 
 

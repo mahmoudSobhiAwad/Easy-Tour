@@ -17,37 +17,46 @@ class ChangeLocalLanguage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:EdgeInsets.only(bottom:MediaQuery.viewInsetsOf(context).bottom),
+      padding:EdgeInsets.only(bottom:MediaQuery.viewInsetsOf(context).bottom,right: 20,left: 20),
       child: Container(
         width: width,
-        height: height*0.33,
+        height: height*0.38,
         decoration: BoxDecoration(
-          border: Border.all(color: thirdColor,width: 1),),
+          color: thirdColor,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: entertainmentColor,width: 1),),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(onPressed: (){
+                  cubit.openOrCloseChangeWidget(false);
+                }, icon:const Icon(Icons.close)),
+              ),
               SizedBox(
                 width:width*0.6,
                 child:  CustomTextFormField(
+                  maxLines: 1,
                   controller: cubit.langController,
                   onChanged: (value){
                     cubit.searchForLocalId(value);
                   },
                   suffix: RotatedBox(
-                    quarterTurns:cubit.showChangeLang?-1:1,
+                    quarterTurns:cubit.showListLang?-1:1,
                     child: IconButton(onPressed:(){
                       cubit.changeShowListOfLang();
                     },icon:const Icon(Icons.arrow_forward_ios_outlined)),),
                 ),
               ),
-              cubit.showChangeLang?
+              cubit.showListLang?
               Container(
                 height: height*0.2,
                 width: width*0.6,
                 decoration: BoxDecoration(
-                  color: thirdColor,
+                  color: secondaryColor,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child:SingleChildScrollView(

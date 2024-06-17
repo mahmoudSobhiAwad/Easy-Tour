@@ -5,13 +5,11 @@ import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart
 class ChangeShowForWidgetInGeneratedTrip extends StatelessWidget {
   const ChangeShowForWidgetInGeneratedTrip({
     super.key,
-    required this.changeShow,
     required this.height,
     required this.barName,
     required this.showDetails,
   });
 
-  final void Function()? changeShow;
   final double height;
   final String barName;
   final bool showDetails;
@@ -19,7 +17,6 @@ class ChangeShowForWidgetInGeneratedTrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:changeShow,
       child: Container(
         height:height*0.1,
         decoration: BoxDecoration(
@@ -28,12 +25,9 @@ class ChangeShowForWidgetInGeneratedTrip extends StatelessWidget {
         ),
         padding:const EdgeInsets.all(10),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(barName,style: CustomTextStyle.fontSecondaryBold22,),
-            RotatedBox(
-                quarterTurns:showDetails? 1:-1,
-                child: const Icon(Icons.arrow_back_ios,)),
+            Text(barName,style: CustomTextStyle.fontBold21.copyWith(fontSize: 25),),
+            const Spacer(),
           ],
         ),
       ),

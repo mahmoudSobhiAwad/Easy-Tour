@@ -166,7 +166,7 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       return Future.error('location is denied');
-      //emit(AllowLocationFailedState(errMessage:'Location services are disabled.Please Enable it.' ));
+
     }
 
     permission = await Geolocator.checkPermission();
@@ -179,7 +179,9 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
     if (permission == LocationPermission.deniedForever) {
       return Future.error('location is denied');
     }
+
     position=await Geolocator.getCurrentPosition();
+
     return await Geolocator.getCurrentPosition();
   }
 }

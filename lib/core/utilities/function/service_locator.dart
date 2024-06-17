@@ -26,6 +26,7 @@ import 'package:prepare_project/features/tourist/nearby_places/data/repos/photo_
 import 'package:prepare_project/features/tourist/profile/data/repos/profie_repo_imp.dart';
 import 'package:prepare_project/features/tourist/settings/data/repo/setting_repo_imp.dart';
 import 'package:prepare_project/features/tourist/tourist_home/data/repo/home_tourist_repo_impl.dart';
+import 'package:prepare_project/features/tourist/trip_history/data/repos/trip_manager_repo_impl.dart';
 import 'package:prepare_project/features/tourist/weather_forecast/data/repos/get_forecast_repo_imp.dart';
 import '../../../features/sign_up/data/repos/sign_up_repo_imp.dart';
 import '../../../features/tourist/chat_with_other/data/repos/get_guide_meta_data/get_guide_meta_data_repo_imp.dart';
@@ -58,6 +59,7 @@ getIt.registerSingleton<NearbyPlacesRepoImpl>(NearbyPlacesRepoImpl(apiServices:g
 getIt.registerSingleton<GuideMetaDataAndChatRecentRepoImp>(GuideMetaDataAndChatRecentRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<GenerateTripRepoImp>(GenerateTripRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<SettingRepoImp>(SettingRepoImp(apiServices:getIt.get<ApiServices>()));
+getIt.registerSingleton<TripManagerRepoImpl>(TripManagerRepoImpl(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<EntertainmentPlaceRepoImp>(EntertainmentPlaceRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<CustomTripRepoImpl>(CustomTripRepoImpl(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<GetHotelsRepoImpl>(GetHotelsRepoImpl(apiServices:getIt.get<ApiServices>()));

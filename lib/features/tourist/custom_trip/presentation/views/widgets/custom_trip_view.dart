@@ -11,16 +11,17 @@ import 'package:prepare_project/features/tourist/custom_trip/presentation/manage
 import 'package:prepare_project/features/tourist/custom_trip/presentation/manager/get_custom_trip/get_custom_trips_cubit.dart';
 import 'package:prepare_project/features/tourist/custom_trip/presentation/views/widgets/custom_trip_body.dart';
 class CustomTripView extends StatelessWidget {
-  const CustomTripView({super.key,this.customTripModel,required this.customTripRepoImpl,required this.cubit});
+  const CustomTripView({super.key,this.customTripModel,required this.customTripRepoImpl,required this.cubit,this.editOrCreate=false});
   final CustomTripModel? customTripModel;
   final CustomTripRepoImpl customTripRepoImpl;
   final GetCustomTripCubit cubit;
+  final bool editOrCreate;
   @override
   Widget build(BuildContext context) {
     final double height=BasicDimension.screenHeight(context);
     final double width=BasicDimension.screenWidth(context);
     return  BlocProvider(
-      create: (context)=>CustomTripCubit(customTripRepoImpl:customTripRepoImpl,pickedCompleteTrip: customTripModel)..initEditCustomTrip(),
+      create: (context)=>CustomTripCubit(editOrCreate: editOrCreate,customTripRepoImpl:customTripRepoImpl,pickedCompleteTrip: customTripModel??CustomTripModel())..initEditCustomTrip(),
       child: BlocConsumer<CustomTripCubit,CustomTripState>(
           builder: (context,state) {
             var cubit=BlocProvider.of<CustomTripCubit>(context);
@@ -30,9 +31,10 @@ class CustomTripView extends StatelessWidget {
             if(state is SuccessCreateOrEditTripState){
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    duration: const Duration(milliseconds: 300),
+                      backgroundColor: whatsAppColor,
+                      duration: const Duration(milliseconds: 600),
                       content: Container(
-                      decoration: BoxDecoration(
+                        decoration: BoxDecoration(
                           color: whatsAppColor,
                           borderRadius: BorderRadius.circular(8)
                       ),

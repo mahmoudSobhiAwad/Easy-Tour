@@ -44,11 +44,7 @@ final ChatBotCubit cubit;
               ),
               MenuItemButton(
                 onPressed: (){
-                  showModalBottomSheet(
-                    isScrollControlled: true,
-                      context: context, builder:(context){
-                        return ChangeLocalLanguage(width: width, height: height, cubit: cubit);
-                  });
+                  cubit.openOrCloseChangeWidget(true);
                 },
                 child: const MenuItemAppBarButton(text: 'Change Language', icon: Icon(Icons.language_sharp,)),
               ),
@@ -58,10 +54,16 @@ final ChatBotCubit cubit;
         ],
       ),
       backgroundColor:const Color(0xffF7F7F9),
-      body: Column(
+      body: Stack(
+        alignment: Alignment.bottomRight,
         children: [
-          MessagesListView(cubit: cubit),
-          TextFormAndSendMessage(width: width, cubit: cubit,),
+          Column(
+            children: [
+              MessagesListView(cubit: cubit),
+              TextFormAndSendMessage(width: width, cubit: cubit,),
+            ],
+          ),
+          cubit.showChangeLangWidget?ChangeLocalLanguage(width: width, height: height, cubit: cubit):const SizedBox()
         ],
       ),
 

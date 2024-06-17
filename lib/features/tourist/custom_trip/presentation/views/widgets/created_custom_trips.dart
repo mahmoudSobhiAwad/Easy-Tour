@@ -3,6 +3,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/custom_alert_widget/delete_edit_photo.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
+import 'package:prepare_project/features/tourist/custom_trip/data/model/custom_trip_model.dart';
 import 'package:prepare_project/features/tourist/custom_trip/presentation/manager/get_custom_trip/get_custom_trips_cubit.dart';
 import 'package:prepare_project/features/tourist/custom_trip/presentation/views/widgets/custom_trip_view.dart';
 import 'package:prepare_project/features/tourist/custom_trip/presentation/views/widgets/created_custom_trip_item.dart';
@@ -21,7 +22,7 @@ class CreatedCustomTripsBody extends StatelessWidget {
             iconSize: 40,
             onPressed:(){
               Navigator.push(context, MaterialPageRoute(builder: (context){
-                return CustomTripView(customTripRepoImpl:cubit.customTripRepoImpl, cubit: cubit,);
+                return CustomTripView(customTripRepoImpl:cubit.customTripRepoImpl, cubit: cubit,customTripModel: CustomTripModel(),);
               }));
             },
             icon: const Icon(Icons.create_rounded,color: Colors.white,)),), 
@@ -33,7 +34,7 @@ class CreatedCustomTripsBody extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10.0),
                 child: CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Custom Trips',),
               ),
-              cubit.customTripList.isEmpty?const Text('Let\'s Create Your First Custom Trip',style: CustomTextStyle.fontBold30,) :
+              cubit.customTripList.isEmpty?const Center(child:  Text('Let\'s Create Your First Custom Trip',style: CustomTextStyle.fontBold30,textAlign: TextAlign.center,)) :
               Expanded(child: RefreshIndicator(
                 onRefresh:()async{
                   cubit.getAllTrips();
@@ -48,21 +49,21 @@ class CreatedCustomTripsBody extends StatelessWidget {
                                     deleteImage: (){
                                       cubit.deleteTrip(index: index);
                                 }, cropImage:()async{
-                                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                                    return CustomTripView(customTripRepoImpl:cubit.customTripRepoImpl,customTripModel: cubit.customTripList[index], cubit: cubit,);
+                                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                                        return CustomTripView(customTripRepoImpl:cubit.customTripRepoImpl,customTripModel: cubit.customTripList[index], cubit: cubit,editOrCreate: true,);
                                   }));
                                 });
                               });
                             },
                               onTap: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return CustomTripView(customTripRepoImpl:cubit.customTripRepoImpl,customTripModel: cubit.customTripList[index], cubit: cubit,);
+                                  return CustomTripView(customTripRepoImpl:cubit.customTripRepoImpl,customTripModel: cubit.customTripList[index], cubit: cubit,editOrCreate: true,);
                                 }));
                               },
                               child: CreatedCustomTripItem(width: width,height: height, customTripModel: cubit.customTripList[index],categoryList: cubit.getCategoriesList(index),));
                         }, separatorBuilder: (context,index){
                       return SizedBox(height: height*0.025,);
-                    }, itemCount: 4),
+                    }, itemCount: cubit.customTripList.length),
               )),
             ],
           )

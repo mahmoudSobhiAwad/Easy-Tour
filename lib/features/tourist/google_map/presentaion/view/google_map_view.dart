@@ -7,16 +7,18 @@ import 'package:prepare_project/features/tourist/google_map/presentaion/manager/
 import 'package:prepare_project/features/tourist/google_map/presentaion/manager/map_cubit/google_map_states.dart';
 import 'package:prepare_project/features/tourist/google_map/presentaion/view/google_map_body.dart';
 class GoogleMapView extends StatelessWidget {
-  const GoogleMapView({super.key,this.initialLatLng,this.initialInfo});
+  const GoogleMapView({super.key,this.initialLatLng,this.initialInfo,this.markers,this.polyLines});
 final LatLng? initialLatLng;
 final String? initialInfo;
+final Set<Marker>?markers;
+final Set<Polyline>?polyLines;
   @override
   Widget build(BuildContext context) {
     return  BlocProvider(
       create: (context)=>GoogleMapCubit(textSearchRepoImp: getIt.get<GoogleSearchRepoImp>(),initialLatLng: initialLatLng,initialLatLngInfo: initialInfo)..determinePosition(),
       child:BlocConsumer<GoogleMapCubit,GoogleMapStates>(builder:(context,state){
         var cubit=BlocProvider.of<GoogleMapCubit>(context);
-        return GoogleMapBody(cubit: cubit,);
+        return GoogleMapBody(cubit: cubit,initialMarkers: markers,initialPolyLines:polyLines,initialLatLng:initialLatLng);
       } ,listener: (context,state){},),
     );
   }

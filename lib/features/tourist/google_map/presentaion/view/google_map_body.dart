@@ -10,9 +10,16 @@ class GoogleMapBody extends StatefulWidget {
   const GoogleMapBody({
     super.key,
     required this.cubit,
+    this.initialMarkers,
+    this.initialPolyLines,
+    this.initialLatLng,
+
   });
 
   final GoogleMapCubit cubit;
+  final Set<Marker>?initialMarkers;
+  final Set<Polyline>?initialPolyLines;
+  final LatLng? initialLatLng;
 
   @override
   State<GoogleMapBody> createState() => _GoogleMapBodyState();
@@ -52,12 +59,12 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
               widget.cubit.getMarkAtSpecificLatLng(markers,latLng);
             },
               zoomControlsEnabled: false,
-              polylines: widget.cubit.polyLinesSets,
+              polylines: widget.initialPolyLines??widget.cubit.polyLinesSets,
               onMapCreated:(controller){
                 googleMapController=controller;
               },
-              markers:markers,
-              initialCameraPosition: CameraPosition(zoom: 14,target:LatLng(widget.cubit.myLocation!.latitude ,widget.cubit.myLocation!.longitude),)
+              markers:widget.initialMarkers??markers,
+              initialCameraPosition: CameraPosition(zoom: 14,target:widget.initialLatLng??LatLng(widget.cubit.myLocation!.latitude ,widget.cubit.myLocation!.longitude),)
           ),
           TextSearchWithResultList(width: width, height: height, cubit: widget.cubit, markers: markers,controller: googleMapController,),
           Positioned(
