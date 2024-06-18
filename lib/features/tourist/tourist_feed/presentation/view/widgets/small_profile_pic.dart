@@ -13,7 +13,7 @@ class SmallProfilePic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundImage: NetworkImage(SetAppState.prefs?.getString('profileUrl')??"",),
+      backgroundImage: NetworkImage(SetAppState.prefs?.getString('profileUrl')??"https://cdn1.iconfinder.com/data/icons/users-pack-mino-io/24/user-1-error-512.png",),
         backgroundColor: thirdColor,
         radius: width*0.06,
         // child:Center(

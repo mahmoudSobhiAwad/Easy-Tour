@@ -32,7 +32,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       children: [
         ListView(
-          padding: EdgeInsets.only(left: 20.0,right: 20,top: height*0.03,),
+          padding: EdgeInsets.only(left: width*0.033,right: width*0.033,top: height*0.03,),
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -9,5 +9,6 @@ List<Icon>tourGuideDrawerIcon=const [
 List<Icon>tourGuideBottomNavIcon= const [
   Icon(Icons.telegram_outlined,size: 33,color: basicColor,),
   Icon(Icons.mode_of_travel_outlined,size: 33,color: basicColor,),
+  Icon(Icons.feed_rounded,size: 33,color: basicColor,),
   Icon(Icons.person_rounded,size: 33,color: basicColor,)
 ];

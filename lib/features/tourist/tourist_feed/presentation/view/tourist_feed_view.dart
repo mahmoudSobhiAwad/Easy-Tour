@@ -49,7 +49,7 @@ class TouristFeedView extends StatelessWidget {
                   return const Center(child:  CircularProgressIndicator());
                 }
                 else{
-                  cubit.getDate(snapshot.data!.docs.cast<QueryDocumentSnapshot<Map<String, dynamic>>>());
+                  cubit.getData(snapshot.data!.docs.cast<QueryDocumentSnapshot<Map<String, dynamic>>>());
                   return ListView.separated(
                     itemCount: cubit.postsList.length,
                     padding: const EdgeInsets.all(15).copyWith(bottom: height*0.12),
@@ -57,7 +57,7 @@ class TouristFeedView extends StatelessWidget {
                       return const SizedBox(height: 15,);
                     },
                     itemBuilder: (context,index){
-                      return SocialItemPost(height: height, width: width,model: cubit.postsList[index],);
+                      return SocialItemPost(height: height, width: width,model: cubit.postsList[index],role: 'tourist',);
                     },
                   );
                 }

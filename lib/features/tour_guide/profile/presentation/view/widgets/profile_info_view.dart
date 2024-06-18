@@ -33,6 +33,7 @@ class TourGuideProfileInfo extends StatelessWidget {
                 ProfileSettingItem(text: 'Edit Profile', onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=> EditTourGuideProfileView(model: cubit.tourGuidePersonalInfoModel,profileViewCubit: cubit,)));
                 },height: height*0.07,child: const Icon(Icons.arrow_forward_ios),),
+
                 ProfileSettingItem(
                     text: 'Languages',
                     height: height*0.07,

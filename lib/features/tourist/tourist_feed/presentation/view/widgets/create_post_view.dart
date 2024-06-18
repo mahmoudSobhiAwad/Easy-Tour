@@ -23,7 +23,7 @@ class CreatePostView extends StatelessWidget {
       }, listener: (context,state){
             if(state is SuccessUploadPostState){
                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Uploaded Successfully"),backgroundColor: whatsAppColor,width: 200,),);
-              Navigator.pop(context);
+               Navigator.pop(context);
             }
       }) ,);
   }

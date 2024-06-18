@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/manager/create_post_cubit/create_post_cubit.dart';
 class ListOfImagesUsingWrap extends StatelessWidget {
   const ListOfImagesUsingWrap({
@@ -31,7 +32,10 @@ class ListOfImagesUsingWrap extends StatelessWidget {
                     filterQuality: FilterQuality.high,),
                   IconButton(onPressed: (){
                     cubit.removeSpecificImage(index);
-                  }, icon:const Icon(Icons.cancel)),
+                  }, icon:const CircleAvatar(
+                      radius: 15,
+                      backgroundColor:closeColor,
+                      child: Icon(Icons.close,color: whiteColor,))),
                 ]
             ),
           );

@@ -12,7 +12,8 @@ class SocialItemPost extends StatelessWidget {
   final double width;
   final double height;
   final PostModel model;
-  const SocialItemPost({super.key,required this.height,required this.width,required this.model});
+  final String role;
+  const SocialItemPost({super.key,required this.role,required this.height,required this.width,required this.model});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +25,7 @@ class SocialItemPost extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          PosterInfo(width: width,model: model,),
+          PosterInfo(width: width,model: model,role: role,),
           SizedBox(height: height*0.02,),
           Text('${model.postText}',),
           SizedBox(height: height*0.02,),

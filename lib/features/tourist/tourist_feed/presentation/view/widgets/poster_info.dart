@@ -7,11 +7,13 @@ class PosterInfo extends StatelessWidget {
   const PosterInfo({
     super.key,
     required this.width,
-    required this.model
+    required this.model,
+    required this.role,
   });
 
   final double width;
   final PostModel model;
+  final String role;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class PosterInfo extends StatelessWidget {
           ],
         ),
         const SizedBox(width: 10,),
-        model.role=='tourist'?const SizedBox():Container(
+        model.role==role?const SizedBox():Container(
           padding: const EdgeInsets.all(4),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(5),topRight: Radius.circular(5),bottomRight: Radius.circular(5),bottomLeft: Radius.circular(5)),
@@ -38,7 +40,7 @@ class PosterInfo extends StatelessWidget {
               Color(0xff324D73),
             ]),
           ),
-          child: Text("Tour Guide",style: CustomTextStyle.font16NormalWhite.copyWith(fontSize: 14),),
+          child: Text(role.toUpperCase(),style: CustomTextStyle.font16NormalWhite.copyWith(fontSize: 14),),
         ),
       ],
     );
