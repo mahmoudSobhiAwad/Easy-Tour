@@ -168,11 +168,15 @@ class ApiServices{
     return response.data;
   }
   Future<Map<String,dynamic>>normalGet(String endPoint,{Map<String,dynamic>?data,Map<String,dynamic>?header})async{
-    final response=await dio.get(endPoint,options: Options(headers:header), );
+    final response=await dio.get(endPoint,options: Options(headers:header),);
     return response.data;
   }
   Future<dynamic>normalPost(String endPoint,{Map<String,dynamic>?data,Map<String,dynamic>?header})async{
     final response=await dio.post(endPoint,options: Options(headers: header),data: data);
+    return response.data;
+  }
+  Future<dynamic>normalRequest(String endPoint,{Map<String,dynamic>?data,Map<String,dynamic>?header})async{
+    final response=await dio.request(endPoint,options: Options(headers: header,method: 'POST'),data: data);
     return response.data;
   }
 

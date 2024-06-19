@@ -96,7 +96,6 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState>{
   Future<void>getNearbyPlaces()async{
     await determinePosition();
     if(myLocation!=null){
-      print(myLocation?.longitude);
       placesList.clear();
       emit(LoadingGetNearbyBanksState());
       var response=await nearbyPlacesRepoImpl.getNearbyPlace(NearbyPlacesModel().toJson(type:['bank','atm'],lat:myLocation!.latitude,long:myLocation!.longitude,distance: num.parse(radiusController.text).toDouble(),maxResult: 3),fieldMask: fieldMaskForShortNearby);

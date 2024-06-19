@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_flights/data/flight_models/get_tickets_model.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_result/all_custom_painter.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_result/date_with_flight_route.dart';
 class FlightTicketItem extends StatelessWidget {
@@ -7,10 +8,12 @@ class FlightTicketItem extends StatelessWidget {
     super.key,
     required this.width,
     required this.height,
+    required this.model,
   });
 
   final double width;
   final double height;
+  final GetTicketsModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +30,17 @@ class FlightTicketItem extends StatelessWidget {
         padding:const EdgeInsets.all(10),
         child: Column(
           children: [
-            DateWithFlightRoute(width: width, height: height),
+            DateWithFlightRoute(width: width, height: height,itineraries: model.goingItinerariesList,),
             SizedBox(height: height*0.03,),
-            DateWithFlightRoute(width: width, height: height),
+            DateWithFlightRoute(width: width, height: height,itineraries: model.returnItinerariesList),
             SizedBox(height: height*0.04,),
             DashedLine(height: 2, color: Colors.black, dashWidth: 3, dashGap: 2, length: width),
             SizedBox(height: height*0.033,),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Total Price',style: CustomTextStyle.fontBold16,),
-                Text('1100.32 \$',style: CustomTextStyle.fontBold16,),
+                const Text('Total Price',style: CustomTextStyle.fontBold16,),
+                Text('${model.price} \$',style: CustomTextStyle.fontBold16,),
               ],
             )
           ],

@@ -23,7 +23,6 @@ class RestHotelDetailsCubit extends Cubit<RestHotelDetailsState>{
       var result=await photoOfPlaceRepoImp.getPhotoOfPlace(model.photosList![i].photoName!.toString());
       result.fold((failure){
         emit(FailureGetPhotoOfPlace(errMessage: failure.errMessage));
-        print(failure.errMessage);
       }, (photoImage){
         photoUrlList.add(photoImage);
         emit(SuccessGetPhotoOfPlace());

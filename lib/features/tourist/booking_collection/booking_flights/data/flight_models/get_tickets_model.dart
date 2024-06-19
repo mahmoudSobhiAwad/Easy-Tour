@@ -1,8 +1,10 @@
+import 'package:intl/intl.dart';
+
 class GetTicketsModel{
   String? lastTicketTime;
   bool instantBooking;
   int? avaSeats;
-  num? price;
+  String? price;
   Itineraries? goingItinerariesList;
   Itineraries?returnItinerariesList;
   OriginDestinations?goingTrip;
@@ -24,23 +26,23 @@ class GetTicketsModel{
       "originDestinations":[
         {
           "id": "1",
-          "originLocationCode": "${goingTrip?.originIatCode}",
-          "destinationLocationCode": "${goingTrip?.departureIatCode}",
+          "originLocationCode": "CAI",
+          "destinationLocationCode": "STN",
           "departureDateTimeRange": {
-            "date": "${goingTrip?.departureLeaveTime}"
+            "date": "2024-06-20"
           }
         },
         goingTrip?.departureReturnTime==null?null:{
           "id": "2",
-          "originLocationCode": "${goingTrip?.departureIatCode}",
-          "destinationLocationCode": "${goingTrip?.originIatCode}",
+          "originLocationCode": "STN",
+          "destinationLocationCode": "CAI",
           "departureDateTimeRange": {
-            "date": "${goingTrip?.departureReturnTime}"
+            "date": "2024-06-23"
           }
         },
       ],
       "travelers": [...List.generate(travelersTypes?.length??0, (index) => {
-        'id':'${index+1}',
+        'id':(index+1).toString(),
         'travelerType':travelersTypes?[index],
       }),],
       "sources": [
@@ -54,7 +56,7 @@ class GetTicketsModel{
               "cabin": cabinType,
               "originDestinationIds": [
                 "1"
-              ]
+              ],
             }
           ]
         }
@@ -75,6 +77,7 @@ class Itineraries{
     for(var item in json['segments']){
       segmentsList.add(Segments.fromJson(item));
     }
+
     return Itineraries(
         duration: json['duration'],
         segments: segmentsList);
@@ -96,7 +99,7 @@ class DepartureOrLeaveOfSegments{
   String timeToLeave;
   DepartureOrLeaveOfSegments({required this.iatCode,required this.timeToLeave});
   factory DepartureOrLeaveOfSegments.fromJson(Map<String,dynamic>json){
-    return DepartureOrLeaveOfSegments(iatCode: json['iataCode'], timeToLeave: json['at']);
+    return DepartureOrLeaveOfSegments(iatCode: json['iataCode'], timeToLeave: DateFormat('d MMM yyyy h:mm a').format(DateTime.parse(json['at'])),);
   }
 }
 class OriginDestinations{

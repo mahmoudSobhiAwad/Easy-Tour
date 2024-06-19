@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/two_beside_form.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/manager/get_ticket/cubit.dart';
 class TravelersDateAndTripType extends StatelessWidget {
   const TravelersDateAndTripType({
     super.key,
     required this.width,
     required this.height,
+    required this.cubit
   });
 
   final double width;
   final double height;
-
+  final GetTicketCubit cubit;
   @override
   Widget build(BuildContext context) {
     return CustomTwoFieldForm(
@@ -25,11 +27,13 @@ class TravelersDateAndTripType extends StatelessWidget {
           border: Border.all(color: secondaryColor,width: 2),
         ),
         padding:const EdgeInsets.all(5),
-        child: const Row(
+        child: Row(
           children: [
-            Icon(Icons.person),
-            Text('0 Adult, 0 Children'),
-            IconButton(onPressed:null,icon:Icon(Icons.add_circle),),
+            const Icon(Icons.person),
+            Text('${cubit.adultNum} Adult, ${cubit.childNum} Children'),
+            IconButton(onPressed:(){
+              cubit.enableChangeAdultOrChild();
+            },icon:const Icon(Icons.add_circle),),
           ],
         ),
       ),
@@ -45,13 +49,15 @@ class TravelersDateAndTripType extends StatelessWidget {
           children: [
             SizedBox(
                 width:width*0.2,
-                child:const Text('sadsadsa',style: CustomTextStyle.fontNormal14WithEllipsis,)),
+                child:Text(cubit.pickedCabin,style: CustomTextStyle.fontNormal14WithEllipsis,)),
             GestureDetector(
               onTap: (){
                 showMenu(context: context,
                     constraints: BoxConstraints(maxHeight: height*0.1,maxWidth: width*0.3),
                     position: RelativeRect.fromLTRB(width*0.8,height*0.8,15, height*0.15), items: [
-                      ...List.generate(4, (index) => const PopupMenuItem(child: Text('ECONOMY')))
+                      ...List.generate(cubit.cabinTypes.length, (index) => PopupMenuItem(onTap: (){
+                        cubit.changeCabinType(index);
+                      },child: Text(cubit.cabinTypes[index])))
                     ]
                 );
               },

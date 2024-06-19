@@ -2,27 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 class TicketInfo extends StatelessWidget {
-  const TicketInfo({super.key});
-
+  const TicketInfo({super.key,required this.instantTicket,required this.lastTicketDate});
+  final bool instantTicket;
+  final String lastTicketDate;
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return  Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Ticket Info',style: CustomTextStyle.fontBold21.copyWith(fontSize: 18)),
           Row(
             children: [
-              Text('Instant Ticket Required',style: CustomTextStyle.fontBold14.copyWith(fontSize: 12)),
-              const Icon(Icons.close,color: closeColor,),
-              const Spacer(),
-              Text('Payment Card Required',style: CustomTextStyle.fontBold14.copyWith(fontSize: 12),),
-              const Icon(Icons.close,color: closeColor)
+              const Text('Instant Ticket Required',style: CustomTextStyle.fontBold16),
+              instantTicket?const Icon(Icons.check,color: whatsAppColor,):const Icon(Icons.close,color: closeColor,)
             ],
           ),
-
-          const Text('Last Ticketing Day : 28 Jun 2024',style: CustomTextStyle.fontBold14,)
+          Text('Last Ticketing Day : $lastTicketDate',style: CustomTextStyle.fontBold16,)
         ],
       ),
     );

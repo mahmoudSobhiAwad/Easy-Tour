@@ -3,7 +3,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 
 class CustomLoginButton extends StatelessWidget {
-  const CustomLoginButton({super.key,this.altWidth,this.onTap,this.label,this.color,this.isLoading=false,this.enable=false,this.borderRadius});
+  const CustomLoginButton({super.key,this.altWidth,this.onTap,this.labelStyle,this.label,this.color,this.isLoading=false,this.enable=false,this.borderRadius});
   final void Function()?onTap;
   final String?label;
   final Color? color;
@@ -11,6 +11,7 @@ class CustomLoginButton extends StatelessWidget {
   final double?altWidth;
   final bool enable;
   final double?borderRadius;
+  final TextStyle? labelStyle;
   @override
   Widget build(BuildContext context) {
     final double height=BasicDimension.screenHeight(context);
@@ -24,14 +25,14 @@ class CustomLoginButton extends StatelessWidget {
             boxShadow:[
                buildBoxShadow(),
             ],
-            borderRadius:  BorderRadius.all(
-              Radius.circular(borderRadius??20),),color:color?? basicColor,),
+            borderRadius: BorderRadius.all(Radius.circular(borderRadius??20),),
+            color:color?? basicColor,),
           child: Center(
               child: isLoading? const CircularProgressIndicator(color: Colors.white,) :
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(label??"",style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),
+                  Text(label??"",style: labelStyle??const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),
                   enable?const Padding(
                     padding:  EdgeInsets.only(left: 16.0),
                     child:  Icon(Icons.arrow_forward_rounded,color: Colors.white,),

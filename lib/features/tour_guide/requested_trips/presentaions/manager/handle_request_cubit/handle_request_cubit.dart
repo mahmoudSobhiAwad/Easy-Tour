@@ -19,7 +19,6 @@ class HandleRequestCubit extends Cubit<HandleRequestStates>{
     });
     result.fold((failure){
       answer=='yes'?isLoadingAccept=false:isLoadingReject=false;
-      print(failure.errMessage);
       emit(FailureSendHandleRequestState(errMessage: failure.errMessage));
     }, (message) {
       answer=='yes'?isLoadingAccept=false:isLoadingReject=false;

@@ -8,5 +8,7 @@ abstract class GetTicketsRepo{
 
   Future<Either<Failure,List<GetTicketsModel>>>getTicketsOfTripByOfferSearch({required Map<String,dynamic>data,required String accessToken});
 
+  Future<Either<Failure,Map<String,dynamic>>>getOfferPrice({required int index,required String accessToken});
+
   Future<Either<Failure,String>>getAccessToken({required Map<String,dynamic>data});
 }

@@ -8,13 +8,16 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_flig
 
 class GetTicketsRepoImpl implements GetTicketsRepo{
   final ApiServices apiServices;
+  Map<String,dynamic>tempData={};
   GetTicketsRepoImpl({required this.apiServices});
   @override
   Future<Either<Failure, List<IatCodeModel>>> getMatchedAirPorts({required String query}) async{
     try {
-      var response = await apiServices.normalGet('http://localhost:8000/search?cityName=$query',);
-      List<IatCodeModel> iataCodesList = List<IatCodeModel>.from(
-          response['data'].map((x) => IatCodeModel.fromJson(x)));
+      List<IatCodeModel> iataCodesList=[];
+      var response = await apiServices.normalGet('http://192.168.1.52:8000/search?cityName=$query',);
+      for(var item in response['data']){
+        iataCodesList.add(IatCodeModel.fromJson(item));
+      }
       return Right(iataCodesList);
     }
     catch (e) {
@@ -28,16 +31,17 @@ class GetTicketsRepoImpl implements GetTicketsRepo{
   }
 
   @override
-  Future<Either<Failure, List<GetTicketsModel>>> getTicketsOfTripByOfferSearch({required Map<String, dynamic> data,required String accessToken}) async{
+  Future<Either<Failure,List<GetTicketsModel>>> getTicketsOfTripByOfferSearch({required Map<String, dynamic> data,required String accessToken}) async{
     try {
-      var response = await apiServices.normalPost(
+      var response = await apiServices.normalRequest(
           'https://test.api.amadeus.com/v2/shopping/flight-offers',
           data: data,
           header: {
-            'X-HTTP-Method-Override':'GET',
-            'Authorization': 'Bearer $accessToken',
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
+            'X-HTTP-Method-Override': 'GET',
+            'Authorization': 'Bearer $accessToken'
           });
+      tempData=response;
       List<GetTicketsModel> tickets = List<GetTicketsModel>.from(response['data'].map((x) => GetTicketsModel.fromJson(x)));
       return Right(tickets);
     }
@@ -61,6 +65,35 @@ class GetTicketsRepoImpl implements GetTicketsRepo{
             'Content-Type': 'application/x-www-form-urlencoded',
           });
       return right(response['access_token']);
+    }
+    catch(e){
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      else {
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> getOfferPrice({required String accessToken,required int index}) async{
+    try {
+      var response = await apiServices.normalRequest(
+          'https://test.api.amadeus.com/v1/shopping/flight-offers/pricing',
+          data: {
+            'data':{
+              "type": "flight-offers-pricing",
+              "flightOffers":[tempData['data'][index]],
+            },
+          },
+          header: {
+            'Content-Type': 'application/json',
+            'X-HTTP-Method-Override': 'GET',
+            'Authorization': 'Bearer $accessToken'
+          });
+
+      return Right(response);
     }
     catch(e){
       if (e is DioException) {

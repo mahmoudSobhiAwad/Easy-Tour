@@ -88,7 +88,6 @@ class BookTripWithTGCubit extends Cubit<BookTripWithTGStates>{
     result.fold(
             (failure){
               isLoadingRequest=false;
-              print(failure.errMessage);
               emit(FailureSendRequestToBookTrip(errMessage: failure.errMessage));
             },
             (success){

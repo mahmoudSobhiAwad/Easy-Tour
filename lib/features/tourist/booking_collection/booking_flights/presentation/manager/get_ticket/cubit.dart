@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/data/flight_models/get_tickets_model.dart';
@@ -9,10 +10,15 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_flig
 class GetTicketCubit extends Cubit<GetTicketsStates>{
   GetTicketCubit({required this.getTicketsRepoImpl}):super(InitialGetTicketsState());
   bool isLoading=false;
+  TextEditingController departureController=TextEditingController();
+  TextEditingController returnController=TextEditingController();
+  TextEditingController fromController=TextEditingController();
+  TextEditingController toController=TextEditingController();
   List<IatCodeModel>toIatCodesList=[];
   List<IatCodeModel>fromIatCodesList=[];
   List<GetTicketsModel> ticketsList=[];
   bool enableReturn=false;
+  bool showOccupancy=false;
   DateTime? departureDate;
   DateTime? returnDate;
   int adultNum=0;
@@ -22,6 +28,7 @@ class GetTicketCubit extends Cubit<GetTicketsStates>{
   String accessToken='';
   IatCodeModel? toPlace;
   List<String> cabinTypes=["ECONOMY", "PREMIUM_ECONOMY", "BUSINESS", "FIRST"];
+  String pickedCabin='ECONOMY';
   final GetTicketsRepoImpl getTicketsRepoImpl;
 
   void changeEnablingReturn(){
@@ -30,6 +37,9 @@ class GetTicketCubit extends Cubit<GetTicketsStates>{
   }
 
   void swapBetweenFromTo(){
+    String text=fromController.text;
+    fromController.text=toController.text;
+    toController.text=text;
     IatCodeModel? tempModel=fromPlace;
     fromPlace=toPlace;
     toPlace=tempModel;
@@ -63,39 +73,37 @@ class GetTicketCubit extends Cubit<GetTicketsStates>{
   }
 
   Future<void>getListOfFromAirPortTextSearch(String text)async{
-
-    fromIatCodesList.clear();
     if(text.isNotEmpty&&text.trim().isNotEmpty){
       if(debounce?.isActive??false){
         debounce?.cancel();
       }
       else{
-        commonGetListSearch(text,fromIatCodesList);
+        await commonGetListSearch(text,true);
       }
     }
     else{
       fromIatCodesList.clear();
+      emit(ClearIatCodesState());
     }
   }
 
   Future<void>getListOfToAirPortTextSearch(String text)async{
-
-    toIatCodesList.clear();
     if(text.isNotEmpty&&text.trim().isNotEmpty){
       if(debounce?.isActive??false){
         debounce?.cancel();
       }
       else{
-        commonGetListSearch(text,toIatCodesList);
+       await commonGetListSearch(text,false);
       }
     }
     else{
       toIatCodesList.clear();
+      emit(ClearIatCodesState());
     }
   }
 
-  void commonGetListSearch(String text,List<IatCodeModel>iatCodeList) {
-    debounce=Timer(const Duration(milliseconds: 250), () async{
+  Future<void> commonGetListSearch(String text,bool fromOrTo) async{
+    debounce=Timer(const Duration(milliseconds:1200), () async{
       emit(LoadingGetIatCodesState());
       var result=await getTicketsRepoImpl.getMatchedAirPorts(query: text);
       result.fold(
@@ -103,10 +111,18 @@ class GetTicketCubit extends Cubit<GetTicketsStates>{
             emit(FailureGetIatCodesState(errMessage: failure.errMessage));
           },
               (result) {
-            iatCodeList.clear();
-            for(var item in result){
-              iatCodeList.add(item);
-            }
+                if(fromOrTo){
+                  fromIatCodesList.clear();
+                  for(var item in result){
+                    fromIatCodesList.add(item);
+                  }
+                }
+                else{
+                  toIatCodesList.clear();
+                  for(var item in result){
+                    toIatCodesList.add(item);
+                  }
+                }
             emit(SuccessGetIatCodesState());
           });
     });
@@ -132,43 +148,72 @@ class GetTicketCubit extends Cubit<GetTicketsStates>{
     isLoading=true;
     var result=await getTicketsRepoImpl.getTicketsOfTripByOfferSearch(data: GetTicketsModel(
         travelersTypes: travelersType(),
-        cabinType: cabinTypes[0],
+        cabinType: pickedCabin,
         goingTrip: OriginDestinations(
           departureReturnTime:DateFormat('yyyy-MM-dd').format(returnDate!),
           departureIatCode: toPlace?.airportCode,
           departureLeaveTime: DateFormat('yyyy-MM-dd').format(departureDate!),
           originIatCode: fromPlace?.airportCode,)).toJson(), accessToken: accessToken);
+
     result.fold((failure)async {
       isLoading=false;
-      if(failure.statusCode==401){
-        await getAccessToken().then((value){
-          getListOfTickets();
-        });
-      }
-      else{
-      emit(FailureGetTicketsState(errMessage: failure.errMessage));
-      }
+        emit(FailureGetTicketsState(errMessage: failure.errMessage));
     }, (tickets) {
       ticketsList.clear();
       isLoading=false;
+
       for(var item in tickets){
         ticketsList.add(item);
       }
-      emit(SuccessGetAccessTokenState());
+      emit(SuccessGetTicketsState(ticketsList: ticketsList));
     });
   }
   
   List<String>travelersType(){
     List<String>travelers=[];
-
+    for(int i=0;i<adultNum;i++){
+      travelers.add('ADULT');
+    }
     for(int i=0;i<childNum;i++){
       travelers.add('CHILD');
     }
 
-    for(int i=0;i<adultNum;i++){
-      travelers.add('ADULT');
-    }
+
 
     return travelers;
+  }
+
+  void enableChangeAdultOrChild(){
+    showOccupancy=!showOccupancy;
+    emit(ChangeShowOccupancyState());
+  }
+
+  void changeCabinType(int index){
+    pickedCabin=cabinTypes[index];
+    emit(ChangeCabinTypeState());
+  }
+
+  void changeDepartureOrReturnDate({required DateTime time,required bool departure}){
+    if(departure){
+      departureController.text=time.toString();
+      departureDate=time;
+    }
+    else{
+      returnController.text=time.toString();
+      returnDate=time;
+    }
+    emit(ChangeDepartureOrArrivalDateState());
+  }
+
+  void pickIatCodesFromAndTo({required IatCodeModel model,required bool from}){
+    if(from){
+      fromPlace=model;
+      fromController.text='${model.countryName}-${model.cityName}';
+    }
+    else{
+      toPlace=model;
+      toController.text='${model.countryName}-${model.cityName}';
+    }
+    emit(ChangeFromToPlaceState());
   }
 }

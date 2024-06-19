@@ -68,7 +68,6 @@ class OccupanciesWidget extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(8),
       child: SingleChildScrollView(
-
         child: Column(
           children:  [
             Align(

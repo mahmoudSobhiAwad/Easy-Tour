@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_flights/data/flight_models/iata_codes_model.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_result/all_custom_painter.dart';
 
 class FlightResultAppBar extends StatelessWidget {
@@ -8,10 +9,14 @@ class FlightResultAppBar extends StatelessWidget {
     super.key,
     required this.height,
     required this.width,
+    required this.dest,
+    required this.origin,
   });
 
   final double height;
   final double width;
+  final IatCodeModel origin;
+  final IatCodeModel dest;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +38,11 @@ class FlightResultAppBar extends StatelessWidget {
                 painter: ArcPainter(width: width,height: height),
                 size: Size(width*0.7,height*0.05),
               ),
-              Column(
+              const Column(
                 children: [
-                  const RotatedBox(
+                  RotatedBox(
                       quarterTurns: 1,
                       child: Icon(Icons.airplanemode_on,color: Colors.white,)),
-                  Text('1 hr 40 M',style: CustomTextStyle.fontBold16.copyWith(color: Colors.white),),
                 ],
               )
             ],
@@ -48,8 +52,8 @@ class FlightResultAppBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('NYC\nNew York City',style: CustomTextStyle.fontBold16.copyWith(color: Colors.white),textAlign: TextAlign.center,),
-                Text('CAI\nCairo',style: CustomTextStyle.fontBold16.copyWith(color: Colors.white,),textAlign: TextAlign.center,),
+                Text('${origin.airportCode}\n${origin.cityName}',style: CustomTextStyle.fontBold16.copyWith(color: Colors.white),textAlign: TextAlign.center,),
+                Text('${dest.airportCode}\n${dest.cityName}',style: CustomTextStyle.fontBold16.copyWith(color: Colors.white,),textAlign: TextAlign.center,),
               ],
             ),
           ),

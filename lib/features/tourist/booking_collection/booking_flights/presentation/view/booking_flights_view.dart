@@ -7,6 +7,7 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_flig
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/manager/get_ticket/cubit.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/manager/get_ticket/states.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_request_body.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_result/flight_result_view.dart';
 import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/intro_trip_history.dart';
 
 class BookingFlightView extends StatelessWidget {
@@ -16,7 +17,7 @@ class BookingFlightView extends StatelessWidget {
     final double width=BasicDimension.screenWidth(context);
     final double height=BasicDimension.screenHeight(context);
     return BlocProvider(
-      create: (context)=>GetTicketCubit(getTicketsRepoImpl: getIt.get<GetTicketsRepoImpl>()),
+      create: (context)=>GetTicketCubit(getTicketsRepoImpl: getIt.get<GetTicketsRepoImpl>())..getAccessToken(),
       child: BlocConsumer<GetTicketCubit,GetTicketsStates>(
           builder: (context,state){
             var cubit=BlocProvider.of<GetTicketCubit>(context);
@@ -26,7 +27,12 @@ class BookingFlightView extends StatelessWidget {
                 FlightRequestView(width: width, height: height,cubit: cubit,)][1],
             );
           },
-          listener: (context,state){}),);
+          listener: (context,state){
+            var cubit=BlocProvider.of<GetTicketCubit>(context);
+            if(state is SuccessGetTicketsState){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>FlightResultView(ticketsList: state.ticketsList, origin: cubit.fromPlace!,dest: cubit.toPlace!,)));
+            }
+          }),);
   }
 }
 

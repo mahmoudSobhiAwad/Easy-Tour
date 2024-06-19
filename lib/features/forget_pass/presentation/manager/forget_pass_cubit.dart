@@ -52,7 +52,6 @@ class ForgetPassCubit extends Cubit<ForgetPasswordState>{
     }
   } //first method
   void checkOtp(){
-    print(otpController.text);
     if(validatorForgerPass()){
       if(otpController.text==resetPasswordCode)
       {
@@ -120,14 +119,12 @@ class ForgetPassCubit extends Cubit<ForgetPasswordState>{
     }
   }//first method to send code according to email
   Future<void>resetTouristPassword()async{
-    print(SetAppState.prefs?.get('token'));
     if(passTouristController.text==confirmPassController.text&&passTouristController.text.isNotEmpty){
       showLoading=true;
       emit(LoadingResetPasswordState());
       var result=await forgetPassRepo.resetTouristPassword({"newPassword":passTouristController.text},);
       result.fold((failure){
         showLoading=false;
-        print(failure.errMessage);
         emit(ErrorResetPasswordState(errorChangePassword: failure.errMessage));
       }, (model){
         showLoading=false;
