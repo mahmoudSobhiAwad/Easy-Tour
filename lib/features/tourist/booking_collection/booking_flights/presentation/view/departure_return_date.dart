@@ -26,9 +26,11 @@ class DepartureAndReturnDate extends StatelessWidget {
               text: 'Departure Date',
               customTextFormField: SizedBox(
                 width: width*0.6,
-                child: const CustomTextFormField(
+                child:  CustomTextFormField(
                   border: 10,
-                  prefix: IconButton(onPressed: null, icon: Icon(Icons.date_range_outlined)),),
+                  prefix: IconButton(onPressed: (){
+                    showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime(DateTime.now().year,DateTime.now().month+1));
+                  }, icon:const Icon(Icons.date_range_outlined)),),
               ),),
             Column(
               children: [

@@ -10,7 +10,7 @@ class FlightResultView extends StatelessWidget {
     final double height=BasicDimension.screenHeight(context);
     final double width=BasicDimension.screenWidth(context);
     return Scaffold(
-      backgroundColor: thirdColor,
+      backgroundColor: const Color(0xffe7e7e7),
       body: SafeArea(
         child: Column(
           children: [

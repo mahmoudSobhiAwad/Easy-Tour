@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/manager/get_ticket/cubit.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/departure_return_date.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_result/flight_result_view.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/intro_flight_request.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/origin_departure_place.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/traveler_num_trip_type.dart';
 class FlightRequestView extends StatelessWidget {
-  const FlightRequestView({super.key,required this.width,required this.height});
+  const FlightRequestView({super.key,required this.width,required this.height,required this.cubit});
   final double width;
   final double height;
+  final GetTicketCubit cubit;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,7 +34,7 @@ class FlightRequestView extends StatelessWidget {
                 child:  Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    OriginAndDeparturePlace(width: width),
+                    OriginAndDeparturePlace(width: width,cubit: cubit,height: height,),
                     SizedBox(height: height*0.02,),
                     DepartureAndReturnDate(width: width, height: height),
                     SizedBox(height: height*0.02,),
