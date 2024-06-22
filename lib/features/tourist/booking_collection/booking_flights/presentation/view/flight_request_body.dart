@@ -18,7 +18,7 @@ class FlightRequestView extends StatelessWidget {
     return SafeArea(
       child: Stack(
         children: [
-          IntroInFlightBooking(height: height),
+          IntroInFlightBooking(height: height,name: cubit.name,profileUrl: cubit.profileUrl,),
           Positioned(
             top: height*0.22,
             left: 0,

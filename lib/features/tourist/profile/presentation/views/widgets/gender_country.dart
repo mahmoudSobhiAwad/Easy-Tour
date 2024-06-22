@@ -39,7 +39,6 @@ class GenderAndCountry extends StatelessWidget {
           {
             cubit.editCountry(value);
           },
-
           ),
         ],
       ),

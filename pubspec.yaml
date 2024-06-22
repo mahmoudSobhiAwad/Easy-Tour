@@ -98,14 +98,14 @@ flutter:
   fonts:
     - family: grover
       fonts:
-        - asset: fonts/login_font/IrishGrover-Regular.ttf
+        - asset: fonts/title_fonts/IrishGrover-Regular.ttf
     - family: inter
       fonts:
-        - asset: fonts/login_font/Inter-Regular.otf
+        - asset: fonts/basic_fonts/Inter-Regular.otf
           weight: 700
     - family: ABeeZee
       fonts:
-          - asset: fonts/login_font/ABeeZee-Regular.ttf
+          - asset: fonts/basic_fonts/ABeeZee-Regular.ttf
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/on_boarding_images/

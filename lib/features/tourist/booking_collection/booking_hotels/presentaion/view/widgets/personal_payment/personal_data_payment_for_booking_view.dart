@@ -27,7 +27,6 @@ class PersonalDataPaymentForHotelBookingView extends StatelessWidget {
               onWillPop: ()async{
                 if(cubit.currentPage==0){
                   return true;
-
                 }
                 else{
                   cubit.toggleBetweenPages(0);
@@ -80,20 +79,20 @@ class PersonalDataPaymentForHotelBookingView extends StatelessWidget {
           },
           listener: (context,state){
             if(state is FailureSendCheckOfBooking){
-            showDialog(context: context, builder: (context)=> ContainerAlertWidget(
-            types: AlertTypes.failed,
-            onTap: (){
-            Navigator.pop(context);
-            },
-            content: '${state.errMessage}',));
+              showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+                types: AlertTypes.failed,
+                onTap: (){
+                  Navigator.pop(context);
+                  },
+                content: '${state.errMessage}',));
             }
             else if(state is FailurePaymentOfBooking){
-            showDialog(context: context, builder: (context)=> ContainerAlertWidget(
-            types: AlertTypes.failed,
-            onTap: (){
-            Navigator.pop(context);
-            },
-            content: '${state.errMessage}',));
+              showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+                types: AlertTypes.failed,
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                content: '${state.errMessage}',));
             }
           }),);
   }

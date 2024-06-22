@@ -27,7 +27,7 @@ final double width;
           )],
           color: Color((0xff5F92D9))
         ),
-        child:Text('Hi Welcome', style: CustomTextStyle.signINTitle.copyWith(color: Colors.white),textAlign:TextAlign.start,),
+        child:Text('Hi Welcome', style: CustomTextStyle.fontGrover40.copyWith(color: Colors.white),textAlign:TextAlign.start,),
       ),
     );
   }

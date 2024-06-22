@@ -37,22 +37,26 @@ class FlightTicketInDetailsView extends StatelessWidget {
               );
             }, itemCount: model.goingItinerariesList?.segments.length??0),
           ),
-          SizedBox(height: height*0.04,),
-          const Text('Return Trip',style: CustomTextStyle.fontBold18,),
-          SizedBox(
-            height: height*0.12,
-            child: ListView.separated(itemBuilder: (context,index){
-              return CodesWithDividerAndDuration(width: width, segments: model.returnItinerariesList!.segments[index],duration: model.returnItinerariesList?.duration,);
-            }, separatorBuilder: (context,index){
-              return SizedBox(
-                height: height*0.03,
-                child: const VerticalDivider(
-                  width: 2,
-                  thickness: 1,
-                  color: entertainmentColor,
-                ),
-              );
-            }, itemCount: model.goingItinerariesList?.segments.length??0),
+          if(model.returnItinerariesList!=null)Column(
+            children: [
+              SizedBox(height: height*0.04,),
+              const Text('Return Trip',style: CustomTextStyle.fontBold18,),
+              SizedBox(
+                height: height*0.12,
+                child: ListView.separated(itemBuilder: (context,index){
+                  return CodesWithDividerAndDuration(width: width, segments: model.returnItinerariesList!.segments[index],duration: model.returnItinerariesList?.duration,);
+                }, separatorBuilder: (context,index){
+                  return SizedBox(
+                    height: height*0.03,
+                    child: const VerticalDivider(
+                      width: 2,
+                      thickness: 1,
+                      color: entertainmentColor,
+                    ),
+                  );
+                }, itemCount: model.goingItinerariesList?.segments.length??0),
+              ),
+            ],
           ),
           SizedBox(height: height*0.025,),
           DashedLine(height: 2, color: secondaryColor, dashWidth: 3, dashGap: 2, length: width),

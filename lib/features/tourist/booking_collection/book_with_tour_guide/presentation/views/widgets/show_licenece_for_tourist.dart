@@ -26,7 +26,7 @@ class ShowGuideLicenceForTourist extends StatelessWidget {
               ...List.generate(licences.length, (index) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(['Ministry ID','Syndicate ID'][index],style: CustomTextStyle.fontSecondaryBold22,),
+                  Text(['Ministry ID','Syndicate ID'][index],style: CustomTextStyle.fontGrover22,),
                   Padding(
                     padding:const EdgeInsets.only(bottom: 20),
                     child: Container(
@@ -46,7 +46,7 @@ class ShowGuideLicenceForTourist extends StatelessWidget {
               ),
               ),
               const SizedBox(height: 10,),
-              const Text('CV',style: CustomTextStyle.fontSecondaryBold22,),
+              const Text('CV',style: CustomTextStyle.fontGrover22,),
               cvUrl==null?
               Container(
                 padding: const EdgeInsets.all(5),

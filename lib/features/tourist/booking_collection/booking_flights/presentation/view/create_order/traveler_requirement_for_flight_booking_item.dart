@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/manager/create_order/cubit.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/create_order/document_data.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/create_order/issuance_data.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/create_order/traveler_data.dart';
 class TravelerRequirementsForFlightBookingItem extends StatelessWidget {
-  const TravelerRequirementsForFlightBookingItem({super.key,required this.width,required this.height});
+  const TravelerRequirementsForFlightBookingItem({super.key,required this.width,required this.height,required this.cubit,required this.index});
   final double width;
   final double height;
+  final CreateFlightOrderCubit cubit;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,36 +24,14 @@ class TravelerRequirementsForFlightBookingItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Traveler 1',style: CustomTextStyle.fontBold14,),
+            Text('Traveler ${index+1}',style: CustomTextStyle.fontBold14,),
             SizedBox(height: height*0.01,),
-            TravelerData(width: width, height: height),
+            TravelerData(width: width, height: height,index: index,cubit: cubit,),
             SizedBox(height: height*0.01,),
-            DocumentData(height: height, width: width),
+            DocumentData(height: height, width: width,index: index,cubit: cubit,),
             SizedBox(height: height*0.01,),
-            IssuanceData(width: width, height: height),
+            IssuanceData(width: width, height: height,cubit: cubit,index: index),
             SizedBox(height: height*0.01,),
-            Row(
-              children: [
-                const Text('Are you the holder ?',style: CustomTextStyle.fontBold16,),
-                SizedBox(width: width*0.1,),
-                ...List.generate(2, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: Container(
-                      padding: const EdgeInsets.all(3),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: thirdColor),
-                      ),
-                      child: const CircleAvatar(
-                        backgroundColor: whatsAppColor,
-                        radius: 10,
-                      ),
-                    ),
-                  );
-                }),
-              ],
-            ),
           ],
         ),
       ),

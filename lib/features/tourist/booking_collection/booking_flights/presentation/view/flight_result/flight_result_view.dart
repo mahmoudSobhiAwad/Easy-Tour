@@ -6,10 +6,11 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_flig
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_result/flight_result_list.dart';
 
 class FlightResultView extends StatelessWidget {
-  const FlightResultView({super.key,required this.ticketsList,required this.origin,required this.dest});
+  const FlightResultView({super.key,required this.ticketsList,required this.origin,required this.dest,required this.travelerNum});
   final List<GetTicketsModel>ticketsList;
   final IatCodeModel origin;
   final IatCodeModel dest;
+  final int travelerNum;
   @override
   Widget build(BuildContext context) {
     final double height=BasicDimension.screenHeight(context);
@@ -20,7 +21,7 @@ class FlightResultView extends StatelessWidget {
         child: Column(
           children: [
             FlightResultAppBar(height: height, width: width,origin: origin,dest: dest,),
-            FlightResultList(height: height, width: width,ticketsList: ticketsList,),
+            FlightResultList(height: height, width: width,ticketsList: ticketsList,travelerNum: travelerNum,),
           ],
         ),
       ),

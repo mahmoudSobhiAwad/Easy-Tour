@@ -3,9 +3,10 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_flig
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/manager/check_price/check_price_states.dart';
 
 class CheckPriceCubit extends Cubit <CheckPriceStates>{
-  CheckPriceCubit({required this.getTicketsRepoImpl,required this.index}):super(InitialCheckPriceState());
+  CheckPriceCubit({required this.getTicketsRepoImpl,required this.index,}):super(InitialCheckPriceState());
   bool isLoading=false;
   int index;
+
   String accessToken='';
   final GetTicketsRepoImpl getTicketsRepoImpl;
   Future<void>getAccessToken()async{
@@ -24,14 +25,19 @@ class CheckPriceCubit extends Cubit <CheckPriceStates>{
   Future<void>checkPrice()async{
     isLoading=true;
     emit(LoadingCheckPriceState());
+
     var response=await getTicketsRepoImpl.getOfferPrice(accessToken: accessToken, index: index);
     response.fold((failure)async{
       isLoading=false;
       if(failure.statusCode==401){
         await getAccessToken();
       }
+      else if(failure.statusCode==500){
+        emit(FailureCheckPriceState(errMessage: 'Try Another Trip or Select Again'));
+      }
       emit(FailureCheckPriceState(errMessage: failure.errMessage));
     }, (data) {
+      isLoading=false;
       emit(SuccessCheckPriceState());
     });
   }

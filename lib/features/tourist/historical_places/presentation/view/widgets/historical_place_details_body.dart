@@ -33,7 +33,7 @@ class DetailsOfPlaceWithText extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Giza Pyramids',style: CustomTextStyle.fontSecondaryBold22,),
+                const Text('Giza Pyramids',style: CustomTextStyle.fontGrover22,),
                 FavouritePlaceIcon(width: width),
               ],
             ),

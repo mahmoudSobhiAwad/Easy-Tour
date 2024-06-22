@@ -6,9 +6,13 @@ class IntroInFlightBooking extends StatelessWidget {
   const IntroInFlightBooking({
     super.key,
     required this.height,
+    required this.name,
+    required this.profileUrl
   });
 
   final double height;
+  final String name;
+  final String profileUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +24,9 @@ class IntroInFlightBooking extends StatelessWidget {
           children: [
             Row(
               children: [
-                ProfilePicWidget(imageUrl: 'https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_0.jpg', height: height*0.07),
+                ProfilePicWidget(imageUrl: profileUrl, height: height*0.07),
                 const SizedBox(width: 5,),
-                Text('Good Morning,sara',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: Colors.white),),
+                Text('Good Morning,$name',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: Colors.white),),
               ],
             ),
             SizedBox(height: height*.02,),

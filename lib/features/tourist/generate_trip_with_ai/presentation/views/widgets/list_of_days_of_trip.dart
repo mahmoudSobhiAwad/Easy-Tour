@@ -38,7 +38,7 @@ class ListOfDaysOfTrip extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 20.0),
-                    child: Text('Day ${index+1}',style: CustomTextStyle.fontSecondaryBold22,),
+                    child: Text('Day ${index+1}',style: CustomTextStyle.fontGrover22,),
                   ),
                   index==currentDay?
                   Container(

@@ -19,7 +19,7 @@ class EntertainmentPlaceItem extends StatelessWidget {
         children:
         [
           Image.asset(cardModel.imagePath,height: height*0.12,),
-          Text(cardModel.labelName,style: CustomTextStyle.homeEntityName.copyWith(fontSize: 14)),
+          Text(cardModel.labelName,style: CustomTextStyle.fontGrover18.copyWith(fontSize: 14)),
         ],
       ),
     );

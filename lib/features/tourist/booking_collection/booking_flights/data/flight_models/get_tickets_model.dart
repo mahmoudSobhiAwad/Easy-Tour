@@ -11,35 +11,39 @@ class GetTicketsModel{
   List<String>?travelersTypes;
   String cabinType;
   GetTicketsModel({this.price,this.instantBooking=false,this.avaSeats,this.lastTicketTime,this.goingItinerariesList,this.returnItinerariesList,this.goingTrip,this.travelersTypes,this.cabinType='BUSINESS'});
-
-  factory GetTicketsModel.fromJson(Map<String,dynamic>json){
+  factory GetTicketsModel.fromJson(Map<String,dynamic>json,bool check){
     return GetTicketsModel(
       price: json['price']['grandTotal'],
       lastTicketTime: json['lastTicketingDate'],
       instantBooking: json['instantTicketingRequired'],
       goingItinerariesList: Itineraries.fromJson(json['itineraries'][0],),
-      returnItinerariesList:Itineraries.fromJson(json['itineraries'][1],),
+      returnItinerariesList:check?Itineraries.fromJson(json['itineraries'][1],):null,
     );
   }
+
+
+
   Map<String,dynamic>toJson(){
     return {
+      "currencyCode": "USD",
       "originDestinations":[
         {
           "id": "1",
-          "originLocationCode": "CAI",
-          "destinationLocationCode": "STN",
+          "originLocationCode": "${goingTrip?.originIatCode}",
+          "destinationLocationCode": "${goingTrip?.departureIatCode}",
           "departureDateTimeRange": {
-            "date": "2024-06-20"
+            "date": "${goingTrip?.departureLeaveTime}"
           }
         },
-        goingTrip?.departureReturnTime==null?null:{
+        if(goingTrip?.departureReturnTime!=null) {
           "id": "2",
-          "originLocationCode": "STN",
-          "destinationLocationCode": "CAI",
+          "originLocationCode": "${goingTrip?.departureIatCode}",
+          "destinationLocationCode": "${goingTrip?.originIatCode}",
           "departureDateTimeRange": {
-            "date": "2024-06-23"
+            "date": "${goingTrip?.departureReturnTime}"
           }
         },
+
       ],
       "travelers": [...List.generate(travelersTypes?.length??0, (index) => {
         'id':(index+1).toString(),
@@ -49,7 +53,7 @@ class GetTicketsModel{
         "GDS"
       ],
       "searchCriteria": {
-        "maxFlightOffers": 5,
+        "maxFlightOffers": 3,
         "flightFilters": {
           "cabinRestrictions": [
             {
@@ -67,6 +71,7 @@ class GetTicketsModel{
 }
 
 
+
 class Itineraries{
   String duration;
   List<Segments> segments;
@@ -79,17 +84,21 @@ class Itineraries{
     }
 
     return Itineraries(
-        duration: json['duration'],
+        duration: parseDuration(json['duration']),
         segments: segmentsList);
   }
 }
 class Segments{
   DepartureOrLeaveOfSegments departureSeg;
   DepartureOrLeaveOfSegments arrivalSeg;
-  Segments({required this.arrivalSeg,required this.departureSeg});
+  String partDuration;
+  Segments({required this.arrivalSeg,required this.departureSeg,required this.partDuration});
   
   factory Segments.fromJson(Map<String,dynamic>json){
-    return Segments(arrivalSeg: DepartureOrLeaveOfSegments.fromJson(json['arrival']), departureSeg: DepartureOrLeaveOfSegments.fromJson(json['departure']));
+    return Segments(
+        partDuration: parseDuration(json['duration'],),
+        arrivalSeg: DepartureOrLeaveOfSegments.fromJson(json['arrival']),
+        departureSeg: DepartureOrLeaveOfSegments.fromJson(json['departure']));
   }
   
 }
@@ -99,7 +108,9 @@ class DepartureOrLeaveOfSegments{
   String timeToLeave;
   DepartureOrLeaveOfSegments({required this.iatCode,required this.timeToLeave});
   factory DepartureOrLeaveOfSegments.fromJson(Map<String,dynamic>json){
-    return DepartureOrLeaveOfSegments(iatCode: json['iataCode'], timeToLeave: DateFormat('d MMM yyyy h:mm a').format(DateTime.parse(json['at'])),);
+    return DepartureOrLeaveOfSegments(
+      iatCode: json['iataCode'],
+      timeToLeave: DateFormat('d MMM yyyy h:mm a').format(DateTime.parse(json['at'])),);
   }
 }
 class OriginDestinations{
@@ -108,4 +119,32 @@ class OriginDestinations{
   String ? departureLeaveTime;
   String ? departureReturnTime;
   OriginDestinations({required this.departureIatCode,required this.departureLeaveTime,required this.originIatCode,this.departureReturnTime});
+}
+
+String parseDuration(String duration) {
+  final regex = RegExp(r'PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?');
+  final match = regex.firstMatch(duration);
+
+  if (match != null) {
+    final hours = int.tryParse(match.group(1) ?? '0') ?? 0;
+    final minutes = int.tryParse(match.group(2) ?? '0') ?? 0;
+    final seconds = int.tryParse(match.group(3) ?? '0') ?? 0;
+
+    final duration = Duration(hours: hours, minutes: minutes, seconds: seconds);
+    return formatDuration(duration);
+  } else {
+    return 'Invalid Duration';
+  }
+}
+
+String formatDuration(Duration duration) {
+  final hours = duration.inHours;
+  final minutes = duration.inMinutes.remainder(60);
+  final seconds = duration.inSeconds.remainder(60);
+
+  final hoursStr = hours.toString().padLeft(2, '0');
+  final minutesStr = minutes.toString().padLeft(2, '0');
+  final secondsStr = seconds.toString().padLeft(2, '0');
+
+  return '$hoursStr:$minutesStr:$secondsStr';
 }

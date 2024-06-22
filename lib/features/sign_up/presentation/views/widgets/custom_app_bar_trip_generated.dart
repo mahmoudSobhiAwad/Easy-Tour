@@ -36,7 +36,7 @@ class CustomGeneratedAiTripAppBar extends StatelessWidget {
           const Expanded(child: SizedBox(width: 5,)),
           appBarTitle==null?const SizedBox():SizedBox(
               width: appBarWidth,
-              child: Text('$appBarTitle',style:appBarStyle??CustomTextStyle.homePartTitle.copyWith(fontSize: 28,),maxLines: 2,textAlign: TextAlign.center,)),
+              child: Text('$appBarTitle',style:appBarStyle??CustomTextStyle.fontGrover30.copyWith(fontSize: 28,),maxLines: 2,textAlign: TextAlign.center,)),
           const Expanded(child: SizedBox(width: 5,)),
           menuToSaveTrip??const Expanded(child: SizedBox(width: 5,)),
         ],

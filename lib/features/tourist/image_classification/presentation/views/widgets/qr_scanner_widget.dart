@@ -16,7 +16,7 @@ class QrScannerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const TitleOfCreateAcc(mainStyle: CustomTextStyle.homePartTitle,
+        const TitleOfCreateAcc(mainStyle: CustomTextStyle.fontGrover30,
             secondaryStyle: CustomTextStyle.fontBold21,
             maxLines: 2,
             mainText: 'Optical Scanner ',

@@ -32,7 +32,7 @@ class FlightTicketItem extends StatelessWidget {
           children: [
             DateWithFlightRoute(width: width, height: height,itineraries: model.goingItinerariesList,),
             SizedBox(height: height*0.03,),
-            DateWithFlightRoute(width: width, height: height,itineraries: model.returnItinerariesList),
+            if(model.returnItinerariesList!=null)DateWithFlightRoute(width: width, height: height,itineraries: model.returnItinerariesList),
             SizedBox(height: height*0.04,),
             DashedLine(height: 2, color: Colors.black, dashWidth: 3, dashGap: 2, length: width),
             SizedBox(height: height*0.033,),

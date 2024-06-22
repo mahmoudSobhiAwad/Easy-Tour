@@ -31,7 +31,7 @@ class BlurTextOverImage extends StatelessWidget {
                   // totalRepeatCount: 3,
                   // isRepeatingAnimation: false,
                   animatedTexts: [
-                    TyperAnimatedText(onBoardList[cubit!.currIndex].text,textStyle:CustomTextStyle.onBoardingTitle,speed:const Duration(milliseconds: 70)),
+                    TyperAnimatedText(onBoardList[cubit!.currIndex].text,textStyle:CustomTextStyle.fontBold48,speed:const Duration(milliseconds: 70)),
                   ])),
               //child: Text(onBoardList[cubit!.currIndex].text,style: CustomTextStyle.onBoardingTitle,)),
         ),

@@ -36,7 +36,7 @@ class GenerateAiTripIntro extends StatelessWidget {
                     )],
                   borderRadius: BorderRadius.circular(30),
                   color: const Color(0xffFFE7CD).withOpacity(0.7)),
-              child:  TitleOfCreateAcc(mainStyle: CustomTextStyle.homePartTitle.copyWith(color: Colors.black),
+              child:  TitleOfCreateAcc(mainStyle: CustomTextStyle.fontGrover30.copyWith(color: Colors.black),
                 secondaryStyle: CustomTextStyle.fontBold16.copyWith(color: Colors.black),
                 mainText: 'Plan Your Trip With AI',
                 secondaryText: 'you can select the places you want to visit, the numbers of Days and the type of the tourism you prefer.',),

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
+import 'package:prepare_project/core/widget/custom_alert_widget/alert_container.dart';
+import 'package:prepare_project/core/widget/custom_alert_widget/alert_types.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/data/flight_models/get_tickets_model.dart';
@@ -14,9 +16,10 @@ import 'package:prepare_project/features/tourist/booking_collection/booking_flig
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/flight_details/ticket_info.dart';
 
 class FlightDetailsView extends StatelessWidget {
-  const FlightDetailsView({super.key,required this.model,required this.index});
+  const FlightDetailsView({super.key,required this.model,required this.index,required this.travelerNum});
   final GetTicketsModel model;
   final int index;
+  final int travelerNum;
   @override
   Widget build(BuildContext context) {
     final double width=BasicDimension.screenWidth(context);
@@ -57,8 +60,16 @@ class FlightDetailsView extends StatelessWidget {
           listener: (context,state){
             if(state is SuccessCheckPriceState){
               Navigator.push(context, MaterialPageRoute(builder: (context){
-                return const CreateFlightOrderView();
+                return CreateFlightOrderView(travelerNum: travelerNum,);
               }));
+            }
+            else if(state is FailureCheckPriceState){
+              showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+                types: AlertTypes.failed,
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                content: '${state.errMessage}',));
             }
           }) ,
     );

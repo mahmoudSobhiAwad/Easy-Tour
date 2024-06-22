@@ -41,7 +41,7 @@ class OriginAndDeparturePlace extends StatelessWidget {
                                   onTap: (){
                                     cubit.pickIatCodesFromAndTo(model: cubit.fromIatCodesList[index], from: true);
                                   },
-                                  child: Text('${cubit.fromIatCodesList[index].countryName}-${cubit.fromIatCodesList[index].cityName}')))
+                                  child: Text('${cubit.fromIatCodesList[index].countryName}-${cubit.fromIatCodesList[index].cityName}-${cubit.fromIatCodesList[index].airportCode}')))
                             ]
                         );
                       }
@@ -72,7 +72,7 @@ class OriginAndDeparturePlace extends StatelessWidget {
                                   onTap: (){
                                     cubit.pickIatCodesFromAndTo(model: cubit.toIatCodesList[index], from: false);
                                   },
-                                  child: Text('${cubit.toIatCodesList[index].countryName}-${cubit.toIatCodesList[index].cityName}')))
+                                  child: Text('${cubit.toIatCodesList[index].countryName}-${cubit.toIatCodesList[index].cityName}-${cubit.toIatCodesList[index].airportCode}')))
                             ]
                         );
                       }

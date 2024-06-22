@@ -34,7 +34,7 @@ class CodesWithDividerAndDuration extends StatelessWidget {
             color: ticketBasicColor,
             borderRadius: BorderRadius.circular(5),
           ),
-          child: Text(duration??"",style: CustomTextStyle.font16BoldWhite.copyWith(fontSize: 14),),
+          child: Text(segments.partDuration,style: CustomTextStyle.font16BoldWhite.copyWith(fontSize: 14),),
         ),
         SizedBox(
           width: width*0.2,

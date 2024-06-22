@@ -31,7 +31,7 @@ class GetTicketsRepoImpl implements GetTicketsRepo{
   }
 
   @override
-  Future<Either<Failure,List<GetTicketsModel>>> getTicketsOfTripByOfferSearch({required Map<String, dynamic> data,required String accessToken}) async{
+  Future<Either<Failure,List<GetTicketsModel>>> getTicketsOfTripByOfferSearch({required Map<String, dynamic> data,required String accessToken,required bool check}) async{
     try {
       var response = await apiServices.normalRequest(
           'https://test.api.amadeus.com/v2/shopping/flight-offers',
@@ -42,7 +42,7 @@ class GetTicketsRepoImpl implements GetTicketsRepo{
             'Authorization': 'Bearer $accessToken'
           });
       tempData=response;
-      List<GetTicketsModel> tickets = List<GetTicketsModel>.from(response['data'].map((x) => GetTicketsModel.fromJson(x)));
+      List<GetTicketsModel> tickets = List<GetTicketsModel>.from(response['data'].map((x) => GetTicketsModel.fromJson(x,check)));
       return Right(tickets);
     }
     catch(e){
@@ -92,8 +92,47 @@ class GetTicketsRepoImpl implements GetTicketsRepo{
             'X-HTTP-Method-Override': 'GET',
             'Authorization': 'Bearer $accessToken'
           });
-
+      tempData=response;
       return Right(response);
+    }
+    catch(e){
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      else {
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> createTripOrder({required List<Map<String, dynamic>> data, required String accessToken, String? remark}) async{
+    try {
+      var response = await apiServices.normalRequest(
+          'https://test.api.amadeus.com/v1/booking/flight-orders',
+          data: {
+            "data": {
+              "type": "flight-order",
+              "flightOffers": [
+                tempData['data']['flightOffers'][0],
+              ],
+            'travelers':data,
+            "remarks": {
+              "general": [
+                {
+                  "subType": "GENERAL_MISCELLANEOUS",
+                  "text": "$remark"
+                }
+              ]
+            }
+          },
+          },
+          header: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $accessToken'
+          });
+      tempData=response;
+      return Right(response['data']['id']);
     }
     catch(e){
       if (e is DioException) {

@@ -24,7 +24,7 @@ class CustomDropDownMenu extends StatelessWidget {
       enableSearch: enableSearch??false,
       inputDecorationTheme: InputDecorationTheme(
         floatingLabelBehavior: FloatingLabelBehavior.never,
-          fillColor: fillColor??formFillColor,
+          fillColor: fillColor,
           filled: true,
         enabledBorder: const CustomTextFormField().buildOutlineInputBorder(borderColor: secondaryColor.withOpacity(0.7),borderRadius: 20) ,
       ),

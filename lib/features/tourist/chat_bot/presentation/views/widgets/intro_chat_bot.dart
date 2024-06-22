@@ -16,7 +16,7 @@ class ChatBotIntro extends StatelessWidget {
         padding: EdgeInsets.only(left: 20.0,right: 20,bottom: 20,top: height*0.08),
         child: Column(
           children: [
-            const Text('Tourism Chat Bot',style: CustomTextStyle.homePartTitle,),
+            const Text('Tourism Chat Bot',style: CustomTextStyle.fontGrover30,),
             const SizedBox(height: 20,),
             const Text('You can ask what you want about the tourism in Egypt in different Fields',style: CustomTextStyle.font16Light,textAlign: TextAlign.center,),
             const SizedBox(height: 20,),

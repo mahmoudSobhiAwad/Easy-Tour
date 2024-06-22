@@ -14,7 +14,6 @@ class PickCountry extends StatelessWidget {
        width: width,
       padding:const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: thirdColor,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: secondaryColor),
       ),
