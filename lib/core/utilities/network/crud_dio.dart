@@ -33,11 +33,11 @@ class ApiServices{
     return response.data;
   }
 
-  Future<Map<String,dynamic>>postWithPhoto({required String endPoint,required FormData data,})async {
+  Future<Map<String,dynamic>>postWithPhoto({required String endPoint,required FormData data,bool out=false})async {
     final String? tokenId=SetAppState.prefs?.getString('token');
-    final response=await dio.post('$baseUrl$endPoint',data: data,options: Options(
+    final response=await dio.post('${out?"":baseUrl}$endPoint',data: data,options: Options(
       headers: {
-        'Authorization':'token $tokenId',
+        if(!out)'Authorization':'token $tokenId',
         'Content-Type':'multipart/form-data'
       },
     ),

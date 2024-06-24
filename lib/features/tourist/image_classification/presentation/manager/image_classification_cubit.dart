@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:camera/camera.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/features/tourist/image_classification/data/models/qr_scanned_model.dart';
 import 'package:prepare_project/features/tourist/image_classification/data/repos/qr_scanned_repo.dart';
 import 'package:prepare_project/features/tourist/image_classification/presentation/manager/image_classification_states.dart';
 
@@ -135,9 +137,10 @@ class ImageClassificationCubit extends Cubit<ImageClassificationStates>{
       pickedFile = await cameraController.takePicture();
       emit(PickImageSuccessState());
     } on CameraException catch (e) {
-      emit(FailureTakePicture(errMessage:e));
+      emit(FailureTakePicture(errMessage:e.toString()));
     }
   }
+
   Future<void>pickFromGallery()async{
     imagePicker.pickImage(source: ImageSource.gallery).then((value) {
       if(value!=null){
@@ -145,6 +148,20 @@ class ImageClassificationCubit extends Cubit<ImageClassificationStates>{
         emit(PickImageSuccessState());
       }
     });
+  }
+
+  Future<void>sendImageToClassify()async{
+    FormData formData = FormData.fromMap({
+     if(pickedFile!=null) 'image':[await MultipartFile.fromFile(pickedFile!.path)],
+    });
+    emit(LoadingSendImageToClassify());
+    var result=await qrScannedRepo.sendImageToClassify(data: formData);
+    result.fold((failure) {
+      emit(FailureSendImageToClassify(errMessage: failure.errMessage));
+    }, (success) {
+      emit(SuccessSendImageToClassify(model: QrScannedModel(imageUrl: ImagePathWithType(type: imageType.local,image: pickedFile!.path),rawDate: success)));
+    });
+
   }
 }
 

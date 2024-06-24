@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/features/tourist/image_classification/presentation/manager/image_classification_cubit.dart';
 import 'package:prepare_project/features/tourist/image_classification/presentation/views/widgets/camer_and_flash_and_gallery.dart';
-import 'package:prepare_project/features/tourist/image_classification/presentation/views/widgets/qr_scanner_widget.dart';
+import 'package:prepare_project/features/tourist/image_classification/presentation/views/widgets/scanner_widget.dart';
 
 class ImageClassificationBody extends StatelessWidget {
   const ImageClassificationBody({
@@ -26,7 +26,7 @@ class ImageClassificationBody extends StatelessWidget {
               decoration: const BoxDecoration(color: Colors.white,),
               height: height*0.8,
               width: width,
-              child: QrScannerWidget(height: height,width: width, cubit:cubit),
+              child: ScannerWidget(height: height,width: width, cubit:cubit),
             ),
             Spacer(),
             CameraFlashGallery(height: height, width: width, cubit: cubit),

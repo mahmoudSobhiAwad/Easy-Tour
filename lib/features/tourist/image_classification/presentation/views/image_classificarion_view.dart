@@ -36,6 +36,12 @@ class ImageClassificationView extends StatelessWidget {
              return ImageClassificationInfo(height: height, model: state.model,width: width);
            }));
          }
+
+         else if(state is SuccessSendImageToClassify){
+           Navigator.push(context, MaterialPageRoute(builder: (context){
+             return ImageClassificationInfo(height: height, model: state.model,width: width);
+           }));
+         }
       },),
     );
   }

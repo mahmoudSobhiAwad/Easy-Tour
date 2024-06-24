@@ -32,4 +32,15 @@ class FailureTakePicture extends ImageClassificationStates {
   FailureTakePicture({this.errMessage});
 }
 
+class FailureSendImageToClassify extends ImageClassificationStates {
+  final String?errMessage;
+  FailureSendImageToClassify({this.errMessage});
+}
+class LoadingSendImageToClassify extends ImageClassificationStates {}
+
+class SuccessSendImageToClassify extends ImageClassificationStates {
+  final QrScannedModel model;
+  SuccessSendImageToClassify({required this.model});
+}
+
 

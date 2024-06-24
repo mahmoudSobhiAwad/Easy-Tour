@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
@@ -18,11 +20,13 @@ class ImageClassificationInfo extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Image.network(model.imageUrl??'',
+          model.imageUrl?.type==imageType.network?
+          Image.network(model.imageUrl?.image??'',
             errorBuilder: (w,r,e){
             return const Center(child:Icon(Icons.error,color: Colors.amber,size: 200,));
             },
-            fit: BoxFit.fitHeight,height: height*0.7,width: width,),
+            fit: BoxFit.fitHeight,height: height*0.7,width: width,) :
+          Image.file(File(model.imageUrl!.image!),fit: BoxFit.fitHeight,height: height*0.7,width: width,),
           Align(
             alignment: Alignment.bottomCenter,
             child: Stack(
@@ -39,7 +43,7 @@ class ImageClassificationInfo extends StatelessWidget {
                   child:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Statue Info',style: CustomTextStyle.fontBold16,),
+                      const Text('Monument Info',style: CustomTextStyle.fontBold16,),
                       SizedBox(
                         height: height*0.3,
                         width: width,

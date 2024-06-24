@@ -27,7 +27,7 @@ class ProfileRepoImpl implements ProfileRepo{
   }
 
   @override
-  Future<Either<Failure, String>> updateTourismInfo({ required FormData infoModel})async {
+  Future<Either<Failure, String>> updateTourismInfo({required FormData infoModel})async {
     try
     {
       var data=await apiServices.postWithPhoto(endPoint: '${homeEndPointTourist}profile/profileSetUp', data:infoModel);

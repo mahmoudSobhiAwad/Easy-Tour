@@ -23,5 +23,22 @@ class QrScannedRepoImp implements QrScannedRepo{
       }
     }
   }
+  @override
+  Future<Either<Failure, String>> sendImageToClassify({required FormData data})async {
+    try
+    {
+      var result=await apiServices.postWithPhoto(endPoint: 'http://52.3.241.245:8000/classify_image/', data:data,out: true);
+      String response= result['predictions'];
+      return right(response);
+    }
+    catch(e){
+      if(e is DioException){
+        return left(ServerFailure.fromDioError(e));
+      }
+      else{
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
 
 }
