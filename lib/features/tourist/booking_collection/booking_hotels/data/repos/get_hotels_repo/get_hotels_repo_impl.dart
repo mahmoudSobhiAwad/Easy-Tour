@@ -97,7 +97,8 @@ Map<String,dynamic>toJson(){
   };
 }
 int getUtcTimestampInEpochSeconds() {
-  return (DateTime.now().millisecondsSinceEpoch ~/ 1000);
+  DateTime dateTime=DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,DateTime.now().hour-1,DateTime.now().minute,DateTime.now().second,DateTime.now().millisecond,DateTime.now().microsecond);
+  return (dateTime.millisecondsSinceEpoch ~/ 1000);
 }
 String getXSignature(){
   int utcDate = getUtcTimestampInEpochSeconds();

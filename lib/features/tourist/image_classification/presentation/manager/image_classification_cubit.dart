@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/features/tourist/image_classification/data/repos/qr_scanned_repo.dart';
 import 'package:prepare_project/features/tourist/image_classification/presentation/manager/image_classification_states.dart';
 
@@ -16,12 +19,26 @@ class ImageClassificationCubit extends Cubit<ImageClassificationStates>{
   Uint8List?image;
   bool isLoading=false;
   bool isFinished=false;
+  int currIndex=0;
+  int pointer=0;
+  XFile?pickedFile;
+  ImagePicker imagePicker=ImagePicker();
+  double _minAvailableZoom = 1.0;
+  double _maxAvailableZoom = 1.0;
+  double _currentScale = 1.0;
+  double _baseScale = 1.0;
+  late CameraController cameraController;
   void startScanner(){
     scannerController.start();
     emit(InitialStartScanner());
   }
+
   void clearImage()async{
-    if(isScanned){
+    if(pickedFile!=null&&currIndex==1){
+      pickedFile=null;
+      emit(DeletePickedImage());
+    }
+    else if(isScanned&&currIndex==0){
       isScanned=false;
       code='';
       image=null;
@@ -57,5 +74,77 @@ class ImageClassificationCubit extends Cubit<ImageClassificationStates>{
       emit(SuccessGetImageInfoClassificationState(model:r));
     });
   }
+  void changeCurrIndex(int index)async{
+    currIndex=index;
+    emit(ChangeBetweenQrCodeAndCamera());
+    if(currIndex==1){
+      await initCamera();
+    }
+    emit(ChangeBetweenQrCodeAndCamera());
+  }
+  Future<void> initCamera()async{
+    cameraController=CameraController(cameras.first, ResolutionPreset.high);
+    await cameraController.initialize();
+    await Future.wait(<Future<Object?>>[
+      // The exposure mode is currently not supported on the web.
+      cameraController
+          .getMaxZoomLevel()
+          .then((double value) => _maxAvailableZoom = value),
+      cameraController
+          .getMinZoomLevel()
+          .then((double value) => _minAvailableZoom = value),
+    ]);
+    emit(InitCameraSuccessState());
+  }
+  void handleScaleStart(ScaleStartDetails details) {
 
+    _baseScale = _currentScale;
+    emit(ChangePointerValueState());
+  }
+
+  Future<void> handleScaleUpdate(ScaleUpdateDetails details) async {
+    // When there are not exactly two fingers on screen don't scale
+    if (pointer != 2) {
+      return;
+    }
+
+    _currentScale = (_baseScale * details.scale)
+        .clamp(_minAvailableZoom, _maxAvailableZoom);
+
+    await cameraController.setZoomLevel(_currentScale);
+    emit(ChangePointerValueState());
+  }
+
+  void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
+    final CameraController cameraControl = cameraController;
+
+    final Offset offset = Offset(
+      details.localPosition.dx / constraints.maxWidth,
+      details.localPosition.dy / constraints.maxHeight,
+    );
+    cameraControl.setExposurePoint(offset);
+    cameraControl.setFocusPoint(offset);
+    emit(ChangePointerValueState());
+  }
+
+  Future<void> takePicture() async {
+    if (cameraController.value.isTakingPicture) {
+      return null;
+    }
+    try {
+      pickedFile = await cameraController.takePicture();
+      emit(PickImageSuccessState());
+    } on CameraException catch (e) {
+      emit(FailureTakePicture(errMessage:e));
+    }
+  }
+  Future<void>pickFromGallery()async{
+    imagePicker.pickImage(source: ImageSource.gallery).then((value) {
+      if(value!=null){
+        pickedFile=value;
+        emit(PickImageSuccessState());
+      }
+    });
+  }
 }
+

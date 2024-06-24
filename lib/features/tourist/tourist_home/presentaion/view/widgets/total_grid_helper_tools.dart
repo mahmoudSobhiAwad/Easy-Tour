@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/go_router/go_router.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
+import 'package:prepare_project/features/tourist/test_mailer.dart';
 import 'package:prepare_project/features/tourist/tourist_home/data/model/home_data.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/card_element.dart';
 
@@ -29,10 +30,12 @@ class TotalHelperToolsGrid extends StatelessWidget {
                               (){context.push(RouterApp.kChatBotView);},
                               (){context.push(RouterApp.kImageClassification);},
                               (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const CameraExampleHome()));
                             ///Car rental if it exist
-                          },
+                                },
                               (){context.push(RouterApp.kWeatherView);},
                               (){context.push(RouterApp.kCurrencyConverter);},
+                              (){context.push(RouterApp.kAiTranslator);},
                         ][index],
                         child: CardElement(height: height,width: width,cardModel: getHelperItems[index],));
                   }),

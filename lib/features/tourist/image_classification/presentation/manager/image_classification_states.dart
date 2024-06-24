@@ -16,6 +16,20 @@ class FailedGetImageInfoClassificationState extends ImageClassificationStates {
 }
 class SuccessChangeCameraFlashMode extends ImageClassificationStates {}
 class ChangeFlashIndex extends ImageClassificationStates {}
+
 class ShowButtonShowMoreToChatBot extends ImageClassificationStates {}
+
+class ChangeBetweenQrCodeAndCamera extends ImageClassificationStates {}
+
+class InitCameraSuccessState extends ImageClassificationStates {}
+
+class ChangePointerValueState extends ImageClassificationStates {}
+
+class PickImageSuccessState extends ImageClassificationStates {}
+
+class FailureTakePicture extends ImageClassificationStates {
+  final String?errMessage;
+  FailureTakePicture({this.errMessage});
+}
 
 

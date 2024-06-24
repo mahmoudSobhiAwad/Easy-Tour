@@ -14,7 +14,7 @@ class GetTicketsRepoImpl implements GetTicketsRepo{
   Future<Either<Failure, List<IatCodeModel>>> getMatchedAirPorts({required String query}) async{
     try {
       List<IatCodeModel> iataCodesList=[];
-      var response = await apiServices.normalGet('http://192.168.1.52:8000/search?cityName=$query',);
+      var response = await apiServices.normalGet('http://192.168.103.207:8000/search?cityName=$query',);
       for(var item in response['data']){
         iataCodesList.add(IatCodeModel.fromJson(item));
       }

@@ -21,6 +21,7 @@ List<CardModel>getHelperItems= [
   CardModel(imagePath: 'assets/tourist_home/book_cars.png', labelName: 'Book A Car'),
   CardModel(imagePath: 'assets/tourist_home/weather_forecast.png', labelName: 'Weather Forecasting'),
   CardModel(imagePath: 'assets/tourist_home/currency_exchage.png', labelName: 'Currency Converter'),
+  CardModel(imagePath: 'assets/tourist_home/translator.png', labelName: 'AI Translator'),
 ];
 
 List<CardModel>placesItem=[

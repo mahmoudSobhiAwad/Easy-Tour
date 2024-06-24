@@ -26,9 +26,8 @@ class VoiceSliderMessage extends StatelessWidget {
         child: Container(
             decoration: BoxDecoration(
               color:type=='source'?forthColor:thirdColor,
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(20),
             ),
-            padding:const EdgeInsets.only(left: 5,right: 5),
             child: SizedBox(
               width: width*0.62,
               child: Column(
@@ -59,11 +58,6 @@ class VoiceSliderMessage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Align(
-                      alignment: model.type=='source'?Alignment.bottomRight:Alignment.bottomLeft,
-                      child: Text('${model.messageDate?.hour}:${model.messageDate?.minute} ${model.messageDate!.hour>12?'PM':'AM'}',style: TextStyle(
-                        color: type=='source'? whiteColor:basicColor,
-                      ),)),
                 ],
               ),
             )),

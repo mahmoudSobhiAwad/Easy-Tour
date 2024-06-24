@@ -6,6 +6,7 @@ import 'package:prepare_project/features/login/presentation/view/login_view.dart
 import 'package:prepare_project/features/sign_up/presentation/views/sign_up_view.dart';
 import 'package:prepare_project/features/tour_guide/basic/presentation/view/home_basic_view.dart';
 import 'package:prepare_project/features/tour_guide/requested_trips/presentaions/view/requested_trip_for_guide_view.dart';
+import 'package:prepare_project/features/tourist/ai_translator/presentation/views/ai_translator_view.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/book_with_tour_guide_view.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_flights/presentation/view/booking_flights_view.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/hotel_booking_view.dart';
@@ -47,6 +48,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
   static const kTouristHotelBooking='/TouristHotelBooking';
   static const kTouristCreatePost='/TouristCreatePost';
   static const kTouristFlightTicketBooking='/TouristFlightBooking';
+  static const kAiTranslator='/AiTranslator';
   static final router=GoRouter(routes:[
    GoRoute(path: '/',builder: (context,state){
    // return const OnBoardingView();
@@ -89,6 +91,7 @@ import '../../../features/tourist/profile/presentation/views/profile_view.dart';
    GoRoute(path: kWeatherView,builder: (context,state)=>const WeatherForecastView(),),
    GoRoute(path: kCustomTripView,builder: (context,state)=>const CreatedCustomTripsView(),),
    GoRoute(path: kTouristCreatePost,builder: (context,state)=>const CreatePostView(),),
+   GoRoute(path: kAiTranslator,builder: (context,state)=>const AiTranslatorView(),),
    GoRoute(path: kTouristHotelBooking,builder: (context,state){
     if(SetAppState.prefs?.getInt('hotelIndex')==0){
      return CustomIntroScreen(

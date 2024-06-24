@@ -9,6 +9,7 @@ import 'package:prepare_project/features/tour_guide/home/data/repo/tour_guide_ho
 import 'package:prepare_project/features/tour_guide/private_tour/data/repos/private_tour_repo_impl.dart';
 import 'package:prepare_project/features/tour_guide/profile/data/repos/tour_guide_profile_repo_imp.dart';
 import 'package:prepare_project/features/tour_guide/requested_trips/data/repos/get_all_request_repo/get_all_request_with_feedback_repo_imp.dart';
+import 'package:prepare_project/features/tourist/ai_translator/data/repos/translator_repo.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/data/repo/book_request_with_guide/request_to_book_trip_repo_imp.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/data/repo/get_all_tour_guide_trips_repo_imp.dart';
 import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/data/repo/get_guide_info_repo/get_guide_info_repo_imp.dart';
@@ -43,6 +44,7 @@ getIt.registerSingleton<ProfileRepoImpl>(ProfileRepoImpl(getIt.get<ApiServices>(
 getIt.registerSingleton<TourGuideProfileRepoImp>(TourGuideProfileRepoImp(apiServices: getIt.get<ApiServices>()));
 getIt.registerSingleton<PrivateTourRepoImp>(PrivateTourRepoImp(apiServices: getIt.get<ApiServices>()));
 getIt.registerSingleton<CurrencyRepoImpl>(CurrencyRepoImpl(apiServices: getIt.get<ApiServices>()));
+getIt.registerSingleton<TranslatorRepoImp>(TranslatorRepoImp(apiServices: getIt.get<ApiServices>()));
 getIt.registerSingleton<HomeTouristRepoImp>(HomeTouristRepoImp(getIt.get<ApiServices>()));
 getIt.registerSingleton<HomeTourGuideRepoImp>(HomeTourGuideRepoImp(getIt.get<ApiServices>()));
 getIt.registerSingleton<DeleteAccountRepoImpl>(DeleteAccountRepoImpl(apiServices:getIt.get<ApiServices>()));

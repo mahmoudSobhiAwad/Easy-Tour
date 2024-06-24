@@ -105,6 +105,7 @@ class LoginCubit extends Cubit<LoginState>{
   }
 
   Future<void>signInWithGoogle()async{
+
     //f1K8HRVtSvq4JABvQwD1aI:APA91bE7bQaKuiwWUTW3zogt5wlW1--g1MdOTYjBkLSxsZsIqdw2V4swcXDWL4EtsuIo4CbuOWdy3qth8-cIwg9HNBATE3KWaDcyrJV0HdEHbZHv3JSsrRQwnBIxbRgCk84CE459QB5K
   }
   /// ForgetPass functions
