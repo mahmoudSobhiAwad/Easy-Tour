@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
+import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/data/model/filter_model.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/data/model/post_model.dart';
@@ -19,8 +20,8 @@ class CreatePostCubit extends Cubit<CreatePostStates>{
   ImagePicker picker=ImagePicker();
   final FilterPostRepoImpl filterPostRepoImpl;
   List<MediaPathWithType>mediaPaths=[];
-  late ChewieController chewieController;
-  late VideoPlayerController videoPlayerController;
+  ChewieController? chewieController;
+  VideoPlayerController videoPlayerController=VideoPlayerController.networkUrl(Uri.parse('https://assets.mixkit.co/videos/preview/mixkit-spinning-around-the-earth-29351-large.mp4'));
   List<MediaPathWithType>uploadedImagesLinks=[];
   final TextEditingController controller=TextEditingController();
   String sourceEmail=SetAppState.prefs?.getString('email')??"";
@@ -29,6 +30,7 @@ class CreatePostCubit extends Cubit<CreatePostStates>{
   final storageRef = FirebaseStorage.instance.ref('post');
   final db = FirebaseFirestore.instance;
   int userPostNum=0;
+  bool isInit=false;
   void getImage()async{
 
    await picker.pickImage(source: ImageSource.gallery).then((value) {
@@ -150,15 +152,34 @@ class CreatePostCubit extends Cubit<CreatePostStates>{
     return items;
   }
 
-  Future<void> initVideo(int index)async{
-    print(index);
-    await videoPlayerController.dispose();
-    videoPlayerController=VideoPlayerController.file(File(mediaPaths[index].path));
-    await videoPlayerController.initialize();
-    chewieController=ChewieController(videoPlayerController: videoPlayerController,autoPlay: false,);
-    emit(AddMediaToPostState());
-    emit(InitVideoState());
+  Future<void> initVideo(int index) async {
+    try {
+      isInit = false;
+      emit(AddMediaToPostState());
+
+      videoPlayerController = VideoPlayerController.file(File(mediaPaths[index].path));
+      isInit = true;
+      chewieController = ChewieController(
+        videoPlayerController: videoPlayerController,
+        autoPlay: false,
+        errorBuilder: (context, errorMessage) {
+          return Center(
+            child: Text(
+              errorMessage,
+              style: TextStyle(color: whiteColor),
+            ),
+          );
+        },
+      );
+
+      emit(InitVideoState());
+    } catch (e) {
+      print('Error initializing video: $e');
+      emit(ErrorVideoState(errMessage: e.toString()));
+    }
   }
+
+
   void getVideo(ImageSource source)async{
     picker.pickVideo(source: source).then((value){
       if(value!=null){
@@ -168,9 +189,11 @@ class CreatePostCubit extends Cubit<CreatePostStates>{
     });
   }
 
-  void onChangePageInPreview(int index){
+  void onChangePageInPreview(int index)async{
+   // await videoPlayerController.dispose();
+   // chewieController?.dispose();
     if(mediaPaths[index].type==MediaType.video){
-      initVideo(index);
+     await initVideo(index);
     }
   }
 }

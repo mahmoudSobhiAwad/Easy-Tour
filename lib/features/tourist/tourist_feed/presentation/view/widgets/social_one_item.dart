@@ -7,6 +7,7 @@ import 'package:prepare_project/features/tourist/tourist_feed/data/model/post_mo
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/images_of_post_list.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/list_of_images_preview.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/poster_info.dart';
+import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/wrap_images.dart';
 
 class SocialItemPost extends StatelessWidget {
   final double width;
@@ -32,10 +33,9 @@ class SocialItemPost extends StatelessWidget {
           SizedBox(height: height*0.02,),
           GestureDetector(
               onTap: ()async{
-
-                // Navigator.push(context, MaterialPageRoute(builder: (context){
-                //   return ListOfImagesPreview(imagesLinks: model.mediaPosts??[], height: height, width: width,initPage: initIndex,);
-                // }));
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return ListOfImagesPreview(imagesLinks: model.mediaPosts??[], height: height, width: width,initPage: initIndex, mediaType: VideoType.url,);
+                }));
               },
               child: ImagesOfPostList(mediaLinks: model.mediaPosts??[], height: height, width: width)),
           model.sourceEmail==SetAppState.prefs?.getString('email')?

@@ -23,6 +23,11 @@ class SuccessGetLengthOfCollectionState extends CreatePostStates {}
 
 class InitVideoState extends CreatePostStates {}
 
+class ErrorVideoState extends CreatePostStates {
+  final String?errMessage;
+  ErrorVideoState({this.errMessage});
+}
+
 class LoadingFilterPosts extends CreatePostStates {}
 
 class SuccessFilterPosts extends CreatePostStates {}
