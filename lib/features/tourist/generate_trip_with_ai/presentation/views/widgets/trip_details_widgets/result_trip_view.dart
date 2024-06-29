@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
 import 'package:prepare_project/features/login/presentation/view/widgets/login_button.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/model/generated_trip_model.dart';
+import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repos/generate_trip_repo_imp.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_cubit.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_state.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/list_of_days_of_trip.dart';
@@ -15,14 +17,15 @@ import 'package:prepare_project/features/tourist/google_map/presentaion/view/goo
 
 
 class GeneratedTripDetailsWithAiView extends StatelessWidget {
-  const GeneratedTripDetailsWithAiView({super.key,required this.startDate,required this.model});
+  const GeneratedTripDetailsWithAiView({super.key,required this.startDate,required this.model,required this.endDate});
   final String?startDate;
+  final String?endDate;
   final GeneratedTripModel model;
   @override
   Widget build(BuildContext context) {
     final double height=BasicDimension.screenHeight(context);
     final double width=BasicDimension.screenWidth(context);
-    return BlocProvider(create: (context)=>ViewTripDetailsCubit(startDate: startDate,generatedTripModel:model )..addDaysDates()..fillLatLangList(),
+    return BlocProvider(create: (context)=>ViewTripDetailsCubit(startDate: startDate,generatedTripModel:model,generateTripRepoImp: getIt.get<GenerateTripRepoImp>(),endDate: endDate )..addDaysDates()..fillLatLangList(),
       child: BlocConsumer<ViewTripDetailsCubit,ViewTripDetailsState>(builder:(context,state)
       {
         var cubit=BlocProvider.of<ViewTripDetailsCubit>(context);
@@ -32,7 +35,9 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Trip Details',menuToSaveTrip: SaveGeneratedTripButton(height: height, width: width),),
+                CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Trip Details',menuToSaveTrip: SaveGeneratedTripButton(controller: cubit.titleController,height: height, width: width,onTap: (){
+                  cubit.uploadTrip();
+                },),),
                 Expanded(
                   child: PageView.builder(
                       physics:const NeverScrollableScrollPhysics(),
@@ -75,10 +80,14 @@ class SaveGeneratedTripButton extends StatelessWidget {
     super.key,
     required this.height,
     required this.width,
+    required this.onTap,
+    required this.controller,
   });
 
   final double height;
   final double width;
+  final void Function()onTap;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +111,8 @@ class SaveGeneratedTripButton extends StatelessWidget {
                       IconButton(onPressed: (){
                         Navigator.pop(context);
                       }, icon: const Icon(Icons.close)),
-                      const CustomTextFormField(enable: true,borderColor: secondaryColor,label: 'Trip Title',floatingLabelBehavior: FloatingLabelBehavior.never,),
-                      Center(child: CustomLoginButton(label: 'Save',altWidth: width*0.4,)),
+                      CustomTextFormField(enable: true,borderColor: secondaryColor,label: 'Trip Title',floatingLabelBehavior: FloatingLabelBehavior.never,controller: controller,),
+                      Center(child: CustomLoginButton(label: 'Save',altWidth: width*0.4,onTap: onTap,)),
                     ],
                   ),
                 ),

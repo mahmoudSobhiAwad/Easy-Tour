@@ -21,10 +21,21 @@ class MessagesListView extends StatelessWidget {
           itemCount: cubit.messages.length,
           itemBuilder: (context,index){
             return cubit.messages[index].message!.endsWith('<bot>')?
-            OtherChatBubble(
-              replacedMessage:'<bot>',
-              message: cubit.messages[index].message??"",
-              isLoading: index==0,
+            Column(
+
+              children: [
+                OtherChatBubble(
+                  replacedMessage:'<bot>',
+                  message: cubit.messages[index].message??"",
+                  isLoading: index==0,
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.copy_rounded),
+                    Icon(Icons.volume_up_outlined),
+                  ],
+                )
+              ],
             ):
             TouristBubble(
               message: cubit.messages[index].message??"",

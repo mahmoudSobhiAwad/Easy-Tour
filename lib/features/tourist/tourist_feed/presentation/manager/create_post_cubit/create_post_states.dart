@@ -1,7 +1,7 @@
 abstract class CreatePostStates{}
 class InitialCreatePostState extends CreatePostStates {}
-class AddImagesToPostState extends CreatePostStates {}
-class RemoveSelectedImageState extends CreatePostStates {}
+class AddMediaToPostState extends CreatePostStates {}
+class RemoveSelectedMediaState extends CreatePostStates {}
 class LoadingUploadImagesState extends CreatePostStates {}
 class SuccessUploadImagesState extends CreatePostStates {}
 class FailureUploadImagesState extends CreatePostStates {
@@ -20,3 +20,14 @@ class FailureGetLengthOfCollectionState extends CreatePostStates {
   FailureGetLengthOfCollectionState({this.errMessage});
 }
 class SuccessGetLengthOfCollectionState extends CreatePostStates {}
+
+class InitVideoState extends CreatePostStates {}
+
+class LoadingFilterPosts extends CreatePostStates {}
+
+class SuccessFilterPosts extends CreatePostStates {}
+
+class FailureFilterPosts extends CreatePostStates {
+  final String?errMessage;
+  FailureFilterPosts({this.errMessage});
+}

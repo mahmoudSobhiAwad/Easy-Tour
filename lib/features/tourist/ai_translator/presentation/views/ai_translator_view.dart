@@ -100,7 +100,9 @@ class TranslatorWidget extends StatelessWidget {
             child: SizedBox(
                 width:width,
                 height: height*0.25,
-                child: sourceOrDest?CustomTextFormField(enableOutLine: true,borderColor: thirdColor,maxLines: 8,controller: cubit.sourceController,):Text(cubit.translatedText,style: CustomTextStyle.fontBold14,),
+                child: sourceOrDest?CustomTextFormField(enableOutLine: true,borderColor: thirdColor,maxLines: 8,controller: cubit.sourceController,onChanged: (String?value){
+                  cubit.translateText();
+                },):Text(cubit.translatedText,style: CustomTextStyle.fontBold14,),
             ),
           ),
           SizedBox(
@@ -119,7 +121,7 @@ class TranslatorWidget extends StatelessWidget {
               sourceOrDest?Text('${cubit.sourceController.text.length}/1000'):Text('${cubit.translatedText.length}/1000'),
               Spacer(),
               IconButton(onPressed: (){
-                cubit.translateText();
+                cubit.speakLanguage(sourceOrDest);
               }, icon: Icon(Icons.volume_up_outlined)),
               sourceOrDest?IconButton(onPressed: (){
                 cubit.enableStartListening();

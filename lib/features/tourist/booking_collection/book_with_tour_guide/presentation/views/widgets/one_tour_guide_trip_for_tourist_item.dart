@@ -52,7 +52,7 @@ class OneTourGuideTripForTourist extends StatelessWidget {
                   onTap:(){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=> ViewGuideProfileFromTouristView(email: model?.guideEmail??"",)));
                   },
-                  child: ProfilePicWidget(height: height*0.1, imageUrl: imagePath??"",))) :
+                  child: ProfilePicWidget(height: height*0.1, imageUrl: "https://1.bp.blogspot.com/-Vj0Gxg73G1Q/VlS_uddJciI/AAAAAAAAAQQ/4CrBYorGi7U/s1600-r/hatsh.jpg"??"",))) :
           const SizedBox(),
         ],
       ),

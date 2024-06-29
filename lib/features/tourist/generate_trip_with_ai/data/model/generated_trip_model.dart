@@ -57,7 +57,7 @@ class Day {
   factory Day.fromJson(List<dynamic> json){
     List<Place>places=[];
     for(int i=0;i<json.length;i++){
-      places.add(Place.fromJson(json[i],i));
+      places.add(Place.fromJson(json[i]));
     }
     return Day(
       places:places,
@@ -66,7 +66,6 @@ class Day {
   factory Day.fromHistory(List<dynamic> json){
     List<Place>places=[];
     for(int i=0;i<json.length;i++){
-
       places.add(Place.fromHistory(json[i]));
     }
     return Day(
@@ -98,9 +97,9 @@ class Place{
     this.picked=false,
   });
 
-  factory Place.fromJson(Map<String, dynamic> json, int i) {
+  factory Place.fromJson(Map<String, dynamic> json,) {
     return Place(
-      name: json['place${i + 1}']??"",
+      name: json['placeName']??"",
       longitude:json['longitude'],
       latitude: json['latitude'],
       activity: json['activity']??"",
@@ -113,7 +112,7 @@ class Place{
 
   factory Place.fromJsonSecond(Map<String, dynamic> json) {
     return Place(
-      name: json['place']??"",
+      name: json['placeName']??"",
       longitude: json['longitude']??0.0,
       latitude: json['latitude']??0.0,
       activity: json['activity']??"",
@@ -149,14 +148,7 @@ class Place{
     );
   }
 
-  Map<String, dynamic> toJson(int i) =>
-      {
-        "place${i + 1}": name,
-        "longitude": longitude,
-        "latitude": latitude,
-        "activity": activity,
-        "category": category,
-      };
+
   Map<String,dynamic>toCustomTripJson(){
     return {
       "placeName": name,

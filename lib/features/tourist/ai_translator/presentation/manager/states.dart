@@ -23,6 +23,8 @@ class EnableVoiceToSpeakAiTranslatorState extends AiTranslatorState {}
 
 class ChangeCountryAiTranslatorState extends AiTranslatorState {}
 
+class ChangeTextToSpeechState extends AiTranslatorState {}
+
 class LoadingSendTextToTranslate extends AiTranslatorState {}
 
 class SuccessSendTextToTranslate extends AiTranslatorState {}

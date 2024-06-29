@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:prepare_project/features/tourist/test_mailer.dart';
 import 'package:prepare_project/features/tourist/trip_history/presentation/view/widgets/intro_trip_history.dart';
 
 import '../../../../../../core/utilities/go_router/go_router.dart';
@@ -34,6 +35,7 @@ class TouristHomeDrawerListTile extends StatelessWidget {
           }));
         },
             (){
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>VideoTest()));
         },
       ][index],
       contentPadding: EdgeInsets.zero,

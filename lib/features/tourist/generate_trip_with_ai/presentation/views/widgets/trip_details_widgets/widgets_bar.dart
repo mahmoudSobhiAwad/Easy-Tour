@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
-import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 class ChangeShowForWidgetInGeneratedTrip extends StatelessWidget {
   const ChangeShowForWidgetInGeneratedTrip({
     super.key,
@@ -18,15 +17,15 @@ class ChangeShowForWidgetInGeneratedTrip extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        height:height*0.1,
+        height:height*0.05,
         decoration: BoxDecoration(
           color: thirdColor,
-          borderRadius: commonBorderRadius(),
+          borderRadius: BorderRadius.circular(12),
         ),
         padding:const EdgeInsets.all(10),
         child: Row(
           children: [
-            Text(barName,style: CustomTextStyle.fontBold21.copyWith(fontSize: 25),),
+            Text(barName,style: CustomTextStyle.fontBold16,),
             const Spacer(),
           ],
         ),

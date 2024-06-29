@@ -30,7 +30,7 @@ class OneActivityInGeneratedTrip extends StatelessWidget {
                 child: Image.network(place.image??imageUrl,errorBuilder: (context,_,s){
                   return const Icon(Icons.warning_rounded,color: closeColor,);
                 },height: height*0.15,width: width*0.8,fit: BoxFit.cover,)),
-            SizedBox(height: height*0.015,),
+            SizedBox(height: height*0.009,),
             SizedBox(
               width: width*0.8,
               child: Column(
@@ -59,7 +59,7 @@ class OneActivityInGeneratedTrip extends StatelessWidget {
                     enableDivider: false,
                     rightWidget: const Text('Time Visiting',style:CustomTextStyle.fontNormal14WithEllipsis,),
                     child: Container(
-                      width: width*0.35,
+                      //width: width*0.35,
                       padding:const EdgeInsets.all(5),
                       decoration: BoxDecoration(color: thirdColor,borderRadius: BorderRadius.circular(10)),
                       child:  Text(place.time??"",style: CustomTextStyle.font12WithEllipsis,),

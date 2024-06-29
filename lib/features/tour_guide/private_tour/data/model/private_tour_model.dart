@@ -50,7 +50,7 @@ class Trip {
       "included":included,
       "excluded":excluded,
       'tripDetails':tripDetails?.map((tripDetails) => tripDetails.toJson()).toList(),
-      'image':bgImagePath!=null?[await MultipartFile.fromFile(bgImagePath!,filename: 'background image')]:[]
+      if(bgImagePath!=null) 'image':[await MultipartFile.fromFile(bgImagePath!,filename: 'background image')]
     });
   return formData;
   }
@@ -64,7 +64,7 @@ class Trip {
       "maximumNumber":maximumNumber,
       "plans":tripTicket,
       'newTripDetails':tripDetails?.map((tripDetails) => tripDetails.toJson()).toList(),
-      'image':bgImagePath!=null?[await MultipartFile.fromFile(bgImagePath!,filename: 'background image')]:[]
+      if(bgImagePath!=null) 'image':[await MultipartFile.fromFile(bgImagePath!,filename: 'background image')]
     });
   return formData;
   }

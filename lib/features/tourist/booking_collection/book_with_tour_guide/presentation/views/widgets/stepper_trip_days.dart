@@ -17,7 +17,7 @@ class StepperTripDay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height*.55,
+      height: tripDays![currDay].dayPlaces!.length>2?height*0.55:height*0.4,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,8 +47,9 @@ class StepperTripDay extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: height*0.4,
+          SizedBox(height: height*0.012,),
+          Expanded(
+            //height:height*0.4,
             child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 padding: EdgeInsets.zero,

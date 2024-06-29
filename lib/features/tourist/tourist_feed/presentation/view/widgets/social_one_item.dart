@@ -13,7 +13,8 @@ class SocialItemPost extends StatelessWidget {
   final double height;
   final PostModel model;
   final String role;
-  const SocialItemPost({super.key,required this.role,required this.height,required this.width,required this.model});
+  final int initIndex;
+  const SocialItemPost({super.key,required this.role,required this.height,required this.width,required this.model,this.initIndex=0});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,12 +31,13 @@ class SocialItemPost extends StatelessWidget {
           Text('${model.postText}',),
           SizedBox(height: height*0.02,),
           GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return ListOfImagesPreview(imagesLinks: model.postImages??[], height: height, width: width);
-                }));
+              onTap: ()async{
+
+                // Navigator.push(context, MaterialPageRoute(builder: (context){
+                //   return ListOfImagesPreview(imagesLinks: model.mediaPosts??[], height: height, width: width,initPage: initIndex,);
+                // }));
               },
-              child: ImagesOfPostList(imagesLinks: model.postImages??[], height: height, width: width)),
+              child: ImagesOfPostList(mediaLinks: model.mediaPosts??[], height: height, width: width)),
           model.sourceEmail==SetAppState.prefs?.getString('email')?
           const SizedBox() : const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

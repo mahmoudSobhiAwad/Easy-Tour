@@ -12,7 +12,7 @@ class TranslatorRepoImp implements TranslatorRepo {
   @override
   Future<Either<Failure, String>> sendRequest({required Map<String, dynamic> data}) async{
     try{
-      var result=await apiServices.normalPost('http://34.230.37.188:8000/translator',data:data);
+      var result=await apiServices.normalPost('http://3.89.26.210:8000/translator',data:data);
       String response =result['response'];
       return right(response);
     }

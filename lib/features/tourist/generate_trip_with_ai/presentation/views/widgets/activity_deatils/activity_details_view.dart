@@ -39,7 +39,7 @@ class ActivityDetailsView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(place.name,style: CustomTextStyle.fontBold21,),
+                        Text(place.name,style: CustomTextStyle.fontBold18,),
                         ProfileSettingItem(
                           enableDivider: false,
                           rightWidget: const Text('Time Visiting',style:CustomTextStyle.fontNormal14WithEllipsis,),

@@ -12,8 +12,10 @@ class LoadingSendRequestToGenerateTrip extends GenerateAiTripState {}
 class SuccessSendRequestToGenerateTrip extends GenerateAiTripState {
   final GeneratedTripModel model;
   final String?startDate;
+  final String?endDate;
   SuccessSendRequestToGenerateTrip({
     required this.model,
+    required this.endDate,
     required this.startDate});
 }
 class FailureSendRequestToGenerateTrip extends GenerateAiTripState {

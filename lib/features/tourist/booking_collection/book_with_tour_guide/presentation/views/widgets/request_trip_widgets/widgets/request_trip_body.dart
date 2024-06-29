@@ -116,7 +116,7 @@ class RequestTripToBookBody extends StatelessWidget {
                 secondCustomFormField: SizedBox(
                     width: width*0.65,
                     height: height*0.12,
-                    child: CustomTextFormField(align: TextAlign.start,label: 'Additional Request...',filled: true,fillColor: thirdColor,expand: true,floatingLabelBehavior: FloatingLabelBehavior.never,controller: cubit.commentController,)
+                    child: CustomTextFormField(align: TextAlign.start,maxLines: 3,label: 'Additional Request...',filled: true,fillColor: thirdColor,floatingLabelBehavior: FloatingLabelBehavior.never,controller: cubit.commentController,)
                 )
             ),
             const SizedBox(height: 20,),

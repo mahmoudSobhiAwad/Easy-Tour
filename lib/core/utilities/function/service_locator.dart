@@ -27,6 +27,7 @@ import 'package:prepare_project/features/tourist/nearby_places/data/repos/nearby
 import 'package:prepare_project/features/tourist/nearby_places/data/repos/photo_repo/get_photo_repo_imp.dart';
 import 'package:prepare_project/features/tourist/profile/data/repos/profie_repo_imp.dart';
 import 'package:prepare_project/features/tourist/settings/data/repo/setting_repo_imp.dart';
+import 'package:prepare_project/features/tourist/tourist_feed/data/repo/filter_post_repo.dart';
 import 'package:prepare_project/features/tourist/tourist_home/data/repo/home_tourist_repo_impl.dart';
 import 'package:prepare_project/features/tourist/trip_history/data/repos/trip_manager_repo_impl.dart';
 import 'package:prepare_project/features/tourist/weather_forecast/data/repos/get_forecast_repo_imp.dart';
@@ -67,6 +68,7 @@ getIt.registerSingleton<TripManagerRepoImpl>(TripManagerRepoImpl(apiServices:get
 getIt.registerSingleton<EntertainmentPlaceRepoImp>(EntertainmentPlaceRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<CustomTripRepoImpl>(CustomTripRepoImpl(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<GetHotelsRepoImpl>(GetHotelsRepoImpl(apiServices:getIt.get<ApiServices>()));
+getIt.registerSingleton<FilterPostRepoImpl>(FilterPostRepoImpl(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<QrScannedRepoImp>(QrScannedRepoImp(apiServices:getIt.get<ApiServices>()));
 getIt.registerSingleton<LogInterceptor>(LogInterceptor());
 }

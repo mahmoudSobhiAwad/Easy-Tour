@@ -144,8 +144,8 @@ class CreateEditPrivateTourCubit extends Cubit<CreateEditPrivateTourState> {
   }
   Future<void> createNewTrip() async {
     trip=Trip(
-      included: included,
-      excluded: excluded,
+      // included: included,
+      // excluded: excluded,
       title: titleTextController.text,
       brief:briefTextController.text,
       bgImagePath: bgFile?.path,

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
@@ -53,13 +54,19 @@ class CreatePostContainer extends StatelessWidget {
             children: [
               const Text('Camera'),
               IconButton(onPressed: (){
-                cubit.getImageFromCamera();
+                cubit.getImage();
               }, icon: const Icon(Icons.photo_camera)),
               SizedBox(width: width*0.05,),
               const Text('Gallery'),
               IconButton(onPressed: (){
                 cubit.getImagesFromGallery();
               }, icon: const Icon(Icons.photo_rounded)),
+              SizedBox(width: width*0.05,),
+              const Text('Video'),
+              IconButton(onPressed: (){
+                cubit.getVideo(ImageSource.gallery);
+              }, icon: const Icon(Icons.video_collection)),
+              
             ],
           )
         ],

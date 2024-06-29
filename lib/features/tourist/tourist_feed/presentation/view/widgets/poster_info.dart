@@ -31,7 +31,7 @@ class PosterInfo extends StatelessWidget {
           ],
         ),
         const SizedBox(width: 10,),
-        model.role==role?const SizedBox():Container(
+        model.role=="tourist"?const SizedBox():Container(
           padding: const EdgeInsets.all(4),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(5),topRight: Radius.circular(5),bottomRight: Radius.circular(5),bottomLeft: Radius.circular(5)),

@@ -22,7 +22,7 @@ class ActivityListWithBar extends StatelessWidget {
           ChangeShowForWidgetInGeneratedTrip(
               showDetails: true,
               height: height,barName: 'Activity'),
-          const SizedBox(height: 10,),
+           const SizedBox(height: 10,),
           Expanded(
             child: ListView.separated(
               padding: EdgeInsets.zero,
