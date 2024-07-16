@@ -19,10 +19,10 @@ class TripHistoryOfTripsWithTourGuide extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Current Trip',style: CustomTextStyle.fontBold21,),
+               Text('Current Trip',style: CustomTextStyle.fontBold21,),
               const SizedBox(height: 10,),
               currentTrip.isEmpty?
-              const Center(child: Text('No Current Trips Try Make One',style: CustomTextStyle.fontBold18,)) :
+               Center(child: Text('No Current Trips Try Make One',style: CustomTextStyle.fontBold18,)) :
               SizedBox(
                 height:currentTrip.length>3?height*.4:height*0.25,
                 child: ListView.builder(
@@ -38,9 +38,9 @@ class TripHistoryOfTripsWithTourGuide extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('UpComing Trips',style: CustomTextStyle.fontBold21,),
+               Text('UpComing Trips',style: CustomTextStyle.fontBold21,),
               const SizedBox(height: 10,),
-              upComing.isEmpty?const Center(child: Text('No UpComing Trips Try Make One',style: CustomTextStyle.fontBold18,)):SizedBox(
+              upComing.isEmpty? Center(child: Text('No UpComing Trips Try Make One',style: CustomTextStyle.fontBold18,)):SizedBox(
                 height: upComing.length>3?height*.4:height*0.25,
                 child: ListView.builder(
                     padding: const EdgeInsets.all(10),
@@ -55,9 +55,9 @@ class TripHistoryOfTripsWithTourGuide extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Completed Trips',style: CustomTextStyle.fontBold21,),
+              Text('Completed Trips',style: CustomTextStyle.fontBold21,),
               const SizedBox(height: 10,),
-              finished.isEmpty?const Center(child: Text('No Completed Trips Try Make One',style: CustomTextStyle.fontBold18,)):SizedBox(
+              finished.isEmpty? Center(child: Text('No Completed Trips Try Make One',style: CustomTextStyle.fontBold18,)):SizedBox(
                 height:finished.length>3?height*.4:height*0.25,
                 child: ListView.builder(
                     itemCount: finished.length,

@@ -5,5 +5,6 @@ import '../model/toursim_sign_in_model.dart';
 
 abstract class LoginRepo{
   Future<Either<Failure,TourismSignInModel>>loginAsTourism(Map<String,dynamic> data);
+  Future<Either<Failure,dynamic>>socialLogin(Map<String,dynamic> data);
   Future<Either<Failure,TourGuideSignUpModel>>loginAsTourGuide(Map<String,dynamic> data);
 }

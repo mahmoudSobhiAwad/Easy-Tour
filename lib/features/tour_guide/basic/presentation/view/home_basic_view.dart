@@ -44,7 +44,6 @@ class BasicHome extends StatelessWidget {
           },
           child: Scaffold(
             extendBody: true,
-            backgroundColor: const Color(0xffF7F7F9),
             body: [const TourGuideHomeView(),PrivateToursView(width: width,height: height,),const TourGuideFeedsView(),TourGuideProfileView(height: height,width: width,),][cubit.currIndex],
             bottomNavigationBar:
             cubit.noDrawer? MyBottomNavBar(

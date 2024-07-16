@@ -60,7 +60,7 @@ class LicencesView extends StatelessWidget {
                       ),
                       ),
                       const SizedBox(height: 10,),
-                      const Text('CV',style: CustomTextStyle.fontGrover22,),
+                      Text('CV',style: CustomTextStyle.fontGrover22,),
                       const SizedBox(height: 10,),
                       cubit.cvFile==null? CvFileExist(pickFile: (){
                         cubit.pickFile();
@@ -163,7 +163,7 @@ final String? cvUrl;
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(color: basicColor,borderRadius: commonBorderRadius()),child: GestureDetector(
             onTap: openFile,
-            child: const Text('Your CV File',style: CustomTextStyle.font16Light,))),
+            child:  Text('Your CV File',style: CustomTextStyle.font16Light,))),
         IconButton(onPressed: pickFile, icon:const Icon(Icons.upload,color: basicColor,))
     ],
     );

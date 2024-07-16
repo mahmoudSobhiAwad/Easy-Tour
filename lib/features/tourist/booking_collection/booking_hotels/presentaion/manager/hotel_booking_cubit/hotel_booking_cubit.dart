@@ -16,6 +16,7 @@ class HotelBookingCubit extends Cubit<HotelBookingStates>{
   DestinationModel?destModel;
   List<String>facilityStringList=[];
   int totalNum=0;
+  bool isLoading=false;
 
   final GetHotelsRepoImpl hotelsRepoImpl;
   late HotelModelWithRoomModel hotelModelWithRoomModel;
@@ -50,9 +51,11 @@ class HotelBookingCubit extends Cubit<HotelBookingStates>{
 
   void searchForHotelsByDestOnly(DestinationModel model)async{
     destModel=model;
+    isLoading=true;
     emit(LoadingGetHotelsState());
     var result=await hotelsRepoImpl.getAllHotelsInDestination(destCode:model.destCode);
     result.fold((failure){
+      isLoading=false;
       emit(FailureGetHotelsState(errMessage:failure.errMessage ));
       debugPrint(failure.errMessage);
     }, (hotels){
@@ -61,6 +64,7 @@ class HotelBookingCubit extends Cubit<HotelBookingStates>{
         hotelList!.add(item);
       }
       totalNum=hotels.total;
+      isLoading=false;
       emit(SuccessGetHotelsState());
     });
   }

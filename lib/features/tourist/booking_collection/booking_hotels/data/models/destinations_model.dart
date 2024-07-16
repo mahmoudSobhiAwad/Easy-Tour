@@ -6,8 +6,8 @@ class DestinationModel{
 }
 List<DestinationModel>destList=[
   DestinationModel(destName: 'Hurghada', destCode: 'HRG', imageUrl: 'https://th.bing.com/th/id/R.00778b1fa1abbaf4b159135050af8e90?rik=njYE11A9EK4%2brw&pid=ImgRaw&r=0'),
-  DestinationModel(destName: 'Aswan', destCode: 'ASW', imageUrl: 'https://planetofhotels.com/guide/sites/default/files/styles/paragraph__live_banner__lb_image__1880bp/public/live_banner/aswan_0.jpg'),
-  DestinationModel(destName: 'Marsa Alam- Qusseir', destCode: 'RMF', imageUrl: 'https://korastsherot.com/wp-content/uploads/2021/07/%D9%85%D8%AF%D9%8A%D9%86%D8%A9-%D9%85%D8%B1%D8%B3%D9%89-%D8%B9%D9%84%D9%85_InPixio-1-1024x576.png'),
+  DestinationModel(destName: 'Aswan', destCode: 'ASW', imageUrl: 'https://imgs.search.brave.com/tmHZRL_UDEpV3r6PgUaQEWbQTS4x1pvK8_k3qfuug_4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hLnN0/b3J5Ymxvay5jb20v/Zi81MzYyNC81NTU1/eDYxOTgvNzkwNzcx/YjJmZC9hc3dhbi1l/Z3lwdF9tb2hhbWVk/LXNvbGltYW4tbWZn/cG5qb3NpX2ktdW5z/cGxhc2guanBn'),
+  DestinationModel(destName: 'Marsa Alam- Qusseir', destCode: 'RMF', imageUrl: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/89/53/e2/albatros-sea-world-marsa.jpg?w=1400&h=500&s=1'),
   DestinationModel(destName: 'Abu Simbel', destCode: 'ABS', imageUrl: 'https://th.bing.com/th/id/OIP.VkCWb6DmR7L7uyI7Wvs4LwHaE8?rs=1&pid=ImgDetMain'),
   DestinationModel(destName: 'Alexandrie-Mediterranean Coast', destCode: 'ALY', imageUrl: 'https://th.bing.com/th/id/R.eeedd96a77dd3d0175c38d008d33d9a8?rik=rOd5lFHNpNhoXg&pid=ImgRaw&r=0'),
   DestinationModel(destName: 'Cairo', destCode: 'CAI', imageUrl: 'https://wanderingwheatleys.com/wp-content/uploads/2022/05/the-top-things-to-do-in-cairo-egypt-header.jpg'),

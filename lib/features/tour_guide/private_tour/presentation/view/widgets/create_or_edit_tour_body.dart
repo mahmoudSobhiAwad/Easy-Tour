@@ -37,7 +37,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('title of the trip',style:CustomTextStyle.fontBold16,),
+                Text('title of the trip',style:CustomTextStyle.fontBold16,),
                 const SizedBox(height: 5,),
                 CustomTextFormField(
                   maxLines: 1,
@@ -54,7 +54,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('brief of the trip',style:CustomTextStyle.fontBold16,),
+                Text('brief of the trip',style:CustomTextStyle.fontBold16,),
                 const SizedBox(height: 5,),
                 CustomTextFormField(
                   controller: cubit.briefTextController,
@@ -72,7 +72,7 @@ class CreateOrEditPrivateTourBody extends StatelessWidget {
             Column(
               children: [
                 cubit.tripDay.isEmpty?
-                const ClipRRect(
+                 ClipRRect(
                   borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20),bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20)),
                   child: ColoredBox(
                     color: thirdColor,

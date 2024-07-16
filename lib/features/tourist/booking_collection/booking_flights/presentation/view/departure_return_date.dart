@@ -49,7 +49,7 @@ class DepartureAndReturnDate extends StatelessWidget {
               ),),
             Column(
               children: [
-                const Text('Return Date',style: CustomTextStyle.fontBold16,),
+                 Text('Return Date',style: CustomTextStyle.fontBold16,),
                 const SizedBox(height: 5,),
                 GestureDetector(
                     onTap: (){

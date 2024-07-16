@@ -32,7 +32,7 @@ final int travelerNum;
                   children: [
                     CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Flight Booking',),
                     SizedBox(height: height*0.015,),
-                    const Text('Fill All The Requirements For Travelers',style: CustomTextStyle.fontBold18,),
+                    Text('Fill All The Requirements For Travelers',style: CustomTextStyle.fontBold18,),
                     SizedBox(height: height*0.01,),
                     SizedBox(
                       height: height*0.8,

@@ -46,7 +46,7 @@ class ShowGuideLicenceForTourist extends StatelessWidget {
               ),
               ),
               const SizedBox(height: 10,),
-              const Text('CV',style: CustomTextStyle.fontGrover22,),
+              Text('CV',style: CustomTextStyle.fontGrover22,),
               cvUrl==null?
               Container(
                 padding: const EdgeInsets.all(5),

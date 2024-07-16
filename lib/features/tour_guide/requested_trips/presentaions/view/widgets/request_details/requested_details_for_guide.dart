@@ -19,15 +19,15 @@ class RequestedDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Details Of Request',style: CustomTextStyle.fontBold16,),
+         Text('Details Of Request',style: CustomTextStyle.fontBold16,),
         SizedBox(height: height*0.015,),
         Column(
           children: [
-            ProfileSettingItem(enableDivider: false,rightWidget: const Text('Start Trip Date',style: CustomTextStyle.font14Light,),child: Text(model.startDate??""),),
+            ProfileSettingItem(enableDivider: false,rightWidget:  Text('Start Trip Date',style: CustomTextStyle.font14Light,),child: Text(model.startDate??""),),
             const SizedBox(height: 10,),
-            ProfileSettingItem(enableDivider: false,rightWidget: const Text('Trip Type ',style: CustomTextStyle.font14Light,),child: Text(model.tripType??""),),
+            ProfileSettingItem(enableDivider: false,rightWidget:  Text('Trip Type ',style: CustomTextStyle.font14Light,),child: Text(model.tripType??""),),
             const SizedBox(height: 10,),
-            ProfileSettingItem(enableDivider: false,rightWidget:const Text('Traveler With Tourist',style: CustomTextStyle.font14Light,),child: Text('${model.additionalTravelers}'),),
+            ProfileSettingItem(enableDivider: false,rightWidget: Text('Traveler With Tourist',style: CustomTextStyle.font14Light,),child: Text('${model.additionalTravelers}'),),
           ],
         ),
         SizedBox(height: height*0.015,),

@@ -8,9 +8,9 @@ class FilterPostModel{
   FilterPostModel({this.text,this.imageLinks,this.videoLinks,this.imgResult,this.textResult,this.videoResult});
   factory FilterPostModel.fromJson(Map<String,dynamic>json){
     return FilterPostModel(
-      imgResult: json['img_result'],
-      videoResult: json['videos_result'],
-      textResult: json['post_result'],
+      imgResult: List<int>.from(json['img_result'],),
+      videoResult: List<int>.from(json['videos_result']),
+      textResult: List<int>.from(json['post_result']),
     );
   }
   Map<String,dynamic>toJson(){

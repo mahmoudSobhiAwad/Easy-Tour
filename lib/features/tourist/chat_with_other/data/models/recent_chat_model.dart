@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/features/tour_guide/private_tour/data/model/private_tour_model.dart';
 
@@ -47,8 +48,9 @@ class CompleteChatOTOModel{
   RecordModel?recordModel;
   ImageModel?imageModel;
   DateTime?messageDate;
+  LatLng?locationMessage;
   bool?isLoading;
-  CompleteChatOTOModel({this.message,this.messageType,this.fromPerson,this.isLoading=true,this.toPerson,this.messageDate,this.imageModel,this.recordModel,this.type});
+  CompleteChatOTOModel({this.message,this.messageType,this.fromPerson,this.locationMessage,this.isLoading=true,this.toPerson,this.messageDate,this.imageModel,this.recordModel,this.type});
   factory CompleteChatOTOModel.fromJson(Map<String,dynamic>json){
     return CompleteChatOTOModel(
       message: json['message'],
@@ -58,6 +60,7 @@ class CompleteChatOTOModel{
       messageDate: DateTime.parse(json['date']),
       recordModel: json['type']=='voice'?RecordModel(recordPath: json['message'],isLoading: false):RecordModel(),
       imageModel: json['type']=='image'?ImageModel(imageNetworkPath: json['message'],isLoading: false):ImageModel(),
+      locationMessage: json['type']=='video'?getLocation(json['message']):LatLng(0, 0),
       type:checkType(json['from']),
     );
   }
@@ -77,4 +80,30 @@ String checkType(String value){
   else{
     return 'destination';
   }
+}
+
+class LocationModel{
+  double? lat;
+  double? long;
+  LocationModel({this.long,this.lat});
+
+
+
+}
+LatLng getLocation(String input){
+  RegExp longExp = RegExp(r'long=([\d.]+)');
+  RegExp latExp = RegExp(r'lat=([\d.]+)');
+
+  // Extract the values using the regular expressions
+  double? longitude;
+  double? latitude;
+
+  Match? longMatch = longExp.firstMatch(input);
+  Match? latMatch = latExp.firstMatch(input);
+
+  if (longMatch != null && latMatch != null) {
+  longitude = double.tryParse(longMatch.group(1)!);
+  latitude = double.tryParse(latMatch.group(1)!);
+  }
+  return LatLng(latitude??0, longitude??0);
 }

@@ -25,7 +25,7 @@ class ContactInfoBody extends StatelessWidget {
               context.pop();
             }, icon: const Icon(Icons.close,color: basicColor,)),
         Expanded(
-          child: ListView.builder(
+          child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.all(20),
               itemCount: cubit.editSocialLinks.length,
@@ -33,7 +33,11 @@ class ContactInfoBody extends StatelessWidget {
                 return ContactShowItem(name: cubit.editSocialLinks.keys.elementAt(index), contactData:cubit.editSocialLinks.values.elementAt(index), width: width, removeFromSocialLinks: (){
                   cubit.removeFromSocialLinks(name:  cubit.editSocialLinks.keys.elementAt(index));
                 });
-              }),
+              }, separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(
+                  height: 20,
+                );
+          },),
         ),
         Align(
           alignment: Alignment.center,

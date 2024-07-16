@@ -74,6 +74,7 @@ class LoginBody extends StatelessWidget {
         }
         else if(state is SuccessLoginState||state is SuccessLoginWithGoogleState){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.white,
                   duration: const Duration(milliseconds: 200),
                   content: Container(
                   decoration: const BoxDecoration(
@@ -84,12 +85,16 @@ class LoginBody extends StatelessWidget {
           context.go(RouterApp.kHomeView);
         }
         else if(state is SuccessTourGuideLoginState){
-          showDialog(context: context, builder: (context)=> const ContainerAlertWidget(
-            types: AlertTypes.success,
-            content: 'Success Login',)).then((value){
-              context.go(RouterApp.kTourGuideHome);
-          }
-          );
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.white,
+              duration: const Duration(milliseconds: 200),
+              content: Container(
+                  decoration: const BoxDecoration(
+                    color: whatsAppColor,
+                  ),
+                  padding:const EdgeInsets.all(5),
+                  child: Text('Success Login',style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: Colors.white),))));
+          context.go(RouterApp.kTourGuideHome);
         }
       },
     );

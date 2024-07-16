@@ -85,8 +85,8 @@ class GetHotelsRepoImpl implements GetHotelRepo{
   }
 
 }
-const apiKey='879188c2f050deef0110f78087920685';
-const secret='fa2f9bd32a';
+const apiKey='74862aba64ef4e7a5ba560fff3fcd3e8';
+const secret='1877567949';
 Map<String,dynamic>toJson(){
   String xSignature=getXSignature();
   return{

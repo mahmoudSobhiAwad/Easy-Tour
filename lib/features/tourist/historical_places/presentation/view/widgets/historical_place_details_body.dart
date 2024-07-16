@@ -33,7 +33,7 @@ class DetailsOfPlaceWithText extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Giza Pyramids',style: CustomTextStyle.fontGrover22,),
+                 Text('Giza Pyramids',style: CustomTextStyle.fontGrover22,),
                 FavouritePlaceIcon(width: width),
               ],
             ),
@@ -41,7 +41,7 @@ class DetailsOfPlaceWithText extends StatelessWidget {
             SizedBox(
               height: height*0.33,
               width: width,
-              child: const Text('The Egyptian pyramids are ancient masonry structures located in Egypt. Sources cite at least 118 identified "Egyptian" pyramids. Approximately 80 pyramids were built within the Kingdom of Kush, now located in the modern country of Sudan. Of those located in modern Egypt, most were built as tombs for the country\'s pharaohs and their consorts during the Old and Middle, The Egyptian pyramids are ancient masonry structures located in  Egypt. Sources cite at least 118 identified "Egyptian"pyramids. Approximately 80 pyramids were built within Kingdom of Kush, now ',
+              child:  Text('The Egyptian pyramids are ancient masonry structures located in Egypt. Sources cite at least 118 identified "Egyptian" pyramids. Approximately 80 pyramids were built within the Kingdom of Kush, now located in the modern country of Sudan. Of those located in modern Egypt, most were built as tombs for the country\'s pharaohs and their consorts during the Old and Middle, The Egyptian pyramids are ancient masonry structures located in  Egypt. Sources cite at least 118 identified "Egyptian"pyramids. Approximately 80 pyramids were built within Kingdom of Kush, now ',
                 style: CustomTextStyle.fontNormal14WithEllipsis, overflow: TextOverflow.ellipsis,maxLines: 15,
               ),),
             const Expanded(child: SizedBox(height: 10,)),

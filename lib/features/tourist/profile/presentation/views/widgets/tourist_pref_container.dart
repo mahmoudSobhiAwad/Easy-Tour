@@ -34,7 +34,7 @@ class TouristPreferences extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
           border: Border.all(color: secondaryColor,width: 2),
-          color: formFillColor,borderRadius: BorderRadius.circular(20)),
+          color: thirdColor,borderRadius: BorderRadius.circular(20)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/features/login/data/model/toursim_sign_in_model.dart';
 import 'package:prepare_project/features/login/data/repos/log_in_repo.dart';
@@ -105,7 +106,39 @@ class LoginCubit extends Cubit<LoginState>{
   }
 
   Future<void>signInWithGoogle()async{
+    GoogleSignIn googleSignIn=GoogleSignIn(
+      scopes: [
+        'email',
+      ]
+    );
 
+    await googleSignIn.signIn().then((value)async {
+      if(value!=null){
+        await value.authentication.then((value)async{
+          var result =await loginRepo.socialLogin({
+            "idToken":value.idToken,
+          });
+          result.fold((failure){
+            print(failure.errMessage);
+            emit(FailureLoginState(errorLogin: failure.errMessage));
+          }, (success){
+            emit(SuccessLoginState());
+          });
+          print(value.idToken);
+        });
+      }
+
+      return null;
+    });
+    // if(googleSignInAccount?.id !=null){
+    //   print(googleSignInAccount?.id);
+
+
+    // }
+
+
+    // googleSignInAccount.id;
+    //GoogleSignIn().requestScopes(scopes);
     //f1K8HRVtSvq4JABvQwD1aI:APA91bE7bQaKuiwWUTW3zogt5wlW1--g1MdOTYjBkLSxsZsIqdw2V4swcXDWL4EtsuIo4CbuOWdy3qth8-cIwg9HNBATE3KWaDcyrJV0HdEHbZHv3JSsrRQwnBIxbRgCk84CE459QB5K
   }
   /// ForgetPass functions

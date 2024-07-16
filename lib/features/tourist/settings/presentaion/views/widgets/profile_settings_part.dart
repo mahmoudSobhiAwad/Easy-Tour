@@ -28,7 +28,7 @@ class ProfileSettingsPart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Profile Settings',style:CustomTextStyle.fontNormal16),
+           Text('Profile Settings',style:CustomTextStyle.fontNormal16),
           const Expanded(child:  SizedBox(height: 10,)),
           ProfileSettingItem(text: 'Change Password',onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context){

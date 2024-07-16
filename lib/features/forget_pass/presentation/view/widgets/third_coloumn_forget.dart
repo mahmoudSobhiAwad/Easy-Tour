@@ -16,7 +16,7 @@ class ThirdColumnResetPass extends StatelessWidget {
         const SizedBox(height: 10,),
         SizedBox(
           height: MediaQuery.of(context).size.height*0.2,
-          child: const TitleOfCreateAcc(
+          child:  TitleOfCreateAcc(
             mainStyle:CustomTextStyle.fontBold30 ,
             secondaryStyle: CustomTextStyle.font16Light,
             textAlign: TextAlign.start,

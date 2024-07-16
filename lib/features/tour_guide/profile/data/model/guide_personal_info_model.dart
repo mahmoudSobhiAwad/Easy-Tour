@@ -31,7 +31,7 @@ class TourGuidePersonalInfoModel{
     synId: ProfileImageUrl.fromJson(json['syndicateLiscence']).imageUrl??"",
     cvUrl: ProfileImageUrl.fromJson(json['CV']).imageUrl??"",
     lang: json['languages']??[],
-    phoneNumber: json['phoneNumber'],
+   phoneNumber: json['phoneNumber'],
     contactInfo:json['contact_info'],
     trips:json['createdTrips']!=null ?(json['createdTrips'] as List).map((oneTrip) => Trip.fromJson(oneTrip)).toList():[],
   );

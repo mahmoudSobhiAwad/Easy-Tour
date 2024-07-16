@@ -14,7 +14,7 @@ class FilterPostRepoImpl implements FilterPostRepo{
   Future<Either<Failure, FilterPostModel>> getFilteredPosts({required Map<String,dynamic>info}) async{
     try
     {
-      var result=await apiServices.normalPost('http://100.25.136.166:8000/post_filteration', data:info);
+      var result=await apiServices.normalPost('http://35.175.102.243:8000/post_filteration', data:info);
       print(result);
       FilterPostModel filterPostModel=FilterPostModel.fromJson(result);
       return right(filterPostModel);

@@ -7,6 +7,7 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentat
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/resturants_hotels_details_view/custom_image_slider.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/resturants_hotels_details_view/rest_or_hotel_info.dart';
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/views/widgets/resturants_hotels_details_view/review_list.dart';
+import 'package:prepare_project/features/tourist/google_map/presentaion/view/google_map_view.dart';
 import 'package:prepare_project/features/tourist/nearby_places/data/models/nearby_places_model.dart';
 class RestaurantOrHotelDetailsBody extends StatelessWidget {
   const RestaurantOrHotelDetailsBody({
@@ -38,7 +39,7 @@ class RestaurantOrHotelDetailsBody extends StatelessWidget {
                         cubit.changeToReview(value);
                       },
                       indicatorColor: entertainmentColor,
-                      tabs:const[
+                      tabs:[
                         Tab(child: Text('Details',style:CustomTextStyle.fontNormal14WithEllipsis,),),
                         Tab(child: Text('Reviews',style:CustomTextStyle.fontNormal14WithEllipsis,),),
                       ]
@@ -49,7 +50,9 @@ class RestaurantOrHotelDetailsBody extends StatelessWidget {
               Expanded(
                   child: ReviewListForHotelsOrRestaurants(height: height, width: width, model: model.reviewsList??[],)),
 
-              Center(child: CustomLoginButton(altWidth: width*0.9,color: forthColor,label: 'Go Now',)),
+              Center(child: CustomLoginButton(altWidth: width*0.9,color: forthColor,label: 'Go Now',onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>GoogleMapView()));
+              },)),
             ],
           ),
         ),

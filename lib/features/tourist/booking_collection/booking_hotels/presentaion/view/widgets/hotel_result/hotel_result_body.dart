@@ -3,8 +3,11 @@ import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/sign_up/presentation/views/widgets/custom_app_bar_trip_generated.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/data/models/get_hotel_model.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/manager/hotel_result_cubit/hotel_result_cubit.dart';
+import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/available_rooms/availabile_room_view.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/date_range_pass_num_destination.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/hotel_result/one_hotel_item_in_result.dart';
+
+import '../../../../data/models/get_availbitly_room_model.dart';
 
 class HotelResultBody extends StatelessWidget {
   const HotelResultBody({
@@ -51,9 +54,14 @@ class HotelResultBody extends StatelessWidget {
                         controller: cubit.scrollController,
                         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
                         itemBuilder: (context,index){
-                          return OneHotelItemInBooking(width: width, height: height,model: hotelList[index],onTap: (){
-                            cubit.searchForAvailableRooms(hotelCode: hotelList[index].code!, hotelIndex: index);
-                          },);
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>RoomAvailabilityView(model: HotelModelWithRoomModel(availableRoomsModel: [], hotelsModel: hotelList[index]),paxList: cubit.occupanciesList, roomNum: cubit.roomNum)));
+                            },
+                            child: OneHotelItemInBooking(width: width, height: height,model: hotelList[index],onTap: (){
+                              cubit.searchForAvailableRooms(hotelCode: hotelList[index].code!, hotelIndex: index);
+                            },),
+                          );
                         }, separatorBuilder: (context,index){
                       return SizedBox(height: height*0.025,);
                     }, itemCount: hotelList.length),

@@ -23,7 +23,7 @@ class LicenceButton extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          const Text('Licence',style: CustomTextStyle.fontNormal16),
+          Text('Licence',style: CustomTextStyle.fontNormal16),
           const Expanded(child:  SizedBox(height: 10,)),
           ProfileSettingItem(text: 'Ministry ID,Syndicate ID', onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context)=>ShowGuideLicenceForTourist(height: height,licences:licenceNames??[],width: width,cvUrl:cvUrl??"",)));

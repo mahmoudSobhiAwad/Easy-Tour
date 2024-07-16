@@ -33,6 +33,7 @@ class ChatTouristOneToOtherOne extends StatelessWidget {
               child: Stack(
                 children: [
                   ChatOneToOneBody(height: height, width: width, cubit: cubit, name: name,profileUrl: profileUrl,destEmail: destEmail,status: status,),
+                  
                   cubit.enableImagePreview? CustomImagePreview(imageModel:cubit.selectedImageModel,height: height, onDismissed: () {
                     cubit.disableImagePreview();
                   }, width: width,enableSendImage: cubit.enableSendImageInImagePreview,sendImage: (){
@@ -47,8 +48,6 @@ class ChatTouristOneToOtherOne extends StatelessWidget {
     );
   }
 }
-
-
 
 
 

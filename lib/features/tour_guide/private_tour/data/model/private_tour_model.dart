@@ -50,7 +50,7 @@ class Trip {
       "included":included,
       "excluded":excluded,
       'tripDetails':tripDetails?.map((tripDetails) => tripDetails.toJson()).toList(),
-      if(bgImagePath!=null) 'image':[await MultipartFile.fromFile(bgImagePath!,filename: 'background image')]
+      if(bgImagePath!=null) 'images':[await MultipartFile.fromFile(bgImagePath!,filename: 'background image'),await MultipartFile.fromFile(bgImagePath!,filename: 'background image')]
     });
   return formData;
   }

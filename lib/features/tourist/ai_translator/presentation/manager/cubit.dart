@@ -98,8 +98,6 @@ class AiTranslatorCubit extends Cubit<AiTranslatorState>{
     if(source){
       if(!sourceTtsState){
         emit(ChangeTextToSpeechState());
-        print(sourceController.text);
-
         await flutterTts.setLanguage(getLocalId(sourceCountry!).localeId.split('_').first);
         await flutterTts.speak(sourceController.text);
       }
@@ -131,23 +129,22 @@ class AiTranslatorCubit extends Cubit<AiTranslatorState>{
         debounce?.cancel();
       }
       else{
-
         debounce=Timer(Duration(milliseconds: 300), ()async {
           emit(LoadingSendTextToTranslate());
           print(sourceController.text);
-          // var result=await translatorRepoImp.sendRequest(data: {
-          //   'source':sourceCountry?.name,
-          //   'destination':destCountry?.name,
-          //   'text':sourceController.text,
-          // });
-          // result.fold((failure) {
-          //   print(failure.errMessage);
-          //   emit(FailureSendTextToTranslate(errMessage: failure.errMessage));
-          // }, (response) {
-          //   print(response);
-          //   translatedText=response;
-          //   emit(SuccessSendTextToTranslate());
-          // });
+          var result=await translatorRepoImp.sendRequest(data: {
+            'source':sourceCountry?.name,
+            'destination':destCountry?.name,
+            'text':sourceController.text,
+          });
+          result.fold((failure) {
+            print(failure.errMessage);
+            emit(FailureSendTextToTranslate(errMessage: failure.errMessage));
+          }, (response) {
+            print(response);
+            translatedText=response;
+            emit(SuccessSendTextToTranslate());
+          });
         });
 
       }

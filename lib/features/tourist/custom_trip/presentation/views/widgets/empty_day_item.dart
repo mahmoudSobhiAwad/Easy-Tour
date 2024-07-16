@@ -18,7 +18,7 @@ class EmptyDayToAddItem extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: const ColoredBox(color: secondaryColor,child: Padding(
+            child:  ColoredBox(color: secondaryColor,child: Padding(
               padding: EdgeInsets.all(8.0),
               child: Text('Push To Pick Places To You Trip',style: CustomTextStyle.fontNormal16,textAlign: TextAlign.center,),
             ),)),

@@ -155,10 +155,13 @@ class ImageClassificationCubit extends Cubit<ImageClassificationStates>{
      if(pickedFile!=null) 'image':[await MultipartFile.fromFile(pickedFile!.path)],
     });
     emit(LoadingSendImageToClassify());
+    isLoading=true;
     var result=await qrScannedRepo.sendImageToClassify(data: formData);
     result.fold((failure) {
+      isLoading=false;
       emit(FailureSendImageToClassify(errMessage: failure.errMessage));
     }, (success) {
+      isLoading=false;
       emit(SuccessSendImageToClassify(model: QrScannedModel(imageUrl: ImagePathWithType(type: imageType.local,image: pickedFile!.path),rawDate: success)));
     });
 

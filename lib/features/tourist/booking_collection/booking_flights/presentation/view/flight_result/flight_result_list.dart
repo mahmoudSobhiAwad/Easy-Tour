@@ -39,7 +39,7 @@ class FlightResultList extends StatelessWidget {
     ):
     SizedBox(
         height: height*0.6,
-        child: const Center(child: Text('There is No Available Planes In this Date ',style: CustomTextStyle.fontBold21,maxLines: 3,textAlign: TextAlign.center,),));
+        child: Center(child: Text('There is No Available Planes In this Date ',style: CustomTextStyle.fontBold21,maxLines: 3,textAlign: TextAlign.center,),));
   }
 }
 

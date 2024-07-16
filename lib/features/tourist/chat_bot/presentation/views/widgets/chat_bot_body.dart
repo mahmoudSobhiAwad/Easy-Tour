@@ -25,7 +25,7 @@ final ChatBotCubit cubit;
               context.pop();
             },
             icon: const Icon(Icons.arrow_back_ios_new,color: basicColor,)),
-        title:const Row(
+        title: Row(
           children: [
             BotCircle(height: 40, blurRadius: 4, icon:Icon(FontAwesomeIcons.robot,color: basicColor,)),
             SizedBox(width: 10,),

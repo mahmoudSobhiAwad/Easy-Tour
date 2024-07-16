@@ -78,26 +78,35 @@ class HotelResultCubit extends Cubit<HotelResultStates>{
   }
 
   void searchForAvailableRooms({required int hotelCode,required int hotelIndex})async{
-    emit(LoadingGetAvailableRooms());
-    var result=await hotelsRepoImpl.getAvailableRooms(toJsonModel: GetAvailableRoomsModel(
-      occupanciesList: occupanciesList,
-      checkIn: checkIn,
-      checkOut: checkOut,
-      hotelCode: hotelCode,
-      // paxList: occupanciesList,
-    ).toJson());
-    result.fold((failure) {
-      emit(FailureGetAvailableRooms(errMessage: failure.errMessage));
-    }, (availableRooms) {
-      if(availableRooms.isEmpty){
-        hotelModelWithRoomModel=HotelModelWithRoomModel(availableRoomsModel: [], hotelsModel: hotelList![hotelIndex]);
-        emit(SuccessGetAvailableRooms(model: hotelModelWithRoomModel));
-      }
-      else{
-        hotelModelWithRoomModel=HotelModelWithRoomModel(availableRoomsModel: availableRooms, hotelsModel: hotelList![hotelIndex]);
-        emit(SuccessGetAvailableRooms(model: hotelModelWithRoomModel));
-      }
-    } );
+    if(totalAdultNum!=0&&checkIn!="Check In"&&checkOut!='Check Out'){
+      emit(LoadingGetAvailableRooms());
+      var result=await hotelsRepoImpl.getAvailableRooms(toJsonModel: GetAvailableRoomsModel(
+        occupanciesList: occupanciesList,
+        checkIn: checkIn,
+        checkOut: checkOut,
+        hotelCode: hotelCode,
+        // paxList: occupanciesList,
+      ).toJson());
+      result.fold((failure) {
+        emit(FailureGetAvailableRooms(errMessage: failure.errMessage));
+      }, (availableRooms) {
+        if(availableRooms.isEmpty){
+          hotelModelWithRoomModel=HotelModelWithRoomModel(availableRoomsModel: [], hotelsModel: hotelList![hotelIndex]);
+          emit(SuccessGetAvailableRooms(model: hotelModelWithRoomModel));
+        }
+        else{
+          hotelModelWithRoomModel=HotelModelWithRoomModel(availableRoomsModel: availableRooms, hotelsModel: hotelList![hotelIndex]);
+          emit(SuccessGetAvailableRooms(model: hotelModelWithRoomModel));
+        }
+      } );
+    }
+    else if(checkIn=="Check In" && checkOut=='Check Out'){
+      emit(FailureGetAvailableRooms(errMessage: "You must Define Date to stay"));
+    }
+    else{
+      emit(FailureGetAvailableRooms(errMessage: "You must have at least one adult or Rooms can't be empty"));
+    }
+
   }
 
   void changeRoomNum({required bool increase}){

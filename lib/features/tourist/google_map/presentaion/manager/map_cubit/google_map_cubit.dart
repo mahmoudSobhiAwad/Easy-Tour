@@ -12,11 +12,13 @@ import '../../../../../../core/utilities/basics.dart';
 import '../../../../../../core/utilities/function/decode_poly_lines.dart';
 
 class GoogleMapCubit extends Cubit<GoogleMapStates>{
-  GoogleMapCubit({required this.textSearchRepoImp,this.initialLatLng,this.initialLatLngInfo}):super(InitialGoogleMapState());
+  GoogleMapCubit({required this.textSearchRepoImp,this.initialLatLng,this.initialLatLngInfo,this.requestLatLng}):super(InitialGoogleMapState());
   Set<Marker>markers={};
   final LatLng?initialLatLng;
+  LatLng?requestLatLng;
   final String?initialLatLngInfo;
   int?initialDistance;
+  bool enableRequest=false;
   bool showInitialBottomSheet=false;
   List<TextSearchModel>textSearchList=[];
   List<RoutePolyLinesModel>routePolyLinesList=[];
@@ -40,15 +42,32 @@ class GoogleMapCubit extends Cubit<GoogleMapStates>{
     );
     polyLinesSets.add(polyline);
   }
+  void closeRequestLatLng(){
+    enableRequest=false;
+    emit(CloseEnableRequestLatLngState());
+  }
   void enableLiveLocationMethod(){
     enableLiveLocation=true;
   }
   void getMarkAtSpecificLatLng(Set<Marker>markers,LatLng latLng){
-    markers.add(Marker(markerId: const MarkerId('new place'),position: latLng));
-    if(markers.contains(const Marker(markerId: MarkerId('markerRoute')))){
-      markers.remove(const Marker(markerId: MarkerId('markerRoute')));
+    if(requestLatLng!=null){
+      enableRequest=true;
+      emit(EnableGetRequestLatLng());
+      markers.add(Marker(markerId: const MarkerId('new place'),position: latLng));
+      requestLatLng=latLng;
+      if(markers.contains(const Marker(markerId: MarkerId('markerRoute')))){
+        requestLatLng=null;
+        markers.remove(const Marker(markerId: MarkerId('markerRoute')));
+      }
     }
-    emit(AddNewMarkersWhenPushOnMap());
+    else{
+      markers.add(Marker(markerId: const MarkerId('new place'),position: latLng));
+      if(markers.contains(const Marker(markerId: MarkerId('markerRoute')))){
+        markers.remove(const Marker(markerId: MarkerId('markerRoute')));
+      }
+    }
+
+    emit(AddNewMarkersWhenPushOnMap(requestValue: latLng));
   }
   Future<bool>askToEnableLocationServices()async{
     bool serviceEnabled;

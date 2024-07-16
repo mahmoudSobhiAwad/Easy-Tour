@@ -34,7 +34,7 @@ class PrivateTourItem extends StatelessWidget {
                 Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(color: entertainmentColor.withOpacity(0.2),borderRadius: BorderRadius.circular(10)),
-                    child:const  Center(child:  Text('Click On The Trip And Edit It To Have BackGround Image',style: CustomTextStyle.fontBold16,textAlign: TextAlign.center,)))
+                    child:Center(child:  Text('Click On The Trip And Edit It To Have BackGround Image',style: CustomTextStyle.fontBold16,textAlign: TextAlign.center,)))
             ),
             PrivateTourWithoutImage(height: height, width: width,model: model,)
           ],

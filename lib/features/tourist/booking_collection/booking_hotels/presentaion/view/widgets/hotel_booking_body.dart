@@ -1,4 +1,7 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
+import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/data/models/destinations_model.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/manager/hotel_booking_cubit/hotel_booking_cubit.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/presentaion/view/widgets/explore_egypt_destination.dart';
@@ -26,18 +29,18 @@ class HotelBookingBody extends StatelessWidget {
         child: Stack(
           children: [
             Image.asset('assets/hotel_booking/booking_background.png',width: width,height: height*0.3,fit: BoxFit.cover,),
-            Align(
+            cubit.isLoading?Center(child: CircularProgressIndicator()): Align(
               alignment: Alignment.bottomCenter,
               child: Container(
                 height: height*0.77,
                 width: width,
-                decoration:const BoxDecoration(
-                    color: Colors.white,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius:  BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))
                 ),
                 child: Padding(
                   padding: EdgeInsets.only(top: height*0.1),
-                  child: ListView(
+                  child:ListView(
                     padding: const EdgeInsets.all(14),
                     children: [
                       TrendingDestinationInHotelBooking(width: width, height: height,onTap: (DestinationModel val){

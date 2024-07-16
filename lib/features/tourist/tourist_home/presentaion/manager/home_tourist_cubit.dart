@@ -43,6 +43,7 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
     }
   }
   void connect(){
+    emit(LoadingMakeSocketConnect());
     socket = io.io(baseUrl,
         OptionBuilder()
             .setTransports(['websocket'])// for Flutter or Dart VM
@@ -51,8 +52,10 @@ class HomeTouristCubit extends Cubit<HomeTouristState>{
             .build()
     );
     socket.connect();
+    emit(SuccessMakeSocketConnect());
     socket.onConnect((data) {
-      socket.on("receiveMessage", (data) {
+      socket.on("receiveMessage", (data) async{
+        await NotificationSetup().createOrderNotification("Message Chat","some one send you ${data['type']}",chatNotificationChannel);
         log('Listening Now To Socket');
       });
     });

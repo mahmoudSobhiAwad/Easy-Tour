@@ -12,6 +12,6 @@ class AddressTextForm extends StatelessWidget {
       text: 'Home Address',customTextFormField: CustomTextFormField(
       maxLines: 1,
       type: TextInputType.streetAddress,
-      label: '',fillColor: formFillColor,filled: true,border: 12,controller:controller ,),);
+      label: '',fillColor: thirdColor,filled: true,border: 12,controller:controller ,),);
   }
 }

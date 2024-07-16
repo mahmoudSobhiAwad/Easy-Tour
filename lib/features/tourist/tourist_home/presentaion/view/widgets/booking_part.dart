@@ -24,7 +24,7 @@ class GetTrip extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('Get A Trip',style: CustomTextStyle.fontGrover30,),
+          Text('Get A Trip',style: CustomTextStyle.fontGrover30,),
           Expanded(
               child: ListView.separated(
                 padding: const EdgeInsets.only(top: 10),

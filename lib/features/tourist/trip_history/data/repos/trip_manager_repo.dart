@@ -5,7 +5,7 @@ import 'package:prepare_project/features/tourist/trip_history/data/model/trip_ma
 abstract class TripManagerRepo {
   Future<Either<Failure,TripManagerModel>>getAllTripsManager();
 
-  //Future<Either<Failure,List<TripManagerModel>>>repeatTripsManager();
+  Future<Either<Failure,String>>repeatTripsManager(Map<String,dynamic>data);
 
-  //Future<Either<Failure,List<TripManagerModel>>>delete();
+  Future<Either<Failure,String>>delete(Map<String,dynamic>data);
 }

@@ -30,7 +30,7 @@ class HomeTouristTourGuideAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(onPressed: openSidePar, icon: const Icon(Icons.table_rows_rounded,),),
-            SizedBox(width: width*0.5,child: const Align(alignment: Alignment.centerLeft,child: Text('Easy Tour',style: CustomTextStyle.fontGrover30,))),
+            SizedBox(width: width*0.5,child:  Align(alignment: Alignment.centerLeft,child: Text('Easy Tour',style: CustomTextStyle.fontGrover30,))),
             enableSearch? GestureDetector(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder:(context)=>const SearchView()));

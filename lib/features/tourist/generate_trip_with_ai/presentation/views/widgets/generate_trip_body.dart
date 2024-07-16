@@ -22,7 +22,7 @@ class GenerateTripBody extends StatelessWidget {
             padding:const EdgeInsets.all(20,).copyWith(right: 5,bottom: 0,left: 5),
             width: width,
             height: height*0.78,
-            decoration:const BoxDecoration(color: Colors.white,borderRadius: BorderRadius.only(topLeft:Radius.circular(40) ,topRight:Radius.circular(40) )),
+            decoration:BoxDecoration(color:Theme.of(context).colorScheme.surface,borderRadius: BorderRadius.only(topLeft:Radius.circular(40) ,topRight:Radius.circular(40) )),
             child:ListView(
               padding: EdgeInsets.only(bottom:MediaQuery.of(context).viewInsets.bottom),
               children: [
@@ -38,7 +38,7 @@ class GenerateTripBody extends StatelessWidget {
                 },),
                 const SizedBox(height: 20,),
                 Center(
-                    child:CustomLoginButton(isLoading: cubit.isLoading,color: Colors.black,label:'Generate A Trip',altWidth: width*0.5,onTap: (){
+                    child:CustomLoginButton(isLoading: cubit.isLoading,label:'Generate A Trip',altWidth: width*0.5,onTap: (){
                       cubit.requestGenerateTrip();
                       },
                     )

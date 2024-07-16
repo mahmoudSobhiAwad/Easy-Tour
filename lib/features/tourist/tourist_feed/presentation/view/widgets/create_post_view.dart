@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
+import 'package:prepare_project/core/widget/custom_alert_widget/alert_container.dart';
+import 'package:prepare_project/core/widget/custom_alert_widget/alert_types.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/data/repo/filter_post_repo.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/manager/create_post_cubit/create_post_cubit.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/presentation/manager/create_post_cubit/create_post_states.dart';
@@ -24,8 +27,16 @@ class CreatePostView extends StatelessWidget {
             );
       }, listener: (context,state){
             if(state is SuccessUploadPostState){
-               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Uploaded Successfully"),backgroundColor: whatsAppColor,width: 200,),);
+               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Uploaded Successfully"),backgroundColor: whatsAppColor,),);
                Navigator.pop(context);
+            }
+            else if (state is FailureFilterPosts){
+              showDialog(context: context, builder: (context)=> ContainerAlertWidget(
+                types: AlertTypes.failed,
+                onTap: (){
+                  context.pop();
+                },
+                content: '${state.errMessage}',));
             }
       }) ,);
   }

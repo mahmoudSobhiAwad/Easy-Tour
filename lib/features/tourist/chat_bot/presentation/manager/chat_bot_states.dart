@@ -19,3 +19,4 @@ class ClearMessagesOfChatBotState extends ChatBotState {}
 class ChangeLocalIdOfChatState extends ChatBotState {}
 class ChangeShowLanguageOfChatState extends ChatBotState {}
 class OpenOrCloseChangeLangState extends ChatBotState {}
+class ChangeEnableVoiceState extends ChatBotState {}

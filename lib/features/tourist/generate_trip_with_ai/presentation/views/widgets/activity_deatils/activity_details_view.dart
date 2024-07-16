@@ -42,7 +42,7 @@ class ActivityDetailsView extends StatelessWidget {
                         Text(place.name,style: CustomTextStyle.fontBold18,),
                         ProfileSettingItem(
                           enableDivider: false,
-                          rightWidget: const Text('Time Visiting',style:CustomTextStyle.fontNormal14WithEllipsis,),
+                          rightWidget:  Text('Time Visiting',style:CustomTextStyle.fontNormal14WithEllipsis,),
                           child: Container(
                             padding:const EdgeInsets.all(5),
                             decoration: BoxDecoration(color: thirdColor,borderRadius: BorderRadius.circular(10)),
@@ -76,7 +76,7 @@ class ActivityDetailsView extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                            const Text('About Destination',style: CustomTextStyle.fontBold21,),
+                             Text('About Destination',style: CustomTextStyle.fontBold21,),
                             SizedBox(height: height*0.02,),
                             SizedBox(
                               height: height*0.2,

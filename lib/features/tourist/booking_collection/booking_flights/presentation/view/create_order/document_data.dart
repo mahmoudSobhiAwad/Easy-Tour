@@ -24,7 +24,7 @@ class DocumentData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Document Date',style: CustomTextStyle.fontBold14,),
+        Text('Document Date',style: CustomTextStyle.fontBold14,),
         SizedBox(height: height*0.01,),
         CustomTwoFieldForm(
           firstText: 'Type',

@@ -20,7 +20,7 @@ class PersonalInfoOfTourToViewTourist extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          const Text('Personal Info',style: CustomTextStyle.fontNormal16),
+           Text('Personal Info',style: CustomTextStyle.fontNormal16),
           const Expanded(child:  SizedBox(height: 10,)),
           ProfileSettingItem(
             text: 'Languages',

@@ -3,6 +3,7 @@ import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/widget/login_sign_up/custom_text_form.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/presentaions/managers/one_to_one/chat_one_to_one_cubit.dart';
+import 'package:prepare_project/features/tourist/google_map/presentaion/view/google_map_view.dart';
 class RecorderWithImagePickerWithCustomForm extends StatefulWidget {
   const RecorderWithImagePickerWithCustomForm({super.key,required this.cubit,required this.height,required this.width});
   final double width;
@@ -66,7 +67,8 @@ class _RecorderWithImagePickerWithCustomFormState extends State<RecorderWithImag
                   PopupMenuItem<SampleItem>(
                     value: SampleItem.camera,
                     onTap: (){
-                      widget.cubit.getImageFromCamera();
+                      print(widget.cubit.requestLatLng);
+                      //widget.cubit.getImageFromCamera();
                     },
                     child: const Padding(
                       padding: EdgeInsets.only(bottom: 5.0),
@@ -91,8 +93,13 @@ class _RecorderWithImagePickerWithCustomFormState extends State<RecorderWithImag
                       ),
                     ),
                   ),
-                  const PopupMenuItem<SampleItem>(
-                    onTap: null,
+                   PopupMenuItem<SampleItem>(
+                    onTap: ()async{
+                      await Navigator.push(context, MaterialPageRoute(builder: (context)=>GoogleMapView(requestLat: widget.cubit.requestLatLng,))).then((value){
+                       widget.cubit.requestLatLng=value;
+                        widget.cubit.addToChatModel("video");
+                      });
+                    },
                     value: SampleItem.location,
                     child:Padding(
                       padding: EdgeInsets.only(bottom: 5.0),

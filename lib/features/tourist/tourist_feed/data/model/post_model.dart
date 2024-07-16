@@ -49,6 +49,7 @@ class MediaPathWithType{
 
 }
 enum MediaType {video,image}
+enum VideoType {local,url}
 extension MediaTypeExtenstion on MediaType {
   static MediaType fromString(String colorString) {
     return MediaType.values.firstWhere(

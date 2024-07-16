@@ -36,7 +36,7 @@ class NearbySearchView extends StatelessWidget {
                   child: SizedBox(
                     height: height*0.6,
                     child:cubit.typesOfList.isEmpty?
-                    const Center(child: Text('Pick Category To Search For It',textAlign: TextAlign.center,style: CustomTextStyle.fontGrover30,),) :
+                     Center(child: Text('Pick Category To Search For It',textAlign: TextAlign.center,style: CustomTextStyle.fontGrover30,),) :
                     ListView.builder(
                         padding: EdgeInsets.zero,
                         itemCount: cubit.typesOfList.length,

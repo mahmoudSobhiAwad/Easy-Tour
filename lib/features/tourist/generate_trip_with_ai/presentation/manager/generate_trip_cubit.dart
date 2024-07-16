@@ -130,7 +130,7 @@ class GenerateAiTripCubit extends Cubit<GenerateAiTripState>{
         }
         else
         {
-          emit(SuccessSendRequestToGenerateTrip(startDate:destinationWithDayList.first.startDate,model:generatedTrip,endDate: destinationWithDayList.last.startDate ));
+          emit(SuccessSendRequestToGenerateTrip(startDate:destinationWithDayList.first.startDate,model:generatedTrip,endDate: destinationWithDayList.last.lastDate ));
         }
       });
     }

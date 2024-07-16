@@ -12,8 +12,42 @@ class TripManagerRepoImpl implements TripManagerRepo{
   @override
   Future<Either<Failure, TripManagerModel>> getAllTripsManager() async{
     try{
-      var result =await apiServices.get(endPoint: '${homeEndPointTourist}tripHistory/getTrips');
+      var result =await apiServices.get(endPoint: '${homeEndPointTourist}tripHistory/tripManager');
       return right(TripManagerModel.fromJson(result));
+    }
+
+    catch(e){
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      else {
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> delete(Map<String,dynamic>data)async {
+    try{
+      var result =await apiServices.delete(endPoint: '${homeEndPointTourist}tripHistory/tripManager',data: data);
+      return right(result['message']);
+    }
+
+    catch(e){
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      else {
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure,String>> repeatTripsManager(Map<String, dynamic> data)async {
+    try{
+      var result =await apiServices.patch(endPoint: '${homeEndPointTourist}tripHistory/tripManager',data: data);
+      return right(result['message']);
     }
 
     catch(e){

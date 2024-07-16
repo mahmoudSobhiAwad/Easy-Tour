@@ -34,7 +34,7 @@ class CreatedCustomTripsBody extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10.0),
                 child: CustomGeneratedAiTripAppBar(height: height, width: width,appBarTitle: 'Custom Trips',),
               ),
-              cubit.customTripList.isEmpty?const Center(child:  Text('Let\'s Create Your First Custom Trip',style: CustomTextStyle.fontBold30,textAlign: TextAlign.center,)) :
+              cubit.customTripList.isEmpty? Center(child:  Text('Let\'s Create Your First Custom Trip',style: CustomTextStyle.fontBold30,textAlign: TextAlign.center,)) :
               Expanded(child: RefreshIndicator(
                 onRefresh:()async{
                   cubit.getAllTrips();

@@ -70,7 +70,7 @@ class CustomContainerWithStroke extends StatelessWidget {
       width:width*0.13,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: bgColor??Colors.white,
+          color: bgColor??Theme.of(context).colorScheme.surface,
           boxShadow: [buildBoxShadow()],
           border: Border.all(color: borderColor??secondaryColor,width: 3)
       ),

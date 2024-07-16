@@ -13,7 +13,7 @@ class TrendingDestinationInHotelBooking extends StatelessWidget {
     return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Trending destinations',style: CustomTextStyle.fontBold21,),
+         Text('Trending destinations',style: CustomTextStyle.fontBold21,),
         SizedBox(height: height*0.01,),
         Wrap(
           spacing:10,

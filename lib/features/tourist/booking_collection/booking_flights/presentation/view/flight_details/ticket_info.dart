@@ -14,7 +14,7 @@ class TicketInfo extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text('Instant Ticket Required',style: CustomTextStyle.fontBold16),
+              Text('Instant Ticket Required',style: CustomTextStyle.fontBold16),
               instantTicket?const Icon(Icons.check,color: whatsAppColor,):const Icon(Icons.close,color: closeColor,)
             ],
           ),

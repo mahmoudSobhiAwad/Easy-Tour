@@ -39,7 +39,7 @@ class BioAndEditButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: formFillColor,
               ),
-              child: const Center(child: Text('Edit Profile',style: CustomTextStyle.fontBold14,)),
+              child:  Center(child: Text('Edit Profile',style: CustomTextStyle.fontBold14,)),
 
             ),
           ),

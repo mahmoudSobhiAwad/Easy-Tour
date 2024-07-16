@@ -19,7 +19,7 @@ class PersonalInfoForTourist extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Personal Info',style: CustomTextStyle.fontBold16,),
+        Text('Personal Info',style: CustomTextStyle.fontBold16,),
         ListTile(
           contentPadding: EdgeInsets.zero,
           leading: ProfilePicWidget(imageUrl:model.image??"", height: height*0.08,),

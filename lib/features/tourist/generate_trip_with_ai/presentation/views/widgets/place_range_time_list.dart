@@ -53,7 +53,7 @@ class PlaceWithRangeTimeList extends StatelessWidget {
                 height: height*0.07,
                 width: width*0.48,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: commonBorderRadius(),
                   boxShadow: [buildBoxShadow()],
                 ),
@@ -63,7 +63,7 @@ class PlaceWithRangeTimeList extends StatelessWidget {
                     destinationList[index].numOfDay==null? const Text('Pick Range Of Date',style: CustomTextStyle.font12WithEllipsis):Text('From: ${destinationList[index].startDate}\nTo : ${destinationList[index].lastDate}',style: CustomTextStyle.font12WithEllipsis,),
                     IconButton(onPressed:(){
                       pickDate(index);
-                    },icon:const Icon(Icons.calendar_month_rounded,color: basicColor,)),
+                    },icon:const Icon(Icons.calendar_month_rounded,)),
                   ],
                 ),
               ),

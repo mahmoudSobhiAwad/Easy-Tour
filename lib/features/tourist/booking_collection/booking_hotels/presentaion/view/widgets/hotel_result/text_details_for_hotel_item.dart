@@ -45,7 +45,7 @@ final void Function() onTap;
                 child: Text('${model.cityName},${model.address}',style: CustomTextStyle.fontNormal14WithEllipsis,maxLines: 3,)),
           ],),
         SizedBox(height: height*0.01,),
-        const Text('Business Hotel, Family Hotel',style: CustomTextStyle.fontNormal14WithEllipsis,),
+         Text('Business Hotel, Family Hotel',style: CustomTextStyle.fontNormal14WithEllipsis,),
         SizedBox(height: height*0.01,),
         Column(
           children: [
@@ -58,13 +58,13 @@ final void Function() onTap;
           ],
         ),
         SizedBox(height: height*0.01,),
-        const Text('2 adult, 3 nights',style: CustomTextStyle.font14Light,),
+        Text('2 adult, 3 nights',style: CustomTextStyle.font14Light,),
         SizedBox(height: height*0.01,),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: GestureDetector(
             onTap: onTap,
-            child: const ColoredBox(
+            child:  ColoredBox(
               color: forthColor,
               child: Padding(
                 padding: EdgeInsets.all(5.0),

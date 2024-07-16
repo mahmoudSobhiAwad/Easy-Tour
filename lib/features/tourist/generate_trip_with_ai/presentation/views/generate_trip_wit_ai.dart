@@ -35,9 +35,11 @@ class GenerateAiTrip extends StatelessWidget {
                 ][cubit.pageCurrIndex]
         );
       }, listener:(context,state){
+
             if(state is SuccessSendRequestToGenerateTrip){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>GeneratedTripDetailsWithAiView(startDate: state.startDate,model: state.model,endDate: state.endDate,)));
             }
+
             else if (state is FailureSendRequestToGenerateTrip) {
               showDialog(context: context, builder: (context)=> ContainerAlertWidget(
                 types: AlertTypes.failed,

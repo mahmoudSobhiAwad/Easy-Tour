@@ -25,7 +25,7 @@ class MaxPersonPlanPrice extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Select Type Of The Trip',style: CustomTextStyle.fontBold16,),
+        Text('Select Type Of The Trip',style: CustomTextStyle.fontBold16,),
         SizedBox(
           height:height*0.23,
           child: ListView.separated(
@@ -65,7 +65,7 @@ class MaxPersonPlanPrice extends StatelessWidget {
             },
           ),
         ),
-        const Text('This Price is Per Person',style: CustomTextStyle.font14Light,),
+        Text('This Price is Per Person',style: CustomTextStyle.font14Light,),
         const SizedBox(height: 15,),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,

@@ -19,12 +19,12 @@ class HelperToolsPart extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Helper Tools',style: CustomTextStyle.fontGrover30,),
+               Text('Helper Tools',style: CustomTextStyle.fontGrover30,),
               GestureDetector(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>TotalHelperToolsGrid(height: height, width: width)));
                 },
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.only(right: 10.0),
                   child: Text('See All',style: CustomTextStyle.fontBold14,),
                 ),

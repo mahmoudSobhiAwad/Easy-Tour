@@ -20,7 +20,7 @@ class RequestedTripInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Requested Trip',style: CustomTextStyle.fontBold16,),
+         Text('Requested Trip',style: CustomTextStyle.fontBold16,),
         SizedBox(height: height*0.015,),
         Container(
           padding:const EdgeInsets.all(7),

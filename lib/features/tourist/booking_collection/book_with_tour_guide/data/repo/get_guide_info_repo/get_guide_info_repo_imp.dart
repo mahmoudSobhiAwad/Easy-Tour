@@ -13,7 +13,7 @@ class GetGuideInfoForTouristRepImp implements GetGuideInfoForTouristRep{
   @override
   Future<Either<Failure, TourGuidePersonalInfoModel>> getTourGuideInfoForTouristToView(Map<String, dynamic> data)async {
     try{
-    var response=await apiServices.get(endPoint: '${homeEndPointTourist}book/TGtrip/viewTourGuide',data: data);
+    var response=await apiServices.get(endPoint:'${homeEndPointTourist}book/TGtrip/viewTourGuide',data: data);
     TourGuidePersonalInfoModel model=TourGuidePersonalInfoModel.fromJson(response['tour_guide']);
     return Right(model);
     }

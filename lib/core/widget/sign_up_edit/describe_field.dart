@@ -15,7 +15,7 @@ class DescribeYourSelf extends StatelessWidget {
         maxLines: 3,
         filled: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        fillColor: formFillColor,
+        fillColor: thirdColor,
         border: 20,
       ),
     );

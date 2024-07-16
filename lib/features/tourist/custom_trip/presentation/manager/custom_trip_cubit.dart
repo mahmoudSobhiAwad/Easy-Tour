@@ -77,8 +77,10 @@ class CustomTripCubit extends Cubit<CustomTripState>{
      var result=await customTripRepoImpl.createCustomTrips(data: pickedCompleteTrip.toJson());
      result.fold((failure){
        isLoading=false;
+       print(failure.errMessage);
        emit(FailureCreateOrEditTripState(errMessage: failure.errMessage));
      } , (data){
+
        isLoading=false;
        emit(SuccessCreateOrEditTripState());
      }

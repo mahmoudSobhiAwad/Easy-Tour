@@ -29,7 +29,7 @@ class EntertainmentPlacesView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ContainerBackIcons(height: height, width: width, onPressed: (){Navigator.pop(context);}),
-                      const Text('Entertainment Places',style: CustomTextStyle.fontGrover22,),
+                       Text('Entertainment Places',style: CustomTextStyle.fontGrover22,),
                       const SizedBox(width: 20,),
                     ],
                   ),

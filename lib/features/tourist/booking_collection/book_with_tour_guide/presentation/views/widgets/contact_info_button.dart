@@ -20,7 +20,7 @@ class ContactInfoButton extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Contact Info', style: CustomTextStyle.fontNormal16),
+           Text('Contact Info', style: CustomTextStyle.fontNormal16),
           const Expanded(child: SizedBox(height: 10,)),
           ProfileSettingItem(
             height: height * 0.07,

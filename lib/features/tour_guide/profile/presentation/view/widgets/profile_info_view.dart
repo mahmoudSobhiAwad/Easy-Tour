@@ -28,7 +28,7 @@ class TourGuideProfileInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                const Text('Personal Info',style: CustomTextStyle.fontNormal16),
+                Text('Personal Info',style: CustomTextStyle.fontNormal16),
                 const Expanded(child:  SizedBox(height: 10,)),
                 ProfileSettingItem(text: 'Edit Profile', onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=> EditTourGuideProfileView(model: cubit.tourGuidePersonalInfoModel,profileViewCubit: cubit,)));
@@ -50,7 +50,7 @@ class TourGuideProfileInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                const Text('Contact Info',style: CustomTextStyle.fontNormal16),
+                Text('Contact Info',style: CustomTextStyle.fontNormal16),
                 const Expanded(child:  SizedBox(height: 10,)),
                 ProfileSettingItem (
                   rightWidget:  Row(

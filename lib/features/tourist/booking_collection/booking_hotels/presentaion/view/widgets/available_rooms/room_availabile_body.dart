@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
@@ -33,7 +35,7 @@ class RoomAvailabilityBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('About Us',style: CustomTextStyle.fontBold21,),
+              Text('About Us',style: CustomTextStyle.fontBold21,),
               SizedBox(height: height*0.01,),
               SizedBox(
                   height: height*0.1,
@@ -41,7 +43,7 @@ class RoomAvailabilityBody extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       child: Text(model.hotelsModel.describe??"",style: CustomTextStyle.font14Light))),
               SizedBox(height: height*0.01,),
-              const Text('Services & Facilities',style: CustomTextStyle.fontBold21,),
+              Text('Services & Facilities',style: CustomTextStyle.fontBold21,),
               SizedBox(height: height*0.01,),
               cubit.facilityStringList.isNotEmpty?
               SizedBox(
@@ -54,7 +56,7 @@ class RoomAvailabilityBody extends StatelessWidget {
               ) :
               const SizedBox(),
               SizedBox(height: height*0.01,),
-              const Text('Available Rooms',style: CustomTextStyle.fontBold21,),
+              Text('Available Rooms',style: CustomTextStyle.fontBold21,),
               SizedBox(height: height*0.01,),
               TableDetailsOfAvailableRooms(width: width,model: model.availableRoomsModel,changeBookedRoomsNum: (
                   {required int index,required bool increase}){
@@ -66,7 +68,7 @@ class RoomAvailabilityBody extends StatelessWidget {
               SizedBox(height: height*0.02,),
               Center(child: CustomLoginButton(onTap: (){
                 cubit.getListOfPickedRoom();
-              },label: 'Book',altWidth: width*0.33,color: cubit.totalRoomNum>0? basicColor:basicColor.withOpacity(0.5),)),
+              },label: 'Book',altWidth: width*0.33,)),
             ],
           ),
         ),

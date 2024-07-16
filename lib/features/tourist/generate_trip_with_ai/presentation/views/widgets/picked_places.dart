@@ -24,7 +24,7 @@ class PlacesWrapWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Select your Destinations ',style: CustomTextStyle.fontBold16,),
+           Text('Select your Destinations ',style: CustomTextStyle.fontBold16,),
           Container(
             width: width,
             padding: const EdgeInsets.only(top: 10,bottom: 10),

@@ -38,7 +38,7 @@ class CustomTripView extends StatelessWidget {
                           color: whatsAppColor,
                           borderRadius: BorderRadius.circular(8)
                       ),
-                        child:const Text("Successfully Done",style: CustomTextStyle.font16BoldWhite,),
+                        child: Text("Successfully Done",style: CustomTextStyle.font16BoldWhite,),
               )));
               Navigator.pop(context);
               cubit.getAllTrips();

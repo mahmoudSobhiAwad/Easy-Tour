@@ -40,7 +40,7 @@ class DeleteOrEditPhoto extends StatelessWidget {
                   cropImage();
                   Navigator.pop(context);
                 },
-                child: const Row(
+                child:  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Edit",style:CustomTextStyle.fontBold16,),

@@ -32,14 +32,14 @@ class DiscoverPart extends StatelessWidget {
          Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('Best Destinations',style: CustomTextStyle.fontGrover30,),
+             Text('Best Destinations',style: CustomTextStyle.fontGrover30,),
             GestureDetector(
               onTap: (){
                 Navigator.push(context,MaterialPageRoute(builder: (context){
                   return  const DiscoverPLacesView();
                 }));
               },
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.only(right: 10.0),
                 child: Text('See All',style: CustomTextStyle.fontNormal14WithEllipsis,),
               ),

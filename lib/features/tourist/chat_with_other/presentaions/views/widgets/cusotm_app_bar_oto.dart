@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
+import 'package:prepare_project/features/tourist/booking_collection/book_with_tour_guide/presentation/views/widgets/guide_profile_from_toursit_view.dart';
 import 'package:prepare_project/features/tourist/profile/presentation/views/widgets/pic_profile_widget.dart';
 
 class CustomChatOneToOneAppBar extends StatelessWidget {
@@ -11,6 +12,7 @@ class CustomChatOneToOneAppBar extends StatelessWidget {
     this.profileUrl,
     this.name,
     this.status,
+    required this.email,
   });
 
   final double height;
@@ -18,6 +20,7 @@ class CustomChatOneToOneAppBar extends StatelessWidget {
   final String?profileUrl;
   final String?name;
   final String?status;
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class CustomChatOneToOneAppBar extends StatelessWidget {
         children: [
           IconButton(onPressed: (){
             Navigator.pop(context);
-          }, icon: const Icon(Icons.arrow_back_ios_new)),
+          }, icon: const Icon(Icons.arrow_back_ios_new,color: basicColor,)),
           ProfilePicWidget(imageUrl: profileUrl??'', height: height*0.06,),
           Padding(
             padding: const EdgeInsets.only(bottom: 15.0,left: 5),
@@ -42,7 +45,7 @@ class CustomChatOneToOneAppBar extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Row(
                   children: [
-                    Text(name??"",style: CustomTextStyle.fontNormal14WithEllipsis,),
+                    Text(name??"",style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: basicColor),),
                     Icon(Icons.circle,color: status=='Online'?whatsAppColor:closeColor,size: 15,),
                   ],
                 ),
@@ -50,7 +53,9 @@ class CustomChatOneToOneAppBar extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          const IconButton(onPressed:null ,padding: EdgeInsets.only(right: 10),icon:Icon(Icons.info,color: basicColor,size: 30,)),
+          IconButton(onPressed:(){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewGuideProfileFromTouristView(email: email)));
+          } ,padding: EdgeInsets.only(right: 10),icon:Icon(Icons.info,color: basicColor,size: 30,)),
         ],
       ),
     );

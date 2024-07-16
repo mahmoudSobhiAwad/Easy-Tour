@@ -39,7 +39,7 @@ class FlightTicketItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Total Price',style: CustomTextStyle.fontBold16,),
+                Text('Total Price',style: CustomTextStyle.fontBold16,),
                 Text('${model.price} \$',style: CustomTextStyle.fontBold16,),
               ],
             )

@@ -1,3 +1,5 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 abstract class GoogleMapStates{}
 class InitialGoogleMapState extends GoogleMapStates {}
 class InitialCameraPositionSuccessState extends GoogleMapStates {}
@@ -21,6 +23,11 @@ class FailureGetRoutePolyLinesList extends GoogleMapStates {
   FailureGetRoutePolyLinesList({this.errMessage});
 }
 class UpdateLatLngBoundsAfterGetRoute extends GoogleMapStates {}
-class AddNewMarkersWhenPushOnMap extends GoogleMapStates {}
+class AddNewMarkersWhenPushOnMap extends GoogleMapStates {
+  final LatLng? requestValue;
+  AddNewMarkersWhenPushOnMap({this.requestValue});
+}
 class FinishPrepareForInitialLocation extends GoogleMapStates {}
 class ShowInitialBottomSheet extends GoogleMapStates {}
+class EnableGetRequestLatLng extends GoogleMapStates {}
+class CloseEnableRequestLatLngState extends GoogleMapStates {}

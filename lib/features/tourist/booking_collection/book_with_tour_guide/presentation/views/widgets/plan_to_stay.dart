@@ -39,7 +39,7 @@ class TypeOfStay extends StatelessWidget {
                   Column(
                     children: [
                       Text('${plan?.values.elementAt(index)??""} \$',style: CustomTextStyle.fontBold16,),
-                      const Text('per person',style: CustomTextStyle.font14Light,),
+                       Text('per person',style: CustomTextStyle.font14Light,),
                     ],)
                 ],
               ),

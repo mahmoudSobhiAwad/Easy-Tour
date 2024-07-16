@@ -28,9 +28,6 @@ class TotalHelperToolsGrid extends StatelessWidget {
                               (){context.push(RouterApp.kTouristFlightTicketBooking);},
                               (){context.push(RouterApp.kChatBotView);},
                               (){context.push(RouterApp.kImageClassification);},
-                              (){
-
-                                },
                               (){context.push(RouterApp.kWeatherView);},
                               (){context.push(RouterApp.kCurrencyConverter);},
                               (){context.push(RouterApp.kAiTranslator);},

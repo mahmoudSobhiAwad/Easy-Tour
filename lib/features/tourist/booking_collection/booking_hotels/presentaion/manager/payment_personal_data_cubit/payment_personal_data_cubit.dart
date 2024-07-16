@@ -93,6 +93,7 @@ class PaymentPersonalDataCubit extends Cubit<PaymentPersonalDataStates>{
     var result=await getHotelsRepoImpl.bookAndPay(toJsonModel: paymentModel.withCreditToJson());
     result.fold(
             (failure){
+              print(failure.errMessage);
               emit(FailurePaymentOfBooking(errMessage: failure.errMessage));
               isLoading=false;
             },

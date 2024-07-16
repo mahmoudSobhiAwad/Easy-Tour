@@ -37,7 +37,7 @@ class ScannerWidget extends StatelessWidget {
           children: [
             Image.file(File(cubit.pickedFile!.path),fit: BoxFit.fill,width: width,height: height*0.5,),
             SizedBox(height: height*0.025,),
-            CustomLoginButton(altWidth: width*0.4,borderRadius: 12,label: 'Get Data',enable: true,onTap: (){
+            CustomLoginButton(altWidth: width*0.4,borderRadius: 12,isLoading: cubit.isLoading,label: 'Get Data',enable: true,onTap: (){
               cubit.sendImageToClassify();
             },),
           ],

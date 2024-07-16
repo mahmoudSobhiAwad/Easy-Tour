@@ -51,11 +51,11 @@ class BGPrivateTourOption extends StatelessWidget {
 
         },
         child:cubit.bgFile==null?
-        const Column(
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.photo_outlined,color: basicColor,size: 40,),
-            SizedBox(height: 10,),
+           const Icon(Icons.photo_outlined,color: basicColor,size: 40,),
+           const SizedBox(height: 10,),
             Text('pick image as back ground for the trip',style: CustomTextStyle.fontBold16,textAlign: TextAlign.center,)
           ],
         ):

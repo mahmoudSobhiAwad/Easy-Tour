@@ -25,7 +25,7 @@ class PayInBookingView extends StatelessWidget {
             cubit.toggleBetweenPages(0);
           },backDirect: false,),
           SizedBox(height: height*0.05,),
-          const Text('Pay Safely',style: CustomTextStyle.fontBold21,),
+           Text('Pay Safely',style: CustomTextStyle.fontBold21,),
           SizedBox(height: height*0.02,),
           CustomColumnWithTextForm(
             text: 'Name on Card ',
@@ -92,7 +92,7 @@ class PayInBookingView extends StatelessWidget {
               border: Border.all(color: thirdColor,width: 2),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(onPressed: null,icon:Icon(Icons.document_scanner_outlined)),

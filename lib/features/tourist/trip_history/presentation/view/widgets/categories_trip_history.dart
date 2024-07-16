@@ -61,7 +61,7 @@ class OneBarItemInTripManager extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal:8.0),
       child: Container(
         decoration: BoxDecoration(
-          color: index==currIndex?basicColor:thirdColor,
+          color: index==currIndex?basicColor:entertainmentColor,
           borderRadius: BorderRadius.circular(14),
         ),
         padding:const EdgeInsets.all(8),

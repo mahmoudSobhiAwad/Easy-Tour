@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/constant_var/constant.dart';
@@ -52,7 +54,7 @@ class OneTourGuideTripForTourist extends StatelessWidget {
                   onTap:(){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=> ViewGuideProfileFromTouristView(email: model?.guideEmail??"",)));
                   },
-                  child: ProfilePicWidget(height: height*0.1, imageUrl: "https://1.bp.blogspot.com/-Vj0Gxg73G1Q/VlS_uddJciI/AAAAAAAAAQQ/4CrBYorGi7U/s1600-r/hatsh.jpg"??"",))) :
+                  child: ProfilePicWidget(height: height*0.1, imageUrl: "https://1.bp.blogspot.com/-Vj0Gxg73G1Q/VlS_uddJciI/AAAAAAAAAQQ/4CrBYorGi7U/s1600-r/hatsh.jpg",))) :
           const SizedBox(),
         ],
       ),

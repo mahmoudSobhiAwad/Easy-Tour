@@ -5,6 +5,12 @@ class ChangeHomeTouristAnimationState extends HomeTouristState{}
 class ChangeHomeTouristNavBottomState extends HomeTouristState{}
 class GoToHomeBackState extends HomeTouristState{}
 class SuccessLogOutState extends HomeTouristState{}
+class SuccessMakeSocketConnect extends HomeTouristState{}
+class LoadingMakeSocketConnect extends HomeTouristState{}
+class FailureMakeSocketConnect extends HomeTouristState{
+  final String?errMessage;
+  FailureMakeSocketConnect({this.errMessage});
+}
 class LoadingLogOutState extends HomeTouristState{}
 
 class FailureLogOutState extends HomeTouristState{

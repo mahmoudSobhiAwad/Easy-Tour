@@ -49,7 +49,7 @@ class OneActivityInGeneratedTrip extends StatelessWidget {
                   ),
                    ProfileSettingItem(
                     enableDivider: false,
-                    rightWidget: const Text('Place Price',style:CustomTextStyle.fontNormal14WithEllipsis,),
+                    rightWidget:  Text('Place Price',style:CustomTextStyle.fontNormal14WithEllipsis,),
                     child: Row(
                       children: [
                         Text('${place.budget} \$',style: CustomTextStyle.fontNormal14WithEllipsis,),
@@ -57,7 +57,7 @@ class OneActivityInGeneratedTrip extends StatelessWidget {
                     ],),),
                   ProfileSettingItem(
                     enableDivider: false,
-                    rightWidget: const Text('Time Visiting',style:CustomTextStyle.fontNormal14WithEllipsis,),
+                    rightWidget:  Text('Time Visiting',style:CustomTextStyle.fontNormal14WithEllipsis,),
                     child: Container(
                       //width: width*0.35,
                       padding:const EdgeInsets.all(5),

@@ -11,17 +11,17 @@ class TouristSettingCubit extends Cubit<TouristSettingState>{
   TouristSettingCubit({required this.settingRepoImp}):super(InitialTouristSettingState());
   bool enableDarkMode=false;
   bool enableNotification=false;
-  ThemeData appTheme=lightMode;
+  ThemeData appTheme=lightTheme;
   ThemeMode appMode=ThemeMode.light;
   final SettingRepoImp settingRepoImp;
   void changeMode(){
-    if(appTheme ==lightMode){
-      appTheme=darkMode;
+    if(appTheme ==lightTheme){
+      appTheme=darkTheme;
       enableDarkMode=true;
       appMode=ThemeMode.dark;
     }
     else{
-      appTheme=lightMode;
+      appTheme=lightTheme;
       enableDarkMode=false;
       appMode=ThemeMode.light;
     }

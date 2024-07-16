@@ -12,7 +12,7 @@ class ExploreEgyptDestination extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Explore Egypt',style: CustomTextStyle.fontBold21,),
+        Text('Explore Egypt',style: CustomTextStyle.fontBold21,),
         SizedBox(height: height*0.01,),
         SizedBox(
           height: height*0.15,

@@ -37,18 +37,13 @@ class RecentChatItemOutSideListTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('$name',style:CustomTextStyle.fontBold16,),
+              Text('$name',style:CustomTextStyle.fontBold16.copyWith(color: basicColor),),
                getMessageType(model),
             ],
           ),
           //subtitle: SizedBox(width: width*0.5,child: getMessageType(model)),
-          trailing: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(model?.oneMessage?.messageDate?.toString().substring(0,10)??"",style: CustomTextStyle.font16Light,),
-              CircleAvatar(backgroundColor: basicColor,radius: 15,child: Center( child: Text('3',style: CustomTextStyle.font14Light.copyWith(color: Colors.white,fontSize: 12),)),)
-            ],
-          ),
+          trailing:Text(model?.oneMessage?.messageDate?.toString().substring(0,10)??"",style: CustomTextStyle.font16Light.copyWith(color: basicColor),),
+
         ),
       ),
     );
@@ -57,11 +52,13 @@ class RecentChatItemOutSideListTile extends StatelessWidget {
 Widget getMessageType(RecentChatModel? model){
   switch(model?.oneMessage?.messageType){
     case 'text':
-      return Text(model?.oneMessage?.message??"",style: CustomTextStyle.fontNormal14WithEllipsis,);
+      return Text(model?.oneMessage?.message??"",style: CustomTextStyle.fontNormal14WithEllipsis.copyWith(color: basicColor),);
     case 'voice':
-      return const Icon(Icons.mic);
+      return const Icon(Icons.mic,color: basicColor,);
     case 'image':
-      return const Icon(Icons.image);
+      return const Icon(Icons.image,color: basicColor,);
+    case 'video':
+      return const Icon(Icons.location_on_rounded,color: basicColor);
     default:
       return const SizedBox();
   }

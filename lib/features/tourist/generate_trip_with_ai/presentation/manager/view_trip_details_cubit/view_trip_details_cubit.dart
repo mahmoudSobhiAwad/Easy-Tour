@@ -8,7 +8,7 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/repo
 import 'package:prepare_project/features/tourist/generate_trip_with_ai/presentation/manager/view_trip_details_cubit/view_trip_details_state.dart';
 
 class ViewTripDetailsCubit extends Cubit<ViewTripDetailsState>{
-  ViewTripDetailsCubit({this.generatedTripModel,this.generateTripRepoImp,this.endDate,required this.startDate}):super(InitialViewTripDetailsState());
+  ViewTripDetailsCubit({this.generatedTripModel,this.generateTripRepoImp,required this.endDate,required this.startDate}):super(InitialViewTripDetailsState());
   int currentDay=0;
   final GeneratedTripModel? generatedTripModel;
   final GenerateTripRepoImp? generateTripRepoImp;

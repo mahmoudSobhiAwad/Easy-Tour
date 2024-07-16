@@ -26,13 +26,13 @@ class CustomLoginButton extends StatelessWidget {
                buildBoxShadow(),
             ],
             borderRadius: BorderRadius.all(Radius.circular(borderRadius??20),),
-            color:color?? basicColor,),
+            color:color?? Theme.of(context).colorScheme.onSurface,),
           child: Center(
               child: isLoading? const CircularProgressIndicator(color: Colors.white,) :
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(label??"",style: labelStyle??const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),
+                  Text(label??"",style: labelStyle??TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Theme.of(context).colorScheme.onPrimary),),
                   enable?const Padding(
                     padding:  EdgeInsets.only(left: 16.0),
                     child:  Icon(Icons.arrow_forward_rounded,color: Colors.white,),

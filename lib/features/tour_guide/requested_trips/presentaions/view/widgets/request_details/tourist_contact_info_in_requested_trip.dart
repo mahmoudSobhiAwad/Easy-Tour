@@ -20,7 +20,7 @@ class TouristContactInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Contact Info',style: CustomTextStyle.fontBold16,),
+         Text('Contact Info',style: CustomTextStyle.fontBold16,),
         SizedBox(height: height*0.015,),
         Column(
           children: [
@@ -37,7 +37,7 @@ class TouristContactInfo extends StatelessWidget {
             const SizedBox(height: 10,),
             ProfileSettingItem(
               enableDivider: false,
-              rightWidget: const Row(
+              rightWidget:  Row(
                 children: [
                   Icon(Icons.phone,color: entertainmentColor,),
                   Text('Phone Number',style: CustomTextStyle.fontNormal14WithEllipsis,)

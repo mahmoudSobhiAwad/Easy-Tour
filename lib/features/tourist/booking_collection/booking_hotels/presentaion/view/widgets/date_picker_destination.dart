@@ -43,7 +43,7 @@ class DatePickerWithDestination extends StatelessWidget {
             height: height*0.08,
             decoration: BoxDecoration(
               border: Border.all(color: secondaryColor,width: 2),
-              color: whiteColor,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(

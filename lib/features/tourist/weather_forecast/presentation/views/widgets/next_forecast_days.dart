@@ -29,7 +29,7 @@ class NextForecastDays extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Next Forecast',style: CustomTextStyle.font16BoldWhite,),
+          Text('Next Forecast',style: CustomTextStyle.font16BoldWhite,),
           SizedBox(height: height*0.02,),
           SizedBox(
             height: height*0.2,

@@ -29,16 +29,16 @@ class GetTicketsModel{
       "originDestinations":[
         {
           "id": "1",
-          "originLocationCode": "${goingTrip?.originIatCode}",
-          "destinationLocationCode": "${goingTrip?.departureIatCode}",
+          "originLocationCode": "${goingTrip?.originIatCode??"PAR"}",
+          "destinationLocationCode": "${goingTrip?.departureIatCode??"CAI"}",
           "departureDateTimeRange": {
             "date": "${goingTrip?.departureLeaveTime}"
           }
         },
         if(goingTrip?.departureReturnTime!=null) {
           "id": "2",
-          "originLocationCode": "${goingTrip?.departureIatCode}",
-          "destinationLocationCode": "${goingTrip?.originIatCode}",
+          "originLocationCode": "${goingTrip?.departureIatCode??"CAI"}",
+          "destinationLocationCode": "${goingTrip?.originIatCode??"PAR"}",
           "departureDateTimeRange": {
             "date": "${goingTrip?.departureReturnTime}"
           }

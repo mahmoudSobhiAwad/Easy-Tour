@@ -16,7 +16,7 @@ class PreferenceItem extends StatelessWidget {
       width: width,
       padding:const EdgeInsets.only(left: 5),
       decoration: BoxDecoration(
-        color: thirdColor,
+        color: secondaryColor,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(

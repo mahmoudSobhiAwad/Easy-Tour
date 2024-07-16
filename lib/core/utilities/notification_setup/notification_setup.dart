@@ -59,7 +59,17 @@ class NotificationSetup{
             vibrationPattern: highVibrationPattern,
             defaultColor:const Color(0xFF9D50DD),
             ledColor:const Color(0xffffffff),
-          )
+          ),
+          NotificationChannel(
+            channelGroupKey: 'basic_channel_group',
+            channelKey: reminderNotificationChannel,
+            channelName: 'reminder notification',
+            channelDescription: 'Notification Channel for reminder trip',
+            importance: NotificationImportance.Max,
+            vibrationPattern: highVibrationPattern,
+            defaultColor:const Color(0xFF9D50DD),
+            ledColor:const Color(0xffffffff),
+          ),
         ],
         // Channel groups are only visual and are not required
         channelGroups: [

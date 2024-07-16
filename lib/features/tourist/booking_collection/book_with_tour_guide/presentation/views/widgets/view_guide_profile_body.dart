@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/features/tour_guide/profile/data/model/guide_personal_info_model.dart';
 import 'package:prepare_project/features/tour_guide/profile/presentation/view/widgets/custom_guide_profile_pic.dart';
@@ -34,7 +36,8 @@ class ViewGuideProfileForTouristBody extends StatelessWidget {
         onRefresh: () async{
          await cubit.getTourGuideData();
         },
-        child: ListView(
+        child: !cubit.isLoading?
+        ListView(
           children: [
             ProfilePicWithClipper(height: height, width: width,profileUrl: model?.profileUrl??'',),
             Center(child: Text('${model?.firstName} ${model?.lastName}',style: CustomTextStyle.fontBold16,)),
@@ -43,7 +46,9 @@ class ViewGuideProfileForTouristBody extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: width*0.025),
               child: Column(
                 children: [
-                  CustomTwoButton(width: width, height: height,secondTap: (){
+                  CustomTwoButton(firstTap: (){
+                    context.push(RouterApp.kChatTouristView);
+                  },width: width, height: height,secondTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context){
                       return Scaffold(
                           body: TourGuideTripForTouristList(isLoading: false,viewProfile: false,height: height, width: width, tripList: model?.trips??[],tourName: '${model?.firstName}${model?.lastName}',));
@@ -58,7 +63,8 @@ class ViewGuideProfileForTouristBody extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        ):
+        Center(child: CircularProgressIndicator()),
       ),
     );
   }

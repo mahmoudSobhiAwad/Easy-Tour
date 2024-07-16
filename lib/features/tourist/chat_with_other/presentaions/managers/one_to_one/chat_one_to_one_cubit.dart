@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart'as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:path/path.dart';
@@ -12,6 +13,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:prepare_project/core/utilities/constant_var/constant.dart';
 import 'package:prepare_project/core/utilities/function/record_config.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
+import 'package:prepare_project/core/utilities/notification_setup/notification_setup.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/models/one_to_one_chat_model.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/models/recent_chat_model.dart';
 import 'package:prepare_project/features/tourist/chat_with_other/data/models/stream_socket.dart';
@@ -28,12 +30,14 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
   final AudioRecorder recorder = AudioRecorder();
   final storageRef = FirebaseStorage.instance.ref('chat');
   bool isRecording=false;
+  LatLng?resultedLatLng;
   bool allowedToRecord=false;
   bool timerOn=false;
   int playingIndex=0;
   final ImagePicker picker=ImagePicker();
   String? voicePath;
   String? imagePath;
+  LatLng requestLatLng=LatLng(0, 0);
   ImageModel selectedImageModel=ImageModel();
   bool enableImagePreview=false;
   bool enableSendImageInImagePreview=false;
@@ -77,7 +81,7 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     );
     emit(SuccessAddToMessageOTOState());
   }
-  void getFromOther(String response,String type) {
+  void getFromOther(String response,String type) async{
     CompleteChatOTOModel model;
     if(type=='image'){
       model=CompleteChatOTOModel(imageModel: ImageModel(imageNetworkPath: response,isLoading: false),type:'destination',messageDate: DateTime.now(),messageType:type);
@@ -88,6 +92,7 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     else{
       model=CompleteChatOTOModel(message: response,type:'destination',messageDate: DateTime.now(),messageType:type);
     }
+   await NotificationSetup().createOrderNotification("Message Chat","${targetEmail!.substring(0,12)} send you ${type}",chatNotificationChannel);
     completeChatOTOModelList.add(model);
     emit(SuccessAddToMessageOTOState());
     sortMessages();
@@ -102,7 +107,7 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
     );
     socket.connect();
     socket.onConnect((data) {
-      log('Socking is ON');
+      log('Socket is ON');
     });
     socket.on("receiveMessage", (data)
     {
@@ -121,6 +126,7 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
         completeChatOTOModelList.first.isLoading=false;
       }
       else{
+
         getFromOther(data['message'],data['type']);
       }
     }
@@ -305,6 +311,18 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
       sortMessages();
       await sendMessage('text', letters);
     }
+    if(type=='video'){
+      completeChatOTOModelList.add(CompleteChatOTOModel(
+        type: 'source',
+        messageType: 'video',
+        messageDate: DateTime.now(),
+        locationMessage: requestLatLng,
+
+      ));
+      emit(AddFileLocallySuccessState());
+      sortMessages();
+      await sendMessage('video', "long=${requestLatLng.longitude},lat=${requestLatLng.latitude}");
+    }
     else if(type=='image') {
       if(imagePath!=null){
         addImageLocallyToList();
@@ -347,7 +365,7 @@ class ChatOneToOneCubit extends Cubit<ChatOneToOneStates>{
       return null;
     }
   }
-}
+
 
 
 Future<String?>imageFromCamera()async{
@@ -365,4 +383,5 @@ Future<String?> imageFromGallery()async{
     return imageGallery.path;
   }
   return null;
+}
 }

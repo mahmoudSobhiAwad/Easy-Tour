@@ -29,7 +29,7 @@ class ChatOneToOneBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CustomChatOneToOneAppBar(height: height, width: width,profileUrl:profileUrl ,name: name,status: status,),
+          CustomChatOneToOneAppBar(height: height, width: width,profileUrl:profileUrl ,name: name,status: status,email: destEmail??"",),
           ListChatOneToOne(cubit: cubit,width: width,height: height,),
           RecorderWithImagePickerWithCustomForm(cubit: cubit, height: height, width: width)
         ],

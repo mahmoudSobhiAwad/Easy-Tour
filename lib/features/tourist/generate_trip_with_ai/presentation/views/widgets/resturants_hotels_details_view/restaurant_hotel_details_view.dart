@@ -10,6 +10,7 @@ import 'package:prepare_project/features/tourist/nearby_places/data/repos/photo_
 class RestaurantOrHotelDetailsView extends StatelessWidget {
   const RestaurantOrHotelDetailsView({super.key,required this.model});
   final NearbyPlacesModel model;
+
   @override
   Widget build(BuildContext context) {
     double width=BasicDimension.screenWidth(context);

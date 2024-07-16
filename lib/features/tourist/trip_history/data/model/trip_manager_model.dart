@@ -4,7 +4,7 @@ import 'package:prepare_project/features/tourist/generate_trip_with_ai/data/mode
 
 class TripManagerModel{
   List<CustomTripModel> customTripsList;// no need to change any thing
-  List<GeneratedTripModel> generatedTripsList;/// need to change the base model not day model
+  List<GeneratedTripModel> generatedTripsList;
   List<Trip> tripsWithTourGuideList;
   TripManagerModel({required this.customTripsList,required this.generatedTripsList,required this.tripsWithTourGuideList});
   factory TripManagerModel.fromJson(Map<String,dynamic>json){

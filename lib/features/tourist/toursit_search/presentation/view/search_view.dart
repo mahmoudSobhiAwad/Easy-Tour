@@ -38,7 +38,7 @@ class SearchView extends StatelessWidget {
                     padding:const EdgeInsets.symmetric(horizontal: 16,vertical: 20),
                     children: [
                       ...List.generate(5, (index){
-                        return const Padding(
+                        return  Padding(
                           padding: EdgeInsets.only(bottom: 25),
                           child: Row(
                             children: [

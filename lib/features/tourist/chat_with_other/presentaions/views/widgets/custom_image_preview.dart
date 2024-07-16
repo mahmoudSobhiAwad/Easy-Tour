@@ -52,7 +52,6 @@ class CustomImagePreview extends StatelessWidget {
                         SizedBox(
                           width:width*0.7,
                           child:  const CustomTextFormField(
-                            //controller:cubit.controller,
                             label: 'Add Description For Image',
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                           ),

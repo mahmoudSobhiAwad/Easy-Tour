@@ -22,7 +22,7 @@ class StepperTripDay extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Trip Days',style: CustomTextStyle.fontBold16,),
+          Text('Trip Days',style: CustomTextStyle.fontBold16,),
           SizedBox(
             width: width,
             height: height*0.08,

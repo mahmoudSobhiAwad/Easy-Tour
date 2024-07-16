@@ -54,7 +54,7 @@ const List<String> languages =<String> [
   "Latvian",
   "Lithuanian",
 ];
-List<String>governments=[
+const List<String>governments=[
   "beheira",
   "cairo",
   "alexandria",
@@ -108,11 +108,12 @@ const String homeEndPointTourGuide='home/tourGuide/';
 String homeEndMutualPoint='home/${SetAppState.prefs?.get('role')}/';
 const String requestNotificationChannel='request_channel_notify';
 const String chatNotificationChannel='chat_notification_channel';
+const String reminderNotificationChannel='reminder_notification_channel';
 const String forecastingWeatherKey='MW0BgPpZeo46MW13eHrMaXM9y2u2c1BJ';
-const baseUrl='http://44.220.130.119:8081/';
-const chatBotUrl='http://54.227.43.119:8000/chatbot';
+const baseUrl='http://54.237.196.135:8081/';
+const chatBotUrl='http://18.212.225.146:8000/chatbot';
 const generateTripUrl='$generateTripBaseUrl/generate_trip';
-const scanQrUrl='http://18.234.36.248:8000/decrypt/';
+const scanQrUrl='http://18.234.62.97:8000/decrypt/';
 const googleNewApiUrl='https://places.googleapis.com/v1/places:';
 const String routeApiUrl='https://routes.googleapis.com/directions/v2:computeRoutes';
 const searchPlacePhoto='https://places.googleapis.com/v1/';
@@ -124,5 +125,5 @@ const String fieldMaskForGetRoute='routes.duration,routes.distanceMeters,routes.
 const String fieldMaskForShortNearby='places.displayName,places.primaryTypeDisplayName,places.nationalPhoneNumber,places.internationalPhoneNumber,places.regularOpeningHours.openNow';
 const String currencyConverterBaseUrl='https://v6.exchangerate-api.com/v6/$currencyConverterApiKey/';
 const String currencyConverterApiKey='9a250bed3ba7c9c8dba370f1';
-const generateTripBaseUrl='http://18.212.13.17:8000';
+const generateTripBaseUrl='http://54.196.19.76:8000';
 const hotelBookingUrl='https://api.test.hotelbeds.com';

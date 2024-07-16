@@ -3,7 +3,13 @@ class SetAppState{
 
   static SharedPreferences? prefs;
   static Future<void>setShared()async{
-    prefs=await SharedPreferences.getInstance();
+    try{
+      prefs=await SharedPreferences.getInstance();
+    }
+    catch (e){
+     prefs=null;
+    }
+
   }
   static Future<void> setCurrIndex(int?index)async{
     await prefs?.setInt('currIndex', index??0);

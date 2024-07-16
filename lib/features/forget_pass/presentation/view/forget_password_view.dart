@@ -12,7 +12,8 @@ import '../../../../core/widget/custom_alert_widget/alert_container.dart';
 import '../../../../core/widget/custom_alert_widget/alert_types.dart';
 
 class ForgetPasswordView extends StatelessWidget {
-  const ForgetPasswordView({super.key});
+  const ForgetPasswordView({super.key,});
+
   @override
   Widget build(BuildContext context) {
     return  BlocProvider(
@@ -22,9 +23,7 @@ class ForgetPasswordView extends StatelessWidget {
           var cubit=BlocProvider.of<ForgetPassCubit>(context);
           return Scaffold(
             resizeToAvoidBottomInset: false,
-            body: DecoratedBox(
-                decoration:const BoxDecoration(image: DecorationImage(image: AssetImage('assets/login/back_ground.png'),fit: BoxFit.cover)),
-                child: ForgetPasswordBody(cubit: cubit,)),
+            body: ForgetPasswordBody(cubit: cubit,),
           );
         },
         listener: (context,state){

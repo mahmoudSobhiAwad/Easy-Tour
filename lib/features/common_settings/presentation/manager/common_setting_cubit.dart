@@ -7,24 +7,22 @@ import 'package:prepare_project/core/utilities/theme_style/theme_mode.dart';
 import 'package:prepare_project/features/common_settings/presentation/manager/common_setting_states.dart';
 import 'package:prepare_project/features/tourist/settings/data/model/put_notify_model.dart';
 import 'package:prepare_project/features/tourist/settings/data/repo/setting_repo_imp.dart';
-
 class CommonSettingCubit extends Cubit<CommonSettingState>{
   CommonSettingCubit({required this.settingRepoImp}):super(InitialTourGuideSettingState());
   bool enableDarkMode=false;
   bool enableNotification=false;
-  ThemeData appTheme=lightMode;
-  ThemeMode appMode=ThemeMode.system;
+  ThemeData appTheme = lightTheme;
+  ThemeMode appMode = ThemeMode.light;
   final SettingRepoImp settingRepoImp;
   void changeMode(){
-    if(appTheme == lightMode){
-      appTheme=darkMode;
+    if (appTheme == lightTheme) {
+      appMode = ThemeMode.dark;
+      appTheme = darkTheme;
       enableDarkMode=true;
-      appMode=ThemeMode.dark;
-    }
-    else{
-      appTheme=lightMode;
+    } else {
+      appMode = ThemeMode.light;
+      appTheme = lightTheme;
       enableDarkMode=false;
-      appMode=ThemeMode.light;
     }
     emit(ChangeToggleOfModeState());
   }

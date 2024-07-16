@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/features/tourist/google_map/presentaion/view/google_map_view.dart';
@@ -8,6 +10,7 @@ import 'package:prepare_project/features/tourist/tourist_home/data/home_ui_data/
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/manager/home_tourist_cubit.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/bottom_nav_bar_custom.dart';
 import 'package:prepare_project/features/tourist/tourist_home/presentaion/view/widgets/home_tourist_first_page.dart';
+import 'package:prepare_project/features/tourist/trip_history/presentation/view/trip_history_view.dart';
 
 class HomeTouristViewUi extends StatelessWidget {
   const HomeTouristViewUi({
@@ -34,7 +37,7 @@ class HomeTouristViewUi extends StatelessWidget {
       body: [
         TouristHomeFirstPage(animation: animation, cubit: cubit, width: width, scaleAnimation: scaleAnimation, height: height),
         const TouristFeedView(),
-        const NearbySearchView(showBackIcon: false,),
+        const TripHistoryView(),
         const ProfileView(showBackIcon: false),
       ][currIndex??cubit.currIndex],
       floatingActionButton:cubit.isMenuActive?null:FloatingActionButton(

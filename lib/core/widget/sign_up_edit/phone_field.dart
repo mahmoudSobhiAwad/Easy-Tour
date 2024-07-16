@@ -14,7 +14,8 @@ class PhoneFormField extends StatelessWidget {
         child:  CustomTextFormField(
           maxLines: 1,
           inputFormatters: [
-            FilteringTextInputFormatter.deny(RegExp(r'^0')), // Deny leading 0
+            FilteringTextInputFormatter.deny(RegExp(r'^0')),
+            LengthLimitingTextInputFormatter(10),// Deny leading 0
           ],
           type:const TextInputType.numberWithOptions(),
           controller: controller,

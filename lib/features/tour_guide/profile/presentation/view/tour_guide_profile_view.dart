@@ -31,7 +31,7 @@ class TourGuideProfileView extends StatelessWidget {
              onRefresh: ()async {
                cubit.getData();
              },
-             child:cubit.licenceNames.isEmpty?const Center(child: Text('Unknown Error Please Try Later',style: CustomTextStyle.fontBold16,)): ListView(
+             child:cubit.licenceNames.isEmpty? Center(child: Text('Unknown Error Please Try Later',style: CustomTextStyle.fontBold16,)): ListView(
                 children: [
                   ProfilePicWithClipper(height: height, width: width,profileUrl: cubit.profileUrl,),
                   Center(child: Text('${cubit.firstName} ${cubit.lastName}',style: CustomTextStyle.fontBold16,)),

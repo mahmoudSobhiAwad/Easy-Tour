@@ -43,7 +43,7 @@ class ImageClassificationInfo extends StatelessWidget {
                   child:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Monument Info',style: CustomTextStyle.fontBold16,),
+                       Text('Monument Info',style: CustomTextStyle.fontBold16,),
                       SizedBox(
                         height: height*0.3,
                         width: width,

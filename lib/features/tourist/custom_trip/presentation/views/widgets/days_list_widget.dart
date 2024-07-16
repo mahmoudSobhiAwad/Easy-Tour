@@ -18,7 +18,7 @@ class DaysToAddList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Add Trip Days',style: CustomTextStyle.fontBold21,),
+         Text('Add Trip Days',style: CustomTextStyle.fontBold21,),
         SizedBox(
           height: height*0.5,
           child: ListView.separated(

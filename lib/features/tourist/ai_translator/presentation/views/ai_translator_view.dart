@@ -1,6 +1,9 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
 import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
@@ -160,15 +163,25 @@ final AiTranslatorCubit cubit;
               child: cubit.sourceController.text.isEmpty?Text('Start Talking.....',style: CustomTextStyle.fontBold18,):Text('${cubit.sourceController.text}',style: CustomTextStyle.fontBold18,maxLines: 10,textAlign: TextAlign.center,)),
         ),
         SizedBox(height: height*0.1,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Column(
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(onPressed: (){
+                  cubit.startListening();
+                }, icon: Icon(Icons.mic),iconSize: width*0.15,),
+                IconButton(onPressed: (){
+                  cubit.stopListening();
+                }, icon: Icon(Icons.stop_circle,),iconSize:  width*0.2),
+
+              ],
+            ),
+            SizedBox(height: height*0.025,),
             IconButton(onPressed: (){
-              cubit.startListening();
-            }, icon: Icon(Icons.mic),iconSize: width*0.15,),
-            IconButton(onPressed: (){
-              cubit.stopListening();
-            }, icon: Icon(Icons.stop_circle,),iconSize:  width*0.2),
+              cubit.translateText();
+              cubit.changePageIndex(0);
+            }, icon: Icon(Icons.translate,),iconSize:  width*0.2),
           ],
         ),
       ],

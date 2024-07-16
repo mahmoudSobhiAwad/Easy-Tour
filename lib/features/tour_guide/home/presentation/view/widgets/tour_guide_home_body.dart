@@ -27,15 +27,15 @@ class HomeTourGuideBody extends StatelessWidget {
                 children: [
                   IconButton(onPressed: (){
                     context.push(RouterApp.kTourGuideNotifications);
-                  },icon:const Icon(Icons.notifications_none_rounded,color: basicColor,size: 35,),padding: EdgeInsets.zero,),
+                  },icon:const Icon(Icons.notifications_none_rounded,size: 35,),padding: EdgeInsets.zero,),
                   const CircleAvatar(radius: 12,backgroundColor: closeColor,child: Center(child: Text('5',style: TextStyle(color: Colors.white),)),)
                 ],
               ),
             ),
             height: height, width: width, openSidePar:(){cubit.openSideBar();},),
-          const Padding(
+          Padding(
             padding:EdgeInsets.only(top: 10.0,left: 10),
-            child:Text('Chats',style: CustomTextStyle.fontGrover30,),
+            child:Text('Chats',style: CustomTextStyle.fontBold30),
           ),
           RecentChatWithOther(width: width, height: height,recentChatList: cubit.chatsList,isRecentChatLoading: cubit.isLoadingRecentChats,emptyMessages: 'No Tourist Talks To Yet, When Chat Starts Will Be Here..',),
         ],

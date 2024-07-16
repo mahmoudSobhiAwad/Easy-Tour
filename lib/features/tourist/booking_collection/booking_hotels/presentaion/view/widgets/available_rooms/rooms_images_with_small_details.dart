@@ -68,8 +68,8 @@ class ImagesOfRoomWithSmallDetails extends StatelessWidget {
               }));
             },child: Column(
               children: [
-                Text('+${imagesPath?.length??1 -1} images',textAlign: TextAlign.center,),
-                const Icon(Icons.arrow_forward_ios),
+                Text('+${imagesPath?.length??1 -1} images',textAlign: TextAlign.center,style: TextStyle(color: basicColor),),
+                Icon(Icons.arrow_forward_ios,color: basicColor),
               ],
             ),),
           )

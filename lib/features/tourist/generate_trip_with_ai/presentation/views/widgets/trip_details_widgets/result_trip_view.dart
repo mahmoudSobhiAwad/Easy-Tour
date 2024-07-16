@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 import 'package:prepare_project/core/utilities/function/service_locator.dart';
@@ -57,7 +58,7 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
                             const SizedBox(height: 15,),
                             ActivityListWithBar(height: height, width: width, cubit:cubit,pageIndex:pageIndex),
                             const SizedBox(height: 15,),
-                            const Text('Trip In Map',style:CustomTextStyle.fontGrover22,),
+                             Text('Trip In Map',style:CustomTextStyle.fontGrover22,),
                             const SizedBox(height: 15,),
                             TripInGoogleMapWithPolyLine(height: height,points: cubit.polyLinesList,),
                           ],
@@ -68,7 +69,12 @@ class GeneratedTripDetailsWithAiView extends StatelessWidget {
             ),
           ),
         );
-      },listener: (context,state){},
+      },listener: (context,state){
+        if(state is SuccessToUploadTripState){
+          context.pop();
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: whatsAppColor,duration: Duration(milliseconds: 300),content: Text("Saved",style: TextStyle(color: Colors.white),)));
+        }
+      },
       ),
     );
   }

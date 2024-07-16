@@ -21,7 +21,7 @@ class AppBarWithSearchWidget extends StatelessWidget {
               Navigator.pop(context);
             }, icon: const Icon(Icons.arrow_back_ios_new)),
             const SizedBox(width: 10,),
-            const Text('Chats',style: CustomTextStyle.fontBold21,),
+             Text('Chats',style: CustomTextStyle.fontBold21,),
           ],
         ),
         Padding(

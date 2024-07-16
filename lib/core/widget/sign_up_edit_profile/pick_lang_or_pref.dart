@@ -16,7 +16,7 @@ class PickPreference extends StatelessWidget {
         height:height*0.06,
         width: width,
         decoration: BoxDecoration(
-          color: thirdColor,
+          color: secondaryColor,
           borderRadius: BorderRadius.circular(12),
         ),
         child:  Row(

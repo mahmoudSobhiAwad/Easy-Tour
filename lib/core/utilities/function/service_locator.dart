@@ -35,8 +35,8 @@ import '../../../features/sign_up/data/repos/sign_up_repo_imp.dart';
 import '../../../features/tourist/chat_with_other/data/repos/get_guide_meta_data/get_guide_meta_data_repo_imp.dart';
 
 final getIt=GetIt.instance;
-void setUp()
-{
+Future<void> setUp ()
+async{
 getIt.registerSingleton<ApiServices>(ApiServices(dio: Dio()));
 getIt.registerSingleton<SignUpRepoImp>(SignUpRepoImp(getIt.get<ApiServices>()));
 getIt.registerSingleton<LoginRepoImpl>(LoginRepoImpl(getIt.get<ApiServices>()));

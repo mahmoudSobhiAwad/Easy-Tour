@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
 
-ThemeData lightMode=ThemeData(
-  scaffoldBackgroundColor:whiteColor ,
-  iconTheme: const IconThemeData(color:basicColor),
+ThemeData lightTheme=ThemeData(
+  scaffoldBackgroundColor:whiteColor,
+    primaryColor: whiteColor,
+    primaryColorDark: basicColor,
+    iconTheme: const IconThemeData(color:basicColor),
   useMaterial3: true,
   brightness: Brightness.light,
   fontFamily: 'ABeeZee',
@@ -15,8 +17,10 @@ ThemeData lightMode=ThemeData(
   ),
   iconButtonTheme: const IconButtonThemeData(style: ButtonStyle(iconColor:MaterialStatePropertyAll(basicColor)))
 );
-ThemeData darkMode=ThemeData(
-  scaffoldBackgroundColor:basicColor ,
+ThemeData darkTheme=ThemeData(
+  primaryColor: basicColor,
+  primaryColorLight: whiteColor,
+  scaffoldBackgroundColor:basicColor,
   iconTheme: const IconThemeData(color:whiteColor),
   useMaterial3: true,
   brightness: Brightness.dark,

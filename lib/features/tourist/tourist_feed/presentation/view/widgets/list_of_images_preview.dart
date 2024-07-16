@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:prepare_project/features/tourist/tourist_feed/data/model/post_model.dart';
-import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/wrap_images.dart';
+import 'package:prepare_project/features/tourist/tourist_feed/presentation/view/widgets/video_preview.dart';
 class ListOfImagesPreview extends StatelessWidget {
   const ListOfImagesPreview({super.key,required this.imagesLinks,required this.height,required this.width,this.initPage=0,required this.mediaType});
   final List<MediaPathWithType>imagesLinks;

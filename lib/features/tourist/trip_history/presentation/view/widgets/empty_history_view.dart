@@ -14,7 +14,7 @@ class EmptyHistory extends StatelessWidget {
       children: [
         SizedBox(
             width: width*0.75,
-            child: const Text('Let\'s Make Your First Trip To Egypt',style: CustomTextStyle.fontBold21,maxLines: 2,textAlign: TextAlign.center,)),
+            child:  Text('Let\'s Make Your First Trip To Egypt',style: CustomTextStyle.fontBold21,maxLines: 2,textAlign: TextAlign.center,)),
         const SizedBox(height: 15,),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width*0.05),

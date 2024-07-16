@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
-import 'package:prepare_project/core/widget/custom_alert_widget/alert_image_pic.dart';
 import 'package:prepare_project/core/widget/custom_alert_widget/delete_edit_photo.dart';
 import 'package:prepare_project/features/sign_up/presentation/manager/sign_up_cubit.dart';
 
@@ -25,17 +24,8 @@ class CustomProfilePic extends StatelessWidget {
           },));
         }
       },
-      onTap:(){
-        showDialog(
-          context: context, builder: (context)=>OptionPickImage(
-          getImageFromGallery: () async{
-            await cubit.getImageFromGallery(SignUpPhotoName.profile);
-          }, cropImage: ()async {
-          await cubit.cropImage(SignUpPhotoName.profile);
-        }, getImageFromCamera: () async{
-          await cubit.getImageFromCamera(SignUpPhotoName.profile);
-        },
-        ),);
+      onTap:()async{
+        await cubit.getImageFromCamera(SignUpPhotoName.profile);
       },
        child:
       Stack(

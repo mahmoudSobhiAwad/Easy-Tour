@@ -11,7 +11,7 @@ class ShowReviewInTourGuideTrip extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Reviews',style: CustomTextStyle.fontBold16,),
+         Text('Reviews',style: CustomTextStyle.fontBold16,),
         Container(
           height: height*0.4,
           width: width,

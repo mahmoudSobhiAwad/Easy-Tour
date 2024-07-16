@@ -21,7 +21,7 @@ class FlightTicketInDetailsView extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Text('Going Trip',style: CustomTextStyle.fontBold18,),
+          Text('Going Trip',style: CustomTextStyle.fontBold18,),
           SizedBox(
             height: height*0.12,
             child: ListView.separated(itemBuilder: (context,index){
@@ -40,7 +40,7 @@ class FlightTicketInDetailsView extends StatelessWidget {
           if(model.returnItinerariesList!=null)Column(
             children: [
               SizedBox(height: height*0.04,),
-              const Text('Return Trip',style: CustomTextStyle.fontBold18,),
+              Text('Return Trip',style: CustomTextStyle.fontBold18,),
               SizedBox(
                 height: height*0.12,
                 child: ListView.separated(itemBuilder: (context,index){
@@ -101,7 +101,7 @@ class FlightTicketInDetailsView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Price',style: CustomTextStyle.fontBold30,),
+              Text('Price',style: CustomTextStyle.fontBold30,),
               Text('${model.price} \$',style: CustomTextStyle.fontBold30,),
             ],
           )

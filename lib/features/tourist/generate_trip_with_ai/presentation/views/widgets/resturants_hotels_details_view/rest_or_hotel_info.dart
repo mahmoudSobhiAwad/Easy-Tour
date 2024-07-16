@@ -68,7 +68,7 @@ class RestOrHotelInfo extends StatelessWidget {
           SizedBox(height: height*0.02,),
           ProfileSettingItem(text: 'Price',child: Text(model.priceLevel??"UnKnown",style: CustomTextStyle.fontNormal16,),),
           SizedBox(height: height*0.02,),
-          const Text('Social Contact',style: CustomTextStyle.fontNormal16),
+           Text('Social Contact',style: CustomTextStyle.fontNormal16),
           ProfileSettingItem(
             rightWidget: Row(
               children: [

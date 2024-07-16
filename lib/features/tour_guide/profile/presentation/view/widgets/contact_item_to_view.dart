@@ -41,7 +41,9 @@ class ContactShowItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 5,),
-              Text(contactData),
+              SizedBox(
+                  width: width*0.58,
+                  child: Text(contactData)),
             ],
           ),
         ),

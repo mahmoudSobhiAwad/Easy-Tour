@@ -66,7 +66,7 @@ class AddOrEditTripModelBottom extends StatelessWidget {
                     decoration: BoxDecoration(borderRadius:BorderRadius.circular(10),border: Border.all(color:secondaryColor)),
                     child: TextButton(
                         onPressed: addAnotherPlaceInDay,
-                        child: const Text("Add Another Place",
+                        child: Text("Add Another Place",
                           style: CustomTextStyle.fontBold14,)),
                   ),
                 ),

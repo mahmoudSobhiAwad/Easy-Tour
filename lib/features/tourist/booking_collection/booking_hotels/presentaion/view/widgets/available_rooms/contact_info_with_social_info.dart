@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prepare_project/core/utilities/basics.dart';
+import 'package:prepare_project/core/utilities/textStyle/font_styles.dart';
 import 'package:prepare_project/core/widget/tour_guide/custom_border_raduis.dart';
 import 'package:prepare_project/features/tourist/booking_collection/booking_hotels/data/models/get_hotel_model.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,9 +31,9 @@ class ContactInfoWithSocialInfo extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(Icons.headset_mic_rounded,),
-                      Text('${phonesList?[index].phoneType}'),
-                      Text('${phonesList?[index].phoneNum}'),
+                      const Icon(Icons.headset_mic_rounded,color: basicColor,),
+                      Text('${phonesList?[index].phoneType}',style: CustomTextStyle.fontBold14.copyWith(color: basicColor),),
+                      Text('${phonesList?[index].phoneNum}',style: CustomTextStyle.fontBold14.copyWith(color: basicColor),),
                     ],
                   ),
                 );

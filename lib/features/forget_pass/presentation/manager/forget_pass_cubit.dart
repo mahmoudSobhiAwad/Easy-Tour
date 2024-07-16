@@ -6,12 +6,12 @@ import 'package:prepare_project/features/forget_pass/presentation/manager/forget
 import '../../../../core/utilities/constant_var/constant.dart';
 
 class ForgetPassCubit extends Cubit<ForgetPasswordState>{
-  ForgetPassCubit({required this.forgetPassRepo}):super(InitialForgetPasswordState());
+  ForgetPassCubit({required this.forgetPassRepo,this.toggleRoleIndex=0}):super(InitialForgetPasswordState());
   final ForgetPassRepo forgetPassRepo;
   bool showPass=true;
   bool showConfirmPass=true;
   bool showLoading=false;
-  int toggleRoleIndex=0;
+  int toggleRoleIndex;
   Role role=Role.tourist;
   int progressTouristIndex=0;
   int progressTourGuideIndex=0;

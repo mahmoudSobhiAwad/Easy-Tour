@@ -74,12 +74,12 @@ class OccupanciesWidget extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: IconButton(onPressed: (){
                 cubit.showOrClosePickOccupancies();
-              }, icon:const Icon(Icons.close)),
+              }, icon:const Icon(Icons.close,color: basicColor,)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Number Of Rooms'),
+                Text('Number Of Rooms',style: CustomTextStyle.fontBold16.copyWith(color: basicColor),),
                 IncreaseOrDecreaseNumber(
                   changedIndex: cubit.roomNum,
                   changeRoomNum: ({required bool increase}){
@@ -91,12 +91,12 @@ class OccupanciesWidget extends StatelessWidget {
             ...List.generate(cubit.roomNum, (buildIndex) => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Text('Room ${buildIndex+1}',style: CustomTextStyle.fontBold16,)),
+                Center(child: Text('Room ${buildIndex+1}',style: CustomTextStyle.fontBold16.copyWith(color: basicColor),)),
                 const SizedBox(height: 5,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Adult Numbers'),
+                    Text('Adult Numbers',style: CustomTextStyle.fontBold16.copyWith(color: basicColor),),
                     IncreaseOrDecreaseNumber(
                       changedIndex: cubit.occupanciesList[buildIndex].adultNum,
 
@@ -109,7 +109,7 @@ class OccupanciesWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Child Num'),
+                    Text('Child Num',style: CustomTextStyle.fontBold16.copyWith(color: basicColor),),
                     IncreaseOrDecreaseNumber(
                       changedIndex: cubit.occupanciesList[buildIndex].childNum,
                       changeOccupancy: ({required bool increase,required int index,required int occIndex }){
@@ -173,7 +173,7 @@ class IncreaseOrDecreaseNumber extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 2.5,),
-        Text('$changedIndex'),
+        Text('$changedIndex',style: CustomTextStyle.fontBold16.copyWith(color: basicColor),),
         const SizedBox(width: 2.5,),
         GestureDetector(
           onTap:(){

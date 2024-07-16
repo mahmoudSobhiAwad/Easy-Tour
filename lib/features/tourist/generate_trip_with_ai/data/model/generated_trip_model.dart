@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class GeneratedTripModel {
   final List<Day> days;
   final List<String>placesNames;
@@ -25,19 +27,10 @@ class GeneratedTripModel {
   }
 
   factory GeneratedTripModel.fromHistory(Map<String,dynamic> json) {
-    List<Day>day=[];
-    for(int i=0;i<json.length;i++)
-    {
-      String jsonKey='Day${i+1}';
-      if(json['tripDetails'][jsonKey]!=null)
-      {
-      day.add(Day.fromHistory(json['tripDetails'][jsonKey]));
-      }
-    }
     return GeneratedTripModel(
-      days:day,
+      days:[],
       id: json['_id'],
-      durationNum:(json['to']!=null||json['from']!=null)?DateTime.parse(json['to']).difference(DateTime.parse(json['from'])).inDays:null,
+      durationNum:(json['to']!=null||json['from']!=null)?DateFormat("dd MMM yyyy").parse(json['to']).difference(DateFormat("dd MMM yyyy").parse(json['from'])).inDays:null,
       startDate: json['from'],
       endDate: json['to'],
       title: json['title'],
@@ -112,7 +105,7 @@ class Place{
 
   factory Place.fromJsonSecond(Map<String, dynamic> json) {
     return Place(
-      name: json['placeName']??"",
+      name: json['place']??"",
       longitude: json['longitude']??0.0,
       latitude: json['latitude']??0.0,
       activity: json['activity']??"",

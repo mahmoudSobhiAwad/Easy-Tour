@@ -114,14 +114,13 @@ class CreatePostCubit extends Cubit<CreatePostStates>{
       await uploadFileToFireBase().then((value)async {
         if(uploadedImagesLinks.isNotEmpty){
           await filterPost();
-         // await createPost();
         }
       });
     }
     else{
       if(controller.text.isNotEmpty)
       {
-      await createPost();
+        await filterPost();
       }
     }
   }
@@ -136,9 +135,33 @@ class CreatePostCubit extends Cubit<CreatePostStates>{
     ).toJson());
     result.fold((failure) {
       emit(FailureFilterPosts(errMessage: failure.errMessage));
-    }, (success){
-
+    }, (success)async{
       emit(SuccessFilterPosts());
+      if(success.videoResult!.contains(1)||success.imgResult!.contains(1)||success.textResult!.contains(1)){
+        emit(FailureFilterPosts(errMessage: "Some Media Contain adult content"));
+      }
+      else{
+        await createPost();
+      }
+
+    });
+  }
+  else if(controller.text.isNotEmpty){
+    emit(LoadingFilterPosts());
+    var result=await filterPostRepoImpl.getFilteredPosts(info: FilterPostModel(
+      text: controller.text,
+    ).toJson());
+    result.fold((failure) {
+      emit(FailureFilterPosts(errMessage: failure.errMessage));
+    }, (success)async{
+      emit(SuccessFilterPosts());
+      if(success.videoResult!.contains(1)||success.imgResult!.contains(1)||success.textResult!.contains(1)){
+        emit(FailureFilterPosts(errMessage: "Some Media Contain adult content"));
+      }
+      else{
+        await createPost();
+      }
+
     });
   }
   }

@@ -15,7 +15,7 @@ class SelectNumOfActivityInDay extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Activity In One Day ',style: CustomTextStyle.fontBold16,),
+           Text('Activity In One Day ',style: CustomTextStyle.fontBold16,),
           const SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

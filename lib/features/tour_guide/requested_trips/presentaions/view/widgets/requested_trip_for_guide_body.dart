@@ -31,7 +31,7 @@ class RequestedTripsTourGuideBody extends StatelessWidget {
                 menuToSaveTrip: TextButton(onPressed: null, child: Text('Clear All',style: CustomTextStyle.fontBold16.copyWith(color: forthColor),)),),
             ),
             cubit.requestedList.isEmpty?
-            const Text('You Dont\'t Have Any Request Yet',style: CustomTextStyle.fontBold21,):
+            Text('You Dont\'t Have Any Request Yet',style: CustomTextStyle.fontBold21,):
             Expanded(
               child: SizedBox(
                 height: height*0.8,

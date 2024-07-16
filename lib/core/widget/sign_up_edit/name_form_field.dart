@@ -14,6 +14,6 @@ final TextEditingController controller;
         width :MediaQuery.of(context).size.width*0.4,
         child:  CustomTextFormField(
           maxLines: 1,
-          fillColor: formFillColor,filled: true,border: 20,controller: controller,));
+          fillColor: thirdColor,filled: true,border: 20,controller: controller,));
   }
 }

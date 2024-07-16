@@ -64,7 +64,7 @@ class CurrencyConverterBody extends StatelessWidget {
                               fillColor: thirdColor,
                               suffix: SizedBox(
                                 width: width*0.1,
-                                child: const Center(child:Text('meter',style: CustomTextStyle.fontNormal14WithEllipsis,)),
+                                child:  Center(child:Text('meter',style: CustomTextStyle.fontNormal14WithEllipsis,)),
                               ),)),
                         SizedBox(width: width*0.1,),
                         ClipRRect(

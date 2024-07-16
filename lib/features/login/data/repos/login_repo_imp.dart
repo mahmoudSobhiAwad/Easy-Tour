@@ -44,4 +44,22 @@ class LoginRepoImpl implements LoginRepo{
     }
   }
 
+  @override
+  Future<Either<Failure, dynamic>> socialLogin(Map<String, dynamic> data)async {
+    try{
+      var result=await apiServices.post(endPoint: '${authTourist}loginWithGmail', data: data);
+      print(result);
+      //TourismSignInModel touristModel= TourismSignInModel.getInfoFromJson(data['user']);
+      return right(result);
+    }
+    catch(e){
+      if(e is DioException){
+        return left(ServerFailure.fromDioError(e));
+      }
+      else{
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
+
 }

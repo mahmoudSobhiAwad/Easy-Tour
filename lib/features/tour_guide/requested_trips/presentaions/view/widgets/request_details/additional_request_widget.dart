@@ -17,7 +17,7 @@ class AdditionalRequest extends StatelessWidget {
     const SizedBox(height: 0,):
     Column(
       children: [
-        const Text('Additional Request',style: CustomTextStyle.fontBold16,),
+        Text('Additional Request',style: CustomTextStyle.fontBold16,),
         SizedBox(height: height*0.015,),
         Container(
           height: height*0.15,

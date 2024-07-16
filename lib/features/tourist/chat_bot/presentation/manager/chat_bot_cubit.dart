@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:prepare_project/core/utilities/function/set_app_state.dart';
 import 'package:prepare_project/features/tourist/chat_bot/data/model/chat_bot_model.dart';
 import 'package:prepare_project/features/tourist/chat_bot/presentation/manager/chat_bot_states.dart';
@@ -20,7 +21,9 @@ class ChatBotCubit extends Cubit<ChatBotState>{
   SpeechToText speechToText = SpeechToText();
   bool enableSpeech=false;
   bool enableMic=false;
+  bool voiceIsPlaying=false;
   List<LocaleName>localsExist=[];
+  FlutterTts flutterTts = FlutterTts();
   String?localId;
   bool showListLang=true;
   bool showChangeLangWidget=false;
@@ -90,6 +93,21 @@ class ChatBotCubit extends Cubit<ChatBotState>{
       );
     }
 }
+void pauseTts()async{
+    await flutterTts.stop();
+    voiceIsPlaying=false;
+    emit(ChangeEnableVoiceState());
+}
+void textToSpeech(String text)async{
+
+      await flutterTts.setLanguage(localId!);
+      voiceIsPlaying=true;
+      emit(ChangeEnableVoiceState());
+      await flutterTts.speak(text);
+
+
+}
+
 void searchForLocalId(String value){
     searchedList=localsExist.where((element) => element.name.toLowerCase().contains(value.toLowerCase())).toList();
     emit(ChangeLocalIdOfChatState());
@@ -124,6 +142,7 @@ void searchForLocalId(String value){
     enableSpeech = await speechToText.initialize(
     );
     localsExist=await speechToText.locales();
+    localId=localsExist.first.localeId;
     searchedList=localsExist;
     langController.text='${searchedList[0].name}-${searchedList[0].localeId}';
     if(enableSpeech){

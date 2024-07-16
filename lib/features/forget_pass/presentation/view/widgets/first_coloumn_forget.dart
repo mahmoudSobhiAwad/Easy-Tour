@@ -17,7 +17,7 @@ class FirstColumnResetPass extends StatelessWidget {
         const  SizedBox(height: 10,),
         SizedBox(
           height: height*0.2,
-          child:const  TitleOfCreateAcc(
+          child:TitleOfCreateAcc(
             mainStyle:CustomTextStyle.fontBold30 ,
             secondaryStyle: CustomTextStyle.fontBold16,
             textAlign: TextAlign.start,
@@ -31,10 +31,10 @@ class FirstColumnResetPass extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Remembered Password?',style: CustomTextStyle.font16Light,),
+             Text('Remembered Password?',style: CustomTextStyle.font16Light,),
             TextButton(onPressed: (){
               context.go(RouterApp.kLoginView);
-            }, child: const Text('Sign In',style: CustomTextStyle.fontBold16)),
+            }, child:  Text('Sign In',style: CustomTextStyle.fontBold16)),
           ],)
       ],);
   }
