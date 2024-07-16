@@ -1,4 +1,4 @@
-# prepare_project
+# Easy Tour
 
 A new Flutter project.
 
