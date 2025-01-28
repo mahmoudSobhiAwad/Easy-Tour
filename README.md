@@ -78,7 +78,6 @@ mobile application related to tourism in Egypt combine (Tourists and TourGuides)
 
 ## **Folder Structure**
 
-Explain the organization of your project. Example:  
 ```plaintext
 lib/
 ├── core/            # Shared resources (constants, themes, utils)
