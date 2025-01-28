@@ -2,8 +2,8 @@
 
 ## **Table of Contents**
 1. [Introduction](#introduction)
-2. [Tourist Features](#tourits_features)
-2. [TourGuide Features](#tourguide_features)
+2. [Tourist Features](#tourist-features)
+2. [TourGuide Features](#tourGuide-features)
 3. [Screenshots](#screenshots)
 4. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
