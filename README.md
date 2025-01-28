@@ -2,7 +2,8 @@
 
 ## **Table of Contents**
 1. [Introduction](#introduction)
-2. [Features](#features)
+2. [Tourist Features](#tourits_features)
+2. [TourGuide Features](#tourguide_features)
 3. [Screenshots](#screenshots)
 4. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
@@ -37,7 +38,7 @@ mobile application related to tourism in Egypt combine (Tourists and TourGuides)
 - 🔹 Feature 13: Image Classification ( for tourist to reconginze to historical place we integrate with ai model to handle this).
 
 ---
-## ** TourGuide Features**
+## **TourGuide Features**
 - 🔹 Feature 1: Authentication ( include Sign up,login,forgot password and profile) 
 - 🔹 Feature 2: Creating Trips ( as tour guide we provide to you how can you add amazing trips to be seen from tourist )  
 - 🔹 Feature 3: Handle requested on his trip to accept or refuse . 
